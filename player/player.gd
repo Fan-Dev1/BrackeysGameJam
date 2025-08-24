@@ -25,3 +25,8 @@ func take_cookie_from(from: CookieStash):
 
 func drop_of_cookie():
 	has_cookie = false
+
+
+func take_damage(damage: int):
+	# TODO take_damage
+	pass

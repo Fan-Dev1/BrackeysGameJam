@@ -1,5 +1,8 @@
 extends Node
 
+signal player_spotted(position: Vector2)
+
+
 var levels: Array[String] = [
 	"res://levels/level_01.tscn",
 	"res://levels/level_02.tscn",

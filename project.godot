@@ -28,6 +28,7 @@ window/size/viewport_height=1080
 
 folder_colors={
 "res://core/": "green",
+"res://export/": "gray",
 "res://guard/": "red",
 "res://levels/": "yellow",
 "res://player/": "teal"
