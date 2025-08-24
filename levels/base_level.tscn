@@ -105,7 +105,17 @@ layout_mode = 2
 text = "Level complete!"
 label_settings = SubResource("LabelSettings_63c5o")
 
-[node name="NextLevelButton" type="Button" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="RetryLevelButton" type="Button" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "retry Level"
+
+[node name="NextLevelButton2" type="Button" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
@@ -150,5 +160,6 @@ text = "retry Level"
 
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
 [connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]
-[connection signal="pressed" from="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer/RetryLevelButton" to="." method="_on_retry_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton2" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer/RetryLevelButton" to="." method="_on_retry_level_button_pressed"]
