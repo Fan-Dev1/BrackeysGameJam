@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://d2j2q3cwvwesw"]
+
+[ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
+[ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
+[ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_81a5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mckh2"]
+size = Vector2(25, 522)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81a5f"]
+size = Vector2(25, 272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0sdw"]
+size = Vector2(25, 210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gg43x"]
+size = Vector2(25, 306)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mllcm"]
+size = Vector2(626.25, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7ibo"]
+size = Vector2(393.125, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cg8v6"]
+size = Vector2(916.563, 26)
+
+[node name="Level_01" instance=ExtResource("1_ty3hu")]
+metadata/_edit_lock_ = true
+
+[node name="LevelMockup" type="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 1, 1, 0.321569)
+position = Vector2(624, 888)
+texture = ExtResource("2_mckh2")
+metadata/_edit_lock_ = true
+
+[node name="LevelTimer" parent="." index="1"]
+wait_time = 90.0
+
+[node name="ExitArea" parent="." index="2"]
+position = Vector2(520, 232)
+
+[node name="CollisionShape2D" parent="ExitArea" index="0"]
+position = Vector2(55.5, -12.5)
+
+[node name="Label" parent="ExitArea" index="1"]
+offset_left = -16.0
+offset_top = -80.0
+offset_right = 122.0
+offset_bottom = -35.0
+
+[node name="HouseWalls" type="StaticBody2D" parent="." index="3"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseWalls" index="0"]
+position = Vector2(152, 859)
+shape = SubResource("RectangleShape2D_mckh2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HouseWalls" index="1"]
+position = Vector2(1056, 1064)
+shape = SubResource("RectangleShape2D_81a5f")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="HouseWalls" index="2"]
+position = Vector2(1056, 703)
+shape = SubResource("RectangleShape2D_j0sdw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HouseWalls" index="3"]
+position = Vector2(712, 751)
+shape = SubResource("RectangleShape2D_gg43x")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="HouseWalls" index="4"]
+position = Vector2(750.875, 608)
+shape = SubResource("RectangleShape2D_mllcm")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="HouseWalls" index="5"]
+position = Vector2(528.563, 896)
+shape = SubResource("RectangleShape2D_q7ibo")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="HouseWalls" index="6"]
+position = Vector2(605.719, 1104)
+shape = SubResource("RectangleShape2D_cg8v6")
+
+[node name="CookieStash1" parent="." index="4" instance=ExtResource("3_81a5f")]
+position = Vector2(968, 698)
+
+[node name="CookieStash2" parent="." index="5" instance=ExtResource("3_81a5f")]
+position = Vector2(642, 666)
+
+[node name="Player" parent="." index="6"]
+position = Vector2(576, 256)

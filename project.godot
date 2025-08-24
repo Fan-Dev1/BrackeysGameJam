@@ -11,13 +11,23 @@ config_version=5
 [application]
 
 config/name="BrackeysGJ"
-run/main_scene="uid://cyocmna8ywpu3"
+run/main_scene="uid://d2j2q3cwvwesw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://core/global.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [file_customization]
 
 folder_colors={
+"res://core/": "green",
 "res://guard/": "red",
 "res://levels/": "yellow",
 "res://player/": "teal"
@@ -26,6 +36,7 @@ folder_colors={
 [global_group]
 
 player=""
+cookie_stash=""
 
 [input]
 
@@ -54,6 +65,7 @@ move_down={
 
 2d_physics/layer_1="envoirment"
 2d_physics/layer_2="player"
+2d_physics/layer_3="cookies"
 
 [rendering]
 

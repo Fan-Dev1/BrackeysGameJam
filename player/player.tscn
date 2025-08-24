@@ -10,6 +10,8 @@ radius = 47.1699
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_rkbax")
+move_speed = 400.0
+move_smothing = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.730469)
@@ -17,3 +19,6 @@ texture = ExtResource("2_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rkbax")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
