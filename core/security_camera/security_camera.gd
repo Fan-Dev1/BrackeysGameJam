@@ -2,99 +2,150 @@
 class_name SecurityCamera
 extends Node2D
 
-enum CameraState { NORMAL, TRACKING, ALERTED, OFF }
+enum CameraState { NORMAL, TRACKING, OFF }
 
 @export var radius := 256.0
-@export_range(0.0, 360.0, 0.1, "degrees") var fov_deg := 45.0
-@export var left_limit_deg := -90.0 
-@export var right_limit_deg := 90.0 
 
-@export var rotaton_speed := 1.0
+@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
+var fov := PI / 4.0
+@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
+var left_limit := PI / -2.0
+@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
+var right_limit := PI / 2.0
+
+@export var rotaton_speed: float
 @export var camera_position_index := 0
 @export var camera_positions: Array[CameraPosition]
 
 @onready var position_timer: Timer = $PositionTimer
+@onready var tracking_timer: Timer = $TrackingTimer
 @onready var camera_area_2d: Area2D = $CameraArea2D
 @onready var camera_fov: Polygon2D = %CameraFov
 @onready var camera_collision: CollisionPolygon2D = %CameraCollision
+@onready var status_color_rect: ColorRect = %StatusColorRect
 
-var state := CameraState.NORMAL
+var state := CameraState.NORMAL : set = set_state
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var new_polygon := calculate_fov_polygon()
-	camera_fov.polygon = new_polygon
-	camera_collision.polygon = new_polygon
+	_update_fov_polygon()
 	var camera_pos: CameraPosition = camera_positions.get(camera_position_index)
-	camera_area_2d.rotation_degrees = camera_pos.angle_deg
+	rotate_camera_toward(camera_pos.rotation)
 	var duration := randf_range(camera_pos.duration_min_sec, camera_pos.duration_max_sec)
 	position_timer.start(duration)
 
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
+		_update_fov_polygon()
+		_clamp_camera_rotations()
 		queue_redraw()
 		var camera_pos: CameraPosition = camera_positions.get(camera_position_index)
-		camera_area_2d.rotation_degrees = camera_pos.angle_deg
-		return
-	
-	match state:
-		CameraState.NORMAL:
-			normal_process(delta)
-		CameraState.TRACKING:
-			track_player(delta)
+		rotate_camera_toward(camera_pos.rotation)
+	else:
+		match state:
+			CameraState.NORMAL: _normal_process(delta)
+			CameraState.TRACKING: _tracking_process(delta)
+			CameraState.OFF: pass
 
 
-func _draw() -> void:
-	if not Engine.is_editor_hint():
-		return
-	
-	var left_limit_point := Vector2.from_angle(deg_to_rad(left_limit_deg)) * radius
-	var right_limit_point := Vector2.from_angle(deg_to_rad(right_limit_deg)) * radius
-	draw_line(Vector2.ZERO, left_limit_point, Color.RED, 2.0)
-	draw_line(Vector2.ZERO, right_limit_point, Color.BLUE, 2.0)
-
-
-func normal_process(delta: float) -> void:
+func _normal_process(delta: float) -> void:
 	var camera_pos: CameraPosition = camera_positions.get(camera_position_index)
-	var rotation_difference := camera_pos.angle_deg - camera_area_2d.rotation_degrees
-	rotation_difference = clampf(rotation_difference, -rotaton_speed, rotaton_speed)
-	camera_area_2d.rotation_degrees += rotation_difference
-	camera_area_2d.rotation_degrees = clampf(camera_area_2d.rotation_degrees, left_limit_deg, right_limit_deg)
+	rotate_camera_toward(camera_pos.rotation, delta)
 	
-	if rotation_difference == 0.0 and position_timer.is_stopped():
+	var angle_difference := angle_difference(camera_area_2d.rotation, camera_pos.rotation)
+	if is_zero_approx(angle_difference) and position_timer.is_stopped():
 		var duration := randf_range(camera_pos.duration_min_sec, camera_pos.duration_max_sec)
 		position_timer.start(duration)
 
 
-func track_player(delta: float) -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	var angle_to_player := self.global_position.angle_to_point(player.global_position)
-	var rotation_difference := camera_area_2d.rotation_degrees - angle_to_player
-	rotation_difference = clampf(rotation_difference, -rotaton_speed, rotaton_speed)
-	camera_area_2d.rotation_degrees += rotation_difference
-
-
-func calculate_fov_polygon(circle_points := 12) -> PackedVector2Array:
-	var new_polygon := PackedVector2Array()
-	new_polygon.append(Vector2(0.0, -8.0))
-	var fov_rad_step := deg_to_rad(fov_deg / circle_points)
-	var current_angle := -fov_rad_step * (circle_points / 2.0)
-	for i in range(circle_points + 1):
-		var half_fov_rad := deg_to_rad((fov_deg / 2.0))
-		new_polygon.append(Vector2.from_angle(current_angle) * radius)
-		current_angle += fov_rad_step
-	new_polygon.append(Vector2(0.0, 8.0))
-	return new_polygon
-
-
 func _on_position_timer_timeout() -> void:
+	# shift to next camera_position
 	camera_position_index += 1
 	if camera_position_index >= camera_positions.size():
 		camera_position_index = 0
 
 
+func _tracking_process(delta: float) -> void:
+	var player: Player = get_tree().get_first_node_in_group("player")
+	var angle_to_player := self.global_position.angle_to_point(player.global_position)
+	rotate_camera_toward(angle_to_player, delta)
+	queue_redraw()
+	if camera_area_2d.overlaps_body(player):
+		tracking_timer.stop()
+	elif tracking_timer.is_stopped():
+		tracking_timer.start()
+
+
+func _on_tracking_timer_timeout() -> void:
+	#switch back to normal operation
+	state = CameraState.NORMAL
+
+
 func _on_camera_area_2d_body_entered(body: Node2D) -> void:
+	# alert about spotted player and track him
 	if body is Player:
 		Global.player_spotted.emit(body.global_position)
+		state = CameraState.TRACKING
+
+
+func set_state(new_state: CameraState) -> void:
+	if state == new_state:
+		return
+	state = new_state
+	camera_area_2d.monitoring = CameraState.OFF != new_state
+	camera_fov.visible = CameraState.OFF != new_state
+	queue_redraw()
+	position_timer.stop()
+	tracking_timer.stop()
+
+
+func _update_fov_polygon(circle_points := 12) -> void:
+	var new_polygon := PackedVector2Array()
+	var fov_step := fov / circle_points
+	var current_angle := -fov_step * (circle_points / 2.0)
+	
+	new_polygon.append(Vector2(0.0, -8.0))
+	for i in range(circle_points + 1):
+		new_polygon.append(Vector2.from_angle(current_angle) * radius)
+		current_angle += fov_step
+	new_polygon.append(Vector2(0.0, 8.0))
+	camera_fov.polygon = new_polygon
+	camera_collision.polygon = new_polygon
+
+
+func _clamp_camera_rotations() -> void:
+	# clamp all camera_position.rotations inside this camera left and right_limit
+	for camera_position: CameraPosition in camera_positions:
+		camera_position.rotation = clamp_camera_rotation(camera_position.rotation)
+
+
+func clamp_camera_rotation(value: float) -> float:
+	var half_fov := fov / 2.0
+	var min := left_limit + half_fov
+	var max := right_limit - half_fov
+	return clampf(value, min, max)
+
+
+func rotate_camera_toward(to: float, delta := 1.0) -> void:
+	var from := camera_area_2d.rotation
+	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
+	new_rotation = clamp_camera_rotation(new_rotation)
+	camera_area_2d.rotation = new_rotation
+
+
+func _draw() -> void:
+	if Engine.is_editor_hint():
+		# draw_line for left and right limit
+		var half_fov := fov / 2.0
+		var left_limit_point := Vector2.from_angle(left_limit) * radius
+		var right_limit_point := Vector2.from_angle(right_limit) * radius
+		draw_line(Vector2.ZERO, left_limit_point, Color.RED, 2.0)
+		draw_line(Vector2.ZERO, right_limit_point, Color.BLUE, 2.0)
+	
+	if OS.is_debug_build() and state == CameraState.TRACKING:
+		# draw_line to tracked player
+		var player: Player = get_tree().get_first_node_in_group("player")
+		var player_position := to_local(player.global_position)
+		draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)

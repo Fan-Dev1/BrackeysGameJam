@@ -27,16 +27,16 @@ size = Vector2(393.125, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cg8v6"]
 size = Vector2(916.563, 26)
 
-[sub_resource type="Resource" id="Resource_q7ibo"]
+[sub_resource type="Resource" id="Resource_mllcm"]
 script = ExtResource("5_mllcm")
-angle_deg = 20.0
+rotation = 0.567232
 duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_cg8v6"]
+[sub_resource type="Resource" id="Resource_q7ibo"]
 script = ExtResource("5_mllcm")
-angle_deg = 160.0
+rotation = 2.57436
 duration_min_sec = 1.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
@@ -105,9 +105,10 @@ position = Vector2(642, 666)
 [node name="Player" parent="." index="6"]
 position = Vector2(576, 256)
 
-[node name="SecurityCamera" parent="." index="7" instance=ExtResource("4_gg43x")]
-position = Vector2(544, 908)
-left_limit_deg = 0.0
-right_limit_deg = 180.0
-camera_position_index = 1
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_q7ibo"), SubResource("Resource_cg8v6")])
+[node name="SecurityCamera" parent="." index="8" instance=ExtResource("4_gg43x")]
+position = Vector2(538.053, 903.929)
+radius = 313.0
+fov = 1.13446
+left_limit = 0.0
+right_limit = 3.14159
+camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_mllcm"), SubResource("Resource_q7ibo")])

@@ -5,28 +5,30 @@
 
 [sub_resource type="Resource" id="Resource_v1u64"]
 script = ExtResource("2_t0tbx")
-angle_deg = -45.0
-duration_min_sec = 3.0
-duration_max_sec = 3.0
+rotation = 0.0
+duration_min_sec = 1.0
+duration_max_sec = 1.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [sub_resource type="Resource" id="Resource_t0tbx"]
 script = ExtResource("2_t0tbx")
-angle_deg = 45.0
+rotation = 0.907571
 duration_min_sec = 1.0
-duration_max_sec = 3.0
+duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [node name="SecurityCamera" type="Node2D"]
 script = ExtResource("1_05d2b")
+rotaton_speed = 2.0
 camera_positions = Array[ExtResource("2_t0tbx")]([SubResource("Resource_v1u64"), SubResource("Resource_t0tbx")])
 
 [node name="PositionTimer" type="Timer" parent="."]
-wait_time = 3.0
+one_shot = true
+
+[node name="TrackingTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="CameraArea2D" type="Area2D" parent="."]
-rotation = -0.785398
 collision_layer = 0
 collision_mask = 2
 
@@ -39,6 +41,7 @@ scale = Vector2(24, 16.5)
 color = Color(0, 0, 0, 1)
 
 [node name="StatusColorRect" type="ColorRect" parent="CameraArea2D"]
+unique_name_in_owner = true
 offset_left = -40.0
 offset_top = -8.0
 offset_right = -32.0
@@ -55,4 +58,5 @@ color = Color(1, 1, 0, 0.235294)
 polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
 
 [connection signal="timeout" from="PositionTimer" to="." method="_on_position_timer_timeout"]
+[connection signal="timeout" from="TrackingTimer" to="." method="_on_tracking_timer_timeout"]
 [connection signal="body_entered" from="CameraArea2D" to="." method="_on_camera_area_2d_body_entered"]
