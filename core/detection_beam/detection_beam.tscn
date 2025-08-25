@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cqufeafed1a5a" path="res://core/blinking_led.gd" id="2_lgpul"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lgpul"]
-b = Vector2(250, 0)
+b = Vector2(200, 0)
 
 [node name="DetectionBeam" type="Area2D"]
 collision_layer = 0
@@ -33,12 +33,13 @@ timer = NodePath("../BlinkTimer")
 
 [node name="BeamLine2D" type="Line2D" parent="."]
 unique_name_in_owner = true
-points = PackedVector2Array(0, 0, 250, 0)
+points = PackedVector2Array(0, 0, 200, 0)
 width = 8.0
-default_color = Color(1, 0.223529, 0.2, 0.431373)
+default_color = Color(1, 0.223529, 0.2, 0.792157)
 
 [node name="BeamCollisionShape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("SegmentShape2D_lgpul")
 
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

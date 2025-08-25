@@ -6,7 +6,7 @@ enum Mode { KEEP_ON, KEEP_OFF, BLINK_PATTERN }
 
 @export var mode := Mode.BLINK_PATTERN : set = set_beam_mode
 @export var beam_enabled := true : set = set_beam_enabled
-@export var beam_length := 250.0 : set = set_beam_length
+@export var beam_length := 200.0 : set = set_beam_length
 
 ## even number = on duration in sec, odd number = off duration in sec[br]
 ## example: [0.4, 0.2, 1.0, 0.2] <=> on=0.4s -> off=0.2s -> on=1.0s -> off=0.2 -> repeat
