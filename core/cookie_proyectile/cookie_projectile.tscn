@@ -9,11 +9,12 @@ radius = 24.0208
 [sub_resource type="CircleShape2D" id="CircleShape2D_fgqb3"]
 radius = 15.0333
 
-[node name="Node2D" type="CharacterBody2D"]
+[node name="Cookie" type="CharacterBody2D" groups=["cookie_projectile"]]
 collision_layer = 2
 script = ExtResource("1_cwubr")
 
 [node name="Area2D" type="Area2D" parent="."]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cft32")
@@ -26,7 +27,9 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_r62ii")
 
 [node name="DeathTimer" type="Timer" parent="."]
-wait_time = 7.5
-autostart = true
+wait_time = 5.0
+
+[node name="Timer" type="Timer" parent="DeathTimer"]
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="DeathTimer/Timer" to="." method="_on_timer_timeout"]

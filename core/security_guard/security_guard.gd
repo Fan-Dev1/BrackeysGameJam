@@ -27,7 +27,7 @@ var fov := PI / 4.0
 
 
 var state := GuardState.NORMAL : set = set_state
-
+var detected := "Player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -71,14 +71,22 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	var angle_to_player := self.global_position.angle_to_point(player.global_position)
-	rotate_camera_toward(angle_to_player, delta)
-	queue_redraw()
-	if guard_area_2d.overlaps_body(player):
-		tracking_timer.stop()
-	elif tracking_timer.is_stopped():
-		tracking_timer.start()
+	if detected == "player" or detected == "cookie_projectile":
+		
+		var target := get_tree().get_first_node_in_group(detected)
+		
+		if is_instance_valid(target):
+			
+			var angle_to_target := self.global_position.angle_to_point(target.global_position)
+			rotate_camera_toward(angle_to_target, delta)
+		
+			if guard_area_2d.overlaps_body(target) and target:
+				tracking_timer.stop()
+			elif tracking_timer.is_stopped():
+				tracking_timer.start()
+		elif tracking_timer.is_stopped():
+			tracking_timer.start()
+		queue_redraw()
 
 
 func _on_tracking_timer_timeout() -> void:
@@ -90,8 +98,11 @@ func _on_camera_area_2d_body_entered(body: Node2D) -> void:
 	# alert about spotted player and track him
 	if body is Player:
 		Global.player_spotted.emit(body.global_position)
+		detected = "player"
 		state = GuardState.TRACKING
-
+	if body is CookieProjectile:
+		detected = "cookie_projectile"
+		state = GuardState.TRACKING
 
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:
@@ -117,20 +128,6 @@ func _update_fov_polygon(circle_points := 12) -> void:
 	guard_fov.polygon = new_polygon
 	guard_collision.polygon = new_polygon
 
-
-#func _clamp_camera_rotations() -> void:
-#	# clamp all camera_position.rotations inside this camera left and right_limit
-#	for guard_position: GuardPosition in guard_positions:
-#		guard_position.rotation = clamp_camera_rotation(guard_position.rotation)
-
-
-#func clamp_camera_rotation(value: float) -> float:
-#	var half_fov := fov / 2.0
-#	var min := left_limit + half_fov
-#	var max := right_limit - half_fov
-#	return clampf(value, min, max)
-
-
 func rotate_camera_toward(to: float, delta := 1.0) -> void:
 	var from := guard_area_2d.rotation
 	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
@@ -142,7 +139,7 @@ func rotate_camera_toward(to: float, delta := 1.0) -> void:
 func move_guard_toward(to: Vector2, delta : float):
 	
 	position = position.move_toward(position + to, move_speed * delta)
-	print(self.position)
+	
 	
 
 func _draw() -> void:
