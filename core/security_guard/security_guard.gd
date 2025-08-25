@@ -84,6 +84,7 @@ func _tracking_process(delta: float) -> void:
 				tracking_timer.stop()
 			elif tracking_timer.is_stopped():
 				tracking_timer.start()
+			
 		elif tracking_timer.is_stopped():
 			tracking_timer.start()
 		queue_redraw()
@@ -100,7 +101,7 @@ func _on_camera_area_2d_body_entered(body: Node2D) -> void:
 		Global.player_spotted.emit(body.global_position)
 		detected = "player"
 		state = GuardState.TRACKING
-	if body is CookieProjectile:
+	elif body is CookieProjectile:
 		detected = "cookie_projectile"
 		state = GuardState.TRACKING
 
