@@ -24,3 +24,9 @@ shape = SubResource("CircleShape2D_fgqb3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_r62ii")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 7.5
+autostart = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

@@ -62,7 +62,7 @@ func fire() -> void:
 	
 	var new_cookie = cookie_proyectile.instantiate()
 	get_parent().add_child(new_cookie)
-	new_cookie.fired(target_pos, position) 
+	new_cookie.fired(to_global(target_pos), global_position) 
 	target_pos = Vector2.ZERO
 	queue_redraw()
 func _draw() -> void:

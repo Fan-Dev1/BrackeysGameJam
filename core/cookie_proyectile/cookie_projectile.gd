@@ -4,17 +4,22 @@ var target_position = Vector2.ZERO
 
 var friction 
 var travelTime := 1.2
-func fired(target : Vector2, spawn_position : Vector2):
-	position = spawn_position
-	target_position = target
-	velocity = target 
-func _physics_process(delta: float) -> void:
-	friction = velocity.length() / travelTime
-	if is_on_floor() or is_on_ceiling() or is_on_wall():
-		velocity = Vector2.ZERO
-	velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	velocity = velocity.move_toward(Vector2.ZERO, 10 * delta)
-	#fuck me here dont know why i struggled with this simple bs, wanted the cookie to always end up in the
-	#crosshair, this kinda does it well without it feeling like total ice
-	move_and_slide()
+var spawn_position
+func fired(target : Vector2, spawn : Vector2):
 	
+	position = spawn
+	target_position = target
+	velocity = (target - spawn).normalized() * 300
+func _physics_process(delta: float) -> void:
+	
+	if is_on_floor() or is_on_ceiling() or is_on_wall():
+		queue_free()
+	if global_position.distance_to(target_position) < 10:
+		queue_free() 
+	move_and_slide()
+	print(global_position, to_global(target_position))
+	
+
+
+func _on_death_timer_timeout() -> void:
+	queue_free()
