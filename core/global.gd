@@ -10,6 +10,22 @@ var levels: Array[String] = [
 var current_level_index := 0
 
 
+func _ready() -> void:
+	player_spotted.connect(_mark_spotted_player_position)
+
+
+func _mark_spotted_player_position(player_position: Vector2) -> void:
+	if not OS.is_debug_build():
+		return
+	var spotted_marker := ColorRect.new()
+	spotted_marker.color = Color.DARK_MAGENTA
+	spotted_marker.size = Vector2(8.0, 8.0)
+	spotted_marker.global_position = player_position
+	get_tree().root.add_child(spotted_marker)
+	await get_tree().create_timer(0.5).timeout
+	spotted_marker.queue_free()
+
+
 func load_next_level():
 	current_level_index = clampi(current_level_index + 1, 0, levels.size() - 1)
 	var next_level_path: String = levels[current_level_index]
