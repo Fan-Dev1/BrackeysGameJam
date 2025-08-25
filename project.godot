@@ -38,6 +38,7 @@ folder_colors={
 
 player=""
 cookie_stash=""
+masked_by_player_vision=""
 
 [input]
 
@@ -64,6 +65,7 @@ move_down={
 
 [layer_names]
 
+2d_render/layer_2="player_vision"
 2d_physics/layer_1="envoirment"
 2d_physics/layer_2="player"
 2d_physics/layer_3="cookies"
