@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dimiwi1v37iya"]
+
+[ext_resource type="Script" uid="uid://cp5c4alkf8a6r" path="res://ui/inventory_cookie_slot.gd" id="1_becvg"]
+[ext_resource type="Texture2D" uid="uid://y0f6l3finpfs" path="res://PlaceholderCharacter/PlaceholderCookie.png" id="2_becvg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pt25v"]
+font_size = 42
+
+[node name="InventoryCookieSlot" type="VBoxContainer"]
+custom_minimum_size = Vector2(210, 270)
+offset_right = 210.0
+offset_bottom = 270.0
+script = ExtResource("1_becvg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Cookie 99"
+label_settings = SubResource("LabelSettings_pt25v")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_becvg")
+expand_mode = 1
+stretch_mode = 5

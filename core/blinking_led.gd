@@ -8,7 +8,7 @@ extends ColorRect
 var is_blinking := false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (not is_blinking 
 			and timer.time_left <= 1.0 
 			and timer.time_left > min_interval):

@@ -1,35 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3lmri50c7jn1"]
+[gd_scene load_steps=6 format=3 uid="uid://b3lmri50c7jn1"]
 
 [ext_resource type="Script" uid="uid://dwaxnvwn5gcdi" path="res://core/cookie_stash/cookie_stash.gd" id="1_lrudw"]
-[ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="2_o1a7e"]
+[ext_resource type="Texture2D" uid="uid://y0f6l3finpfs" path="res://PlaceholderCharacter/PlaceholderCookie.png" id="2_gfnro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tinl6"]
-radius = 32.0
+radius = 40.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_57rol"]
-font_size = 24
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfnro"]
+bg_color = Color(0.46, 0.46, 0.46, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8t3n"]
+bg_color = Color(0.2268, 0.81, 0.2268, 1)
 
 [node name="CookieStash" type="Area2D" groups=["cookie_stash"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_lrudw")
+loot_duration_sec = 1.5
+
+[node name="LootTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["masked_by_player_vision"]]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_o1a7e")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_gfnro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tinl6")
-debug_color = Color(0.544179, 0.566014, 1.92523e-07, 0.42)
 
-[node name="Label" type="Label" parent="." groups=["masked_by_player_vision"]]
+[node name="LootProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = 10
 offset_left = -32.0
-offset_top = -16.0
-offset_right = 39.0
-offset_bottom = 18.0
-text = "Cookie"
-label_settings = SubResource("LabelSettings_57rol")
+offset_top = -55.0
+offset_right = 32.0
+offset_bottom = -44.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gfnro")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n8t3n")
+step = 0.0
+value = 43.0
+show_percentage = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="LootTimer" to="." method="_on_loot_timer_timeout"]
