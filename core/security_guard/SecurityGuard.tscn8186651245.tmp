@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdtjxtyyetv2y"]
+
+[ext_resource type="Script" uid="uid://dmhmq4v34a7ie" path="res://core/security_guard/security_guard.gd" id="1_p6iyn"]
+[ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="2_ptygn"]
+
+[sub_resource type="Resource" id="Resource_ptygn"]
+script = ExtResource("2_ptygn")
+rotation = -0.392699
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="Resource" id="Resource_p37y6"]
+script = ExtResource("2_ptygn")
+rotation = -0.392699
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[node name="SecurityGuard" type="Node2D"]
+script = ExtResource("1_p6iyn")
+left_limit = 0.0
+right_limit = 0.0
+rotaton_speed = 1.0
+guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
+
+[node name="positionTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="trackingTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GuardArea2D" type="Area2D" parent="."]
+rotation = 0.392699
+collision_layer = 0
+collision_mask = 2
+
+[node name="GuardCollision" type="CollisionPolygon2D" parent="GuardArea2D"]
+unique_name_in_owner = true
+visible = false
+polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
+
+[node name="GuardFov" type="Polygon2D" parent="GuardArea2D"]
+unique_name_in_owner = true
+color = Color(1, 1, 0, 0.235294)
+polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
+
+[connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
+[connection signal="timeout" from="trackingTimer" to="." method="_on_tracking_timer_timeout"]
+[connection signal="body_entered" from="GuardArea2D" to="." method="_on_camera_area_2d_body_entered"]

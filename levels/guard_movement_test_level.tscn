@@ -1,0 +1,155 @@
+[gd_scene load_steps=10 format=3 uid="uid://exoe8xt1c2iu"]
+
+[ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_6f7pe"]
+[ext_resource type="PackedScene" uid="uid://bdtjxtyyetv2y" path="res://core/security_guard/SecurityGuard.tscn" id="2_0se1k"]
+[ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="3_myjux"]
+[ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="4_5umpd"]
+
+[sub_resource type="Resource" id="Resource_5umpd"]
+script = ExtResource("3_myjux")
+rotation = 1.5708
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+target_marker = Vector2(0, 10)
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="Resource" id="Resource_1jpcd"]
+script = ExtResource("3_myjux")
+rotation = 3.14159
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+target_marker = Vector2(0, -10)
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="LabelSettings" id="LabelSettings_myjux"]
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5umpd"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jpcd"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GuardMovementTestLevel" type="Node2D"]
+script = ExtResource("1_6f7pe")
+
+[node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
+position = Vector2(606, 315)
+move_speed = 100.0
+guard_position_index = 1
+guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopLeftContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CookiesLabel" type="Label" parent="CanvasLayer/TopLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cookies: 00/01"
+label_settings = SubResource("LabelSettings_myjux")
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/TopLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time: 00:00:00"
+label_settings = SubResource("LabelSettings_myjux")
+
+[node name="LevelCompletePanel" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -20.0
+offset_right = 58.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelCompletePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelCompletePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level complete!"
+label_settings = SubResource("LabelSettings_5umpd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="RetryLevelButton" type="Button" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "retry Level"
+
+[node name="NextLevelButton2" type="Button" parent="CanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "next Level"
+
+[node name="TimeoutPanel" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -20.0
+offset_right = 58.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TimeoutPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TimeoutPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Timeout!"
+label_settings = SubResource("LabelSettings_1jpcd")
+
+[node name="RetryLevelButton" type="Button" parent="CanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "retry Level"
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("4_5umpd")]
