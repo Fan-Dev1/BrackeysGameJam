@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @export var max_line_length: float = 300.0
-@export var dot_color: Color = Color.WHITE
+
 @export var dot_size: float = 10.0
 @export var gap_size: float = 15.0
 
@@ -16,6 +16,7 @@ var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
 
+var cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projectile.tscn")
 
 func _physics_process(delta: float) -> void:
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -54,10 +55,14 @@ func manage_animations(input_direction, last_direction) -> void:
 		animated_sprite_2d.play(anim_state +"East")
 
 func aim() -> void:
-	target_pos = get_local_mouse_position().limit_length(300)
+	target_pos = get_local_mouse_position().limit_length(max_line_length)
 	queue_redraw()
 
 func fire() -> void:
+	
+	var new_cookie = cookie_proyectile.instantiate()
+	get_parent().add_child(new_cookie)
+	new_cookie.fired(target_pos, position) 
 	target_pos = Vector2.ZERO
 	queue_redraw()
 func _draw() -> void:
@@ -69,7 +74,7 @@ func _draw() -> void:
 	
 	while current_pos.length() < target_pos.length():
 		# Draw one dot (a short line segment)
-		draw_line(current_pos, current_pos + direction * dot_size, dot_color, 5.0)
+		draw_line(current_pos, current_pos + direction * dot_size, "White", 5.0)
 		
 		# Move forward past the dot and the gap
 		current_pos += direction * (dot_size + gap_size)

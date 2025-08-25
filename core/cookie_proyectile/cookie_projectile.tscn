@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm5g7igo0287j"]
+
+[ext_resource type="Script" uid="uid://duaeyp478f7cl" path="res://core/cookie_proyectile/cookie_projectile.gd" id="1_cwubr"]
+[ext_resource type="Texture2D" uid="uid://y0f6l3finpfs" path="res://PlaceholderCharacter/PlaceholderCookie.png" id="2_r62ii"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cft32"]
+radius = 24.0208
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fgqb3"]
+radius = 15.0333
+
+[node name="Node2D" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_cwubr")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cft32")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fgqb3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_r62ii")
