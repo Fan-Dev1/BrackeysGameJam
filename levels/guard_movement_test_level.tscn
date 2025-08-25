@@ -42,7 +42,6 @@ script = ExtResource("1_6f7pe")
 [node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
 position = Vector2(606, 315)
 move_speed = 100.0
-guard_position_index = 1
 guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

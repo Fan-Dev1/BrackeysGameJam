@@ -1,10 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhd35o5m5lhrq"]
+[gd_scene load_steps=14 format=3 uid="uid://dhd35o5m5lhrq"]
 
 [ext_resource type="Script" uid="uid://bpqyegseblpju" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="2_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://b8ye17ey7oqdb" path="res://PlaceholderCharacter/Chara_West_WalkL.png" id="3_2ieo8"]
+[ext_resource type="Texture2D" uid="uid://vcx2u341xsd" path="res://PlaceholderCharacter/Chara_West_Still.png" id="4_ebec5"]
+[ext_resource type="Texture2D" uid="uid://cai5q25d55naf" path="res://PlaceholderCharacter/Chara_West_WalkR.png" id="5_yllr7"]
+[ext_resource type="Texture2D" uid="uid://2codejrcc4di" path="res://PlaceholderCharacter/Chara_North_WalkL.png" id="6_kb6p2"]
+[ext_resource type="Texture2D" uid="uid://b8pwvsceex6g2" path="res://PlaceholderCharacter/Chara_North_Still.png" id="7_wodsf"]
+[ext_resource type="Texture2D" uid="uid://cwww0aonk8qgi" path="res://PlaceholderCharacter/Chara_North_WalkR.png" id="8_32hag"]
+[ext_resource type="Texture2D" uid="uid://b8t1rch1hf4q" path="res://PlaceholderCharacter/Chara_South_WalkR.png" id="9_tqiix"]
+[ext_resource type="Texture2D" uid="uid://c8h3n5s5vshm" path="res://PlaceholderCharacter/Chara_South_Still.png" id="10_e7oew"]
+[ext_resource type="Texture2D" uid="uid://cdrrnx2reuyr2" path="res://PlaceholderCharacter/Chara_South_WalkL.png" id="11_c35mf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 47.1699
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_65viv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ebec5")
+}],
+"loop": true,
+"name": &"IdleEast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wodsf")
+}],
+"loop": true,
+"name": &"IdleNorth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_e7oew")
+}],
+"loop": true,
+"name": &"IdleSouth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2ieo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ebec5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yllr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ebec5")
+}],
+"loop": true,
+"name": &"WalkEast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kb6p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wodsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_32hag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wodsf")
+}],
+"loop": true,
+"name": &"WalkNorth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_tqiix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_e7oew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_c35mf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_e7oew")
+}],
+"loop": true,
+"name": &"WalkSouth",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -22,3 +109,7 @@ shape = SubResource("CircleShape2D_rkbax")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_65viv")
+animation = &"WalkSouth"
