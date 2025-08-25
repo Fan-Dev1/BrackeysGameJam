@@ -16,13 +16,13 @@ blink_pattern = PackedFloat32Array(2, 2, 4, 4)
 wait_time = 4.0
 one_shot = true
 
-[node name="LazerRect" type="ColorRect" parent="."]
+[node name="LazerRect" type="ColorRect" parent="." groups=["masked_by_player_vision"]]
 offset_left = -32.0
 offset_top = -16.0
 offset_bottom = 16.0
 color = Color(0, 0, 0, 1)
 
-[node name="LazerStateRect" type="ColorRect" parent="." node_paths=PackedStringArray("timer")]
+[node name="LazerStateRect" type="ColorRect" parent="." node_paths=PackedStringArray("timer") groups=["masked_by_player_vision"]]
 offset_left = -24.0
 offset_top = -16.0
 offset_right = -16.0
@@ -31,7 +31,7 @@ color = Color(0, 1, 0, 1)
 script = ExtResource("2_lgpul")
 timer = NodePath("../BlinkTimer")
 
-[node name="BeamLine2D" type="Line2D" parent="."]
+[node name="BeamLine2D" type="Line2D" parent="." groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 points = PackedVector2Array(0, 0, 200, 0)
 width = 8.0

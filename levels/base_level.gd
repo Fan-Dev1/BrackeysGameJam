@@ -1,6 +1,8 @@
 class_name Level 
 extends Node2D
 
+@export var masked_by_player_vision_material: Material
+
 @onready var player: Player = $Player
 @onready var level_timer: Timer = $LevelTimer
 @onready var cookies_label: Label = %CookiesLabel
@@ -18,6 +20,10 @@ func _ready() -> void:
 	cookies_label.text = "Cookies: %2d/%2d" % [collected_cookie_count, available_cookie_count]
 	timeout_panel.visible = false
 	level_complete_panel.visible = false
+	for node in get_tree().get_nodes_in_group("masked_by_player_vision"):
+		if node is CanvasItem:
+			node.light_mask = 2
+			node.material = masked_by_player_vision_material
 
 
 func _process(delta: float) -> void:

@@ -33,7 +33,7 @@ one_shot = true
 collision_layer = 0
 collision_mask = 2
 
-[node name="CameraSprite2D" type="ColorRect" parent="CameraArea2D"]
+[node name="CameraSprite2D" type="ColorRect" parent="CameraArea2D" groups=["masked_by_player_vision"]]
 offset_left = -48.0
 offset_top = -8.0
 offset_right = -46.0
@@ -41,7 +41,7 @@ offset_bottom = -7.0
 scale = Vector2(24, 16.5)
 color = Color(0, 0, 0, 1)
 
-[node name="StatusColorRect" type="ColorRect" parent="CameraArea2D"]
+[node name="StatusColorRect" type="ColorRect" parent="CameraArea2D" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 offset_left = -40.0
 offset_top = -8.0
@@ -53,7 +53,7 @@ unique_name_in_owner = true
 visible = false
 polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
 
-[node name="CameraFov" type="Polygon2D" parent="CameraArea2D"]
+[node name="CameraFov" type="Polygon2D" parent="CameraArea2D" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 color = Color(1, 1, 0, 0.235294)
 polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)

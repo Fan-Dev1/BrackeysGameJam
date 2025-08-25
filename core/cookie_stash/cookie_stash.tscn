@@ -16,7 +16,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_lrudw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["masked_by_player_vision"]]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_o1a7e")
 
@@ -24,7 +24,7 @@ texture = ExtResource("2_o1a7e")
 shape = SubResource("CircleShape2D_tinl6")
 debug_color = Color(0.544179, 0.566014, 1.92523e-07, 0.42)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." groups=["masked_by_player_vision"]]
 offset_left = -32.0
 offset_top = -16.0
 offset_right = 39.0
