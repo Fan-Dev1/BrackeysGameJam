@@ -1,8 +1,8 @@
 @tool
 class_name SecurityGuard
-extends Node2D
+extends CharacterBody2D
 
-enum GuardState { NORMAL, TRACKING, MOVING, OFF }
+enum GuardState { NORMAL, TRACKING, DISTRACTED ,RETURN, OFF }
 
 @export var radius := 256.0
 
@@ -17,6 +17,7 @@ var fov := PI / 4.0
 @export var move_speed: float = 1.0
 @export var guard_position_index := 0
 @export var guard_positions: Array[GuardPosition]
+@onready var update_nav: Timer = $updateNav
 
 @onready var position_timer: Timer = $positionTimer
 @onready var tracking_timer: Timer = $trackingTimer
@@ -24,13 +25,15 @@ var fov := PI / 4.0
 @onready var guard_fov: Polygon2D = %GuardFov
 @onready var guard_collision: CollisionPolygon2D = %GuardCollision
 
-
-
+@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+var next_path_pos : Vector2 = Vector2.ZERO
+var original_position : Vector2 = Vector2.ZERO
 var state := GuardState.NORMAL : set = set_state
 var detected := "Player"
-
+@onready var target : CharacterBody2D= get_tree().get_first_node_in_group("player")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	original_position = self.global_position
 	_update_fov_polygon()
 	var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 	rotate_camera_toward(guard_pos.rotation)
@@ -39,6 +42,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	
 	if Engine.is_editor_hint():
 		_update_fov_polygon()
 		#_clamp_camera_rotations()
@@ -49,8 +53,11 @@ func _physics_process(delta: float) -> void:
 		match state:
 			GuardState.NORMAL: _normal_process(delta)
 			GuardState.TRACKING: _tracking_process(delta)
+			GuardState.RETURN: _return_process(delta)
+			GuardState.DISTRACTED : _distracted_process(delta)
 			#GuardState.MOVING: _moving_process(delta)
 			GuardState.OFF: pass
+	print(position)
 
 
 func _normal_process(delta: float) -> void:
@@ -72,9 +79,7 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
-	if detected == "player" or detected == "cookie_projectile":
-		
-		var target := get_tree().get_first_node_in_group(detected)
+	if detected == "player":
 		
 		if is_instance_valid(target):
 			
@@ -88,13 +93,50 @@ func _tracking_process(delta: float) -> void:
 			
 		elif tracking_timer.is_stopped():
 			tracking_timer.start()
+			
+		if detected == "player":
+			
+			if navigation_agent_2d.is_navigation_finished():
+				state = GuardState.RETURN
+			next_path_pos = navigation_agent_2d.get_next_path_position()
+			var direction = (next_path_pos - self.global_position).normalized()
+			velocity = direction * move_speed
+			move_and_slide()
+			
 		queue_redraw()
 
+func _distracted_process(delta):
+	var cookie = get_tree().get_first_node_in_group("cookie_projectile")
+	
+	if is_instance_valid(cookie):
+		var angle_to_target := self.global_position.angle_to_point(cookie.global_position)
+		rotate_camera_toward(angle_to_target, delta)
+		
+		if guard_area_2d.overlaps_body(target) and target:
+			tracking_timer.stop()
+		elif tracking_timer.is_stopped():
+			tracking_timer.start()
+			
+		elif tracking_timer.is_stopped():
+			tracking_timer.start()
 
 func _on_tracking_timer_timeout() -> void:
 	#switch back to normal operation
-	state = GuardState.NORMAL
-
+	state = GuardState.RETURN
+	velocity = Vector2.ZERO
+func _return_process(delta) -> void:
+	_scan_for_player()
+	
+	navigation_agent_2d.target_position = original_position
+	var next_path_pos = navigation_agent_2d.get_next_path_position()
+	var direction = (next_path_pos - self.global_position).normalized()
+	velocity = direction * move_speed
+	move_and_slide()
+	if navigation_agent_2d.is_navigation_finished():
+		velocity = Vector2.ZERO
+		position = original_position
+		state = GuardState.NORMAL
+	
 
 func _scan_for_player() -> void:
 	for body: Node2D in guard_area_2d.get_overlapping_bodies():
@@ -104,8 +146,7 @@ func _scan_for_player() -> void:
 			Global.player_spotted.emit(body.global_position)
 			state = GuardState.TRACKING
 		elif body is CookieProjectile: #elif so if both cookie and player, follow player
-			detected = "cookie_projectile"
-			state = GuardState.TRACKING
+			state = GuardState.DISTRACTED
 
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:
@@ -141,7 +182,7 @@ func rotate_camera_toward(to: float, delta := 1.0) -> void:
 
 func move_guard_toward(to: Vector2, delta : float):
 	
-	position = position.move_toward(position + to, move_speed * delta)
+	velocity = velocity.move_toward(to, move_speed * delta)
 	
 	
 
@@ -159,3 +200,7 @@ func _draw() -> void:
 		var player: Player = get_tree().get_first_node_in_group("player")
 		var player_position := to_local(player.global_position)
 		draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
+
+
+func _on_update_nav_timeout() -> void:
+	navigation_agent_2d.target_position = target.global_position
