@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3ex6enbtttl5"]
+[gd_scene load_steps=8 format=3 uid="uid://d3ex6enbtttl5"]
 
 [ext_resource type="Script" uid="uid://dmy6ut8fhdaxr" path="res://core/door/door.gd" id="1_sc1hs"]
+[ext_resource type="Texture2D" uid="uid://crar5ecjk0mgx" path="res://core/door/door_vision_light.png" id="2_p5nwt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc1hs"]
 radius = 48.0
@@ -20,18 +21,6 @@ polygon = PackedVector2Array(-72, -16, 72, -16, 72, 16, -72, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5nwt"]
 size = Vector2(8, 32)
-
-[sub_resource type="Gradient" id="Gradient_ew5uy"]
-offsets = PackedFloat32Array(0.999, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sc1hs"]
-gradient = SubResource("Gradient_ew5uy")
-width = 1080
-height = 1080
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.850427, 0.211538)
 
 [node name="Door" type="Node2D"]
 script = ExtResource("1_sc1hs")
@@ -60,6 +49,7 @@ metadata/_edit_group_ = true
 
 [node name="BorderLine2D" type="Line2D" parent="SlideDoor"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(-72, -16)
 points = PackedVector2Array(0, 0, 144, 0, 144, 32, 0, 32)
 closed = true
@@ -111,7 +101,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlideDoor/SqueezeArea2D"]
-visible = false
 position = Vector2(76, 0)
 shape = SubResource("RectangleShape2D_p5nwt")
 debug_color = Color(0.7, 0, 0.243518, 0.42)
@@ -125,18 +114,24 @@ shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 4.0
 shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_sc1hs")
+texture = ExtResource("2_p5nwt")
+offset = Vector2(0, -137)
+metadata/_edit_lock_ = true
 
 [node name="DownPeekPointLight2D" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 24)
+rotation = 3.14159
+enabled = false
 blend_mode = 2
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 4.0
 shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_sc1hs")
+texture = ExtResource("2_p5nwt")
+offset = Vector2(0, -137)
+metadata/_edit_lock_ = true
 
 [node name="OpenDoorReference" type="ReferenceRect" parent="."]
 offset_left = 72.0
@@ -145,6 +140,7 @@ offset_right = 216.0
 offset_bottom = 17.0
 mouse_filter = 2
 border_color = Color(1, 0.412, 0.02, 1)
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="InterationArea2D" to="." method="_on_interation_area_2d_body_entered"]
 [connection signal="body_exited" from="InterationArea2D" to="." method="_on_interation_area_2d_body_exited"]

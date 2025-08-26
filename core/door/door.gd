@@ -49,12 +49,14 @@ func _slide_door(to_position: Vector2, delta: float) -> void:
 func start_peeking(from_position: Vector2) -> void:
 	var peek_direction := global_position.direction_to(from_position)
 	var is_on_up_side := peek_direction.dot(Vector2.DOWN) > 0.0
-	up_peek_light.enabled = not is_on_up_side
 	down_peek_light.enabled = is_on_up_side
+	up_peek_light.enabled = not is_on_up_side
+
 
 func stop_peeking() -> void:
 	up_peek_light.enabled = false
 	down_peek_light.enabled = false
+
 
 func is_peeking() -> bool:
 	return up_peek_light.enabled or down_peek_light.enabled

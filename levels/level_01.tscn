@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d2j2q3cwvwesw"]
+[gd_scene load_steps=25 format=3 uid="uid://d2j2q3cwvwesw"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
@@ -12,10 +12,10 @@
 size = Vector2(25, 522)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81a5f"]
-size = Vector2(25, 272)
+size = Vector2(32, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0sdw"]
-size = Vector2(25, 210)
+size = Vector2(32, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gg43x"]
 size = Vector2(25, 306)
@@ -34,11 +34,11 @@ size = Vector2(164.5, 32)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q7ibo"]
 cull_mode = 2
-polygon = PackedVector2Array(440, 592, 1072, 592, 1072, 816, 1040, 816, 1040, 624, 728, 624, 728, 912, 328, 912, 328, 872, 696, 872, 696, 624, 440, 624)
+polygon = PackedVector2Array(440, 592, 1080, 592, 1080, 792, 1048, 792, 1048, 624, 728, 624, 728, 912, 328, 912, 328, 872, 696, 872, 696, 624, 440, 624)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cg8v6"]
 cull_mode = 2
-polygon = PackedVector2Array(304, 592, 304, 624, 168, 624, 168, 1080, 1040, 1088, 1040, 928, 1072, 928, 1072, 1128, 136, 1120, 136, 592)
+polygon = PackedVector2Array(304, 592, 304, 624, 168, 624, 168, 1080, 1048, 1088, 1048, 936, 1080, 936, 1080, 1120, 136, 1120, 136, 592)
 
 [sub_resource type="Animation" id="Animation_cg8v6"]
 length = 0.001
@@ -93,8 +93,19 @@ duration_min_sec = 1.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
+[sub_resource type="Gradient" id="Gradient_satuh"]
+offsets = PackedFloat32Array(0.864943, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cg8v6"]
+gradient = SubResource("Gradient_satuh")
+width = 1080
+height = 1080
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.850427, 0.211538)
+
 [node name="Level_01" instance=ExtResource("1_ty3hu")]
-metadata/_edit_lock_ = true
 
 [node name="LevelMockup" type="Sprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 0.321569)
@@ -106,18 +117,17 @@ metadata/_edit_lock_ = true
 wait_time = 90.0
 
 [node name="HouseWalls" type="StaticBody2D" parent="." index="3"]
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HouseWalls" index="0"]
 position = Vector2(152, 859)
 shape = SubResource("RectangleShape2D_mckh2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HouseWalls" index="1"]
-position = Vector2(1056, 1064)
+position = Vector2(1064, 1028)
 shape = SubResource("RectangleShape2D_81a5f")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="HouseWalls" index="2"]
-position = Vector2(1056, 703)
+position = Vector2(1064, 688)
 shape = SubResource("RectangleShape2D_j0sdw")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="HouseWalls" index="3"]
@@ -183,7 +193,12 @@ camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_mllcm"),
 position = Vector2(376, 608)
 rotation = 3.14159
 
-[node name="ExitArea" parent="." index="10"]
+[node name="Door2" parent="." index="10" instance=ExtResource("7_cg8v6")]
+position = Vector2(1064, 864)
+rotation = -1.5708
+metadata/_edit_lock_ = true
+
+[node name="ExitArea" parent="." index="11"]
 position = Vector2(520, 232)
 
 [node name="CollisionShape2D" parent="ExitArea" index="0"]
@@ -195,5 +210,10 @@ offset_top = -80.0
 offset_right = 122.0
 offset_bottom = -35.0
 
-[node name="Player" parent="." index="11"]
+[node name="Player" parent="." index="12"]
 position = Vector2(576, 256)
+metadata/_edit_lock_ = true
+
+[node name="VisionPointLight2D" parent="Player" index="5"]
+texture = SubResource("GradientTexture2D_cg8v6")
+metadata/_edit_lock_ = true
