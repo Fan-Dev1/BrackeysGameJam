@@ -25,7 +25,7 @@ var right_limit := PI / 2.0
 @onready var status_color_rect: ColorRect = %StatusColorRect
 
 var state := CameraState.NORMAL : set = set_state
-
+var detected := "player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,20 +70,31 @@ func _scan_for_player() -> void:
 	for body: Node2D in camera_area_2d.get_overlapping_bodies():
 		# alert about spotted player and track him
 		if body is Player:
+			detected = "player"
 			Global.player_spotted.emit(body.global_position)
 			state = CameraState.TRACKING
-
+		elif body is CookieProjectile: #elif so if both cookie and player, follow player
+			detected = "cookie_projectile"
+			state = CameraState.TRACKING
 
 func _tracking_process(delta: float) -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	var angle_to_player := self.global_position.angle_to_point(player.global_position)
-	rotate_camera_toward(angle_to_player, delta)
-	queue_redraw()
-	if camera_area_2d.overlaps_body(player):
-		tracking_timer.stop()
-		Global.player_spotted.emit(player.global_position)
-	elif tracking_timer.is_stopped():
-		tracking_timer.start()
+	if detected == "player" or detected == "cookie_projectile":
+		
+		var target := get_tree().get_first_node_in_group(detected)
+		
+		if is_instance_valid(target):
+			
+			var angle_to_target := self.global_position.angle_to_point(target.global_position)
+			rotate_camera_toward(angle_to_target, delta)
+		
+			if camera_area_2d.overlaps_body(target) and target:
+				tracking_timer.stop()
+			elif tracking_timer.is_stopped():
+				tracking_timer.start()
+			
+		elif tracking_timer.is_stopped():
+			tracking_timer.start()
+		queue_redraw()
 
 
 func _on_tracking_timer_timeout() -> void:

@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 
 func _normal_process(delta: float) -> void:
 	var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
+	_scan_for_player()
 	rotate_camera_toward(guard_pos.rotation, delta)
 	move_guard_toward(guard_pos.target_marker, delta)
 	var angle_difference := angle_difference(guard_area_2d.rotation, guard_pos.rotation)
@@ -95,15 +96,16 @@ func _on_tracking_timer_timeout() -> void:
 	state = GuardState.NORMAL
 
 
-func _on_camera_area_2d_body_entered(body: Node2D) -> void:
-	# alert about spotted player and track him
-	if body is Player:
-		Global.player_spotted.emit(body.global_position)
-		detected = "player"
-		state = GuardState.TRACKING
-	elif body is CookieProjectile: #elif so if both cookie and player, follow player
-		detected = "cookie_projectile"
-		state = GuardState.TRACKING
+func _scan_for_player() -> void:
+	for body: Node2D in guard_area_2d.get_overlapping_bodies():
+		# alert about spotted player and track him
+		if body is Player:
+			detected = "player"
+			Global.player_spotted.emit(body.global_position)
+			state = GuardState.TRACKING
+		elif body is CookieProjectile: #elif so if both cookie and player, follow player
+			detected = "cookie_projectile"
+			state = GuardState.TRACKING
 
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:

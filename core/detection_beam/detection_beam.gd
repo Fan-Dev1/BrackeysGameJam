@@ -18,13 +18,13 @@ var blink_pattern_index := 0
 @onready var beam_collision_shape: CollisionShape2D = %BeamCollisionShape
 
 var original_beam_length := 200.0
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	original_beam_length = beam_length
 	_setup_beam_length()
 	_start_blink_timer()
-	is_ready = true
-
+	is_ready = true # this line is needed since its a tool, it doesnt load the og beam length and causes null value
+# god knows why idk
 func _setup_beam_length() -> void:
 	beam_line_2d.clear_points()
 	beam_line_2d.add_point(Vector2.ZERO)
@@ -94,7 +94,7 @@ func _enter_blink_pattern_mode() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_node_ready() or beam_line_2d.get_point_count() < 2 or !is_ready:
+	if not is_node_ready() or beam_line_2d.get_point_count() < 2 or !is_ready: 
 		return 
 	var overlapping_bodies = get_overlapping_bodies()
 	var distance_to_body = original_beam_length 

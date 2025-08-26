@@ -45,7 +45,6 @@ script = ExtResource("1_6f7pe")
 position = Vector2(606, 315)
 rotaton_speed = 3.0
 move_speed = 100.0
-guard_position_index = 0
 guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
 
 [node name="LevelTimer" type="Timer" parent="."]
