@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://couhbnnm0mr6v"
+path="res://.godot/imported/Levers B.wav-2b31a4ce8d6f1c6ee50a8832416e7bd6.sample"
+
+[deps]
+
+source_file="res://core/lever_button/Levers B.wav"
+dest_files=["res://.godot/imported/Levers B.wav-2b31a4ce8d6f1c6ee50a8832416e7bd6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,39 +1,28 @@
 @tool
 class_name DetectionBeam
-extends Area2D
+extends Node2D
 
 enum Mode { KEEP_ON, KEEP_OFF, BLINK_PATTERN }
 
+@export var controlling_lever: LeverButton
 @export var mode := Mode.BLINK_PATTERN : set = set_beam_mode
 @export var beam_enabled := true : set = set_beam_enabled
 @export var beam_length := 200.0 : set = set_beam_length
-var is_ready := false
 ## even number = on duration in sec, odd number = off duration in sec[br]
 ## example: [0.4, 0.2, 1.0, 0.2] <=> on=0.4s -> off=0.2s -> on=1.0s -> off=0.2 -> repeat
 @export var blink_pattern := PackedFloat32Array()
 var blink_pattern_index := 0
 
 @onready var blink_timer: Timer = $BlinkTimer
-@onready var beam_line_2d: Line2D = %BeamLine2D
-@onready var beam_collision_shape: CollisionShape2D = %BeamCollisionShape
+@onready var beam_line_2d: Line2D = $BeamLine2D
+@onready var laser_ray_cast_2d: RayCast2D = $LaserRayCast2D
 
-var original_beam_length := 200.0
 
 func _ready() -> void:
-	original_beam_length = beam_length
-	_setup_beam_length()
+	set_beam_length(beam_length)
 	_start_blink_timer()
-	is_ready = true # this line is needed since its a tool, it doesnt load the og beam length and causes null value
-# god knows why idk
-func _setup_beam_length() -> void:
-	beam_line_2d.clear_points()
-	beam_line_2d.add_point(Vector2.ZERO)
-	beam_line_2d.add_point(Vector2.RIGHT * beam_length)
-	
-	var beam_shape := SegmentShape2D.new()
-	beam_shape.a = beam_line_2d.get_point_position(0)
-	beam_shape.b = beam_line_2d.get_point_position(1)
-	beam_collision_shape.shape = beam_shape
+	if is_controlled_by_lever():
+		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
 
 func _start_blink_timer():
@@ -62,14 +51,22 @@ func _on_blink_timer_timeout() -> void:
 func set_beam_length(length: float) -> void:
 	beam_length = length
 	if is_node_ready():
-		_setup_beam_length()
+		var target_position := Vector2.RIGHT * beam_length
+		laser_ray_cast_2d.set_target_position.call_deferred(target_position)
+		draw_beam_to(target_position)
+
+
+func draw_beam_to(target_position: Vector2) -> void:
+	beam_line_2d.clear_points()
+	beam_line_2d.add_point(Vector2.ZERO)
+	beam_line_2d.add_point(target_position)
 
 
 func set_beam_enabled(enabled: bool) -> void:
 	beam_enabled = enabled
 	if is_node_ready():
 		beam_line_2d.visible = beam_enabled
-		beam_collision_shape.disabled = not beam_enabled
+		laser_ray_cast_2d.enabled = beam_enabled
 		if beam_enabled:
 			$LazerStateRect.color = Color.GREEN
 		else:
@@ -94,24 +91,33 @@ func _enter_blink_pattern_mode() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_node_ready() or beam_line_2d.get_point_count() < 2 or !is_ready: 
-		return 
-	var overlapping_bodies = get_overlapping_bodies()
-	var distance_to_body = original_beam_length
-	if !overlapping_bodies.is_empty():
-		for body in overlapping_bodies:
-			distance_to_body = global_position.distance_to(body.global_position)
-			
-	if not is_equal_approx(beam_line_2d.points[1].x, distance_to_body):
-		set_beam_length(distance_to_body)
+	if not beam_enabled or Engine.is_editor_hint():
+		return
 	
-	
+	if laser_ray_cast_2d.is_colliding():
+		var collision_point := laser_ray_cast_2d.get_collision_point()
+		print(str(collision_point))
+		draw_beam_to(to_local(collision_point))
+		if laser_ray_cast_2d.get_collider() is Player:
+			Global.player_spotted.emit(collision_point)
+	else:
+		var full_length_position := Vector2.RIGHT * beam_length
+		draw_beam_to(full_length_position)
 
 
 func _scan_overlapping_bodies():
-	for body: Node2D in get_overlapping_bodies():
+	for body: Node2D in laser_ray_cast_2d.get_collider():
 		if body is Player:
 			# alert about spotted player
 			Global.player_spotted.emit(body.global_position)
-			
-		
+
+
+func is_controlled_by_lever() -> bool:
+	return controlling_lever != null
+
+
+func _on_lever_flipped(flipped_over: bool) -> void:
+	if flipped_over:
+		set_beam_mode.call_deferred(Mode.KEEP_ON)
+	else:
+		set_beam_mode.call_deferred(Mode.KEEP_OFF)

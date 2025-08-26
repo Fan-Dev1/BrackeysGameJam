@@ -4,13 +4,14 @@ extends Node2D
 
 enum CameraState { NORMAL, TRACKING, OFF }
 
+@export var controlling_lever : LeverButton
 @export var radius := 256.0
 
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0
-@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
+@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var left_limit := PI / -2.0
-@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
+@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var right_limit := PI / 2.0
 
 @export var rotaton_speed: float
@@ -27,11 +28,24 @@ var right_limit := PI / 2.0
 var state := CameraState.NORMAL : set = set_state
 var detected := "player"
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	if not is_zero_approx(rotation):
+		rotation = 0.0
+		push_warning("other rotation currently are buggy, setting rotaton not supported")
 	_update_fov_polygon()
+	_ready_camera_rotation()
+	if is_controlled_by_lever():
+		controlling_lever.lever_flipped.connect(_on_lever_flipped)
+
+
+func _ready_camera_rotation() -> void:
+	if camera_positions.is_empty():
+		return
+	camera_position_index = clampi(camera_position_index, 0, maxi(camera_positions.size() - 1, 0))
 	var camera_pos: CameraPosition = camera_positions.get(camera_position_index)
-	rotate_camera_toward(camera_pos.rotation)
+	if camera_pos != null:
+		rotate_camera_toward(camera_pos.rotation)
 
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		_update_fov_polygon()
 		_clamp_camera_rotations()
 		queue_redraw()
+		camera_position_index = clampi(camera_position_index, 0, maxi(camera_positions.size() - 1, 0))
 		var camera_pos: CameraPosition = camera_positions.get(camera_position_index)
 		rotate_camera_toward(camera_pos.rotation)
 	else:
@@ -77,13 +92,13 @@ func _scan_for_player() -> void:
 			detected = "cookie_projectile"
 			state = CameraState.TRACKING
 
+
 func _tracking_process(delta: float) -> void:
 	if detected == "player" or detected == "cookie_projectile":
-		
 		var target := get_tree().get_first_node_in_group(detected)
+		queue_redraw()
 		
 		if is_instance_valid(target):
-			
 			var angle_to_target := self.global_position.angle_to_point(target.global_position)
 			rotate_camera_toward(angle_to_target, delta)
 		
@@ -94,12 +109,13 @@ func _tracking_process(delta: float) -> void:
 			
 		elif tracking_timer.is_stopped():
 			tracking_timer.start()
-		queue_redraw()
 
 
 func _on_tracking_timer_timeout() -> void:
-	#switch back to normal operation
-	state = CameraState.NORMAL
+	if is_controlled_by_lever() and not controlling_lever.flipped_over:
+		state = CameraState.OFF
+	else: #switch back to normal operation
+		state = CameraState.NORMAL
 
 
 func set_state(new_state: CameraState) -> void:
@@ -130,7 +146,8 @@ func _update_fov_polygon(circle_points := 12) -> void:
 func _clamp_camera_rotations() -> void:
 	# clamp all camera_position.rotations inside this camera left and right_limit
 	for camera_position: CameraPosition in camera_positions:
-		camera_position.rotation = clamp_camera_rotation(camera_position.rotation)
+		if camera_position != null:
+			camera_position.rotation = clamp_camera_rotation(camera_position.rotation)
 
 
 func clamp_camera_rotation(value: float) -> float:
@@ -143,6 +160,17 @@ func rotate_camera_toward(to: float, delta := 1.0) -> void:
 	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
 	new_rotation = clamp_camera_rotation(new_rotation)
 	camera_area_2d.rotation = new_rotation
+
+
+func is_controlled_by_lever() -> bool:
+	return controlling_lever != null
+
+
+func _on_lever_flipped(flipped_over: bool) -> void:
+	if flipped_over:
+		set_state(CameraState.NORMAL)
+	else:
+		set_state(CameraState.OFF)
 
 
 func _draw() -> void:

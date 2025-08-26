@@ -69,23 +69,24 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 
 
 ### Interactable Button
+<img width="254" height="165" alt="LeverButton" src="https://github.com/user-attachments/assets/c1a2133d-8a03-41f9-aaa6-4a43064539cd" />
 
-- [ ] Can be interacted with left-click if the player is close enough
+- [X] Can be interacted with `spacebar` if the player is close enough
 - [ ] Can be operated by security guards who are aiming to maintain a desired state (keeping security devices online)
-- [ ] Can control a door (open / close)
-- [ ] Can control a detection laser (turn on / off) 
-- [ ] Can control a security camera (turn on / off)
-- [ ] 🎨 Sprite for button (on state / off state)
-- [ ] 🔊 SFX button clicked
+- [X] Can control a door (open / close)
+- [X] Can control a detection laser (turn on / off) 
+- [X] Can control a security camera (turn on / off)
+- [X] 🎨 Sprite for button (on state / off state)
+- [X] 🔊 SFX button clicked
 
 
 ### Sliding Door
 
-- [ ] Can be opened / closed by the player
+- [X] Can be opened / closed by the player
 - [ ] Can be opened / closed by the guards
-- [ ] The player can peek behind the door
+- [X] The player can peek behind the door
 - [ ] Can be locked with a key
-- [ ] Can be controlled by a button
+- [X] Can be controlled by a button
 - [ ] 🎨 Sprite for sliding door
 - [ ] 🔊 SFX for open / closing a door
 
@@ -110,7 +111,7 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [x] Can be blocked by a thrown cookie
 - [ ] Can be blocked by a passing guard
 - [ ] Can be blocked by other laser (both stop at intersection point)
-- [ ] Can be controlled by a button (on / off)
+- [X] Can be controlled by a button (on / off)
 - [ ] Slows down hit players and guards
 - [ ] 🎨 Sprite for dectection laser device
 - [ ] 🎨 Sprite animation for laser beam (optional) [currently a simple red line]
@@ -129,7 +130,7 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [X] A player who has been spotted is tracked by ~~all~~ cameras
 - [X] A thrown cookie distracts the camera for a while
 - [ ] When a key is spotted, a guard is sent to collect it
-- [ ] Can be controlled by a button (on / off)
+- [X] Can be controlled by a button (on / off)
 - [ ] 🎨 Sprite for security camera device
 - [ ] 🔊 SFX for rotating camera
 - [ ] 🔊 SFX for turn on / off
@@ -144,8 +145,8 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [ ] Guard behavior:
    - [ ] **Sleeping** Sleeps and wakes up when alarmed to chase players
    - [ ] **Patrolling** Patrols a specified path in a timed loop
-      - [ ] Moves between control points
-      - [ ] Looks in different directions
+	  - [ ] Moves between control points
+	  - [ ] Looks in different directions
    - [ ] **Investigate** When the alarm is triggered and the guard is within range, he sprints to the player's last reported position
    - [ ] **Chasing** If the player is spotted by the security guard, he will pursue them
    - [ ] **Distracted** When a cookie is spotted, the security guard runs up to it and observes it for a while
@@ -158,6 +159,5 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [ ] 🔊 SFX sleeping
 - [ ] 🎶 Music when guards alerted
 - [ ] 🎶 Music when beeing chased
-
 
 
