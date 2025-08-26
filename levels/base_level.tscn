@@ -191,11 +191,13 @@ text = "retry Level"
 
 [node name="CookieLootPanel" parent="UiCanvasLayer" instance=ExtResource("3_63c5o")]
 unique_name_in_owner = true
+visible = false
 offset_left = -532.0
 offset_right = 286.0
 
 [node name="InventoryPanel" parent="UiCanvasLayer" instance=ExtResource("4_satuh")]
 unique_name_in_owner = true
+visible = false
 offset_left = -588.0
 
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
