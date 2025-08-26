@@ -35,7 +35,7 @@ func _ready() -> void:
 		push_warning("other rotation currently are buggy, setting rotaton not supported")
 	_update_fov_polygon()
 	_ready_camera_rotation()
-	if is_controlled_by_lever():
+	if is_controlled_by_lever() and not Engine.is_editor_hint():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
 

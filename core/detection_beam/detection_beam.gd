@@ -21,7 +21,7 @@ var blink_pattern_index := 0
 func _ready() -> void:
 	set_beam_length(beam_length)
 	_start_blink_timer()
-	if is_controlled_by_lever():
+	if is_controlled_by_lever() and not Engine.is_editor_hint():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
 
@@ -96,7 +96,6 @@ func _physics_process(_delta: float) -> void:
 	
 	if laser_ray_cast_2d.is_colliding():
 		var collision_point := laser_ray_cast_2d.get_collision_point()
-		print(str(collision_point))
 		draw_beam_to(to_local(collision_point))
 		if laser_ray_cast_2d.get_collider() is Player:
 			Global.player_spotted.emit(collision_point)

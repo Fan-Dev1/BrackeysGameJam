@@ -3,13 +3,14 @@ extends Node2D
 
 enum State { OPEN, CLOSED, PEAKING }
 
+@export var controlling_lever : LeverButton
 @export var door_speed: float
 @export var door_state := State.CLOSED
-@export var controlling_lever : LeverButton
 
 @onready var slide_door: AnimatableBody2D = $SlideDoor
 @onready var border_line_2d: Line2D = %BorderLine2D
 @onready var visually_node: Node2D = %VisuallyNode
+@onready var open_door_reference: ReferenceRect = $OpenDoorReference
 
 @onready var interation_area_2d: Area2D = %InterationArea2D
 @onready var squeeze_area_2d: Area2D = %SqueezeArea2D
@@ -23,7 +24,7 @@ func _ready() -> void:
 		slide_door.set_position.call_deferred(get_slide_position())
 	border_line_2d.visible = false
 	stop_peeking()
-	if is_controlled_by_lever():
+	if is_controlled_by_lever() and not Engine.is_editor_hint():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
 
@@ -48,7 +49,7 @@ func _slide_door(delta: float) -> void:
 
 func get_slide_position() -> Vector2:
 	if door_state == State.OPEN:
-		var door_width := border_line_2d.get_point_position(1).x
+		var door_width := open_door_reference.size.x
 		return Vector2.RIGHT * door_width
 	elif squeeze_area_2d.get_overlapping_bodies(): # closing blocked by body
 		return slide_door.position - Vector2.LEFT * 8.0

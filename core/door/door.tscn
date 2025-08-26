@@ -1,19 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3ex6enbtttl5"]
+[gd_scene load_steps=9 format=3 uid="uid://d3ex6enbtttl5"]
 
 [ext_resource type="Script" uid="uid://dmy6ut8fhdaxr" path="res://core/door/door.gd" id="1_sc1hs"]
-[ext_resource type="Texture2D" uid="uid://bqdo5aefq0y8" path="res://core/door/door_sprite.png" id="2_ib8i1"]
+[ext_resource type="Texture2D" uid="uid://b15xciarxjoqi" path="res://core/door/door_sprite.png" id="2_ib8i1"]
 [ext_resource type="Texture2D" uid="uid://crar5ecjk0mgx" path="res://core/door/door_vision_light.png" id="2_p5nwt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc1hs"]
 radius = 48.0
-height = 192.0
+height = 234.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ib8i1"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sc1hs"]
-size = Vector2(144, 32)
+size = Vector2(168, 32)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p5nwt"]
 cull_mode = 2
-polygon = PackedVector2Array(-72, -16, 72, -16, 72, 16, -72, 16)
+polygon = PackedVector2Array(-92, -16, 76, -16, 76, 16, -92, 16)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5nwt"]
 radius = 16.0
@@ -22,63 +25,66 @@ height = 46.0
 [node name="Door" type="Node2D"]
 script = ExtResource("1_sc1hs")
 door_speed = 3.0
+metadata/_edit_lock_ = true
 
 [node name="InterationArea2D" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 collision_mask = 2
 metadata/_edit_lock_ = true
 
 [node name="TopCollisionShape2D" type="CollisionShape2D" parent="InterationArea2D"]
-visible = false
 position = Vector2(0, -24)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sc1hs")
+debug_color = Color(0, 0.7, 0.416798, 0.42)
 
 [node name="BottomCollisionShape2D" type="CollisionShape2D" parent="InterationArea2D"]
-visible = false
 position = Vector2(0, 24)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sc1hs")
+debug_color = Color(0, 0.7, 0.416798, 0.42)
 
 [node name="SlideDoor" type="AnimatableBody2D" parent="."]
 collision_mask = 3
+metadata/_edit_lock_ = true
 
 [node name="VisuallyNode" type="Node2D" parent="SlideDoor"]
 unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_ib8i1")
+
+[node name="Sprite2D" type="Sprite2D" parent="SlideDoor/VisuallyNode"]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("2_ib8i1")
 
 [node name="BorderLine2D" type="Line2D" parent="SlideDoor/VisuallyNode"]
 unique_name_in_owner = true
-visible = false
-position = Vector2(-72, -16)
-points = PackedVector2Array(0, 0, 144, 0, 144, 32, 0, 32)
+use_parent_material = true
+points = PackedVector2Array(-84, -16, 84, -16, 84, 16, -84, 16)
 closed = true
-width = 6.0
+width = 8.0
 default_color = Color(0.7998, 0.84103, 0.93, 1)
 joint_mode = 2
 round_precision = 12
 
-[node name="Sprite2D" type="Sprite2D" parent="SlideDoor/VisuallyNode"]
-texture_filter = 1
-texture = ExtResource("2_ib8i1")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlideDoor"]
-visible = false
 shape = SubResource("RectangleShape2D_sc1hs")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="SlideDoor"]
 self_modulate = Color(1, 1, 1, 0)
+position = Vector2(8, 0)
 occluder = SubResource("OccluderPolygon2D_p5nwt")
 occluder_light_mask = 3
 
 [node name="SqueezeArea2D" type="Area2D" parent="SlideDoor"]
 unique_name_in_owner = true
-position = Vector2(-80, 0)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlideDoor/SqueezeArea2D"]
-position = Vector2(8, 0)
+position = Vector2(-88, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_p5nwt")
 debug_color = Color(0.7, 0, 0.243518, 0.42)
@@ -113,13 +119,12 @@ offset = Vector2(0, -137)
 metadata/_edit_lock_ = true
 
 [node name="OpenDoorReference" type="ReferenceRect" parent="."]
-offset_left = 72.0
+offset_left = 84.0
 offset_top = -16.0
-offset_right = 216.0
-offset_bottom = 17.0
+offset_right = 252.0
+offset_bottom = 16.0
 mouse_filter = 2
 border_color = Color(1, 0.412, 0.02, 1)
-metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="InterationArea2D" to="." method="_on_interation_area_2d_body_entered"]
 [connection signal="body_exited" from="InterationArea2D" to="." method="_on_interation_area_2d_body_exited"]

@@ -18,6 +18,7 @@ var collected_cookie_count := 0
 
 
 func _ready() -> void:
+	$CanvasModulate.visible = true
 	timeout_panel.visible = false
 	level_complete_panel.visible = false
 	cookie_loot_panel.visible = false
