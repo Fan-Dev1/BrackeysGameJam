@@ -31,7 +31,7 @@ func stop_looting() -> void:
 
 
 func finish_looting() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
+	var player := Global.get_player()
 	cookie_looted.emit(self)
 	player.take_cookie_from(self)
 	loot_progress_bar.visible = false

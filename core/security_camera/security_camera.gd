@@ -155,6 +155,6 @@ func _draw() -> void:
 	
 	if OS.is_debug_build() and state == CameraState.TRACKING:
 		# draw_line to tracked player
-		var player: Player = get_tree().get_first_node_in_group("player")
+		var player := Global.get_player()
 		var player_position := to_local(player.global_position)
 		draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)

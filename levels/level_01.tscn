@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2j2q3cwvwesw"]
+[gd_scene load_steps=23 format=3 uid="uid://d2j2q3cwvwesw"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="4_gg43x"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="5_mllcm"]
 [ext_resource type="PackedScene" uid="uid://cqscxj4caxy1i" path="res://core/detection_beam/detection_beam.tscn" id="6_q7ibo"]
+[ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="7_cg8v6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mckh2"]
 size = Vector2(25, 522)
@@ -28,13 +29,16 @@ size = Vector2(393.125, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cg8v6"]
 size = Vector2(916.563, 26)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jy02f"]
+size = Vector2(164.5, 32)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q7ibo"]
 cull_mode = 2
 polygon = PackedVector2Array(440, 592, 1072, 592, 1072, 816, 1040, 816, 1040, 624, 728, 624, 728, 912, 328, 912, 328, 872, 696, 872, 696, 624, 440, 624)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cg8v6"]
 cull_mode = 2
-polygon = PackedVector2Array(168, 600, 168, 1080, 1040, 1088, 1040, 928, 1072, 928, 1072, 1128, 136, 1120, 136, 600)
+polygon = PackedVector2Array(304, 592, 304, 624, 168, 624, 168, 1080, 1040, 1088, 1040, 928, 1072, 928, 1072, 1128, 136, 1120, 136, 592)
 
 [sub_resource type="Animation" id="Animation_cg8v6"]
 length = 0.001
@@ -132,11 +136,15 @@ shape = SubResource("RectangleShape2D_q7ibo")
 position = Vector2(605.719, 1104)
 shape = SubResource("RectangleShape2D_cg8v6")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="HouseWalls" index="7"]
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="HouseWalls" index="7"]
+position = Vector2(221.75, 608)
+shape = SubResource("RectangleShape2D_jy02f")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="HouseWalls" index="8"]
 modulate = Color(1, 1, 1, 0)
 occluder = SubResource("OccluderPolygon2D_q7ibo")
 
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="HouseWalls" index="8"]
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="HouseWalls" index="9"]
 modulate = Color(1, 1, 1, 0)
 occluder = SubResource("OccluderPolygon2D_cg8v6")
 
@@ -171,7 +179,11 @@ left_limit = 0.0
 right_limit = 3.14159
 camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_mllcm"), SubResource("Resource_q7ibo")])
 
-[node name="ExitArea" parent="." index="9"]
+[node name="Door" parent="." index="9" instance=ExtResource("7_cg8v6")]
+position = Vector2(376, 608)
+rotation = 3.14159
+
+[node name="ExitArea" parent="." index="10"]
 position = Vector2(520, 232)
 
 [node name="CollisionShape2D" parent="ExitArea" index="0"]
@@ -183,5 +195,5 @@ offset_top = -80.0
 offset_right = 122.0
 offset_bottom = -35.0
 
-[node name="Player" parent="." index="10"]
+[node name="Player" parent="." index="11"]
 position = Vector2(576, 256)

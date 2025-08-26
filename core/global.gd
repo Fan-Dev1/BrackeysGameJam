@@ -37,3 +37,7 @@ func retry_level():
 	var next_level_path: String = levels[current_level_index]
 	get_tree().change_scene_to_file(next_level_path)
 	get_tree().set_pause(false)
+
+
+func get_player() -> Player:
+	return get_tree().get_first_node_in_group("player")

@@ -97,8 +97,7 @@ func _physics_process(_delta: float) -> void:
 	if not is_node_ready() or beam_line_2d.get_point_count() < 2 or !is_ready: 
 		return 
 	var overlapping_bodies = get_overlapping_bodies()
-	var distance_to_body = original_beam_length 
-	print(original_beam_length)
+	var distance_to_body = original_beam_length
 	if !overlapping_bodies.is_empty():
 		for body in overlapping_bodies:
 			distance_to_body = global_position.distance_to(body.global_position)

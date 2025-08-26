@@ -16,12 +16,12 @@ font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Gradient" id="Gradient_ew5uy"]
+[sub_resource type="Gradient" id="Gradient_satuh"]
 offsets = PackedFloat32Array(0.864943, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_63c5o"]
-gradient = SubResource("Gradient_ew5uy")
+gradient = SubResource("Gradient_satuh")
 width = 1080
 height = 1080
 fill = 1
@@ -83,7 +83,7 @@ blend_mode = 2
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 1
-shadow_filter_smooth = 5.0
+shadow_filter_smooth = 4.0
 shadow_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_63c5o")
 
