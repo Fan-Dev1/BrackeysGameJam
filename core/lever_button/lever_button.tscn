@@ -1,10 +1,102 @@
-[gd_scene load_steps=21 format=3 uid="uid://be3ewbyga6008"]
+[gd_scene load_steps=13 format=3 uid="uid://be3ewbyga6008"]
 
 [ext_resource type="Texture2D" uid="uid://cgxtkj6sx4uqm" path="res://core/lever_button/level_button_sprites.png" id="1_1d3ay"]
 [ext_resource type="Script" uid="uid://wpnic6hycec1" path="res://core/lever_button/lever_button.gd" id="1_76s5e"]
 [ext_resource type="Texture2D" uid="uid://bkjmtoyaya6m0" path="res://core/lever_button/level_button_sprites_outline.png" id="3_5leoa"]
 [ext_resource type="AudioStream" uid="uid://cfyc2mpg7s68c" path="res://core/lever_button/Levers A.wav" id="4_6pi72"]
 [ext_resource type="AudioStream" uid="uid://couhbnnm0mr6v" path="res://core/lever_button/Levers B.wav" id="5_ab8qn"]
+
+[sub_resource type="Animation" id="Animation_6pi72"]
+resource_name = "turn_on"
+length = 0.416675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/OutlineSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_ab8qn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/OutlineSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8e1rb"]
+resource_name = "turn_off"
+length = 0.416675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/OutlineSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0841057, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8e1rb"]
+_data = {
+&"RESET": SubResource("Animation_ab8qn"),
+&"turn_off": SubResource("Animation_8e1rb"),
+&"turn_on": SubResource("Animation_6pi72")
+}
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8e1rb"]
 random_pitch = 1.2
@@ -19,95 +111,14 @@ radius = 48.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5leoa"]
 size = Vector2(96, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8e1rb"]
-atlas = ExtResource("1_1d3ay")
-region = Rect2(184, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bti7j"]
-atlas = ExtResource("1_1d3ay")
-region = Rect2(138, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5nd1f"]
-atlas = ExtResource("1_1d3ay")
-region = Rect2(92, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lpbeu"]
-atlas = ExtResource("1_1d3ay")
-region = Rect2(46, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iuada"]
-atlas = ExtResource("1_1d3ay")
-region = Rect2(0, 0, 46, 42)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8e1rb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8e1rb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bti7j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5nd1f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lpbeu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iuada")
-}],
-"loop": false,
-"name": &"turn_on",
-"speed": 12.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xry77"]
-atlas = ExtResource("3_5leoa")
-region = Rect2(184, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n5uos"]
-atlas = ExtResource("3_5leoa")
-region = Rect2(138, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xf1y4"]
-atlas = ExtResource("3_5leoa")
-region = Rect2(92, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r0uxy"]
-atlas = ExtResource("3_5leoa")
-region = Rect2(46, 0, 46, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_duker"]
-atlas = ExtResource("3_5leoa")
-region = Rect2(0, 0, 46, 42)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rdygi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xry77")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n5uos")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xf1y4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r0uxy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_duker")
-}],
-"loop": false,
-"name": &"turn_on",
-"speed": 12.0
-}]
-
 [node name="LeverButton" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_76s5e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8e1rb")
+}
 
 [node name="LeverFlipSfx" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_8e1rb")
@@ -122,19 +133,18 @@ shape = SubResource("CircleShape2D_76s5e")
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_5leoa")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -17)
-sprite_frames = SubResource("SpriteFrames_8e1rb")
-animation = &"turn_on"
+texture = ExtResource("1_1d3ay")
+hframes = 5
 metadata/_edit_group_ = true
 
-[node name="OutlineAnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
-visible = false
+[node name="OutlineSprite2D" type="Sprite2D" parent="Sprite2D"]
 show_behind_parent = true
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_rdygi")
-animation = &"turn_on"
+texture = ExtResource("3_5leoa")
+hframes = 5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

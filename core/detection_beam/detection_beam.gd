@@ -1,3 +1,4 @@
+@tool
 class_name DetectionBeam
 extends Node2D
 

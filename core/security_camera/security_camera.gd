@@ -9,9 +9,9 @@ enum CameraState { NORMAL, TRACKING, OFF }
 
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0
-@export_range(-360.0, 360.0, 0.1, "radians_as_degrees") 
+@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var left_limit := PI / -2.0
-@export_range(-360.0, 360.0, 0.1, "radians_as_degrees") 
+@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var right_limit := PI / 2.0
 
 @export var rotaton_speed: float
