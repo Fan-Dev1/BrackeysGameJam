@@ -101,7 +101,7 @@ func _on_camera_area_2d_body_entered(body: Node2D) -> void:
 		Global.player_spotted.emit(body.global_position)
 		detected = "player"
 		state = GuardState.TRACKING
-	elif body is CookieProjectile:
+	elif body is CookieProjectile: #elif so if both cookie and player, follow player
 		detected = "cookie_projectile"
 		state = GuardState.TRACKING
 

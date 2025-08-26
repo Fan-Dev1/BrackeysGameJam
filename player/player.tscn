@@ -113,3 +113,7 @@ unique_name_in_owner = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_65viv")
 animation = &"WalkSouth"
+
+[node name="FireCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

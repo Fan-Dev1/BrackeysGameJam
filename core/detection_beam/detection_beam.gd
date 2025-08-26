@@ -7,7 +7,7 @@ enum Mode { KEEP_ON, KEEP_OFF, BLINK_PATTERN }
 @export var mode := Mode.BLINK_PATTERN : set = set_beam_mode
 @export var beam_enabled := true : set = set_beam_enabled
 @export var beam_length := 200.0 : set = set_beam_length
-
+var is_ready := false
 ## even number = on duration in sec, odd number = off duration in sec[br]
 ## example: [0.4, 0.2, 1.0, 0.2] <=> on=0.4s -> off=0.2s -> on=1.0s -> off=0.2 -> repeat
 @export var blink_pattern := PackedFloat32Array()
@@ -17,12 +17,13 @@ var blink_pattern_index := 0
 @onready var beam_line_2d: Line2D = %BeamLine2D
 @onready var beam_collision_shape: CollisionShape2D = %BeamCollisionShape
 
-
+var original_beam_length := 200.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	original_beam_length = beam_length
 	_setup_beam_length()
 	_start_blink_timer()
-
+	is_ready = true
 
 func _setup_beam_length() -> void:
 	beam_line_2d.clear_points()
@@ -93,8 +94,19 @@ func _enter_blink_pattern_mode() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if beam_enabled:
-		_scan_overlapping_bodies()
+	if not is_node_ready() or beam_line_2d.get_point_count() < 2 or !is_ready:
+		return 
+	var overlapping_bodies = get_overlapping_bodies()
+	var distance_to_body = original_beam_length 
+	print(original_beam_length)
+	if !overlapping_bodies.is_empty():
+		for body in overlapping_bodies:
+			distance_to_body = global_position.distance_to(body.global_position)
+			
+	if not is_equal_approx(beam_line_2d.points[1].x, distance_to_body):
+		set_beam_length(distance_to_body)
+	
+	
 
 
 func _scan_overlapping_bodies():
@@ -102,3 +114,5 @@ func _scan_overlapping_bodies():
 		if body is Player:
 			# alert about spotted player
 			Global.player_spotted.emit(body.global_position)
+			
+		

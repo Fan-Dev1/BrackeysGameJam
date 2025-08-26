@@ -15,6 +15,7 @@ extends CharacterBody2D
 var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
+@onready var fire_cooldown: Timer = $FireCooldown
 
 var cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projectile.tscn")
 
@@ -26,10 +27,12 @@ func _physics_process(delta: float) -> void:
 	manage_animations(input_direction, last_direction)
 	var velocity_weight := 1.0 - exp(-move_smothing * delta)
 	velocity = velocity.lerp(target_velocity, velocity_weight)
-	if Input.is_action_pressed("fire"):
-		aim()
-	elif Input.is_action_just_released("fire"):
-		fire()
+	if fire_cooldown.is_stopped():
+		if Input.is_action_pressed("fire"):
+			aim()
+		elif Input.is_action_just_released("fire"):
+			fire_cooldown.start()
+			fire()
 	move_and_slide()
 
 func manage_animations(input_direction, last_direction) -> void:
