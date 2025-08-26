@@ -1,13 +1,14 @@
 class_name Door
 extends Node2D
 
+enum State { OPEN, CLOSED, PEAKING }
 
-@export var smoothing: float
-@export var open := false
+@export var door_speed: float
+@export var door_state := State.CLOSED
 
 @onready var slide_door: AnimatableBody2D = $SlideDoor
 @onready var border_line_2d: Line2D = %BorderLine2D
-@onready var door_width: float = %Sprite.size.x
+@onready var visually_node: Node2D = %VisuallyNode
 
 @onready var interation_area_2d: Area2D = %InterationArea2D
 @onready var squeeze_area_2d: Area2D = %SqueezeArea2D
@@ -17,57 +18,64 @@ extends Node2D
 
 
 func _ready() -> void:
+	if door_state == State.CLOSED:
+		slide_door.set_position.call_deferred(get_slide_position())
 	border_line_2d.visible = false
 	stop_peeking()
 
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
-		var player := Global.get_player()
-		if interation_area_2d.overlaps_body(player):
-			if open:
-				close_door()
-			elif is_peeking():
-				open_door()
-			else:
-				start_peeking(player.global_position)
+		handle_interation()
+	_slide_door(delta)
+
+
+func _slide_door(delta: float) -> void:
+	var slide_position := get_slide_position()
+	var weight := 1 - exp(-door_speed * delta)
+	slide_door.position = slide_door.position.lerp(slide_position, weight)
 	
-	# slide door
-	if open:
-		_slide_door(Vector2.RIGHT * door_width, delta)
-	elif is_peeking():
-		_slide_door(Vector2.RIGHT * 20.0, delta)
-	elif not squeeze_area_2d.get_overlapping_bodies(): # close
-		_slide_door(Vector2.ZERO, delta)
+	# visually faked door peaking
+	if door_state == State.PEAKING:
+		var peak_position := Vector2.RIGHT * 20.0
+		visually_node.position = visually_node.position.lerp(peak_position, weight * 2.0)
+	else:
+		visually_node.position = visually_node.position.lerp(Vector2.ZERO, weight * 2.0)
 
 
-func _slide_door(to_position: Vector2, delta: float) -> void:
-	var weight := 1 - exp(-smoothing * delta)
-	slide_door.position = slide_door.position.lerp(to_position, weight)
+func get_slide_position() -> Vector2:
+	if door_state == State.OPEN:
+		var door_width := border_line_2d.get_point_position(1).x
+		return Vector2.RIGHT * door_width
+	elif squeeze_area_2d.get_overlapping_bodies(): # closing blocked by body
+		return slide_door.position - Vector2.LEFT * 8.0
+	else: # PEAKING, CLOSED
+		return Vector2.ZERO
 
 
 func start_peeking(from_position: Vector2) -> void:
 	var peek_direction := global_position.direction_to(from_position)
-	var is_on_up_side := peek_direction.dot(Vector2.DOWN) > 0.0
+	var local_direction: Vector2 = transform.basis_xform_inv(peek_direction)
+	var is_on_up_side := local_direction.dot(Vector2.UP) > 0.0
 	down_peek_light.enabled = is_on_up_side
 	up_peek_light.enabled = not is_on_up_side
+	print("peak up " + str(is_on_up_side))
+	door_state = State.PEAKING
 
 
 func stop_peeking() -> void:
 	up_peek_light.enabled = false
 	down_peek_light.enabled = false
-
-
-func is_peeking() -> bool:
-	return up_peek_light.enabled or down_peek_light.enabled
+	door_state = State.CLOSED
 
 
 func open_door() -> void:
-	open = true
 	stop_peeking()
+	door_state = State.OPEN
+
 
 func close_door() -> void:
-	open = false
+	door_state = State.CLOSED
 
 
 func _on_interation_area_2d_body_entered(body: Node2D) -> void:
@@ -78,4 +86,20 @@ func _on_interation_area_2d_body_entered(body: Node2D) -> void:
 func _on_interation_area_2d_body_exited(body: Node2D) -> void:
 	if body is Player:
 		border_line_2d.visible = false
-		stop_peeking()
+		if door_state == State.PEAKING:
+			stop_peeking()
+
+
+func handle_interation() -> void:
+	var player := Global.get_player()
+	var in_reach_for_interation := border_line_2d.visible
+	if in_reach_for_interation:
+		if door_state == State.OPEN: # open --> closed
+			print("close " + self.name)
+			close_door()
+		elif door_state == State.PEAKING: # peaking --> open
+			print("open " + self.name)
+			open_door()
+		elif slide_door.position.x < 20.0: # closed --> peaking
+			print("peaking " + self.name)
+			start_peeking(player.global_position)
