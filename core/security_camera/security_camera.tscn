@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [sub_resource type="Resource" id="Resource_t0tbx"]
 script = ExtResource("2_t0tbx")
-rotation = 0.907571
+rotation = 0.0
 duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"

@@ -5,6 +5,7 @@ enum State { OPEN, CLOSED, PEAKING }
 
 @export var door_speed: float
 @export var door_state := State.CLOSED
+@export var controlling_lever : LeverButton
 
 @onready var slide_door: AnimatableBody2D = $SlideDoor
 @onready var border_line_2d: Line2D = %BorderLine2D
@@ -22,6 +23,8 @@ func _ready() -> void:
 		slide_door.set_position.call_deferred(get_slide_position())
 	border_line_2d.visible = false
 	stop_peeking()
+	if is_controlled_by_lever():
+		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,7 +62,6 @@ func start_peeking(from_position: Vector2) -> void:
 	var is_on_up_side := local_direction.dot(Vector2.UP) > 0.0
 	down_peek_light.enabled = is_on_up_side
 	up_peek_light.enabled = not is_on_up_side
-	print("peak up " + str(is_on_up_side))
 	door_state = State.PEAKING
 
 
@@ -78,6 +80,17 @@ func close_door() -> void:
 	door_state = State.CLOSED
 
 
+func is_controlled_by_lever() -> bool:
+	return controlling_lever != null
+
+
+func _on_lever_flipped(flipped_over: bool) -> void:
+	if flipped_over:
+		open_door.call_deferred()
+	else:
+		close_door.call_deferred()
+
+
 func _on_interation_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		border_line_2d.visible = true
@@ -94,12 +107,9 @@ func handle_interation() -> void:
 	var player := Global.get_player()
 	var in_reach_for_interation := border_line_2d.visible
 	if in_reach_for_interation:
-		if door_state == State.OPEN: # open --> closed
-			print("close " + self.name)
-			close_door()
-		elif door_state == State.PEAKING: # peaking --> open
-			print("open " + self.name)
-			open_door()
-		elif slide_door.position.x < 20.0: # closed --> peaking
-			print("peaking " + self.name)
+		if door_state == State.OPEN and not is_controlled_by_lever(): 
+			close_door() # open --> closed
+		elif door_state == State.PEAKING and not is_controlled_by_lever(): 
+			open_door() # peaking --> open
+		elif slide_door.position.x < 20.0: # --> peaking
 			start_peeking(player.global_position)

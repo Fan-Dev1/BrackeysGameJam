@@ -1,16 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqscxj4caxy1i"]
+[gd_scene load_steps=3 format=3 uid="uid://cqscxj4caxy1i"]
 
 [ext_resource type="Script" uid="uid://b0n8mtigge4g2" path="res://core/detection_beam/detection_beam.gd" id="1_p7rxj"]
 [ext_resource type="Script" uid="uid://cqufeafed1a5a" path="res://core/blinking_led.gd" id="2_lgpul"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lgpul"]
-b = Vector2(200, 0)
-
-[node name="DetectionBeam" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
+[node name="DetectionBeam" type="Node2D"]
 script = ExtResource("1_p7rxj")
-blink_pattern = PackedFloat32Array(2, 2, 4, 4)
 
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -32,14 +26,12 @@ script = ExtResource("2_lgpul")
 timer = NodePath("../BlinkTimer")
 
 [node name="BeamLine2D" type="Line2D" parent="." groups=["masked_by_player_vision"]]
-unique_name_in_owner = true
 points = PackedVector2Array(0, 0, 200, 0)
 width = 8.0
 default_color = Color(1, 0.223529, 0.2, 0.792157)
 
-[node name="BeamCollisionShape" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-visible = false
-shape = SubResource("SegmentShape2D_lgpul")
+[node name="LaserRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+collision_mask = 2
 
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

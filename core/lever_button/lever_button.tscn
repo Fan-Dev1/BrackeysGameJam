@@ -1,0 +1,140 @@
+[gd_scene load_steps=21 format=3 uid="uid://be3ewbyga6008"]
+
+[ext_resource type="Texture2D" uid="uid://cgxtkj6sx4uqm" path="res://core/lever_button/level_button_sprites.png" id="1_1d3ay"]
+[ext_resource type="Script" uid="uid://wpnic6hycec1" path="res://core/lever_button/lever_button.gd" id="1_76s5e"]
+[ext_resource type="Texture2D" uid="uid://bkjmtoyaya6m0" path="res://core/lever_button/level_button_sprites_outline.png" id="3_5leoa"]
+[ext_resource type="AudioStream" uid="uid://cfyc2mpg7s68c" path="res://core/lever_button/Levers A.wav" id="4_6pi72"]
+[ext_resource type="AudioStream" uid="uid://couhbnnm0mr6v" path="res://core/lever_button/Levers B.wav" id="5_ab8qn"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8e1rb"]
+random_pitch = 1.2
+random_volume_offset_db = 3.0
+streams_count = 2
+stream_0/stream = ExtResource("4_6pi72")
+stream_1/stream = ExtResource("5_ab8qn")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_76s5e"]
+radius = 48.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5leoa"]
+size = Vector2(96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e1rb"]
+atlas = ExtResource("1_1d3ay")
+region = Rect2(184, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bti7j"]
+atlas = ExtResource("1_1d3ay")
+region = Rect2(138, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nd1f"]
+atlas = ExtResource("1_1d3ay")
+region = Rect2(92, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpbeu"]
+atlas = ExtResource("1_1d3ay")
+region = Rect2(46, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuada"]
+atlas = ExtResource("1_1d3ay")
+region = Rect2(0, 0, 46, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8e1rb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e1rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bti7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nd1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpbeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuada")
+}],
+"loop": false,
+"name": &"turn_on",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xry77"]
+atlas = ExtResource("3_5leoa")
+region = Rect2(184, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5uos"]
+atlas = ExtResource("3_5leoa")
+region = Rect2(138, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf1y4"]
+atlas = ExtResource("3_5leoa")
+region = Rect2(92, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0uxy"]
+atlas = ExtResource("3_5leoa")
+region = Rect2(46, 0, 46, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duker"]
+atlas = ExtResource("3_5leoa")
+region = Rect2(0, 0, 46, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdygi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xry77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5uos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf1y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0uxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duker")
+}],
+"loop": false,
+"name": &"turn_on",
+"speed": 12.0
+}]
+
+[node name="LeverButton" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_76s5e")
+
+[node name="LeverFlipSfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_8e1rb")
+volume_db = -10.0
+max_polyphony = 2
+
+[node name="CircleCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -48)
+shape = SubResource("CircleShape2D_76s5e")
+
+[node name="BoxCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_5leoa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -17)
+sprite_frames = SubResource("SpriteFrames_8e1rb")
+animation = &"turn_on"
+metadata/_edit_group_ = true
+
+[node name="OutlineAnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+visible = false
+show_behind_parent = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_rdygi")
+animation = &"turn_on"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

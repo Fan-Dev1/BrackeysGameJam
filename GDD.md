@@ -81,9 +81,9 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 
 ### Sliding Door
 
-- [ ] Can be opened / closed by the player
+- [X] Can be opened / closed by the player
 - [ ] Can be opened / closed by the guards
-- [ ] The player can peek behind the door
+- [X] The player can peek behind the door
 - [ ] Can be locked with a key
 - [ ] Can be controlled by a button
 - [ ] 🎨 Sprite for sliding door
@@ -144,8 +144,8 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [ ] Guard behavior:
    - [ ] **Sleeping** Sleeps and wakes up when alarmed to chase players
    - [ ] **Patrolling** Patrols a specified path in a timed loop
-      - [ ] Moves between control points
-      - [ ] Looks in different directions
+	  - [ ] Moves between control points
+	  - [ ] Looks in different directions
    - [ ] **Investigate** When the alarm is triggered and the guard is within range, he sprints to the player's last reported position
    - [ ] **Chasing** If the player is spotted by the security guard, he will pursue them
    - [ ] **Distracted** When a cookie is spotted, the security guard runs up to it and observes it for a while
@@ -158,6 +158,3 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 - [ ] 🔊 SFX sleeping
 - [ ] 🎶 Music when guards alerted
 - [ ] 🎶 Music when beeing chased
-
-
-
