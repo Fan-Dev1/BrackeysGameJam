@@ -5,7 +5,6 @@ extends CharacterBody2D
 @export var move_speed: float
 @export var move_smothing: float
 
-@onready var camera_2d: Camera2D = %Camera2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @export var max_line_length: float = 300.0
 

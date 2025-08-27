@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhd35o5m5lhrq"]
+[gd_scene load_steps=16 format=3 uid="uid://dhd35o5m5lhrq"]
 
 [ext_resource type="Script" uid="uid://bpqyegseblpju" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="2_g1dw6"]
@@ -11,9 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b8t1rch1hf4q" path="res://PlaceholderCharacter/Chara_South_WalkR.png" id="9_tqiix"]
 [ext_resource type="Texture2D" uid="uid://c8h3n5s5vshm" path="res://PlaceholderCharacter/Chara_South_Still.png" id="10_e7oew"]
 [ext_resource type="Texture2D" uid="uid://cdrrnx2reuyr2" path="res://PlaceholderCharacter/Chara_South_WalkL.png" id="11_c35mf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
-radius = 47.1699
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_65viv"]
 animations = [{
@@ -93,6 +90,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
+radius = 47.1699
+
+[sub_resource type="Gradient" id="Gradient_satuh"]
+offsets = PackedFloat32Array(0.864943, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ieo8"]
+gradient = SubResource("Gradient_satuh")
+width = 1080
+height = 1080
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.850427, 0.211538)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 motion_mode = 1
@@ -100,21 +112,27 @@ script = ExtResource("1_rkbax")
 move_speed = 400.0
 move_smothing = 20.0
 
+[node name="FireCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.730469)
 texture = ExtResource("2_g1dw6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rkbax")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-unique_name_in_owner = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.667, 0.667)
 sprite_frames = SubResource("SpriteFrames_65viv")
 animation = &"WalkSouth"
 
-[node name="FireCooldown" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rkbax")
+
+[node name="VisionPointLight2D" type="PointLight2D" parent="."]
+blend_mode = 2
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter_smooth = 20.0
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_2ieo8")
+metadata/_edit_lock_ = true
