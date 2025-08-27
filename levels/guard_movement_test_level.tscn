@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://exoe8xt1c2iu"]
+[gd_scene load_steps=15 format=4 uid="uid://exoe8xt1c2iu"]
 
 [ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_6f7pe"]
 [ext_resource type="PackedScene" uid="uid://bdtjxtyyetv2y" path="res://core/security_guard/SecurityGuard.tscn" id="2_0se1k"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="4_5umpd"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="4_hs50d"]
 [ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory_panel.tscn" id="5_opkbm"]
+[ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="6_e5vn1"]
 [ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="7_opkbm"]
 
 [sub_resource type="Resource" id="Resource_5umpd"]
@@ -24,29 +25,26 @@ duration_max_sec = 3.0
 target_marker = Vector2(0, -10)
 metadata/_custom_type_script = "uid://tdiec21ofqup"
 
-[sub_resource type="LabelSettings" id="LabelSettings_e5vn1"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e5vn1"]
+vertices = PackedVector2Array(73, 137, 73, 55, 193.422, 1.07031, 202.57, 536, -708.172, 3.92188, -329, 55, -711.828, 536, -329, 457, -246.922, 457, -247.922, 137)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 6, 7, 8), PackedInt32Array(0, 3, 8, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-733, -21, 218, -24, 228, 561, -737, 561), PackedVector2Array(-272, 432, -273, 112, 48, 112, 48, 80, -304, 80, -304, 432)])
+agent_radius = 25.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_opkbm"]
 font_size = 32
 outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5vn1"]
+font_size = 48
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_5x83e"]
 font_size = 48
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_brl4d"]
-font_size = 48
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hs50d"]
-size = Vector2(32, 310)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_e5vn1"]
-vertices = PackedVector2Array(193.422, 1.07031, 202.57, 536, 49.7578, 173.563, 47.2891, 89.5391, -708.172, 3.92188, -316.148, 81.4297, -711.828, 536, -313.859, 479, -230.922, 479, -231.906, 167.531)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(1, 6, 7, 8), PackedInt32Array(2, 1, 8, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-733, -21, 218, -24, 228, 561, -737, 561), PackedVector2Array(-256, 454, -257, 142, 24, 148, 23, 114, -291, 107, -289, 454)])
-agent_radius = 25.0
 
 [node name="GuardMovementTestLevel" type="Node2D"]
 script = ExtResource("1_6f7pe")
@@ -59,13 +57,25 @@ texture = ExtResource("7_opkbm")
 [node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
 position = Vector2(606, 315)
 rotaton_speed = 3.0
-guard_position_index = 1
 guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
+
+[node name="WallTileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+position = Vector2(735, 26)
+tile_map_data = PackedByteArray("AAD7/wUAAAADAAEAAAD7/wQAAAADAAEAAAD7/wMAAAADAAEAAAD7/wIAAAADAAEAAAD7/wEAAAAEAAAAAAD8/wEAAAABAAMAAAD9/wEAAAABAAMAAAD+/wEAAAABAAMAAAD//wEAAAABAAMAAAD7/wYAAAADAAIAAAAAAAEAAAACAAMAAAA=")
+tile_set = ExtResource("6_e5vn1")
+metadata/_edit_lock_ = true
 
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 90.0
 one_shot = true
 autostart = true
+
+[node name="Player" parent="." instance=ExtResource("4_5umpd")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(735, 26)
+navigation_polygon = SubResource("NavigationPolygon_e5vn1")
 
 [node name="UiCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -77,13 +87,13 @@ offset_bottom = 40.0
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cookies: 00/01"
-label_settings = SubResource("LabelSettings_e5vn1")
+label_settings = SubResource("LabelSettings_opkbm")
 
 [node name="TimeLabel" type="Label" parent="UiCanvasLayer/TopLeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Time: 00:00:00"
-label_settings = SubResource("LabelSettings_e5vn1")
+label_settings = SubResource("LabelSettings_opkbm")
 
 [node name="LevelCompletePanel" type="PanelContainer" parent="UiCanvasLayer"]
 unique_name_in_owner = true
@@ -114,7 +124,7 @@ layout_mode = 2
 [node name="Title" type="Label" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Level complete!"
-label_settings = SubResource("LabelSettings_5x83e")
+label_settings = SubResource("LabelSettings_e5vn1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -161,7 +171,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Level Timeout!"
-label_settings = SubResource("LabelSettings_brl4d")
+label_settings = SubResource("LabelSettings_5x83e")
 
 [node name="RetryLevelButton" type="Button" parent="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -171,38 +181,15 @@ text = "retry Level"
 
 [node name="CookieLootPanel" parent="UiCanvasLayer" instance=ExtResource("4_hs50d")]
 unique_name_in_owner = true
-offset_left = -98.0
-offset_top = 458.0
-offset_right = 720.0
-offset_bottom = 1046.0
+visible = false
+offset_left = -532.0
+offset_right = 286.0
 
 [node name="InventoryPanel" parent="UiCanvasLayer" instance=ExtResource("5_opkbm")]
 unique_name_in_owner = true
+visible = false
 offset_left = -588.0
 
-[node name="Player" parent="." instance=ExtResource("4_5umpd")]
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(602, 154)
-rotation = 1.59096
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_hs50d")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-scale = Vector2(0.257813, 2.44531)
-texture = ExtResource("7_opkbm")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(462, 324)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_hs50d")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(0.257813, 2.44531)
-texture = ExtResource("7_opkbm")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(735, 26)
-navigation_polygon = SubResource("NavigationPolygon_e5vn1")
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.31802, 0.31802, 0.31802, 1)

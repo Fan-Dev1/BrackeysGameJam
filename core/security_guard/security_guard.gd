@@ -5,6 +5,8 @@ extends CharacterBody2D
 enum GuardState { NORMAL, TRACKING, DISTRACTED ,RETURN, OFF }
 @onready var caught_area: Area2D = $CaughtArea
 
+
+
 @onready var wall_ray_cast_2d: RayCast2D = $WallRayCast2D
 
 @export var radius := 256.0
@@ -53,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 		rotate_camera_toward(guard_pos.rotation)
 	else:
+		_update_fov_polygon()
 		match state:
 			GuardState.NORMAL: _normal_process(delta)
 			GuardState.TRACKING: _tracking_process(delta)
@@ -82,12 +85,14 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
+	
 	if detected == "player":
 		
 		if is_instance_valid(target):
 			
 			var angle_to_target := self.global_position.angle_to_point(target.global_position)
-			rotate_camera_toward(angle_to_target, delta)
+			if _scan_walls(target):
+				rotate_camera_toward(angle_to_target, delta)
 		
 			if guard_area_2d.overlaps_body(target) and target:
 				tracking_timer.stop()
@@ -170,8 +175,9 @@ func _update_fov_polygon(circle_points := 12) -> void:
 	
 	new_polygon.append(Vector2(0.0, -8.0))
 	for i in range(circle_points + 1):
-		new_polygon.append(Vector2.from_angle(current_angle) * radius)
+		
 		current_angle += fov_step
+		new_polygon.append(Vector2.from_angle(current_angle) * radius)
 	new_polygon.append(Vector2(0.0, 8.0))
 	guard_fov.polygon = new_polygon
 	guard_collision.polygon = new_polygon
@@ -185,7 +191,7 @@ func rotate_camera_toward(to: float, delta := 1.0) -> void:
 #func _moving_process(delta: float)
 
 func move_guard_toward(to: Vector2, delta : float):
-	
+		
 	velocity = velocity.move_toward(to, move_speed * delta)
 	
 	
@@ -198,6 +204,11 @@ func _scan_walls(body : Node2D) -> bool:
 		return true
 	else:
 		return false
+		
+
+func _shorten_fov() -> void:
+	pass
+	
 func _draw() -> void:
 	if Engine.is_editor_hint():
 		# draw_line for left and right limit
@@ -208,10 +219,11 @@ func _draw() -> void:
 		#draw_line(Vector2.ZERO, right_limit_point, Color.BLUE, 2.0)
 	
 	if OS.is_debug_build() and state == GuardState.TRACKING:
+		pass
 		# draw_line to tracked player
-		var player: Player = get_tree().get_first_node_in_group("player")
-		var player_position := to_local(player.global_position)
-		draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
+		#var player: Player = get_tree().get_first_node_in_group("player")
+		#var player_position := to_local(player.global_position)
+		#draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
 
 
 

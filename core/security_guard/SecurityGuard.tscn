@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdtjxtyyetv2y"]
+[gd_scene load_steps=11 format=3 uid="uid://bdtjxtyyetv2y"]
 
 [ext_resource type="Script" uid="uid://dmhmq4v34a7ie" path="res://core/security_guard/security_guard.gd" id="1_p6iyn"]
 [ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="2_ptygn"]
+[ext_resource type="Texture2D" uid="uid://5jiaxq3f15qk" path="res://Flashlighty.png" id="3_e2b7p"]
 [ext_resource type="Texture2D" uid="uid://dw2ijtlpte4mo" path="res://core/security_guard/Guard.png" id="3_p37y6"]
 
 [sub_resource type="Resource" id="Resource_ptygn"]
@@ -19,6 +20,15 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 target_marker = Vector2(0, 0)
 metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="Gradient" id="Gradient_p37y6"]
+offsets = PackedFloat32Array(0, 0.681818)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2b7p"]
+gradient = SubResource("Gradient_p37y6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p37y6"]
 radius = 25.02
@@ -51,12 +61,29 @@ collision_mask = 2
 [node name="GuardCollision" type="CollisionPolygon2D" parent="GuardArea2D"]
 unique_name_in_owner = true
 visible = false
-polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
+polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
 [node name="GuardFov" type="Polygon2D" parent="GuardArea2D"]
 unique_name_in_owner = true
+visible = false
 color = Color(1, 1, 0, 0.235294)
-polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
+polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
+
+[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D"]
+position = Vector2(-1.99999, 2.00001)
+scale = Vector2(2.5, 2.5)
+color = Color(1, 1, 0.623529, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_e2b7p")
+
+[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D"]
+z_index = 1
+position = Vector2(53.2, -0.800193)
+scale = Vector2(0.564, 0.58)
+color = Color(1, 1, 0.623529, 1)
+energy = 0.75
+shadow_enabled = true
+texture = ExtResource("3_e2b7p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
@@ -72,15 +99,16 @@ debug_enabled = true
 wait_time = 0.25
 autostart = true
 
+[node name="WallRayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(236.513, 97.967)
+collision_mask = 3
+
 [node name="CaughtArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CaughtArea"]
 shape = SubResource("CircleShape2D_e2b7p")
 disabled = true
-
-[node name="WallRayCast2D" type="RayCast2D" parent="."]
-enabled = false
-collision_mask = 7
 
 [connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
 [connection signal="timeout" from="trackingTimer" to="." method="_on_tracking_timer_timeout"]
