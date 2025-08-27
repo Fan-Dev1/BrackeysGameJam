@@ -2,7 +2,7 @@
 class_name SecurityGuard
 extends CharacterBody2D
 
-enum GuardState { NORMAL, TRACKING, DISTRACTED ,RETURN, OFF }
+enum GuardState { NORMAL, TRACKING, DISTRACTED, LOST ,RETURN, OFF }
 @onready var caught_area: Area2D = $CaughtArea
 
 
@@ -62,6 +62,7 @@ func _physics_process(delta: float) -> void:
 		match state:
 			GuardState.NORMAL: _normal_process(delta)
 			GuardState.TRACKING: _tracking_process(delta)
+			GuardState.LOST: _return_process(delta)
 			GuardState.RETURN: _return_process(delta)
 			GuardState.DISTRACTED : _distracted_process(delta)
 			#GuardState.MOVING: _moving_process(delta)
@@ -165,6 +166,8 @@ func _scan_for_player() -> void:
 			change_light_colors(Color8(255, 100, 0)) #orange
 			state = GuardState.DISTRACTED
 
+func _lost_physics_process():
+	pass
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:
 		return
@@ -215,9 +218,6 @@ func _scan_walls(body : Node2D) -> bool:
 		return false
 		
 
-func _shorten_fov() -> void:
-	pass
-	
 func _draw() -> void:
 	if Engine.is_editor_hint():
 		# draw_line for left and right limit
