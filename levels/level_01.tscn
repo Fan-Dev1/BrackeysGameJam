@@ -132,6 +132,9 @@ controlling_lever = NodePath("../../Interactables/DoorLeverButton")
 position = Vector2(1056, 896)
 rotation = -1.5708
 
+[node name="HideoutArea2D" parent="MapRoot" index="2"]
+position = Vector2(576, 224)
+
 [node name="CameraLeverButton" parent="MapRoot/Interactables" index="0" instance=ExtResource("8_j0sdw")]
 position = Vector2(1040, 592)
 
@@ -209,5 +212,7 @@ radius = 278.0
 rotaton_speed = 3.0
 fov = 1.0472
 left_limit = -3.14159
-camera_position_index = 3
 camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_xw3ee"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_l0eo6")])
+
+[node name="Player" parent="MapRoot" index="7"]
+position = Vector2(576, 264)

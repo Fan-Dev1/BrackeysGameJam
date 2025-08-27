@@ -1,22 +1,23 @@
 class_name Player 
 extends CharacterBody2D
 
+const cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projectile.tscn")
 
 @export var move_speed: float
 @export var move_smothing: float
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @export var max_line_length: float = 300.0
-
 @export var dot_size: float = 10.0
 @export var gap_size: float = 15.0
 
 var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
-@onready var fire_cooldown: Timer = $FireCooldown
 
-var cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projectile.tscn")
+@onready var fire_cooldown: Timer = $FireCooldown
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var vision_point_light_2d: PointLight2D = $VisionPointLight2D
+
 
 func _physics_process(delta: float) -> void:
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 			fire_cooldown.start()
 			fire()
 	move_and_slide()
+
 
 func manage_animations(input_direction, last_direction) -> void:
 	var anim_state : String
@@ -56,23 +58,25 @@ func manage_animations(input_direction, last_direction) -> void:
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.play(anim_state +"East")
 
+
 func aim() -> void:
 	target_pos = get_local_mouse_position().limit_length(max_line_length)
 	queue_redraw()
 
+
 func fire() -> void:
-	
 	var new_cookie = cookie_proyectile.instantiate()
 	get_parent().add_child(new_cookie)
 	new_cookie.fired(to_global(target_pos), global_position) 
 	target_pos = Vector2.ZERO
 	queue_redraw()
+
+
 func _draw() -> void:
 	var current_pos = Vector2.ZERO
 	var direction = target_pos.normalized()
 	gap_size = target_pos.length() / 10
 	# Keep drawing dots until we reach the target position
-	
 	
 	while current_pos.length() < target_pos.length():
 		# Draw one dot (a short line segment)
@@ -82,14 +86,11 @@ func _draw() -> void:
 		current_pos += direction * (dot_size + gap_size)
 	draw_circle(target_pos, 15, "Black")
 	draw_circle(target_pos, 10, "White")
+
+
 func take_cookie_from(from: CookieStash):
 	has_cookie = true
 
 
 func drop_of_cookie():
 	has_cookie = false
-
-
-func take_damage(damage: int):
-	# TODO take_damage
-	pass
