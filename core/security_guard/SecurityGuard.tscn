@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdtjxtyyetv2y"]
+[gd_scene load_steps=8 format=3 uid="uid://bdtjxtyyetv2y"]
 
 [ext_resource type="Script" uid="uid://dmhmq4v34a7ie" path="res://core/security_guard/security_guard.gd" id="1_p6iyn"]
 [ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="2_ptygn"]
@@ -23,13 +23,16 @@ metadata/_custom_type_script = "uid://tdiec21ofqup"
 [sub_resource type="CircleShape2D" id="CircleShape2D_p37y6"]
 radius = 25.02
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
+radius = 68.0074
+
 [node name="SecurityGuard" type="CharacterBody2D"]
+collision_layer = 8
 floor_stop_on_slope = false
 floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
 rotaton_speed = 1.0
 move_speed = 300.0
-guard_position_index = 1
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]
@@ -41,7 +44,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="GuardArea2D" type="Area2D" parent="."]
-rotation = 3.14159
+rotation = 1.5708
 collision_layer = 0
 collision_mask = 2
 
@@ -69,6 +72,17 @@ debug_enabled = true
 wait_time = 0.25
 autostart = true
 
+[node name="CaughtArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaughtArea"]
+shape = SubResource("CircleShape2D_e2b7p")
+disabled = true
+
+[node name="WallRayCast2D" type="RayCast2D" parent="."]
+enabled = false
+collision_mask = 7
+
 [connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
 [connection signal="timeout" from="trackingTimer" to="." method="_on_tracking_timer_timeout"]
 [connection signal="timeout" from="updateNav" to="." method="_on_update_nav_timeout"]
+[connection signal="body_entered" from="CaughtArea" to="." method="_on_caught_area_body_entered"]

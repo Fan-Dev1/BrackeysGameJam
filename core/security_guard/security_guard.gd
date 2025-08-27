@@ -3,6 +3,9 @@ class_name SecurityGuard
 extends CharacterBody2D
 
 enum GuardState { NORMAL, TRACKING, DISTRACTED ,RETURN, OFF }
+@onready var caught_area: Area2D = $CaughtArea
+
+@onready var wall_ray_cast_2d: RayCast2D = $WallRayCast2D
 
 @export var radius := 256.0
 
@@ -57,7 +60,7 @@ func _physics_process(delta: float) -> void:
 			GuardState.DISTRACTED : _distracted_process(delta)
 			#GuardState.MOVING: _moving_process(delta)
 			GuardState.OFF: pass
-	print(position)
+	
 
 
 func _normal_process(delta: float) -> void:
@@ -107,7 +110,7 @@ func _tracking_process(delta: float) -> void:
 
 func _distracted_process(delta):
 	var cookie = get_tree().get_first_node_in_group("cookie_projectile")
-	
+	_scan_for_player()
 	if is_instance_valid(cookie):
 		var angle_to_target := self.global_position.angle_to_point(cookie.global_position)
 		rotate_camera_toward(angle_to_target, delta)
@@ -142,9 +145,10 @@ func _scan_for_player() -> void:
 	for body: Node2D in guard_area_2d.get_overlapping_bodies():
 		# alert about spotted player and track him
 		if body is Player:
-			detected = "player"
-			Global.player_spotted.emit(body.global_position)
-			state = GuardState.TRACKING
+			if _scan_walls(body):
+				detected = "player"
+				Global.player_spotted.emit(body.global_position)
+				state = GuardState.TRACKING
 		elif body is CookieProjectile: #elif so if both cookie and player, follow player
 			state = GuardState.DISTRACTED
 
@@ -185,7 +189,15 @@ func move_guard_toward(to: Vector2, delta : float):
 	velocity = velocity.move_toward(to, move_speed * delta)
 	
 	
-
+func _scan_walls(body : Node2D) -> bool:
+	
+	wall_ray_cast_2d.target_position = body.global_position - wall_ray_cast_2d.global_position
+	wall_ray_cast_2d.force_raycast_update()
+	if wall_ray_cast_2d.is_colliding() and wall_ray_cast_2d.get_collider() == body:
+		print("its true")
+		return true
+	else:
+		return false
 func _draw() -> void:
 	if Engine.is_editor_hint():
 		# draw_line for left and right limit
@@ -202,5 +214,14 @@ func _draw() -> void:
 		draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
 
 
+
+
 func _on_update_nav_timeout() -> void:
-	navigation_agent_2d.target_position = target.global_position
+	navigation_agent_2d.target_position = target.global_position #if you get sent to this line,
+	#the player isnt in the scene, i had to preload it because im stupid and too lazy to fix, if you NEED 
+	#it fixed ill do it, but usually the player exists
+
+
+func _on_caught_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		_scan_walls(body)
