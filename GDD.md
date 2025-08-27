@@ -81,6 +81,7 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 
 
 ### Sliding Door
+<img width="354" height="101" alt="Door_animation" src="https://github.com/user-attachments/assets/cc784cd6-0a8a-442f-8ae2-709bc8eb1953" />
 
 - [X] Can be opened / closed by the player
 - [ ] Can be opened / closed by the guards
@@ -92,11 +93,13 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 
 
 ### Hidden spot
+<img width="203" height="153" alt="HidingSpot_plant" src="https://github.com/user-attachments/assets/a5897c15-84c9-41b9-87b2-368e4068d61c" />
 
-- [ ] Can be entered by the player to hide
-- [ ] Hides from guard vision
-- [ ] Hides from security camera vision
-- [ ] 🎨 Sprite for hidden spot
+- [X] Can be entered by the player to hide
+- [X] Hides from guard vision
+- [X] Hides from security camera vision
+- [X] Hides from detection laser
+- [ ] 🎨 Sprite for hidden spot (placeholder plant)
 - [ ] 🔊 SFX enter / exit
 
 

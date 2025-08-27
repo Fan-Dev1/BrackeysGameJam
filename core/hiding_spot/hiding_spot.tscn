@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnl8ikta6u6ne"]
+
+[ext_resource type="Script" uid="uid://bem2o48yolu4w" path="res://core/hiding_spot/hiding_spot.gd" id="1_asnba"]
+[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://player/chroma_key_shader.gdshader" id="2_mndq3"]
+[ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_856r5"]
+[ext_resource type="Texture2D" uid="uid://85ppxd85sf86" path="res://core/hiding_spot/hiding_spot_plant_sprite.png" id="4_c38xd"]
+[ext_resource type="Texture2D" uid="uid://d2hrjq42tjtik" path="res://core/hiding_spot/hiding_spot_plant_sprite_outline.png" id="5_856r5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c38xd"]
+shader = ExtResource("2_mndq3")
+shader_parameter/chroma_key_color = Color(0, 1, 0, 1)
+shader_parameter/pickup_range = 0.25
+shader_parameter/fade_amount = 0.284
+
+[sub_resource type="Gradient" id="Gradient_satuh"]
+offsets = PackedFloat32Array(0.864943, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_856r5"]
+gradient = SubResource("Gradient_satuh")
+width = 1080
+height = 1080
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.850427, 0.211538)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_856r5"]
+radius = 40.0
+
+[node name="HidingSpot" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_asnba")
+enter_duration = 0.3
+
+[node name="PlayerMarker2D" type="Marker2D" parent="."]
+position = Vector2(-5, -56)
+metadata/_edit_group_ = true
+
+[node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerMarker2D"]
+unique_name_in_owner = true
+self_modulate = Color(0.798517, 0.296629, 0.812278, 1)
+material = SubResource("ShaderMaterial_c38xd")
+scale = Vector2(0.667, 0.667)
+sprite_frames = ExtResource("3_856r5")
+animation = &"IdleSouth"
+
+[node name="Camera2D" type="Camera2D" parent="PlayerMarker2D/PlayerAnimatedSprite2D"]
+unique_name_in_owner = true
+enabled = false
+metadata/_edit_lock_ = true
+
+[node name="VisionPointLight2D" type="PointLight2D" parent="PlayerMarker2D/PlayerAnimatedSprite2D"]
+unique_name_in_owner = true
+visible = false
+energy = 0.2
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter_smooth = 20.0
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_856r5")
+metadata/_edit_lock_ = true
+
+[node name="FlowerPotSprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -48)
+texture = ExtResource("4_c38xd")
+
+[node name="OutlineSprite2D" type="Sprite2D" parent="FlowerPotSprite2D"]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("5_856r5")
+
+[node name="InteractionCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_856r5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

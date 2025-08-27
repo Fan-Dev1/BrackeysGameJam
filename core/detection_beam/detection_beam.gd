@@ -32,7 +32,7 @@ func _start_blink_timer():
 		push_warning("empty_blink_pattern")
 		blink_timer.start(2.0)
 	else:
-		var blink_duration_sec := blink_pattern.get(blink_pattern_index)
+		var blink_duration_sec := blink_pattern[blink_pattern_index]
 		blink_timer.start(blink_duration_sec)
 
 
@@ -102,13 +102,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		var full_length_position := Vector2.RIGHT * beam_length
 		draw_beam_to(full_length_position)
-
-
-func _scan_overlapping_bodies():
-	for body: Node2D in laser_ray_cast_2d.get_collider():
-		if body is Player:
-			# alert about spotted player
-			Global.player_spotted.emit(body.global_position)
 
 
 func is_controlled_by_lever() -> bool:

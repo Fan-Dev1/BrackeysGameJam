@@ -1,36 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdppfmbhnfc3d"]
+[gd_scene load_steps=6 format=3 uid="uid://cdppfmbhnfc3d"]
 
 [ext_resource type="Script" uid="uid://bxyyl3oktcgqk" path="res://core/security_camera/security_camera.gd" id="1_05d2b"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="2_t0tbx"]
 
-[sub_resource type="Resource" id="Resource_v1u64"]
+[sub_resource type="Resource" id="Resource_t0tbx"]
+resource_local_to_scene = true
 script = ExtResource("2_t0tbx")
-rotation = 0.878773
-duration_min_sec = 1.0
-duration_max_sec = 1.0
+
+rotation = -0.706858
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_t0tbx"]
+[sub_resource type="Resource" id="Resource_v1u64"]
+resource_local_to_scene = true
 script = ExtResource("2_t0tbx")
-rotation = 0.878773
-duration_min_sec = 1.0
-duration_max_sec = 2.0
+
+rotation = 0.855211
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+metadata/_custom_type_script = "uid://cw0363ko8eoy5"
+
+[sub_resource type="Resource" id="Resource_1qdvj"]
+resource_local_to_scene = true
+script = ExtResource("2_t0tbx")
+rotation = 1.1781
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [node name="SecurityCamera" type="Node2D"]
 script = ExtResource("1_05d2b")
 rotaton_speed = 2.0
-camera_positions = Array[ExtResource("2_t0tbx")]([SubResource("Resource_v1u64"), SubResource("Resource_t0tbx")])
+camera_positions = Array[ExtResource("2_t0tbx")]([SubResource("Resource_t0tbx"), SubResource("Resource_v1u64"), SubResource("Resource_1qdvj"), SubResource("Resource_v1u64")])
 
 [node name="PositionTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="TrackingTimer" type="Timer" parent="."]
+[node name="TrackingResetTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
 [node name="CameraArea2D" type="Area2D" parent="."]
-rotation = 0.878773
+
+rotation = -0.706858
+
 collision_layer = 0
 collision_mask = 2
 
@@ -60,4 +76,4 @@ color = Color(1, 1, 0, 0.235294)
 polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
 
 [connection signal="timeout" from="PositionTimer" to="." method="_on_position_timer_timeout"]
-[connection signal="timeout" from="TrackingTimer" to="." method="_on_tracking_timer_timeout"]
+[connection signal="timeout" from="TrackingResetTimer" to="." method="_on_tracking_reset_timer_timeout"]

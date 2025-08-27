@@ -6,11 +6,12 @@ extends Node2D
 var available_cookie_count := 0
 var collected_cookie_count := 0
 
-@onready var player: Player = $Player
+@onready var player: Player = %Player
+@onready var camera_2d: Camera2D = %Camera2D
 @onready var level_timer: Timer = $LevelTimer
+
 @onready var cookies_label: Label = %CookiesLabel
 @onready var time_label: Label = %TimeLabel
-
 @onready var level_complete_panel: PanelContainer = %LevelCompletePanel
 @onready var timeout_panel: PanelContainer = %TimeoutPanel
 @onready var cookie_loot_panel: CookieLootPanel = %CookieLootPanel
