@@ -88,6 +88,7 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
+	queue_redraw()
 	if not is_instance_valid(tracking_target):
 		# target / distraction cookie seems to be invalid --> start tracking_reset_timer
 		if tracking_reset_timer.is_stopped():

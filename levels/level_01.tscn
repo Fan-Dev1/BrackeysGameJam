@@ -166,18 +166,16 @@ position = Vector2(720, 744)
 controlling_lever = NodePath("../../Interactables/BeamLeverButton")
 mode = 0
 beam_length = 320.0
+blink_pattern = PackedFloat32Array()
 
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_q7ibo")]
+[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" instance=ExtResource("6_q7ibo")]
 position = Vector2(552, 904)
 rotation = 2.0944
-controlling_lever = NodePath("../../Interactables/BeamLeverButton")
-mode = 0
 beam_length = 240.0
 
 [node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="2" instance=ExtResource("6_q7ibo")]
 position = Vector2(536, 656)
 rotation = 1.5708
-mode = 0
 beam_length = 192.0
 blink_pattern = PackedFloat32Array(5, 2, 3, 3)
 
