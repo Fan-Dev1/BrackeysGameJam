@@ -32,7 +32,7 @@ func _start_blink_timer():
 		push_warning("empty_blink_pattern")
 		blink_timer.start(2.0)
 	else:
-		var blink_duration_sec := blink_pattern.get(blink_pattern_index)
+		var blink_duration_sec := blink_pattern[blink_pattern_index]
 		blink_timer.start(blink_duration_sec)
 
 

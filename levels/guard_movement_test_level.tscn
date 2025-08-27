@@ -59,7 +59,6 @@ texture = ExtResource("7_opkbm")
 [node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
 position = Vector2(606, 315)
 rotaton_speed = 3.0
-guard_position_index = 1
 guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
 
 [node name="LevelTimer" type="Timer" parent="."]
