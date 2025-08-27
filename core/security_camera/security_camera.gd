@@ -46,10 +46,10 @@ func _ready_camera_rotation() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if OS.is_debug_build():
+		queue_redraw()
 	if Engine.is_editor_hint():
 		_update_fov_polygon()
-		_clamp_camera_rotations()
-		queue_redraw()
 		
 		camera_position_index = wrapi(camera_position_index, 0, camera_positions.size())
 		var camera_position := camera_positions[camera_position_index]
@@ -109,7 +109,7 @@ func _tracking_process(delta: float) -> void:
 
 
 func to_camera_position(node2D: Node2D) -> CameraPosition:
-	var target_direction := self.global_position.direction_to(tracking_target.global_position)
+	var target_direction := self.global_position.direction_to(node2D.global_position)
 	var local_direction := global_transform.basis_xform_inv(target_direction)
 	
 	var target_camera_position := CameraPosition.new()
@@ -148,13 +148,6 @@ func _update_fov_polygon(circle_points := 12) -> void:
 	camera_collision.polygon = new_polygon
 
 
-func _clamp_camera_rotations() -> void:
-	# clamp all camera_position.rotations inside this camera left and right_limit
-	for camera_position: CameraPosition in camera_positions:
-		if camera_position != null:
-			camera_position.rotation = clamp_camera_rotation(camera_position.rotation)
-
-
 func clamp_camera_rotation(rotation_value: float) -> float:
 	var half_fov := fov / 2.0
 	return clampf(rotation_value, left_limit + half_fov, right_limit - half_fov)
@@ -181,16 +174,15 @@ func _on_lever_flipped(flipped_over: bool) -> void:
 		set_state(CameraState.OFF)
 
 
+# debug draw
 func _draw() -> void:
-	if Engine.is_editor_hint():
-		# draw_line for left and right limit
-		var left_limit_point := Vector2.from_angle(left_limit) * radius
-		var right_limit_point := Vector2.from_angle(right_limit) * radius
-		draw_line(Vector2.ZERO, left_limit_point, Color.GREEN, 2.0)
-		draw_line(Vector2.ZERO, right_limit_point, Color.RED, 2.0)
+	# draw_line for left and right limit
+	var left_limit_point := Vector2.from_angle(left_limit) * radius
+	var right_limit_point := Vector2.from_angle(right_limit) * radius
+	draw_line(Vector2.ZERO, left_limit_point, Color.GREEN, 2.0)
+	draw_line(Vector2.ZERO, right_limit_point, Color.RED, 2.0)
 	
-	if OS.is_debug_build() and state == CameraState.TRACKING:
-		if is_instance_valid(tracking_target):
-			# draw_line to tracked target for debug purposes
-			var target_position := to_local(tracking_target.global_position)
-			draw_line(Vector2.ZERO, target_position, Color.WHEAT, 4.0)
+	if state == CameraState.TRACKING and is_instance_valid(tracking_target):
+		# draw_line to tracked target for debug purposes
+		var target_position := to_local(tracking_target.global_position)
+		draw_line(Vector2.ZERO, target_position, Color.WHEAT, 4.0)

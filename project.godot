@@ -31,7 +31,6 @@ window/stretch/mode="viewport"
 folder_colors={
 "res://core/": "blue",
 "res://export/": "gray",
-"res://guard/": "red",
 "res://levels/": "yellow",
 "res://player/": "teal",
 "res://ui/": "green"

@@ -93,10 +93,11 @@ Obstacles dont kill you, they slow you down severely, if you have cookies on you
 
 ### Hidden spot
 
-- [ ] Can be entered by the player to hide
-- [ ] Hides from guard vision
-- [ ] Hides from security camera vision
-- [ ] 🎨 Sprite for hidden spot
+- [X] Can be entered by the player to hide
+- [X] Hides from guard vision
+- [X] Hides from security camera vision
+- [X] Hides from detection laser
+- [ ] 🎨 Sprite for hidden spot (placeholder plant)
 - [ ] 🔊 SFX enter / exit
 
 

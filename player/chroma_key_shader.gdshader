@@ -5,6 +5,14 @@ uniform vec3 chroma_key_color : source_color = vec3(0.0, 1.0, 0.0);
 uniform float pickup_range : hint_range(0.0, 1.0) = 0.1;
 uniform float fade_amount : hint_range(0.0, 1.0) = 0.1;
 
+varying vec4 vertex_color; 
+
+
+void vertex() {
+	vertex_color = COLOR;
+}
+
+
 void fragment() {
 	// Get the color from the texture at the given UV coordinates
 	vec4 color = texture(TEXTURE, UV);
@@ -18,5 +26,5 @@ void fragment() {
 	// Calculate the fade factor based on the pickup range and fade amount
 	float fade_factor = smoothstep(pickup_range, pickup_range + fade_amount, distance);
 	// Set the output color with the original RGB values and the calculated fade factor
-	COLOR = vec4(color.rgb, fade_factor);
+	COLOR = vertex_color * vec4(color.rgb, fade_factor);
 }

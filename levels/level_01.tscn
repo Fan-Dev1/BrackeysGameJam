@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://d2j2q3cwvwesw"]
+[gd_scene load_steps=21 format=4 uid="uid://d2j2q3cwvwesw"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_81a5f"]
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="4_gg43x"]
+[ext_resource type="PackedScene" uid="uid://bnl8ikta6u6ne" path="res://core/hiding_spot/hiding_spot.tscn" id="5_jy02f"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="5_mllcm"]
 [ext_resource type="PackedScene" uid="uid://cqscxj4caxy1i" path="res://core/detection_beam/detection_beam.tscn" id="6_q7ibo"]
 [ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="7_cg8v6"]
@@ -145,6 +146,15 @@ flipped_over = false
 [node name="BeamLeverButton" parent="MapRoot/Interactables" index="2" instance=ExtResource("8_j0sdw")]
 position = Vector2(688, 672)
 rotation = 1.5708
+
+[node name="HidingSpot" parent="MapRoot/Interactables" index="3" instance=ExtResource("5_jy02f")]
+position = Vector2(1008, 360)
+
+[node name="HidingSpot2" parent="MapRoot/Interactables" index="4" instance=ExtResource("5_jy02f")]
+position = Vector2(400, 840)
+
+[node name="HidingSpot3" parent="MapRoot/Interactables" index="5" instance=ExtResource("5_jy02f")]
+position = Vector2(928, 1104)
 
 [node name="CookieStash1" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_81a5f")]
 position = Vector2(976, 688)
