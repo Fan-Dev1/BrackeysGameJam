@@ -60,7 +60,7 @@ collision_mask = 2
 
 [node name="GuardCollision" type="CollisionPolygon2D" parent="GuardArea2D"]
 unique_name_in_owner = true
-visible = false
+rotation = -0.0707134
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
 [node name="GuardFov" type="Polygon2D" parent="GuardArea2D"]
@@ -78,12 +78,12 @@ texture = SubResource("GradientTexture2D_e2b7p")
 
 [node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D"]
 z_index = 1
-position = Vector2(53.2, -0.800193)
 scale = Vector2(0.564, 0.58)
 color = Color(1, 1, 0.623529, 1)
 energy = 0.75
 shadow_enabled = true
 texture = ExtResource("3_e2b7p")
+offset = Vector2(105, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)

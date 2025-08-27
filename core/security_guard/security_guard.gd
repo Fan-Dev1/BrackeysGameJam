@@ -162,25 +162,26 @@ func set_state(new_state: GuardState) -> void:
 		return
 	state = new_state
 	guard_area_2d.monitoring = GuardState.OFF != new_state
-	guard_fov.visible = GuardState.OFF != new_state
+	#guard_fov.visible = GuardState.OFF != new_state
 	queue_redraw()
 	position_timer.stop()
 	tracking_timer.stop()
 
 
 func _update_fov_polygon(circle_points := 12) -> void:
-	var new_polygon := PackedVector2Array()
-	var fov_step := fov / circle_points
-	var current_angle := -fov_step * (circle_points / 2.0)
+	pass
+	#var new_polygon := PackedVector2Array()
+	#var fov_step := fov / circle_points
+	#var current_angle := -fov_step * (circle_points / 2.0)
 	
-	new_polygon.append(Vector2(0.0, -8.0))
-	for i in range(circle_points + 1):
+	#new_polygon.append(Vector2(0.0, -8.0))
+	#for i in range(circle_points + 1):
 		
-		current_angle += fov_step
-		new_polygon.append(Vector2.from_angle(current_angle) * radius)
-	new_polygon.append(Vector2(0.0, 8.0))
-	guard_fov.polygon = new_polygon
-	guard_collision.polygon = new_polygon
+	#	current_angle += fov_step
+	#	new_polygon.append(Vector2.from_angle(current_angle) * radius)
+	#new_polygon.append(Vector2(0.0, 8.0))
+	#guard_fov.polygon = new_polygon
+	#guard_collision.polygon = new_polygon
 
 func rotate_camera_toward(to: float, delta := 1.0) -> void:
 	var from := guard_area_2d.rotation
