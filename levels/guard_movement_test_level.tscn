@@ -57,6 +57,7 @@ texture = ExtResource("7_opkbm")
 [node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
 position = Vector2(606, 315)
 rotaton_speed = 3.0
+guard_position_index = 0
 guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
 
 [node name="WallTileMapLayer" type="TileMapLayer" parent="."]
@@ -72,6 +73,10 @@ one_shot = true
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("4_5umpd")]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+unique_name_in_owner = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(735, 26)

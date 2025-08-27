@@ -29,8 +29,11 @@ var fov := PI / 4.0
 @onready var guard_area_2d: Area2D = $GuardArea2D
 @onready var guard_fov: Polygon2D = %GuardFov
 @onready var guard_collision: CollisionPolygon2D = %GuardCollision
-
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+
+@onready var vision_light: PointLight2D = $GuardArea2D/PointLight2D
+@onready var flashlight: PointLight2D = $GuardArea2D/PointLight2D/PointLight2D
+
 var next_path_pos : Vector2 = Vector2.ZERO
 var original_position : Vector2 = Vector2.ZERO
 var state := GuardState.NORMAL : set = set_state
@@ -105,6 +108,7 @@ func _tracking_process(delta: float) -> void:
 		if detected == "player":
 			
 			if navigation_agent_2d.is_navigation_finished():
+				change_light_colors(Color8(255, 100, 0))
 				state = GuardState.RETURN
 			next_path_pos = navigation_agent_2d.get_next_path_position()
 			var direction = (next_path_pos - self.global_position).normalized()
@@ -130,6 +134,7 @@ func _distracted_process(delta):
 
 func _on_tracking_timer_timeout() -> void:
 	#switch back to normal operation
+	change_light_colors(Color8(255, 100, 0)) #orange
 	state = GuardState.RETURN
 	velocity = Vector2.ZERO
 func _return_process(delta) -> void:
@@ -143,6 +148,7 @@ func _return_process(delta) -> void:
 	if navigation_agent_2d.is_navigation_finished():
 		velocity = Vector2.ZERO
 		position = original_position
+		change_light_colors(Color8(255,255,123)) #yellow
 		state = GuardState.NORMAL
 	
 
@@ -153,8 +159,10 @@ func _scan_for_player() -> void:
 			if _scan_walls(body):
 				detected = "player"
 				Global.player_spotted.emit(body.global_position)
+				change_light_colors(Color8(255, 39, 26)) # red
 				state = GuardState.TRACKING
 		elif body is CookieProjectile: #elif so if both cookie and player, follow player
+			change_light_colors(Color8(255, 100, 0)) #orange
 			state = GuardState.DISTRACTED
 
 func set_state(new_state: GuardState) -> void:
@@ -226,7 +234,9 @@ func _draw() -> void:
 		#var player_position := to_local(player.global_position)
 		#draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
 
-
+func change_light_colors(color : Color):
+	flashlight.color = color
+	vision_light.color = color
 
 
 func _on_update_nav_timeout() -> void:

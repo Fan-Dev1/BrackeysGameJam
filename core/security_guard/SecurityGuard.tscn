@@ -43,6 +43,7 @@ floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
 rotaton_speed = 1.0
 move_speed = 300.0
+guard_position_index = 1
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]
@@ -54,12 +55,13 @@ wait_time = 5.0
 one_shot = true
 
 [node name="GuardArea2D" type="Area2D" parent="."]
-rotation = 1.5708
+rotation = 3.14159
 collision_layer = 0
 collision_mask = 2
 
 [node name="GuardCollision" type="CollisionPolygon2D" parent="GuardArea2D"]
 unique_name_in_owner = true
+visible = false
 rotation = -0.0707134
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
@@ -72,14 +74,14 @@ polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.08
 [node name="PointLight2D" type="PointLight2D" parent="GuardArea2D"]
 position = Vector2(-1.99999, 2.00001)
 scale = Vector2(2.5, 2.5)
-color = Color(1, 1, 0.623529, 1)
+color = Color(1, 1, 0, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_e2b7p")
 
 [node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D"]
 z_index = 1
 scale = Vector2(0.564, 0.58)
-color = Color(1, 1, 0.623529, 1)
+color = Color(1, 1, 0.482353, 1)
 energy = 0.75
 shadow_enabled = true
 texture = ExtResource("3_e2b7p")
