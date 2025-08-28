@@ -9,9 +9,9 @@ var collected_cookie_count := 0
 
 @onready var player: Player = %Player
 @onready var camera_2d: Camera2D = %Camera2D
-@onready var car_camera_2d: Camera2D = %CarCamera2D
+@onready var car_drive_camera_2d: Camera2D = %CarDriveCamera2D
 @onready var level_timer: Timer = $LevelTimer
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var car_drive_scroller: CarDriverScroller = %CarDriveScroller
 
 @onready var cookies_label: Label = %CookiesLabel
 @onready var time_label: Label = %TimeLabel
@@ -24,20 +24,24 @@ var collected_cookie_count := 0
 
 func _ready() -> void:
 	mission_details.set_level_mission(level_mission)
-	$CanvasModulate.visible = true
 	timeout_panel.visible = false
 	level_complete_panel.visible = false
 	cookie_loot_panel.visible = false
 	inventory_panel.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
-	
-	animation_player.play("enter_scene")
-	await animation_player.animation_finished
-	camera_2d.enabled = true
-	camera_2d.make_current.call_deferred()
-	car_camera_2d.set_enabled.call_deferred(false)
-	player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
+	_play_drive_in()
+	car_drive_scroller.thief_car.car_entered.connect(_on_car_entered)
+	car_drive_scroller.thief_car.car_exited.connect(_on_car_exited)
+
+
+func _play_drive_in() -> void:
+	player.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
+	player.visible = false
+	car_drive_camera_2d.make_current()
+	car_drive_scroller.play_drive_in()
+	await car_drive_scroller.animation_player.animation_finished
+	_on_car_exited()
 
 
 func _setup_cookie_stashes() -> void:
@@ -107,6 +111,43 @@ func _on_cookie_loot_panel_finish_looting() -> void:
 func _on_cookie_loot_panel_cookie_collected(cookie_id: int) -> void:
 	player.has_cookie = true
 	inventory_panel.add_cookie(cookie_id)
+
+
+func _on_car_entered() -> void:
+	mission_details.visible = true
+	player.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
+	player.visible = false
+	
+	car_drive_camera_2d.global_position = camera_2d.global_position
+	car_drive_camera_2d.enabled = true
+	car_drive_camera_2d.make_current()
+	camera_2d.enabled = false
+	
+	var tween := create_tween()
+	var car_drive_position := Vector2(1920.0, 1080.0) / 2.0
+	tween.tween_property(car_drive_camera_2d, "global_position", car_drive_position, 0.4)
+
+
+func _on_car_exited() -> void:
+	var tween := create_tween()
+	var car_exit_position := car_drive_scroller.thief_car.global_position
+	tween.tween_property(car_drive_camera_2d, "global_position", car_exit_position, 0.4) \
+		.from(Vector2(1920.0, 1080.0) / 2.0)
+	tween.tween_callback(func ():
+		player.global_position = car_drive_scroller.thief_car.global_position
+		player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
+		player.visible = true
+		
+		camera_2d.enabled = true
+		camera_2d.make_current()
+		car_drive_camera_2d.enabled = false)
+
+
+func _on_mission_details_mission_started(level_mission: LevelMission) -> void:
+	car_drive_scroller.play_drive_out()
+	mission_details.visible = false
+	await car_drive_scroller.animation_player.animation_finished
+	get_tree().change_scene_to_file("res://ui/level_select_ui/level_select_ui.tscn")
 
 
 static func format_as_time(total_seconds: float) -> String:

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://k26h8ccd2lgf" path="res://levels/missions/level_02_mission.res" id="3_qalhj"]
 [ext_resource type="Resource" uid="uid://cui4hviq17tvo" path="res://levels/missions/level_03_mission.res" id="4_l0p41"]
 [ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="5_3ax5x"]
-[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://ui/level_select_ui/car_drive_scroller.tscn" id="5_h6lu8"]
+[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/cars/car_drive_scroller.tscn" id="5_h6lu8"]
 [ext_resource type="PackedScene" uid="uid://1gebq4go3yqh" path="res://ui/level_select_ui/level_slot.tscn" id="6_lmnmt"]
 
 [sub_resource type="Animation" id="Animation_f1rwt"]
@@ -13,168 +13,144 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CarDriveScroller/CarSprite2D:position")
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1380, 540)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/LevelSelector:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(65, 64)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/MissionDetails:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1216, 64)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasModulate:color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.52, 0.52, 0.52, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CarDriveScroller/CarSprite2D/GameTitleLabel:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CarDriveScroller/ThiefCar/GameTitleLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1616, 767)]
+}
 
 [sub_resource type="Animation" id="Animation_wu1mh"]
 resource_name = "enter_scene"
-length = 1.1
+length = 0.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CarDriveScroller/CarSprite2D:position")
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-224, 540), Vector2(830, 540), Vector2(1400, 540)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/LevelSelector:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-1000, 64), Vector2(64, 64)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/MissionDetails:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.7),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1980, 64), Vector2(1216, 64)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ButtonContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1980, 767), Vector2(1616, 767)]
+}
 
 [sub_resource type="Animation" id="Animation_qk4dn"]
 resource_name = "exit_scene"
-length = 1.2
+length = 0.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CarDriveScroller/CarSprite2D:position")
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1400, 540), Vector2(2190, 540), Vector2(2700, 540)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/LevelSelector:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(64, 64), Vector2(-1000, 64)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/MissionDetails:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1216, 64), Vector2(1980, 64)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CarDriveScroller/ThiefCar/GameTitleLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasModulate:color")
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.52, 0.52, 0.52, 1), Color(0.52, 0.52, 0.52, 1), Color(0, 0, 0, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CarDriveScroller/CarSprite2D/GameTitleLabel:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+"values": [Vector2(1616, 767), Vector2(1980, 767)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8fsn"]
@@ -188,15 +164,14 @@ _data = {
 light_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_l6swc"]
-font_size = 90
-font_color = Color(0, 0, 0, 1)
-outline_size = 8
+font_size = 120
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vgsmr"]
 font_size = 68
 
-[node name="LevelSelectUi" type="Node2D"]
-texture_filter = 1
+[node name="LevelSelectUI" type="CanvasLayer"]
 script = ExtResource("1_h6lu8")
 
 [node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
@@ -207,28 +182,27 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_k8fsn")
 }
-autoplay = "enter_scene"
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.52, 0.52, 0.52, 1)
 
 [node name="CarDriveScroller" parent="." instance=ExtResource("5_h6lu8")]
+unique_name_in_owner = true
 
-[node name="CarSprite2D" parent="CarDriveScroller" index="3"]
-position = Vector2(1380, 540)
-
-[node name="GameTitleLabel" type="Label" parent="CarDriveScroller/CarSprite2D" index="3"]
+[node name="GameTitleLabel" type="Label" parent="CarDriveScroller/ThiefCar" index="3"]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_h6lu8")
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -664.0
-offset_top = -394.0
-offset_right = -122.0
-offset_bottom = -270.0
-grow_vertical = 0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -931.0
+offset_top = -122.5
+offset_right = -208.0
+offset_bottom = 42.5
+grow_horizontal = 0
+grow_vertical = 2
 text = "Cookie Heist"
 label_settings = SubResource("LabelSettings_l6swc")
+horizontal_alignment = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -239,9 +213,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 60.0
+offset_left = -704.0
 offset_top = -476.0
-offset_right = 700.0
+offset_right = -64.0
 offset_bottom = 228.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -253,9 +227,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1960.0
+offset_left = -895.0
 offset_top = -476.0
-offset_right = -1001.0
+offset_right = 64.0
 offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -320,6 +294,35 @@ layout_mode = 2
 [node name="LevelSlot10" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
 layout_mode = 2
 
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -313.0
+offset_right = -64.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Settings"
+
+[node name="CreditsButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Quit"
+
 [connection signal="mission_started" from="CanvasLayer/MissionDetails" to="." method="_on_mission_details_mission_started"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 
 [editable path="CarDriveScroller"]

@@ -121,10 +121,10 @@ position = Vector2(624, 1588)
 texture = ExtResource("2_mckh2")
 metadata/_edit_lock_ = true
 
-[node name="LevelTimer" parent="." index="2"]
+[node name="LevelTimer" parent="." index="1"]
 wait_time = 90.0
 
-[node name="CarDriveScroller" parent="MapRoot" index="1"]
+[node name="CarDriveScroller" parent="MapRoot" index="0"]
 metadata/_edit_group_ = true
 
 [node name="WallTileMapLayer" parent="MapRoot" index="3"]

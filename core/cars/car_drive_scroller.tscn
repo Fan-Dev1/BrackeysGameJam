@@ -1,0 +1,300 @@
+[gd_scene load_steps=10 format=3 uid="uid://7nm2meivy40g"]
+
+[ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/cars/car_driving_parallex_sprites.png" id="1_5vs06"]
+[ext_resource type="Script" uid="uid://c4eyim8o8cymi" path="res://core/cars/car_drive_scroller.gd" id="1_ffh42"]
+[ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/cars/car.tscn" id="2_cton4"]
+
+[sub_resource type="Animation" id="Animation_0rg8l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.7, 0.7, 0.7, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkyParallax2D:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-94, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StreetParallax2D:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-360, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThiefCar:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 1008)]
+}
+
+[sub_resource type="Animation" id="Animation_maq6b"]
+resource_name = "drive_in"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.7, 0.7, 0.7, 1), Color(0.7, 0.7, 0.7, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkyParallax2D:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-94, 0), Vector2(-94, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StreetParallax2D:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-360, 0), Vector2(-360, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThiefCar:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-256, 1008), Vector2(960, 1008)]
+}
+
+[sub_resource type="Animation" id="Animation_cton4"]
+resource_name = "drive_out"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.7, 0.7, 0.7, 1), Color(0.7, 0.7, 0.7, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkyParallax2D:autoscroll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-94, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StreetParallax2D:autoscroll")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-360, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ThiefCar:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(960, 1008), Vector2(960, 1008), Vector2(2140, 1008)]
+}
+
+[sub_resource type="Animation" id="Animation_ffh42"]
+resource_name = "enter_driving"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.7, 0.7, 0.7, 1), Color(0.7, 0.7, 0.7, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ThiefCar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-256, 1008), Vector2(960, 1008)]
+}
+
+[sub_resource type="Animation" id="Animation_n0eqi"]
+resource_name = "exit_driving"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.7, 0.7, 0.7, 1), Color(0.7, 0.7, 0.7, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ThiefCar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 1008), Vector2(2140, 1008)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rg8l"]
+_data = {
+&"RESET": SubResource("Animation_0rg8l"),
+&"drive_in": SubResource("Animation_maq6b"),
+&"drive_out": SubResource("Animation_cton4"),
+&"enter_driving": SubResource("Animation_ffh42"),
+&"exit_driving": SubResource("Animation_n0eqi")
+}
+
+[node name="CarDriveScroller" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_ffh42")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
+libraries = {
+&"": SubResource("AnimationLibrary_0rg8l")
+}
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+border_color = Color(0.908041, 0, 1, 1)
+border_width = 8.0
+
+[node name="SkyParallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-94, 0)
+metadata/_edit_lock_ = true
+
+[node name="SkySprite2D" type="Sprite2D" parent="SkyParallax2D"]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5vs06")
+region_enabled = true
+region_rect = Rect2(0, 0, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="CloudParallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-154, 0)
+metadata/_edit_lock_ = true
+
+[node name="CloudSprite2D" type="Sprite2D" parent="CloudParallax2D"]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5vs06")
+region_enabled = true
+region_rect = Rect2(0, 270, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="StreetParallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-360, 0)
+metadata/_edit_lock_ = true
+
+[node name="StreetSprite2D" type="Sprite2D" parent="StreetParallax2D"]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5vs06")
+region_enabled = true
+region_rect = Rect2(0, 540, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="TreesSprite2D" type="Sprite2D" parent="StreetParallax2D"]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5vs06")
+region_enabled = true
+region_rect = Rect2(0, 1080, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="ThiefCar" parent="." instance=ExtResource("2_cton4")]
+unique_name_in_owner = true
+position = Vector2(960, 1008)

@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://dptqv0l043tyw"]
+[gd_scene load_steps=14 format=4 uid="uid://dptqv0l043tyw"]
 
 [ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_ew5uy"]
 [ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="2_63c5o"]
-[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://ui/level_select_ui/car_drive_scroller.tscn" id="2_maq6b"]
+[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/cars/car_drive_scroller.tscn" id="2_maq6b"]
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="2_p5284"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="3_63c5o"]
 [ext_resource type="PackedScene" uid="uid://cbtlrnu6r3qxy" path="res://core/hideout/hideout.tscn" id="3_46036"]
@@ -11,164 +11,6 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ew5uy"]
 light_mode = 2
-
-[sub_resource type="Animation" id="Animation_0rg8l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasModulate:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.7, 0.7, 0.7, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MapRoot/CarDriveScroller/SkyParallax2D:autoscroll")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-94, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MapRoot/CarDriveScroller/StreetParallax2D:autoscroll")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-360, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MapRoot/CarDriveScroller/CarCamera2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(960, 540)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MapRoot/Player:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MapRoot/CarDriveScroller/CarSprite2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(960, 540)]
-}
-
-[sub_resource type="Animation" id="Animation_maq6b"]
-resource_name = "enter_scene"
-length = 1.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("CanvasModulate:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.7, 0.7, 0.7, 1), Color(0.7, 0.7, 0.7, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MapRoot/CarDriveScroller/SkyParallax2D:autoscroll")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-94, 0), Vector2(-94, 0), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MapRoot/CarDriveScroller/StreetParallax2D:autoscroll")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-360, 0), Vector2(-360, 0), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MapRoot/CarDriveScroller/CarCamera2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(960, 540), Vector2(960, 540), Vector2(960, 1008)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MapRoot/Player:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MapRoot/CarDriveScroller/CarSprite2D:position")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-200, 540), Vector2(912, 540)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rg8l"]
-_data = {
-&"RESET": SubResource("Animation_0rg8l"),
-&"enter_scene": SubResource("Animation_maq6b")
-}
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0rg8l"]
 normal = Vector2(0, 1)
@@ -192,35 +34,28 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_ew5uy")
 masked_by_player_vision_material = SubResource("CanvasItemMaterial_ew5uy")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.7, 0.7, 0.7, 1)
-
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 120.0
 one_shot = true
 autostart = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0rg8l")
-}
-
 [node name="MapRoot" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="CarDriveScroller" parent="MapRoot" instance=ExtResource("2_maq6b")]
+unique_name_in_owner = true
+
+[node name="CarDriveCamera2D" type="Camera2D" parent="MapRoot/CarDriveScroller"]
+unique_name_in_owner = true
+position = Vector2(960, 540)
+limit_top = 0
 
 [node name="WorldBoundaries" type="StaticBody2D" parent="MapRoot"]
 
 [node name="TopCollisionShape2D" type="CollisionShape2D" parent="MapRoot/WorldBoundaries"]
 position = Vector2(960, 0)
 shape = SubResource("WorldBoundaryShape2D_0rg8l")
-
-[node name="CarDriveScroller" parent="MapRoot" instance=ExtResource("2_maq6b")]
-metadata/_edit_lock_ = true
-
-[node name="CarCamera2D" type="Camera2D" parent="MapRoot/CarDriveScroller"]
-unique_name_in_owner = true
-position = Vector2(960, 540)
 
 [node name="FloorTileMapLayer" type="TileMapLayer" parent="MapRoot"]
 texture_filter = 1
@@ -234,6 +69,7 @@ tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
 [node name="HideoutArea2D" parent="MapRoot" instance=ExtResource("3_46036")]
+visible = false
 position = Vector2(960, 960)
 metadata/_edit_lock_ = true
 
@@ -396,5 +232,4 @@ grow_vertical = 2
 [connection signal="pressed" from="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer/RetryLevelButton" to="." method="_on_retry_level_button_pressed"]
 [connection signal="cookie_collected" from="UiCanvasLayer/CookieLootPanel" to="." method="_on_cookie_loot_panel_cookie_collected"]
 [connection signal="finish_looting" from="UiCanvasLayer/CookieLootPanel" to="." method="_on_cookie_loot_panel_finish_looting"]
-
-[editable path="MapRoot/CarDriveScroller"]
+[connection signal="mission_started" from="UiCanvasLayer/MissionDetails" to="." method="_on_mission_details_mission_started"]

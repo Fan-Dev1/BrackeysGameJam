@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcbn3xbm6u5jf"
-path="res://.godot/imported/car_driving_parallex.png-27c2bc6c152c21a1a049921e35ec46d8.ctex"
+uid="uid://d12iurn15b8i5"
+path="res://.godot/imported/thief_car_sprite.png-0b66c6d68589d2194693f0b9eb089622.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/level_select_ui/car_driving_parallex.png"
-dest_files=["res://.godot/imported/car_driving_parallex.png-27c2bc6c152c21a1a049921e35ec46d8.ctex"]
+source_file="res://core/cars/thief_car_sprite.png"
+dest_files=["res://.godot/imported/thief_car_sprite.png-0b66c6d68589d2194693f0b9eb089622.ctex"]
 
 [params]
 
