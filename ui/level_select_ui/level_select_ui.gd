@@ -16,8 +16,6 @@ var slot_button_group := ButtonGroup.new()
 func _ready() -> void:
 	slot_button_group.allow_unpress = false
 	_setup_level_slots()
-	var first_level_slot: LevelSlot = level_grid_container.get_child(0)
-	first_level_slot.set_pressed.call_deferred(true)
 	animation_player.play("enter_scene")
 	car_drive_scroller.play_enter_driving()
 
@@ -26,6 +24,7 @@ func _setup_level_slots() -> void:
 	for child in level_grid_container.get_children():
 		child.queue_free()
 	
+	var is_first := true
 	for resource_name in level_mission_preloader.get_resource_list():
 		var level_mission: LevelMission = level_mission_preloader.get_resource(resource_name)
 		if not level_mission is LevelMission:
@@ -36,6 +35,9 @@ func _setup_level_slots() -> void:
 		level_slot.level_mission_selected.connect(_on_level_mission_selected)
 		level_slot.button_group = slot_button_group
 		level_grid_container.add_child(level_slot)
+		if is_first:
+			level_slot.set_pressed.call_deferred(true)
+			is_first = false
 
 
 func _on_level_mission_selected(level_mission: LevelMission) -> void:

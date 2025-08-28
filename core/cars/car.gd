@@ -19,8 +19,10 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var in_reach_for_interation := car_sprite_2d.use_parent_material == false
 	if event.is_action_pressed("interact") and player_inside:
+		player_inside = false
 		car_exited.emit()
 	elif event.is_action_pressed("interact") and in_reach_for_interation:
+		player_inside = true
 		car_entered.emit()
 
 

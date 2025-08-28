@@ -116,6 +116,7 @@ func _on_cookie_loot_panel_cookie_collected(cookie_id: int) -> void:
 
 
 func _on_car_entered() -> void:
+	var thief_car := car_drive_scroller.thief_car
 	mission_details.visible = true
 	player.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
 	player.visible = false
@@ -124,21 +125,28 @@ func _on_car_entered() -> void:
 	car_drive_camera_2d.enabled = true
 	car_drive_camera_2d.make_current()
 	camera_2d.enabled = false
+	thief_car.set_process_unhandled_input(false)
 	
 	var tween := create_tween()
 	var car_drive_position := Vector2(1920.0, 1080.0) / 2.0
-	tween.tween_property(car_drive_camera_2d, "global_position", car_drive_position, 0.4)
+	tween.tween_property(car_drive_camera_2d, "global_position", car_drive_position, 0.4) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(thief_car.set_process_unhandled_input.bind(true))
 
 
 func _on_car_exited() -> void:
+	var thief_car := car_drive_scroller.thief_car
+	thief_car.set_process_unhandled_input(false)
+	
 	var tween := create_tween()
-	var car_exit_position := car_drive_scroller.thief_car.global_position
+	var car_exit_position := thief_car.global_position
 	tween.tween_property(car_drive_camera_2d, "global_position", car_exit_position, 0.4) \
-		.from(Vector2(1920.0, 1080.0) / 2.0)
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(func ():
 		player.global_position = car_drive_scroller.thief_car.global_position
 		player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
 		player.visible = true
+		thief_car.set_process_unhandled_input(true)
 		
 		camera_2d.enabled = true
 		camera_2d.make_current()
