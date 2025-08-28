@@ -30,10 +30,11 @@ var fov := PI / 4.0
 @onready var guard_fov: Polygon2D = %GuardFov
 @onready var guard_collision: CollisionPolygon2D = %GuardCollision
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var lost_rotation_timer: Timer = $lostRotationTimer
 
 @onready var vision_light: PointLight2D = $GuardArea2D/PointLight2D
 @onready var flashlight: PointLight2D = $GuardArea2D/PointLight2D/PointLight2D
-
+var lost_rotation : float = 0.0
 var next_path_pos : Vector2 = Vector2.ZERO
 var original_position : Vector2 = Vector2.ZERO
 var state := GuardState.NORMAL : set = set_state
@@ -62,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		match state:
 			GuardState.NORMAL: _normal_process(delta)
 			GuardState.TRACKING: _tracking_process(delta)
-			GuardState.LOST: _return_process(delta)
+			GuardState.LOST: _lost_process(delta)
 			GuardState.RETURN: _return_process(delta)
 			GuardState.DISTRACTED : _distracted_process(delta)
 			#GuardState.MOVING: _moving_process(delta)
@@ -110,6 +111,8 @@ func _tracking_process(delta: float) -> void:
 			
 			if navigation_agent_2d.is_navigation_finished():
 				change_light_colors(Color8(255, 100, 0))
+				lost_rotation = 0.0
+				guard_area_2d.rotation = 0.0
 				state = GuardState.RETURN
 			next_path_pos = navigation_agent_2d.get_next_path_position()
 			var direction = (next_path_pos - self.global_position).normalized()
@@ -136,7 +139,9 @@ func _distracted_process(delta):
 func _on_tracking_timer_timeout() -> void:
 	#switch back to normal operation
 	change_light_colors(Color8(255, 100, 0)) #orange
-	state = GuardState.RETURN
+	lost_rotation = 0.0
+	guard_area_2d.rotation = 0.0
+	state = GuardState.LOST
 	velocity = Vector2.ZERO
 func _return_process(delta) -> void:
 	_scan_for_player()
@@ -166,8 +171,11 @@ func _scan_for_player() -> void:
 			change_light_colors(Color8(255, 100, 0)) #orange
 			state = GuardState.DISTRACTED
 
-func _lost_physics_process():
-	pass
+func _lost_process(delta: float) -> void:
+	if lost_rotation_timer.is_stopped():
+		lost_rotation_timer.start()
+	rotate_camera_toward(deg_to_rad(lost_rotation), delta)
+	_scan_for_player()
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:
 		return
@@ -180,7 +188,7 @@ func set_state(new_state: GuardState) -> void:
 
 
 func _update_fov_polygon(circle_points := 12) -> void:
-	pass
+	pass 
 	#var new_polygon := PackedVector2Array()
 	#var fov_step := fov / circle_points
 	#var current_angle := -fov_step * (circle_points / 2.0)
@@ -222,7 +230,7 @@ func _draw() -> void:
 	if Engine.is_editor_hint():
 		# draw_line for left and right limit
 		var half_fov := fov / 2.0
-		#var left_limit_point := Vector2.from_angle(left_limit) * radius
+		#var left_limit_point := Vector2.from_angl	e(left_limit) * radius
 		#var right_limit_point := Vector2.from_angle(right_limit) * radius
 		#draw_line(Vector2.ZERO, left_limit_point, Color.RED, 2.0)
 		#draw_line(Vector2.ZERO, right_limit_point, Color.BLUE, 2.0)
@@ -248,3 +256,14 @@ func _on_update_nav_timeout() -> void:
 func _on_caught_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_scan_walls(body)
+
+
+func _on_lost_rotation_timer_timeout() -> void:
+	
+	if lost_rotation >= 360.0:
+		lost_rotation = 0.0
+		guard_area_2d.rotation = 0.0
+		state = GuardState.RETURN
+	else:
+		lost_rotation += 90.0
+		lost_rotation_timer.start()
