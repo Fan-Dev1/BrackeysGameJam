@@ -31,7 +31,7 @@ func start_hiding() -> void:
 	var player := Global.get_player()
 	var from_position := player.global_position
 	var final_position := player_marker.global_position
-	
+	player.player_is_hidden = true
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	player.global_position = final_position
 	player.visible = false
@@ -55,6 +55,7 @@ func stop_hiding() -> void:
 	player.global_position = player_placeholder_sprite.global_position
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 	player.visible = true
+	player.player_is_hidden = false
 	outline_sprite.visible = true
 	
 	player_placeholder_sprite.visible = false

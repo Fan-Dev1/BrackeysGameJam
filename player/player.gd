@@ -13,7 +13,7 @@ const cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projecti
 var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
-
+var player_is_hidden = false
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_point_light_2d: PointLight2D = $VisionPointLight2D
