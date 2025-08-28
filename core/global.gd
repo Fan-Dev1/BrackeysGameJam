@@ -3,13 +3,6 @@ extends Node
 signal player_spotted(position: Vector2)
 
 
-var levels: Array[String] = [
-	"res://levels/level_01.tscn",
-	"res://levels/level_02.tscn",
-]
-var current_level_index := 0
-
-
 func _ready() -> void:
 	player_spotted.connect(_mark_spotted_player_position)
 
@@ -25,19 +18,6 @@ func _mark_spotted_player_position(player_position: Vector2) -> void:
 	add_child(spotted_marker)
 	await get_tree().create_timer(0.5).timeout
 	spotted_marker.queue_free()
-
-
-func load_next_level():
-	current_level_index = clampi(current_level_index + 1, 0, levels.size() - 1)
-	var next_level_path: String = levels[current_level_index]
-	get_tree().change_scene_to_file(next_level_path)
-	get_tree().set_pause(false)
-
-
-func retry_level():
-	var next_level_path: String = levels[current_level_index]
-	get_tree().change_scene_to_file(next_level_path)
-	get_tree().set_pause(false)
 
 
 func get_player() -> Player:

@@ -1,6 +1,7 @@
 class_name Level 
 extends Node2D
 
+@export var level_mission: LevelMission
 @export var masked_by_player_vision_material: Material
 
 var available_cookie_count := 0
@@ -8,7 +9,9 @@ var collected_cookie_count := 0
 
 @onready var player: Player = %Player
 @onready var camera_2d: Camera2D = %Camera2D
+@onready var car_camera_2d: Camera2D = %CarCamera2D
 @onready var level_timer: Timer = $LevelTimer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var cookies_label: Label = %CookiesLabel
 @onready var time_label: Label = %TimeLabel
@@ -16,9 +19,11 @@ var collected_cookie_count := 0
 @onready var timeout_panel: PanelContainer = %TimeoutPanel
 @onready var cookie_loot_panel: CookieLootPanel = %CookieLootPanel
 @onready var inventory_panel: InventoryPanel = %InventoryPanel
+@onready var mission_details: MissionDetailUi = %MissionDetails
 
 
 func _ready() -> void:
+	mission_details.set_level_mission(level_mission)
 	$CanvasModulate.visible = true
 	timeout_panel.visible = false
 	level_complete_panel.visible = false
@@ -26,6 +31,13 @@ func _ready() -> void:
 	inventory_panel.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
+	
+	animation_player.play("enter_scene")
+	await animation_player.animation_finished
+	camera_2d.enabled = true
+	camera_2d.make_current.call_deferred()
+	car_camera_2d.set_enabled.call_deferred(false)
+	player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
 
 
 func _setup_cookie_stashes() -> void:
@@ -47,7 +59,7 @@ func _process(_delta: float) -> void:
 	time_label.text = "Time: %s" % format_as_time(level_timer.time_left)
 
 
-func _on_exit_area_body_entered(body: Node2D) -> void:
+func _on_hideout_area_2d_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
 	if player.has_cookie:
@@ -71,11 +83,13 @@ func _on_level_timer_timeout() -> void:
 
 
 func _on_next_level_button_pressed() -> void:
-	Global.load_next_level()
+	get_tree().set_pause.call_deferred(false)
+	get_tree().change_scene_to_file("res://ui/level_select_ui/level_select_ui.tscn")
 
 
 func _on_retry_level_button_pressed() -> void:
-	Global.retry_level()
+	get_tree().set_pause.call_deferred(false)
+	get_tree().change_scene_to_file(self.scene_file_path)
 
 
 func _on_cookie_looted(_from: CookieStash) -> void:

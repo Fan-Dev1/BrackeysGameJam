@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="3_myjux"]
 [ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="4_5umpd"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="4_hs50d"]
-[ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory_panel.tscn" id="5_opkbm"]
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="6_e5vn1"]
+[ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory/inventory_panel.tscn" id="5_opkbm"]
 [ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="7_opkbm"]
 
 [sub_resource type="Resource" id="Resource_5umpd"]

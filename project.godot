@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BrackeysGJ"
-run/main_scene="uid://d2j2q3cwvwesw"
+run/main_scene="uid://dqb5wew0y2why"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://y0f6l3finpfs"
 
