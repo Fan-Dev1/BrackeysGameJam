@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=4 uid="uid://d2j2q3cwvwesw"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
-[ext_resource type="Resource" uid="uid://d3gjpfu2rgpqa" path="res://levels/missions/level_01_mission.res" id="2_5dxk1"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_5dxk1"]
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_81a5f"]
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="4_gg43x"]
@@ -50,7 +50,7 @@ _data = {
 &"loop_detection_beam": SubResource("Animation_q7ibo")
 }
 
-[sub_resource type="Resource" id="Resource_5dxk1"]
+[sub_resource type="Resource" id="Resource_kjd3d"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = 1.1781
@@ -58,7 +58,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_kjd3d"]
+[sub_resource type="Resource" id="Resource_qdeet"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = -1.1781
@@ -66,7 +66,7 @@ duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_qdeet"]
+[sub_resource type="Resource" id="Resource_y72ps"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = -1.44862
@@ -74,7 +74,7 @@ duration_min_sec = 2.0
 duration_max_sec = 5.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_y72ps"]
+[sub_resource type="Resource" id="Resource_xw3ee"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = 1.44862
@@ -82,7 +82,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_xw3ee"]
+[sub_resource type="Resource" id="Resource_l0eo6"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = -1.18682
@@ -104,7 +104,7 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_l0eo6"]
+[sub_resource type="Resource" id="Resource_d3o6j"]
 resource_local_to_scene = true
 script = ExtResource("5_mllcm")
 rotation = 0.872665
@@ -199,7 +199,7 @@ autoplay = "loop_detection_beam"
 position = Vector2(1008, 1868)
 rotation = -4.36332
 radius = 210.0
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_5dxk1"), SubResource("Resource_kjd3d")])
+camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_kjd3d"), SubResource("Resource_qdeet")])
 
 [node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" instance=ExtResource("4_gg43x")]
 position = Vector2(864, 2300)
@@ -209,7 +209,7 @@ rotaton_speed = 1.0
 fov = 0.523599
 left_limit = -1.71042
 right_limit = 1.71042
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_qdeet"), SubResource("Resource_y72ps")])
+camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_y72ps"), SubResource("Resource_xw3ee")])
 
 [node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("4_gg43x")]
 position = Vector2(1520, 1236)
@@ -219,6 +219,6 @@ radius = 278.0
 rotaton_speed = 3.0
 fov = 1.0472
 left_limit = -3.14159
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_xw3ee"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_l0eo6")])
+camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_l0eo6"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_d3o6j")])
 
 [editable path="MapRoot/CarDriveScroller"]

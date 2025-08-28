@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://dqb5wew0y2why"]
 
 [ext_resource type="Script" uid="uid://cax2gk4mb1d8y" path="res://ui/level_select_ui/level_select_ui.gd" id="1_h6lu8"]
-[ext_resource type="Resource" uid="uid://d3gjpfu2rgpqa" path="res://levels/missions/level_01_mission.res" id="2_l6swc"]
-[ext_resource type="Resource" uid="uid://k26h8ccd2lgf" path="res://levels/missions/level_02_mission.res" id="3_qalhj"]
-[ext_resource type="Resource" uid="uid://cui4hviq17tvo" path="res://levels/missions/level_03_mission.res" id="4_l0p41"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_h6lu8"]
+[ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="3_l6swc"]
+[ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="4_qalhj"]
 [ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="5_3ax5x"]
 [ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/cars/car_drive_scroller.tscn" id="5_h6lu8"]
 [ext_resource type="PackedScene" uid="uid://1gebq4go3yqh" path="res://ui/level_select_ui/level_slot.tscn" id="6_lmnmt"]
@@ -175,7 +175,7 @@ font_size = 68
 script = ExtResource("1_h6lu8")
 
 [node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_l6swc"), ExtResource("3_qalhj"), ExtResource("4_l0p41")]]
+resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_h6lu8"), ExtResource("3_l6swc"), ExtResource("4_qalhj")]]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
