@@ -13,7 +13,11 @@ config_version=5
 config/name="BrackeysGJ"
 run/main_scene="uid://dqb5wew0y2why"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.0901961, 0.12549, 0.219608, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://o5n4n3ullf5w"
 config/icon="uid://y0f6l3finpfs"
+boot_splash/minimum_display_time=500
 
 [autoload]
 
@@ -25,6 +29,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/borderless=true
 window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="C:/Projekte/BrackeysGameJam/export/movie/movie_maker.png"
 
 [file_customization]
 
