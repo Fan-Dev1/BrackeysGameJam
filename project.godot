@@ -17,7 +17,7 @@ config/icon="uid://y0f6l3finpfs"
 
 [autoload]
 
-Global="*res://core/global.gd"
+Global="*res://core/global.tscn"
 
 [display]
 

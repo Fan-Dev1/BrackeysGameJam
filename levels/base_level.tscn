@@ -34,6 +34,9 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_ew5uy")
 masked_by_player_vision_material = SubResource("CanvasItemMaterial_ew5uy")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.7, 0.7, 0.7, 1)
+
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 120.0
 one_shot = true

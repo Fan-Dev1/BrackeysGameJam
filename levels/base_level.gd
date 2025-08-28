@@ -1,6 +1,8 @@
 class_name Level 
 extends Node2D
 
+const LEVEL_SELECT_UI := "res://ui/level_select_ui/level_select_ui.tscn"
+
 @export var level_mission: LevelMission
 @export var masked_by_player_vision_material: Material
 
@@ -88,7 +90,7 @@ func _on_level_timer_timeout() -> void:
 
 func _on_next_level_button_pressed() -> void:
 	get_tree().set_pause.call_deferred(false)
-	get_tree().change_scene_to_file("res://ui/level_select_ui/level_select_ui.tscn")
+	get_tree().change_scene_to_file(LEVEL_SELECT_UI)
 
 
 func _on_retry_level_button_pressed() -> void:
@@ -146,8 +148,12 @@ func _on_car_exited() -> void:
 func _on_mission_details_mission_started(level_mission: LevelMission) -> void:
 	car_drive_scroller.play_drive_out()
 	mission_details.visible = false
+	ResourceLoader.load_threaded_request(LEVEL_SELECT_UI)
 	await car_drive_scroller.animation_player.animation_finished
-	get_tree().change_scene_to_file("res://ui/level_select_ui/level_select_ui.tscn")
+	await Global.play_fade_out()
+	var loaded_level := ResourceLoader.load_threaded_get(LEVEL_SELECT_UI)
+	get_tree().change_scene_to_packed(loaded_level)
+	Global.play_fade_in()
 
 
 static func format_as_time(total_seconds: float) -> String:

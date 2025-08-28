@@ -47,8 +47,10 @@ func _on_mission_details_mission_started(level_mission: LevelMission) -> void:
 	car_drive_scroller.play_exit_driving()
 	ResourceLoader.load_threaded_request(level_mission.level_path)
 	await animation_player.animation_finished
+	await Global.play_fade_out()
 	var loaded_level := ResourceLoader.load_threaded_get(level_mission.level_path)
 	get_tree().change_scene_to_packed(loaded_level)
+	Global.play_fade_in()
 
 
 func _on_settings_button_pressed() -> void:

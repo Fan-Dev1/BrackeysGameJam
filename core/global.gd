@@ -1,10 +1,23 @@
-extends Node
+extends CanvasLayer
 
 signal player_spotted(position: Vector2)
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	player_spotted.connect(_mark_spotted_player_position)
+	play_fade_in()
+
+
+func play_fade_out():
+	animation_player.play("fade_out")
+	await animation_player.animation_finished 
+
+
+func play_fade_in():
+	animation_player.play("fade_in")
+	await animation_player.animation_finished
 
 
 func _mark_spotted_player_position(player_position: Vector2) -> void:
