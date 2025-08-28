@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://kudvhyh5d56r"]
+[gd_scene load_steps=7 format=3 uid="uid://kudvhyh5d56r"]
 
 [ext_resource type="Script" uid="uid://biw4l2qldlroj" path="res://core/global.gd" id="1_cjuri"]
+[ext_resource type="AudioStream" uid="uid://cf3f4s4yahc7q" path="res://levels/missions/cookie jam.mp3" id="2_408d3"]
 
 [sub_resource type="Animation" id="Animation_408d3"]
 length = 0.001
@@ -15,21 +16,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vs21h"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_cjuri"]
@@ -47,6 +33,21 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_vs21h"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vs21h"]
 _data = {
 &"RESET": SubResource("Animation_408d3"),
@@ -58,6 +59,12 @@ _data = {
 process_mode = 3
 layer = 99
 script = ExtResource("1_cjuri")
+
+[node name="ThemeMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_408d3")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -72,3 +79,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[connection signal="finished" from="ThemeMusicPlayer" to="." method="_on_theme_music_player_finished"]

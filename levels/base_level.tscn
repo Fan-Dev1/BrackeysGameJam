@@ -57,7 +57,7 @@ limit_top = 0
 [node name="WorldBoundaries" type="StaticBody2D" parent="MapRoot"]
 
 [node name="TopCollisionShape2D" type="CollisionShape2D" parent="MapRoot/WorldBoundaries"]
-position = Vector2(960, 0)
+position = Vector2(960, 686)
 shape = SubResource("WorldBoundaryShape2D_0rg8l")
 
 [node name="FloorTileMapLayer" type="TileMapLayer" parent="MapRoot"]

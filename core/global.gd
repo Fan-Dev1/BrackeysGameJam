@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal player_spotted(position: Vector2)
 
+@onready var theme_music_player: AudioStreamPlayer = $ThemeMusicPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -35,3 +36,7 @@ func _mark_spotted_player_position(player_position: Vector2) -> void:
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
+
+
+func _on_theme_music_player_finished() -> void:
+	theme_music_player.play()

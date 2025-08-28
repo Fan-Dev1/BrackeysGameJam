@@ -5,6 +5,7 @@ extends Resource
 @export var level_name := "Level %2d" % level_index
 @export_file("*.tscn") var level_path: String
 @export var level_preview_texture: Texture
+@export var level_music: AudioStream
 
 @export var level_goals: Array[LevelGoal] = []
 @export var used_device_count := PackedInt32Array()
