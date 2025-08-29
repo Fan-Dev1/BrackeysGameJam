@@ -10,7 +10,10 @@ config_version=5
 
 [application]
 
-config/name="BrackeysGJ"
+config/name="Cookie Heist"
+config/description="​Stealth based game where you steal some cookies from a bakery. You have a fixed time to steal whatever amount of cookies, but take too many and you will feel encumbered.
+
+ Brackeys Game Jam 2025.2 submission with the theme: \"Risk it for the Biscuit\""
 run/main_scene="uid://dqb5wew0y2why"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0.0901961, 0.12549, 0.219608, 1)
@@ -27,7 +30,6 @@ Global="*res://core/global.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/borderless=true
 window/stretch/mode="viewport"
 
 [editor]
