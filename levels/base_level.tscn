@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=4 uid="uid://dptqv0l043tyw"]
+[gd_scene load_steps=15 format=4 uid="uid://dptqv0l043tyw"]
 
 [ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_ew5uy"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_6w4ab"]
 [ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="2_63c5o"]
 [ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/cars/car_drive_scroller.tscn" id="2_maq6b"]
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="2_p5284"]
@@ -32,6 +33,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_ew5uy")
+level_mission = ExtResource("2_6w4ab")
 masked_by_player_vision_material = SubResource("CanvasItemMaterial_ew5uy")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
