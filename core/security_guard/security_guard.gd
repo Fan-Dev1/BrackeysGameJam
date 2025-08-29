@@ -109,16 +109,13 @@ func _tracking_process(delta: float) -> void:
 			
 		if detected == "player":
 			if target.player_is_hidden:
-				change_light_colors(Color8(255, 100, 0))
-				lost_rotation = 0.0
 				state = GuardState.LOST
-				
+			
+					
 			if navigation_agent_2d.is_navigation_finished():
 				change_light_colors(Color8(255, 100, 0))
 				lost_rotation = 0.0
 				guard_area_2d.rotation = 0.0
-			
-				
 				state = GuardState.RETURN
 			next_path_pos = navigation_agent_2d.get_next_path_position()
 			var direction = (next_path_pos - self.global_position).normalized()

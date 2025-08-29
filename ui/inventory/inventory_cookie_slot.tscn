@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dimiwi1v37iya"]
 
-[ext_resource type="Script" uid="uid://cp5c4alkf8a6r" path="res://ui/inventory_cookie_slot.gd" id="1_becvg"]
+[ext_resource type="Script" uid="uid://cp5c4alkf8a6r" path="res://ui/inventory/inventory_cookie_slot.gd" id="1_becvg"]
 [ext_resource type="Texture2D" uid="uid://y0f6l3finpfs" path="res://PlaceholderCharacter/PlaceholderCookie.png" id="2_becvg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pt25v"]

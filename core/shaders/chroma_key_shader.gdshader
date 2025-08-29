@@ -5,7 +5,7 @@ uniform vec3 chroma_key_color : source_color = vec3(0.0, 1.0, 0.0);
 uniform float pickup_range : hint_range(0.0, 1.0) = 0.1;
 uniform float fade_amount : hint_range(0.0, 1.0) = 0.1;
 
-varying vec4 vertex_color; 
+varying vec4 vertex_color;
 
 
 void vertex() {

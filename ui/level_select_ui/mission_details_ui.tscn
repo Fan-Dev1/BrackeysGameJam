@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3 uid="uid://b64heix3puy0v"]
+
+[ext_resource type="Script" uid="uid://bs4stnp16vn2e" path="res://ui/level_select_ui/mission_details_ui.gd" id="1_nj7oi"]
+
+[sub_resource type="SystemFont" id="SystemFont_nj7oi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l600d"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_nj7oi"]
+font_size = 32
+
+[node name="MissionDetails" type="PanelContainer"]
+offset_right = 525.0
+offset_bottom = 479.0
+script = ExtResource("1_nj7oi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+text = "Mission Name"
+label_settings = SubResource("LabelSettings_l600d")
+
+[node name="Underline" type="ColorRect" parent="MarginContainer/VBoxContainer/TitleLabel"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MainGoalContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MainGoalCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/MainGoalContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 20
+text = "Steal 25 Cookies within 10 minutes and escape"
+flat = true
+
+[node name="Spacer1" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StretchGoal" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stretch Goals"
+label_settings = SubResource("LabelSettings_nj7oi")
+
+[node name="StretchGoalContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GoalCheckBox1" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 20
+text = "Don't get seen by a camera"
+
+[node name="GoalCheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 20
+text = "Block a Laser"
+
+[node name="GoalCheckBox3" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 20
+text = "Deactivate a security camera"
+
+[node name="GoalCheckBox4" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 20
+text = "Escape in under 5 minutes"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MissionButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_nj7oi")
+theme_override_font_sizes/font_size = 32
+text = "Start / Finish Mission"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MissionButton" to="." method="_on_mission_button_pressed"]

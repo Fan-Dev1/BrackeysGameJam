@@ -1,7 +1,7 @@
 class_name InventoryPanel
 extends Container
 
-const INVENTORY_COOKIE_SLOT := preload("res://ui/inventory_cookie_slot.tscn")
+const INVENTORY_COOKIE_SLOT := preload("res://ui/inventory/inventory_cookie_slot.tscn")
 
 @onready var inventory_container: GridContainer = %InventoryContainer
 

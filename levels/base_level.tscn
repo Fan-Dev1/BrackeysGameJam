@@ -1,23 +1,24 @@
-[gd_scene load_steps=11 format=4 uid="uid://dptqv0l043tyw"]
+[gd_scene load_steps=14 format=4 uid="uid://dptqv0l043tyw"]
 
 [ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_ew5uy"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_6w4ab"]
 [ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="2_63c5o"]
+[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/thief_car/car_drive_scroller.tscn" id="2_maq6b"]
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="2_p5284"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="3_63c5o"]
-[ext_resource type="PackedScene" uid="uid://cbtlrnu6r3qxy" path="res://core/hideout/hideout.tscn" id="3_46036"]
-[ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory_panel.tscn" id="4_satuh"]
+[ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory/inventory_panel.tscn" id="4_satuh"]
+[ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="8_0rg8l"]
+[ext_resource type="PackedScene" uid="uid://cqctqm0k1qlsr" path="res://ui/game_paused_ui/game_paused_ui.tscn" id="10_n8wy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ew5uy"]
 light_mode = 2
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0rg8l"]
+normal = Vector2(0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_ew5uy"]
 font_size = 32
 outline_size = 12
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_63c5o"]
-font_size = 48
-outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_satuh"]
@@ -27,6 +28,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_ew5uy")
+level_mission = ExtResource("2_6w4ab")
 masked_by_player_vision_material = SubResource("CanvasItemMaterial_ew5uy")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -40,6 +42,23 @@ autostart = true
 [node name="MapRoot" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
+[node name="CarDriveScroller" parent="MapRoot" instance=ExtResource("2_maq6b")]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="CarDriveCamera2D" type="Camera2D" parent="MapRoot/CarDriveScroller"]
+unique_name_in_owner = true
+position = Vector2(960, 540)
+limit_top = 0
+metadata/_edit_lock_ = true
+
+[node name="WorldBoundaries" type="StaticBody2D" parent="MapRoot"]
+metadata/_edit_lock_ = true
+
+[node name="TopCollisionShape2D" type="CollisionShape2D" parent="MapRoot/WorldBoundaries"]
+position = Vector2(960, 686)
+shape = SubResource("WorldBoundaryShape2D_0rg8l")
+
 [node name="FloorTileMapLayer" type="TileMapLayer" parent="MapRoot"]
 texture_filter = 1
 tile_set = ExtResource("2_p5284")
@@ -47,14 +66,12 @@ metadata/_edit_lock_ = true
 
 [node name="WallTileMapLayer" type="TileMapLayer" parent="MapRoot"]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAQAAkAAAABAAMAAAAPAAkAAAABAAMAAAAOAAkAAAABAAMAAAANAAkAAAAHAAAAAAAMAAkAAAABAAMAAAALAAkAAAAGAAAAAAAKAAkAAAABAAMAAAAJAAkAAAAHAAQAAAAIAAkAAAAHAAAAAAAHAAkAAAABAAMAAAAGAAkAAAABAAMAAAAFAAkAAAABAAMAAAARAAwAAAADAAEAAAARAAsAAAADAAEAAAARAAoAAAADAAEAAAAFAA0AAAABAAMAAAAGAA0AAAABAAMAAAAHAA0AAAABAAMAAAAIAA0AAAABAAMAAAAJAA0AAAABAAMAAAAKAA0AAAABAAMAAAAEAAwAAAADAAEAAAAEAAsAAAADAAEAAAAEAAoAAAADAAEAAAALAA0AAAABAAMAAAAMAA0AAAABAAMAAAANAA0AAAABAAMAAAAOAA0AAAABAAMAAAAPAA0AAAABAAMAAAAQAA0AAAABAAMAAAARAA0AAAAFAAEAAAAEAA0AAAAHAAAAAAAEAAkAAAAHAAQAAAARAAkAAAAHAAEAAAAEAAgAAAADAAEAAAAEAAcAAAADAAEAAAAEAAYAAAAEAAAAAAAFAAYAAAAFAAEAAAAFAAUAAAAGAAAAAAAEAAUAAAABAAMAAAADAAUAAAABAAMAAAACAAUAAAABAAMAAAABAAUAAAAEAAAAAAABAAYAAAADAAEAAAABAAcAAAADAAEAAAABAAgAAAADAAEAAAABAAkAAAAGAAEAAAACAAkAAAABAAMAAAADAAkAAAABAAMAAAABAAoAAAADAAEAAAABAAsAAAADAAEAAAABAAwAAAADAAEAAAABAA0AAAAEAAEAAAACAA0AAAABAAMAAAADAA0AAAABAAMAAAARAAgAAAADAAEAAAARAAcAAAADAAEAAAARAAYAAAAFAAAAAAAQAAYAAAABAAMAAAAPAAYAAAABAAMAAAAOAAYAAAABAAMAAAANAAYAAAAEAAAAAAANAAcAAAAHAAEAAAANAAgAAAADAAEAAAALAAoAAAADAAEAAAALAAsAAAAFAAEAAAAKAAsAAAABAAMAAAAJAAsAAAAEAAEAAAAJAAoAAAADAAEAAAAIAAgAAAADAAEAAAAIAAcAAAADAAEAAAAIAAYAAAAFAAAAAAAHAAYAAAAEAAEAAAAHAAUAAAAFAAAAAAAGAAUAAAABAAMAAAAMAAcAAAABAAMAAAALAAcAAAABAAMAAAAKAAcAAAAEAAAAAAAKAAgAAAAFAAEAAAAJAAgAAAAEAAAAAAAGAAsAAAADAAMAAAAOAAsAAAADAAMAAAAPAAcAAAADAAAAAAAPAAgAAAADAAIAAAAPAAwAAAAAAAMAAAAQAAwAAAAFAAEAAAAQAAsAAAADAAAAAAAGAAwAAAAAAAMAAAAHAAwAAAACAAMAAAAHAAoAAAADAAMAAAAGAAgAAAADAAMAAAAfAAUAAAACAAEAAAAfAAQAAAACAAEAAAAfAAMAAAACAAEAAAAeAAUAAAABAAEAAAAeAAQAAAABAAEAAAAeAAMAAAABAAEAAAAdAAUAAAABAAEAAAAdAAQAAAABAAEAAAAdAAMAAAABAAEAAAAcAAUAAAABAAEAAAAcAAQAAAABAAEAAAAcAAMAAAABAAEAAAAbAAUAAAABAAEAAAAbAAQAAAABAAEAAAAbAAMAAAABAAEAAAAaAAUAAAABAAEAAAAaAAQAAAABAAEAAAAaAAMAAAABAAEAAAAZAAUAAAAFAAIAAAAZAAQAAAABAAEAAAAZAAMAAAABAAEAAAAYAAUAAAABAAIAAAAYAAQAAAABAAEAAAAYAAMAAAAFAAMAAAAXAAUAAAABAAIAAAAXAAQAAAABAAEAAAAXAAMAAAABAAAAAAAWAAUAAAABAAIAAAAWAAQAAAABAAEAAAAWAAMAAAABAAAAAAAVAAUAAAABAAIAAAAVAAQAAAABAAEAAAAVAAMAAAABAAAAAAAUAAUAAAABAAIAAAAUAAQAAAABAAEAAAAUAAMAAAABAAAAAAATAAUAAAAAAAIAAAATAAQAAAAAAAEAAAATAAMAAAAAAAAAAAAfAAIAAAACAAEAAAAfAAEAAAACAAEAAAAfAAAAAAACAAAAAAAeAAIAAAABAAEAAAAeAAEAAAABAAEAAAAeAAAAAAABAAAAAAAdAAIAAAABAAEAAAAdAAEAAAABAAEAAAAdAAAAAAABAAAAAAAcAAIAAAABAAEAAAAcAAEAAAABAAEAAAAcAAAAAAABAAAAAAAbAAIAAAABAAEAAAAbAAEAAAABAAEAAAAbAAAAAAABAAAAAAAaAAIAAAABAAEAAAAaAAEAAAABAAEAAAAaAAAAAAABAAAAAAAZAAIAAAABAAEAAAAZAAEAAAABAAEAAAAZAAAAAAABAAAAAAAYAAIAAAAAAAEAAAAYAAEAAAAAAAEAAAAYAAAAAAAAAAAAAAAgAAgAAAACAAIAAAAgAAcAAAAEAAIAAAAgAAYAAAABAAAAAAAfAAgAAAABAAIAAAAfAAcAAAABAAEAAAAfAAYAAAAEAAMAAAAeAAgAAAABAAIAAAAeAAcAAAABAAEAAAAeAAYAAAABAAEAAAAdAAgAAAABAAIAAAAdAAcAAAABAAEAAAAdAAYAAAABAAEAAAAcAAgAAAABAAIAAAAcAAcAAAABAAEAAAAcAAYAAAABAAEAAAAbAAgAAAABAAIAAAAbAAcAAAABAAEAAAAbAAYAAAABAAEAAAAaAAgAAAABAAIAAAAaAAcAAAABAAEAAAAaAAYAAAABAAEAAAAZAAgAAAAAAAIAAAAZAAcAAAAAAAEAAAAZAAYAAAAAAAEAAAAkAAcAAAABAAIAAAAkAAYAAAABAAAAAAAjAAcAAAABAAIAAAAjAAYAAAABAAAAAAAiAAcAAAABAAIAAAAiAAYAAAABAAAAAAAhAAcAAAABAAIAAAAhAAYAAAABAAAAAAAmAAcAAAAFAAIAAAAmAAYAAAAFAAMAAAAlAAcAAAABAAIAAAAlAAYAAAABAAAAAAAoAAcAAAACAAEAAAAoAAYAAAAEAAIAAAAnAAcAAAABAAEAAAAnAAYAAAABAAEAAAAsAAYAAAACAAIAAAArAAYAAAABAAIAAAAqAAYAAAABAAIAAAApAAYAAAABAAIAAAAoAAUAAAAEAAMAAAAoAAQAAAACAAAAAAAnAAUAAAABAAEAAAAnAAQAAAABAAAAAAAmAAUAAAAAAAEAAAAmAAQAAAAAAAAAAAAoAAkAAAACAAIAAAAoAAgAAAACAAEAAAAnAAkAAAABAAIAAAAnAAgAAAABAAEAAAAmAAkAAAAAAAIAAAAmAAgAAAAAAAEAAAAsAAUAAAACAAAAAAArAAUAAAABAAAAAAAqAAUAAAABAAAAAAApAAUAAAABAAAAAAAzAAcAAAABAAIAAAAzAAYAAAABAAEAAAAzAAUAAAABAAAAAAAyAAcAAAABAAIAAAAyAAYAAAABAAEAAAAyAAUAAAABAAAAAAAxAAcAAAABAAIAAAAxAAYAAAABAAEAAAAxAAUAAAABAAAAAAAwAAcAAAABAAIAAAAwAAYAAAABAAEAAAAwAAUAAAABAAAAAAAvAAcAAAAAAAIAAAAvAAYAAAAAAAEAAAAvAAUAAAAAAAAAAAA1AAYAAAAEAAMAAAA0AAYAAAABAAEAAAA3AAYAAAACAAAAAAA2AAYAAAABAAAAAAA3AAcAAAACAAIAAAA2AAcAAAABAAIAAAA1AAcAAAABAAIAAAA0AAcAAAABAAIAAAA0AAUAAAABAAAAAAA1AAUAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAdABMAAAACAAAAAAAcABMAAAABAAAAAAAbABMAAAABAAAAAAAaABMAAAABAAAAAAAZABMAAAABAAAAAAAYABMAAAABAAAAAAAXABMAAAABAAAAAAAWABMAAAABAAAAAAAVABMAAAABAAAAAAAUABMAAAABAAAAAAATABMAAAABAAAAAAASABMAAAABAAAAAAARABMAAAABAAAAAAAQABMAAAABAAAAAAAPABMAAAABAAAAAAAOABMAAAABAAAAAAANABMAAAABAAAAAAAMABMAAAABAAAAAAALABMAAAABAAAAAAAKABMAAAABAAAAAAAJABMAAAABAAAAAAAIABMAAAABAAAAAAAHABMAAAABAAAAAAAGABMAAAABAAAAAAAFABMAAAABAAAAAAAEABMAAAABAAAAAAADABMAAAABAAAAAAACABMAAAABAAAAAAABABMAAAABAAAAAAAAABMAAAAAAAAAAAAdABQAAAACAAIAAAAcABQAAAABAAIAAAAbABQAAAABAAIAAAAaABQAAAABAAIAAAAZABQAAAABAAIAAAAYABQAAAABAAIAAAAXABQAAAABAAIAAAAWABQAAAABAAIAAAAVABQAAAABAAIAAAAUABQAAAABAAIAAAATABQAAAABAAIAAAASABQAAAABAAIAAAARABQAAAABAAIAAAAQABQAAAABAAIAAAAPABQAAAABAAIAAAAOABQAAAABAAIAAAANABQAAAABAAIAAAAMABQAAAABAAIAAAALABQAAAABAAIAAAAKABQAAAABAAIAAAAJABQAAAABAAIAAAAIABQAAAABAAIAAAAHABQAAAABAAIAAAAGABQAAAABAAIAAAAFABQAAAABAAIAAAAEABQAAAABAAIAAAADABQAAAABAAIAAAACABQAAAABAAIAAAABABQAAAABAAIAAAAAABQAAAAAAAIAAAA=")
 tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
-[node name="HideoutArea2D" parent="MapRoot" instance=ExtResource("3_46036")]
-position = Vector2(768, 85)
-
 [node name="Interactables" type="Node2D" parent="MapRoot"]
+metadata/_edit_lock_ = true
 
 [node name="CookiesStashes" type="Node2D" parent="MapRoot"]
 metadata/_edit_lock_ = true
@@ -67,12 +84,14 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="MapRoot" instance=ExtResource("2_63c5o")]
 unique_name_in_owner = true
-position = Vector2(384, 72)
-metadata/_edit_group_ = true
+process_mode = 4
+position = Vector2(960, 1008)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="MapRoot/Player"]
 unique_name_in_owner = true
+enabled = false
+limit_top = 0
 
 [node name="UiCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -91,53 +110,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Time: 00:00:00"
 label_settings = SubResource("LabelSettings_ew5uy")
-
-[node name="LevelCompletePanel" type="PanelContainer" parent="UiCanvasLayer"]
-unique_name_in_owner = true
-process_mode = 3
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.5
-offset_top = -20.0
-offset_right = 58.5
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UiCanvasLayer/LevelCompletePanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Level complete!"
-label_settings = SubResource("LabelSettings_63c5o")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="RetryLevelButton" type="Button" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
-text = "retry Level"
-
-[node name="NextLevelButton2" type="Button" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
-text = "next Level"
 
 [node name="TimeoutPanel" type="PanelContainer" parent="UiCanvasLayer"]
 unique_name_in_owner = true
@@ -187,9 +159,29 @@ unique_name_in_owner = true
 visible = false
 offset_left = -588.0
 
+[node name="MissionDetails" parent="UiCanvasLayer" instance=ExtResource("8_0rg8l")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -704.0
+offset_top = -476.0
+offset_right = -64.0
+offset_bottom = 104.0
+grow_horizontal = 0
+grow_vertical = 2
+in_mission = true
+
+[node name="GamePausedUI" parent="." instance=ExtResource("10_n8wy4")]
+unique_name_in_owner = true
+layer = 2
+visible = false
+
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
-[connection signal="pressed" from="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer/RetryLevelButton" to="." method="_on_retry_level_button_pressed"]
-[connection signal="pressed" from="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton2" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer/RetryLevelButton" to="." method="_on_retry_level_button_pressed"]
 [connection signal="cookie_collected" from="UiCanvasLayer/CookieLootPanel" to="." method="_on_cookie_loot_panel_cookie_collected"]
 [connection signal="finish_looting" from="UiCanvasLayer/CookieLootPanel" to="." method="_on_cookie_loot_panel_finish_looting"]
+[connection signal="mission_finished" from="UiCanvasLayer/MissionDetails" to="." method="_on_mission_finished"]

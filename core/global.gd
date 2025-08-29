@@ -1,17 +1,24 @@
-extends Node
+extends CanvasLayer
 
 signal player_spotted(position: Vector2)
 
-
-var levels: Array[String] = [
-	"res://levels/level_01.tscn",
-	"res://levels/level_02.tscn",
-]
-var current_level_index := 0
+@onready var theme_music_player: AudioStreamPlayer = $ThemeMusicPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	player_spotted.connect(_mark_spotted_player_position)
+	play_fade_in()
+
+
+func play_fade_out():
+	animation_player.play("fade_out")
+	await animation_player.animation_finished 
+
+
+func play_fade_in():
+	animation_player.play("fade_in")
+	await animation_player.animation_finished
 
 
 func _mark_spotted_player_position(player_position: Vector2) -> void:
@@ -27,18 +34,9 @@ func _mark_spotted_player_position(player_position: Vector2) -> void:
 	spotted_marker.queue_free()
 
 
-func load_next_level():
-	current_level_index = clampi(current_level_index + 1, 0, levels.size() - 1)
-	var next_level_path: String = levels[current_level_index]
-	get_tree().change_scene_to_file(next_level_path)
-	get_tree().set_pause(false)
-
-
-func retry_level():
-	var next_level_path: String = levels[current_level_index]
-	get_tree().change_scene_to_file(next_level_path)
-	get_tree().set_pause(false)
-
-
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
+
+
+func _on_theme_music_player_finished() -> void:
+	theme_music_player.play()

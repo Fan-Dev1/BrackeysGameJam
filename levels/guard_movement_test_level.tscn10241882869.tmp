@@ -1,0 +1,204 @@
+[gd_scene load_steps=16 format=4 uid="uid://exoe8xt1c2iu"]
+
+[ext_resource type="Script" uid="uid://bnfs5pldu2cd0" path="res://levels/base_level.gd" id="1_6f7pe"]
+[ext_resource type="PackedScene" uid="uid://bdtjxtyyetv2y" path="res://core/security_guard/SecurityGuard.tscn" id="2_0se1k"]
+[ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="3_myjux"]
+[ext_resource type="PackedScene" uid="uid://dhd35o5m5lhrq" path="res://player/player.tscn" id="4_5umpd"]
+[ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="4_hs50d"]
+[ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory_panel.tscn" id="5_opkbm"]
+[ext_resource type="PackedScene" uid="uid://bnl8ikta6u6ne" path="res://core/hiding_spot/hiding_spot.tscn" id="6_5x83e"]
+[ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="6_e5vn1"]
+[ext_resource type="Texture2D" uid="uid://dlniah4q152qk" path="res://icon.svg" id="7_opkbm"]
+
+[sub_resource type="Resource" id="Resource_5umpd"]
+script = ExtResource("3_myjux")
+rotation = 1.5708
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+target_marker = Vector2(0, 10)
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="Resource" id="Resource_1jpcd"]
+script = ExtResource("3_myjux")
+rotation = 3.14159
+duration_min_sec = 3.0
+duration_max_sec = 3.0
+target_marker = Vector2(0, -10)
+metadata/_custom_type_script = "uid://tdiec21ofqup"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e5vn1"]
+vertices = PackedVector2Array(73, 137, 73, 55, 193.422, 1.07031, 202.57, 536, -708.172, 3.92188, -329, 55, -711.828, 536, -329, 457, -246.922, 457, -247.922, 137)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 6, 7, 8), PackedInt32Array(0, 3, 8, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-733, -21, 218, -24, 228, 561, -737, 561), PackedVector2Array(-272, 432, -273, 112, 48, 112, 48, 80, -304, 80, -304, 432)])
+agent_radius = 25.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_opkbm"]
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5vn1"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5x83e"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GuardMovementTestLevel" type="Node2D"]
+script = ExtResource("1_6f7pe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(480, 305)
+scale = Vector2(7.38281, 4.32031)
+texture = ExtResource("7_opkbm")
+
+[node name="SecurityGuard" parent="." instance=ExtResource("2_0se1k")]
+position = Vector2(606, 315)
+rotaton_speed = 3.0
+guard_position_index = 0
+guard_positions = Array[ExtResource("3_myjux")]([SubResource("Resource_5umpd"), SubResource("Resource_1jpcd")])
+
+[node name="WallTileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+position = Vector2(735, 26)
+tile_map_data = PackedByteArray("AAD7/wUAAAADAAEAAAD7/wQAAAADAAEAAAD7/wMAAAADAAEAAAD7/wIAAAADAAEAAAD7/wEAAAAEAAAAAAD8/wEAAAABAAMAAAD9/wEAAAABAAMAAAD+/wEAAAABAAMAAAD//wEAAAABAAMAAAD7/wYAAAADAAIAAAAAAAEAAAACAAMAAAA=")
+tile_set = ExtResource("6_e5vn1")
+metadata/_edit_lock_ = true
+
+[node name="HidingSpot" parent="." instance=ExtResource("6_5x83e")]
+position = Vector2(301, 519)
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("4_5umpd")]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+unique_name_in_owner = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(735, 26)
+navigation_polygon = SubResource("NavigationPolygon_e5vn1")
+
+[node name="UiCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopLeftContainer" type="VBoxContainer" parent="UiCanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CookiesLabel" type="Label" parent="UiCanvasLayer/TopLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cookies: 00/01"
+label_settings = SubResource("LabelSettings_opkbm")
+
+[node name="TimeLabel" type="Label" parent="UiCanvasLayer/TopLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time: 00:00:00"
+label_settings = SubResource("LabelSettings_opkbm")
+
+[node name="LevelCompletePanel" type="PanelContainer" parent="UiCanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -20.0
+offset_right = 58.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UiCanvasLayer/LevelCompletePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level complete!"
+label_settings = SubResource("LabelSettings_e5vn1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="RetryLevelButton" type="Button" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "retry Level"
+
+[node name="NextLevelButton2" type="Button" parent="UiCanvasLayer/LevelCompletePanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "next Level"
+
+[node name="TimeoutPanel" type="PanelContainer" parent="UiCanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -20.0
+offset_right = 58.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UiCanvasLayer/TimeoutPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UiCanvasLayer/TimeoutPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Timeout!"
+label_settings = SubResource("LabelSettings_5x83e")
+
+[node name="RetryLevelButton" type="Button" parent="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "retry Level"
+
+[node name="CookieLootPanel" parent="UiCanvasLayer" instance=ExtResource("4_hs50d")]
+unique_name_in_owner = true
+visible = false
+offset_left = -532.0
+offset_right = 286.0
+
+[node name="InventoryPanel" parent="UiCanvasLayer" instance=ExtResource("5_opkbm")]
+unique_name_in_owner = true
+visible = false
+offset_left = -588.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.31802, 0.31802, 0.31802, 1)

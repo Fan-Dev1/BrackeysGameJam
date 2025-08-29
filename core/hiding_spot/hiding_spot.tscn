@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bnl8ikta6u6ne"]
 
 [ext_resource type="Script" uid="uid://bem2o48yolu4w" path="res://core/hiding_spot/hiding_spot.gd" id="1_asnba"]
-[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://player/chroma_key_shader.gdshader" id="2_mndq3"]
+[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://core/shaders/chroma_key_shader.gdshader" id="2_mndq3"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_856r5"]
 [ext_resource type="Texture2D" uid="uid://85ppxd85sf86" path="res://core/hiding_spot/hiding_spot_plant_sprite.png" id="4_c38xd"]
 [ext_resource type="Texture2D" uid="uid://d2hrjq42tjtik" path="res://core/hiding_spot/hiding_spot_plant_sprite_outline.png" id="5_856r5"]

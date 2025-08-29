@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="LevelMission" load_steps=8 format=3 uid="uid://by1n18bx63d3g"]
+
+[ext_resource type="Script" uid="uid://dnrw5msmlqhea" path="res://ui/level_select_ui/level_goal.gd" id="1_e0787"]
+[ext_resource type="AudioStream" uid="uid://cf3f4s4yahc7q" path="res://levels/missions/cookie jam.mp3" id="2_7oekt"]
+[ext_resource type="Script" uid="uid://btji1vxv6jj7s" path="res://ui/level_select_ui/level_mission.gd" id="3_0ca0m"]
+
+[sub_resource type="Resource" id="Resource_d3o6j"]
+script = ExtResource("1_e0787")
+goal_text = "Collect 12 cookies within 150 seconds"
+goal_reached = false
+goal_type = 0
+metadata/_custom_type_script = "uid://dnrw5msmlqhea"
+
+[sub_resource type="Resource" id="Resource_pdl2l"]
+script = ExtResource("1_e0787")
+goal_text = "Escape in under 120 seconds"
+goal_reached = false
+goal_type = 1
+metadata/_custom_type_script = "uid://dnrw5msmlqhea"
+
+[sub_resource type="Resource" id="Resource_2t17w"]
+script = ExtResource("1_e0787")
+goal_text = "Don't get spotted by a security camera"
+goal_reached = false
+goal_type = 1
+metadata/_custom_type_script = "uid://dnrw5msmlqhea"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lb8fc"]
+
+[resource]
+script = ExtResource("3_0ca0m")
+level_index = 2
+level_name = "Fast and silently"
+level_path = "uid://bkumol8f5qnnh"
+level_preview_texture = SubResource("PlaceholderTexture2D_lb8fc")
+level_music = ExtResource("2_7oekt")
+level_goals = Array[ExtResource("1_e0787")]([SubResource("Resource_d3o6j"), SubResource("Resource_pdl2l"), SubResource("Resource_2t17w")])
+used_device_count = PackedInt32Array(2, 4)
+unlocked = true
+level_completion_time = 120.0
+metadata/_custom_type_script = "uid://btji1vxv6jj7s"

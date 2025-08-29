@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhd35o5m5lhrq"]
 
 [ext_resource type="Script" uid="uid://bpqyegseblpju" path="res://player/player.gd" id="1_rkbax"]
-[ext_resource type="Shader" path="res://player/chroma_key_shader.gdshader" id="3_ebec5"]
+[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://core/shaders/chroma_key_shader.gdshader" id="3_ebec5"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_g1dw6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yllr7"]

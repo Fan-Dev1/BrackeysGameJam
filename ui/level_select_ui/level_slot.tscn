@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://1gebq4go3yqh"]
+
+[ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="1_680na"]
+[ext_resource type="Texture2D" uid="uid://k366ag4uvht" path="res://ui/level_select_ui/cliplock.png" id="1_b0egu"]
+[ext_resource type="Script" uid="uid://c0l77rhqtdjec" path="res://ui/level_select_ui/level_slot.gd" id="1_qmpul"]
+[ext_resource type="Texture2D" uid="uid://by43bsibwiydx" path="res://ui/level_select_ui/lock.png" id="2_b0egu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmpul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmpul"]
+atlas = ExtResource("1_680na")
+region = Rect2(128, 563, 1106, 1113)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8jadc"]
+font_size = 28
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LevelSlot" type="Button"]
+custom_minimum_size = Vector2(200, 250)
+offset_top = 253.0
+offset_right = 200.0
+offset_bottom = 503.0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qmpul")
+toggle_mode = true
+script = ExtResource("1_qmpul")
+
+[node name="ClipTextureRect" type="TextureRect" parent="."]
+clip_children = 1
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_b0egu")
+stretch_mode = 6
+
+[node name="LevelPreviewTextureRect" type="TextureRect" parent="ClipTextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_qmpul")
+expand_mode = 1
+
+[node name="GreyColorRect" type="ColorRect" parent="ClipTextureRect/LevelPreviewTextureRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="LockedTextureRect" type="TextureRect" parent="ClipTextureRect/LevelPreviewTextureRect"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(124, 124)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -62.0
+offset_right = 62.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b0egu")
+
+[node name="LevelLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 81.0
+grow_horizontal = 2
+text = "Mission #01"
+label_settings = SubResource("LabelSettings_8jadc")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

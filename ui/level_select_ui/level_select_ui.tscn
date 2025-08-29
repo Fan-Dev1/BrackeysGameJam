@@ -1,0 +1,331 @@
+[gd_scene load_steps=15 format=3 uid="uid://dqb5wew0y2why"]
+
+[ext_resource type="Script" uid="uid://cax2gk4mb1d8y" path="res://ui/level_select_ui/level_select_ui.gd" id="1_h6lu8"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_h6lu8"]
+[ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="3_l6swc"]
+[ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="4_qalhj"]
+[ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="5_3ax5x"]
+[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/thief_car/car_drive_scroller.tscn" id="5_h6lu8"]
+[ext_resource type="PackedScene" uid="uid://1gebq4go3yqh" path="res://ui/level_select_ui/level_slot.tscn" id="6_lmnmt"]
+
+[sub_resource type="Animation" id="Animation_f1rwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(65, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1216, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CarDriveScroller/ThiefCar/GameTitleLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1616, 767)]
+}
+
+[sub_resource type="Animation" id="Animation_wu1mh"]
+resource_name = "enter_scene"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1000, 64), Vector2(64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1980, 64), Vector2(1216, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ButtonContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1980, 767), Vector2(1616, 767)]
+}
+
+[sub_resource type="Animation" id="Animation_qk4dn"]
+resource_name = "exit_scene"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/LevelSelector:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 64), Vector2(-1000, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1216, 64), Vector2(1980, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CarDriveScroller/ThiefCar/GameTitleLabel:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ButtonContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1616, 767), Vector2(1980, 767)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8fsn"]
+_data = {
+&"RESET": SubResource("Animation_f1rwt"),
+&"enter_scene": SubResource("Animation_wu1mh"),
+&"exit_scene": SubResource("Animation_qk4dn")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h6lu8"]
+light_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_l6swc"]
+font_size = 120
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgsmr"]
+font_size = 68
+
+[node name="LevelSelectUI" type="Node"]
+script = ExtResource("1_h6lu8")
+
+[node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_h6lu8"), ExtResource("3_l6swc"), ExtResource("4_qalhj")]]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_k8fsn")
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="CarDriveScroller" parent="." instance=ExtResource("5_h6lu8")]
+unique_name_in_owner = true
+
+[node name="GameTitleLabel" type="Label" parent="CarDriveScroller/ThiefCar" index="3"]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_h6lu8")
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -931.0
+offset_top = -122.5
+offset_right = -208.0
+offset_bottom = 42.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Cookie Heist"
+label_settings = SubResource("LabelSettings_l6swc")
+horizontal_alignment = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MissionDetails" parent="CanvasLayer" instance=ExtResource("5_3ax5x")]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -704.0
+offset_top = -476.0
+offset_right = -64.0
+offset_bottom = 104.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="LevelSelector" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -895.0
+offset_top = -476.0
+offset_right = 64.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelSelector"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelSelector/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select next Mission"
+label_settings = SubResource("LabelSettings_vgsmr")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelGridContainer" type="GridContainer" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
+columns = 4
+
+[node name="LevelSlot" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot2" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot3" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot4" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot5" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot6" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot7" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot8" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot9" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="LevelSlot10" parent="CanvasLayer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("6_lmnmt")]
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -313.0
+offset_right = -64.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Settings"
+
+[node name="CreditsButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Quit"
+
+[connection signal="mission_started" from="CanvasLayer/MissionDetails" to="." method="_on_mission_details_mission_started"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+
+[editable path="CarDriveScroller"]

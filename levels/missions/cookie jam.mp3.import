@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cf3f4s4yahc7q"
+path="res://.godot/imported/cookie jam.mp3-8ba34622979904b719d4e39ed03b78f4.mp3str"
+
+[deps]
+
+source_file="res://levels/missions/cookie jam.mp3"
+dest_files=["res://.godot/imported/cookie jam.mp3-8ba34622979904b719d4e39ed03b78f4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

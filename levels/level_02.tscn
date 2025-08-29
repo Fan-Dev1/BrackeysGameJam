@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://bkumol8f5qnnh"]
+[gd_scene load_steps=9 format=4 uid="uid://bkumol8f5qnnh"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_8yqd8"]
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="2_8yqd8"]
+[ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="2_didps"]
+[ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_didps"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="3_h518d"]
 
-[sub_resource type="Resource" id="Resource_8yqd8"]
+[sub_resource type="Resource" id="Resource_didps"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = -1.1781
@@ -12,7 +14,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_h518d"]
+[sub_resource type="Resource" id="Resource_gia0r"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = 0.0
@@ -20,7 +22,7 @@ duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_didps"]
+[sub_resource type="Resource" id="Resource_mihb8"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = 1.1781
@@ -29,18 +31,17 @@ duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [node name="Level_02" instance=ExtResource("1_8yqd8")]
+level_mission = ExtResource("2_didps")
 metadata/_edit_lock_ = true
 
-[node name="WallTileMapLayer" parent="MapRoot" index="1"]
-tile_map_data = PackedByteArray("AAAIAAcAAAADAAIAAAAIAAYAAAAHAAQAAAAHAAYAAAABAAMAAAAHAAAAAAAAAAMAAAAIAAAAAAABAAMAAAAJAAAAAAABAAMAAAAKAAAAAAABAAMAAAALAAAAAAABAAMAAAAMAAAAAAABAAMAAAANAAAAAAABAAMAAAAOAAAAAAABAAMAAAAPAAAAAAABAAMAAAAQAAAAAAABAAMAAAARAAAAAAAFAAAAAAARAAEAAAADAAEAAAARAAIAAAADAAEAAAARAAMAAAADAAEAAAARAAQAAAADAAEAAAARAAUAAAADAAIAAAAGAAYAAAAAAAMAAAAJAAYAAAABAAMAAAAKAAYAAAACAAMAAAAIAAUAAAADAAAAAAA=")
+[node name="WallTileMapLayer" parent="MapRoot" index="3"]
+tile_map_data = PackedByteArray("AAACABUAAAACAAAAAAACABYAAAACAAEAAAACABcAAAACAAEAAAACABgAAAACAAEAAAACABkAAAACAAEAAAACABoAAAAEAAMAAAACABsAAAABAAIAAAADABsAAAABAAIAAAAEABsAAAABAAIAAAAFABsAAAABAAIAAAAGABsAAAABAAIAAAAHABoAAAABAAAAAAAIABoAAAABAAAAAAAJABoAAAABAAAAAAAKABoAAAABAAAAAAALABoAAAABAAAAAAALABsAAAABAAIAAAAMABsAAAABAAIAAAANABsAAAABAAIAAAAOABsAAAABAAIAAAAPABsAAAABAAIAAAAQABsAAAABAAIAAAARABsAAAABAAIAAAARABoAAAABAAAAAAASABoAAAABAAAAAAATABoAAAAFAAMAAAATABkAAAAAAAEAAAAUABkAAAABAAEAAAAUABgAAAABAAEAAAAVABgAAAABAAEAAAAWABgAAAABAAEAAAAXABgAAAACAAEAAAABABsAAAABAAIAAAABABoAAAABAAEAAAABABkAAAABAAEAAAABABgAAAABAAEAAAABABcAAAABAAEAAAABABYAAAABAAEAAAABABUAAAABAAAAAAAAABsAAAAAAAIAAAAAABoAAAAAAAEAAAAAABkAAAAAAAEAAAAAABgAAAAAAAEAAAAAABcAAAAAAAEAAAAAABYAAAAAAAEAAAAAABUAAAAAAAAAAAAQABoAAAABAAAAAAAPABoAAAABAAAAAAAOABoAAAABAAAAAAANABoAAAABAAAAAAAMABoAAAABAAAAAAAKABsAAAABAAIAAAAJABsAAAABAAIAAAAIABsAAAABAAIAAAAHABsAAAABAAIAAAAGABoAAAABAAAAAAAFABoAAAABAAAAAAAEABoAAAABAAAAAAADABoAAAABAAAAAAAXABoAAAACAAEAAAAWABoAAAABAAEAAAAVABoAAAABAAEAAAAUABoAAAABAAEAAAAXABsAAAACAAIAAAAWABsAAAABAAIAAAAVABsAAAABAAIAAAAUABsAAAABAAIAAAATABsAAAABAAIAAAASABsAAAABAAIAAAAXABkAAAACAAEAAAAXABcAAAACAAEAAAAXABYAAAACAAEAAAAXABUAAAACAAAAAAAWABkAAAABAAEAAAAWABcAAAABAAEAAAAWABYAAAABAAEAAAAWABUAAAABAAAAAAAVABkAAAABAAEAAAAVABcAAAABAAEAAAAVABYAAAABAAEAAAAVABUAAAABAAAAAAAUABcAAAABAAEAAAAUABYAAAABAAEAAAAUABUAAAABAAAAAAATABgAAAAAAAEAAAATABcAAAAAAAEAAAATABYAAAAAAAEAAAATABUAAAAAAAAAAAA=")
 
-[node name="HideoutArea2D" parent="MapRoot" index="2"]
-position = Vector2(880, 168)
+[node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_didps")]
+position = Vector2(1000, 1216)
 
-[node name="Player" parent="MapRoot" index="7"]
-position = Vector2(216, 152)
-move_speed = 1200.0
+[node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="0" instance=ExtResource("2_8yqd8")]
+position = Vector2(560, 1152)
+camera_positions = Array[ExtResource("3_h518d")]([SubResource("Resource_didps"), SubResource("Resource_gia0r"), SubResource("Resource_mihb8")])
 
-[node name="SecurityCamera" parent="." index="4" instance=ExtResource("2_8yqd8")]
-position = Vector2(0, 416)
-camera_positions = Array[ExtResource("3_h518d")]([SubResource("Resource_8yqd8"), SubResource("Resource_h518d"), SubResource("Resource_didps")])
+[editable path="MapRoot/CarDriveScroller"]

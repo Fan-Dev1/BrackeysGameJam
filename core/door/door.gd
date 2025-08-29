@@ -105,7 +105,7 @@ func _on_interation_area_2d_body_exited(body: Node2D) -> void:
 
 
 func handle_interation() -> void:
-	var player := Global.get_player()
+	var player: Player = Global.get_player()
 	var in_reach_for_interation := border_line_2d.visible
 	if in_reach_for_interation:
 		if door_state == State.OPEN and not is_controlled_by_lever(): 

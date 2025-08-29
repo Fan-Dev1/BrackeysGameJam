@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cgxtkj6sx4uqm" path="res://core/lever_button/level_button_sprites.png" id="1_1d3ay"]
 [ext_resource type="Script" uid="uid://wpnic6hycec1" path="res://core/lever_button/lever_button.gd" id="1_76s5e"]
-[ext_resource type="Texture2D" uid="uid://bkjmtoyaya6m0" path="res://core/lever_button/level_button_sprites_outline.png" id="3_5leoa"]
 [ext_resource type="AudioStream" uid="uid://cfyc2mpg7s68c" path="res://core/lever_button/Levers A.wav" id="4_6pi72"]
 [ext_resource type="AudioStream" uid="uid://couhbnnm0mr6v" path="res://core/lever_button/Levers B.wav" id="5_ab8qn"]
 
@@ -111,6 +110,9 @@ radius = 48.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5leoa"]
 size = Vector2(96, 48)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nufx1"]
+load_path = "res://.godot/imported/level_button_sprites_outline.png-709011cd7feea237fe4cf8549e4bb501.ctex"
+
 [node name="LeverButton" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_76s5e")
@@ -143,7 +145,7 @@ metadata/_edit_group_ = true
 [node name="OutlineSprite2D" type="Sprite2D" parent="Sprite2D"]
 show_behind_parent = true
 texture_filter = 1
-texture = ExtResource("3_5leoa")
+texture = SubResource("CompressedTexture2D_nufx1")
 hframes = 5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
