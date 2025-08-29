@@ -7,10 +7,12 @@ signal cookie_looted(from: CookieStash)
 
 @onready var loot_timer: Timer = $LootTimer
 @onready var loot_progress_bar: ProgressBar = %LootProgressBar
+@onready var cookie_particles: GPUParticles2D = $CookieParticles
 
 
 func _ready() -> void:
 	loot_progress_bar.visible = false
+	cookie_particles.emitting = false
 
 
 func _process(_delta: float) -> void:
@@ -23,11 +25,13 @@ func start_looting() -> void:
 	loot_progress_bar.max_value = loot_timer.wait_time
 	loot_progress_bar.value = 0.0
 	loot_progress_bar.visible = true
+	cookie_particles.emitting = true
 
 
 func stop_looting() -> void:
 	loot_timer.stop()
 	loot_progress_bar.visible = false
+	cookie_particles.emitting = false
 
 
 func finish_looting() -> void:
@@ -35,6 +39,7 @@ func finish_looting() -> void:
 	cookie_looted.emit(self)
 	player.take_cookie_from(self)
 	loot_progress_bar.visible = false
+	cookie_particles.emitting = false
 	queue_free()
 
 
