@@ -26,6 +26,7 @@ var collected_cookie_count := 0
 
 func _ready() -> void:
 	mission_details.set_level_mission(level_mission)
+	mission_details.visible = true
 	timeout_panel.visible = false
 	level_complete_panel.visible = false
 	cookie_loot_panel.visible = false
@@ -137,6 +138,7 @@ func _on_car_entered() -> void:
 func _on_car_exited() -> void:
 	var thief_car := car_drive_scroller.thief_car
 	thief_car.set_process_unhandled_input(false)
+	mission_details.visible = false
 	
 	var tween := create_tween()
 	var car_exit_position := thief_car.global_position
