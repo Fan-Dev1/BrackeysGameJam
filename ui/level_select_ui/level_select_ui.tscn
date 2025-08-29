@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="3_l6swc"]
 [ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="4_qalhj"]
 [ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="5_3ax5x"]
-[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/cars/car_drive_scroller.tscn" id="5_h6lu8"]
+[ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/thief_car/car_drive_scroller.tscn" id="5_h6lu8"]
 [ext_resource type="PackedScene" uid="uid://1gebq4go3yqh" path="res://ui/level_select_ui/level_slot.tscn" id="6_lmnmt"]
 
 [sub_resource type="Animation" id="Animation_f1rwt"]
@@ -118,7 +118,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("CanvasLayer/MissionDetails:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -171,7 +171,7 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_vgsmr"]
 font_size = 68
 
-[node name="LevelSelectUI" type="CanvasLayer"]
+[node name="LevelSelectUI" type="Node"]
 script = ExtResource("1_h6lu8")
 
 [node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
@@ -182,6 +182,9 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_k8fsn")
 }
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.7, 0.7, 0.7, 1)
 
 [node name="CarDriveScroller" parent="." instance=ExtResource("5_h6lu8")]
 unique_name_in_owner = true
@@ -216,7 +219,7 @@ anchor_bottom = 0.5
 offset_left = -704.0
 offset_top = -476.0
 offset_right = -64.0
-offset_bottom = 228.0
+offset_bottom = 104.0
 grow_horizontal = 0
 grow_vertical = 2
 

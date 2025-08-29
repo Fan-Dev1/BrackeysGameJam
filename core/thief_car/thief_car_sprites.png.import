@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1sge6ua7f628"
-path="res://.godot/imported/thief_car_head_lights.png-a623fb4281e1b0db4a6299f4d227ac85.ctex"
+uid="uid://dxik0npp1s6j2"
+path="res://.godot/imported/thief_car_sprites.png-e9e1760f764acf1daed41e666e4be5c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://core/cars/thief_car_head_lights.png"
-dest_files=["res://.godot/imported/thief_car_head_lights.png-a623fb4281e1b0db4a6299f4d227ac85.ctex"]
+source_file="res://core/thief_car/thief_car_sprites.png"
+dest_files=["res://.godot/imported/thief_car_sprites.png-e9e1760f764acf1daed41e666e4be5c7.ctex"]
 
 [params]
 

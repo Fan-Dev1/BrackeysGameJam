@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func start_hiding() -> void:
-	var player := Global.get_player()
+	var player: Player = Global.get_player()
 	var from_position := player.global_position
 	var final_position := player_marker.global_position
 	
@@ -51,7 +51,7 @@ func start_hiding() -> void:
 
 
 func stop_hiding() -> void:
-	var player := Global.get_player()
+	var player: Player = Global.get_player()
 	player.global_position = player_placeholder_sprite.global_position
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 	player.visible = true

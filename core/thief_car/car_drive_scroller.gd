@@ -2,7 +2,7 @@ class_name CarDriverScroller
 extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var thief_car: Car = %ThiefCar
+@onready var thief_car: ThiefCar = %ThiefCar
 
 
 func _ready() -> void:

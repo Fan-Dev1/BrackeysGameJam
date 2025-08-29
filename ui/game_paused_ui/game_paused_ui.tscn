@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqctqm0k1qlsr"]
+
+[ext_resource type="Script" uid="uid://b5ssvuhii5rej" path="res://ui/game_paused_ui/game_paused_ui.gd" id="1_rf5t7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_63c5o"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GamePausedUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_rf5t7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.407843)
+
+[node name="GamePausePanel" type="PanelContainer" parent="."]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -168.5
+offset_right = 178.5
+offset_bottom = 168.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePausePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePausePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="GamePausedLabel" type="Label" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_63c5o")
+
+[node name="ContinueButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Continue"
+
+[node name="RestartMissionButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Restart Mission"
+
+[node name="AbortMissionButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Abort Mission"
+
+[node name="SettingsButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit Game"
+
+[connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/RestartMissionButton" to="." method="_on_restart_mission_button_pressed"]
+[connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/AbortMissionButton" to="." method="_on_abort_mission_button_pressed"]
+[connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

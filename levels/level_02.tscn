@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_didps"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="3_h518d"]
 
-[sub_resource type="Resource" id="Resource_gia0r"]
+[sub_resource type="Resource" id="Resource_didps"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = -1.1781
@@ -14,7 +14,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_mihb8"]
+[sub_resource type="Resource" id="Resource_gia0r"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = 0.0
@@ -22,7 +22,7 @@ duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_2owmk"]
+[sub_resource type="Resource" id="Resource_mihb8"]
 resource_local_to_scene = true
 script = ExtResource("3_h518d")
 rotation = 1.1781
@@ -42,6 +42,6 @@ position = Vector2(1000, 1216)
 
 [node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="0" instance=ExtResource("2_8yqd8")]
 position = Vector2(560, 1152)
-camera_positions = Array[ExtResource("3_h518d")]([SubResource("Resource_gia0r"), SubResource("Resource_mihb8"), SubResource("Resource_2owmk")])
+camera_positions = Array[ExtResource("3_h518d")]([SubResource("Resource_didps"), SubResource("Resource_gia0r"), SubResource("Resource_mihb8")])
 
 [editable path="MapRoot/CarDriveScroller"]

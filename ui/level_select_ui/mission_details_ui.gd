@@ -2,14 +2,15 @@ class_name MissionDetailUi
 extends Container
 
 signal mission_started(level_mission: LevelMission)
+signal mission_finished(level_mission: LevelMission)
 
 @export var level_mission: LevelMission : set = set_level_mission
+@export var in_mission := false
 
 @onready var title_label: Label = %TitleLabel
 @onready var main_goal_container: VBoxContainer = %MainGoalContainer
 @onready var stretch_goal_container: VBoxContainer = %StretchGoalContainer
-@onready var device_grid_container: GridContainer = %DeviceGridContainer
-@onready var start_mission_button: Button = %StartMissionButton
+@onready var mission_button: Button = %MissionButton
 
 
 func _ready() -> void:
@@ -19,9 +20,14 @@ func _ready() -> void:
 func _update_ui() -> void:
 	if level_mission == null:
 		return
-	title_label.text = level_mission.level_name
-	start_mission_button.disabled = not level_mission.unlocked
+	if in_mission:
+		mission_button.text = "Finish Mission"
+		mission_button.disabled = not level_mission.can_finish_mission()
+	else:
+		mission_button.text = "Start Mission"
+		mission_button.disabled = not level_mission.unlocked
 	
+	title_label.text = level_mission.level_name
 	for old_goal in main_goal_container.get_children():
 		old_goal.queue_free()
 	for old_goal in stretch_goal_container.get_children():
@@ -45,5 +51,8 @@ func set_level_mission(_level_mission: LevelMission) -> void:
 	_update_ui()
 
 
-func _on_start_mission_button_pressed() -> void:
-	mission_started.emit(level_mission)
+func _on_mission_button_pressed():
+	if in_mission:
+		mission_finished.emit(level_mission)
+	else:
+		mission_started.emit(level_mission)

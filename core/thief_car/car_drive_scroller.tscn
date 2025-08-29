@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://7nm2meivy40g"]
 
-[ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/cars/car_driving_parallex_sprites.png" id="1_5vs06"]
-[ext_resource type="Script" uid="uid://c4eyim8o8cymi" path="res://core/cars/car_drive_scroller.gd" id="1_ffh42"]
-[ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/cars/car.tscn" id="2_cton4"]
+[ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/thief_car/car_driving_parallex_sprites.png" id="1_5vs06"]
+[ext_resource type="Script" uid="uid://c4eyim8o8cymi" path="res://core/thief_car/car_drive_scroller.gd" id="1_ffh42"]
+[ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/thief_car/thief_car.tscn" id="2_cton4"]
 
 [sub_resource type="Animation" id="Animation_0rg8l"]
 length = 0.001

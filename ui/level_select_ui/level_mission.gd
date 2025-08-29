@@ -11,3 +11,13 @@ extends Resource
 @export var used_device_count := PackedInt32Array()
 @export var unlocked := false
 @export var level_completion_time := 120.0
+
+
+func can_finish_mission() -> bool:
+	return main_goals().all(func (level_goal: LevelGoal):
+		return level_goal.goal_reached == true)
+
+
+func main_goals() -> Array[LevelGoal]:
+	return level_goals.filter(func (level_goal: LevelGoal): 
+		return level_goal.goal_type == LevelGoal.Type.MAIN_GOAL)
