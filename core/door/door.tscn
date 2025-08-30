@@ -116,9 +116,9 @@ offset = Vector2(0, -137)
 metadata/_edit_lock_ = true
 
 [node name="OpenDoorReference" type="ReferenceRect" parent="."]
-offset_left = 84.0
+offset_left = 72.0
 offset_top = -16.0
-offset_right = 252.0
+offset_right = 240.0
 offset_bottom = 16.0
 mouse_filter = 2
 border_color = Color(1, 0.412, 0.02, 1)

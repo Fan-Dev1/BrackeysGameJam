@@ -183,24 +183,12 @@ tile_map_data = PackedByteArray("AAAfABgAAAACAAAAAAAeABgAAAABAAAAAAAdABgAAAABAAA
 [node name="InteriorTileMapLayer" parent="MapRoot" index="3"]
 tile_map_data = PackedByteArray("AAARACAABAAEAAAAAAATACAABAAEAAIAAAAUABgABAADAAMAAAAUABkABAADAAUAAAAUACAABAAEAAMAAAAVABgABAADAAMAAAAVABkABAAEAAUAAAAVACAABAAFAAIAAAAXACAABAAFAAAAAAAYAB0ABAAFAAUAAAAYAB4ABAAFAAUAAAAZAB0ABAAGAAUAAAAZAB4ABAAGAAUAAAAaABkABAAAAAEAAAAaABoABAAAAAIAAAAaAB8ABAAAAAMAAAAaACAABAAAAAQAAAAbABkABAACAAAAAAAcABkABAAAAAAAAAAdABkABAABAAEAAAAdABoABAABAAIAAAAdAB0ABAADAAAAAAAdAB8ABAACAAMAAAAdACAABAACAAQAAAA=")
 
-[node name="CarDriveCamera2D" parent="MapRoot/CarDriveScroller" index="7"]
-visible = false
-
-[node name="Interactables" parent="MapRoot" index="5"]
-visible = false
-
 [node name="MainEntranceDoor" parent="MapRoot/Interactables" index="0" instance=ExtResource("2_cg8v6")]
 position = Vector2(1023, 1920)
 rotation = 1.57079
 
-[node name="CookiesStashes" parent="MapRoot" index="6"]
-visible = false
-
 [node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_j0sdw")]
 position = Vector2(1344, 1584)
-
-[node name="SecurityDevices" parent="MapRoot" index="7"]
-visible = false
 
 [node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
 position = Vector2(944, 1632)
@@ -231,16 +219,9 @@ right_limit = 0.628319
 camera_position_index = 1
 camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_ehlne"), SubResource("Resource_7sc7i")])
 
-[node name="Guards" parent="MapRoot" index="8"]
-visible = false
-
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_position_index = 1
 state = 5
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
 position = Vector2(-500, 0)
-
-[node name="Camera2D" parent="MapRoot/Player" index="4"]
-visible = false
