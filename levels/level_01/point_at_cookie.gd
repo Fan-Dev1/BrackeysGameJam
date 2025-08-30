@@ -45,10 +45,10 @@ func _on_cookie_looted(from: CookieStash) -> void:
 	
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(camera_2d, "global_position", thief_car.global_position, 0.33)
+	tween.tween_property(camera_2d, "global_position", thief_car.global_position, 0.3)
 	tween.tween_callback(cargo_bed_pointer_sprite.start_pointing)
 	tween.tween_interval(1.0)
-	tween.tween_property(camera_2d, "position", Vector2.ZERO, 0.33)
+	tween.tween_property(camera_2d, "position", Vector2.ZERO, 0.3)
 	tween.tween_callback(func ():
 		player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
 		camera_2d.enabled = false)

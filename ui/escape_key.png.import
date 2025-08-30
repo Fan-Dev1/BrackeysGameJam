@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chhym6c86s5ta"
-path="res://.godot/imported/SpaceKey.png-d3135a5d2d1255b9618200b4fd15000e.ctex"
+uid="uid://dmj32b7kfrija"
+path="res://.godot/imported/escape_key.png-8d6e480cce5e8645548a3bb388860a20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/SpaceKey.png"
-dest_files=["res://.godot/imported/SpaceKey.png-d3135a5d2d1255b9618200b4fd15000e.ctex"]
+source_file="res://ui/escape_key.png"
+dest_files=["res://.godot/imported/escape_key.png-8d6e480cce5e8645548a3bb388860a20.ctex"]
 
 [params]
 

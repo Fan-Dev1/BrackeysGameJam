@@ -1,29 +1,28 @@
-[gd_resource type="Resource" script_class="LevelMission" load_steps=8 format=3 uid="uid://dn4kc3fwiw8kb"]
+[gd_resource type="Resource" script_class="LevelMission" load_steps=7 format=3 uid="uid://dn4kc3fwiw8kb"]
 
 [ext_resource type="Script" uid="uid://dnrw5msmlqhea" path="res://ui/level_select_ui/level_goal.gd" id="1_4q017"]
 [ext_resource type="AudioStream" uid="uid://cf3f4s4yahc7q" path="res://levels/missions/cookie jam.mp3" id="2_jx7vk"]
-[ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="3_scndp"]
 [ext_resource type="Script" uid="uid://btji1vxv6jj7s" path="res://ui/level_select_ui/level_mission.gd" id="4_erwly"]
 
 [sub_resource type="Resource" id="Resource_d3o6j"]
 script = ExtResource("1_4q017")
-goal_text = "Collect 10 cookies within 120 seconds"
+goal_text = "Collect 1 cookies within 120 seconds"
 goal_reached = false
 goal_type = 0
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
 [sub_resource type="Resource" id="Resource_pdl2l"]
 script = ExtResource("1_4q017")
-goal_text = "Escape in under 90 seconds"
+goal_text = "Don't get hit by a laser"
 goal_reached = false
 goal_type = 1
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
-[sub_resource type="Resource" id="Resource_2t17w"]
+[sub_resource type="Resource" id="Resource_4sgwi"]
 script = ExtResource("1_4q017")
-goal_text = "Don't get detected by any lasers"
+goal_text = "Get spotted by a security camera"
 goal_reached = false
-goal_type = 1
+goal_type = 2
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
 [resource]
@@ -31,9 +30,8 @@ script = ExtResource("4_erwly")
 level_index = 1
 level_name = "First robbery"
 level_path = "uid://baia6evchbu5t"
-level_preview_texture = ExtResource("3_scndp")
 level_music = ExtResource("2_jx7vk")
-level_goals = Array[ExtResource("1_4q017")]([SubResource("Resource_d3o6j"), SubResource("Resource_pdl2l"), SubResource("Resource_2t17w")])
+level_goals = Array[ExtResource("1_4q017")]([SubResource("Resource_d3o6j"), SubResource("Resource_pdl2l"), SubResource("Resource_4sgwi")])
 used_device_count = PackedInt32Array(4, 1)
 unlocked = true
 level_completion_time = 120.0

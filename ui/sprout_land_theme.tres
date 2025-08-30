@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=38 format=3 uid="uid://dphk2cvguw754"]
+[gd_resource type="Theme" load_steps=40 format=3 uid="uid://dphk2cvguw754"]
 
 [ext_resource type="FontFile" uid="uid://cep3foox6k0yn" path="res://ui/fonts/fusion-pixel-12px-proportional-sc-latin-400-normal.woff2" id="1_771u4"]
 [ext_resource type="Texture2D" uid="uid://bxdthesv41ojc" path="res://ui/UI_sprite_sheet.png" id="3_hs3qb"]
@@ -61,7 +61,15 @@ region_rect = Rect2(59, 57, 26, 30)
 atlas = ExtResource("3_hs3qb")
 region = Rect2(832, 64, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp0rn"]
+atlas = ExtResource("3_hs3qb")
+region = Rect2(832, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2k58"]
+atlas = ExtResource("3_hs3qb")
+region = Rect2(832, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjpkq"]
 atlas = ExtResource("3_hs3qb")
 region = Rect2(832, 96, 32, 32)
 
@@ -296,7 +304,9 @@ Button/styles/normal = SubResource("StyleBoxTexture_0c1h8")
 Button/styles/pressed = SubResource("StyleBoxTexture_u072a")
 CheckBox/constants/h_separation = 12
 CheckBox/icons/checked = SubResource("AtlasTexture_ek3yx")
+CheckBox/icons/checked_disabled = SubResource("AtlasTexture_pp0rn")
 CheckBox/icons/unchecked = SubResource("AtlasTexture_g2k58")
+CheckBox/icons/unchecked_disabled = SubResource("AtlasTexture_fjpkq")
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource("StyleBoxLine_foc5j")
 HSlider/constants/center_grabber = 0

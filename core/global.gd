@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal player_spotted(position: Vector2)
+signal player_spotted(position: Vector2, device: Node2D)
 
 @onready var theme_music_player: AudioStreamPlayer = $ThemeMusicPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -21,7 +21,7 @@ func play_fade_in():
 	await animation_player.animation_finished
 
 
-func _mark_spotted_player_position(player_position: Vector2) -> void:
+func _mark_spotted_player_position(player_position: Vector2, device: Node2D) -> void:
 	if not OS.is_debug_build():
 		return
 	var spotted_marker := ColorRect.new()

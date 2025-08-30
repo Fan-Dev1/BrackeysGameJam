@@ -155,7 +155,7 @@ func _return_process(delta) -> void:
 		position = original_position
 		change_light_colors(Color8(255,255,123)) #yellow
 		state = GuardState.NORMAL
-	
+
 
 func _scan_for_player() -> void:
 	for body: Node2D in guard_area_2d.get_overlapping_bodies():
@@ -163,7 +163,7 @@ func _scan_for_player() -> void:
 		if body is Player:
 			if _scan_walls(body):
 				detected = "player"
-				Global.player_spotted.emit(body.global_position)
+				Global.player_spotted.emit(body.global_position, self)
 				change_light_colors(Color8(255, 39, 26)) # red
 				state = GuardState.TRACKING
 		elif body is CookieProjectile: #elif so if both cookie and player, follow player

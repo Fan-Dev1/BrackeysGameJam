@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b64heix3puy0v"]
+[gd_scene load_steps=7 format=3 uid="uid://b64heix3puy0v"]
 
 [ext_resource type="Theme" uid="uid://dphk2cvguw754" path="res://ui/sprout_land_theme.tres" id="1_l600d"]
 [ext_resource type="Script" uid="uid://bs4stnp16vn2e" path="res://ui/level_select_ui/mission_details_ui.gd" id="1_nj7oi"]
+[ext_resource type="PackedScene" uid="uid://bec2v8kbofnve" path="res://ui/level_select_ui/goal_check_box.tscn" id="3_t0ror"]
 
 [sub_resource type="SystemFont" id="SystemFont_nj7oi"]
 subpixel_positioning = 0
@@ -17,8 +18,9 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="MissionDetails" type="PanelContainer"]
-offset_right = 525.0
-offset_bottom = 479.0
+custom_minimum_size = Vector2(0, 488)
+offset_right = 530.0
+offset_bottom = 488.0
 theme = ExtResource("1_l600d")
 script = ExtResource("1_nj7oi")
 
@@ -56,10 +58,9 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="GoalCheckBox1" type="CheckBox" parent="MarginContainer/VBoxContainer/MainGoalContainer"]
+[node name="GoalCheckBox1" parent="MarginContainer/VBoxContainer/MainGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Don't get seen by a camera"
+text = "Collect 2 cookies within 120 seconds"
 
 [node name="Spacer1" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,27 +76,12 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="GoalCheckBox1" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+[node name="GoalCheckBox2" parent="MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Don't get seen by a camera"
 
-[node name="GoalCheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
+[node name="GoalCheckBox3" parent="MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-button_pressed = true
 text = "Block a Laser"
-
-[node name="GoalCheckBox3" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-button_pressed = true
-text = "Deactivate a security camera"
-
-[node name="GoalCheckBox4" type="CheckBox" parent="MarginContainer/VBoxContainer/StretchGoalContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Escape in under 5 minutes"
 
 [node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -107,4 +93,5 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Start / Finish Mission"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MissionButton" to="." method="_on_mission_button_pressed"]

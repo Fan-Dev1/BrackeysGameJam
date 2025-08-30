@@ -9,6 +9,7 @@ const LEVEL_SELECT_UI := "res://ui/level_select_ui/level_select_ui.tscn"
 var available_cookie_count := 0
 var collected_cookie_count := 0
 
+@onready var goal_tracker: Node = $GoalTracker
 @onready var player: Player = %Player
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var car_drive_camera_2d: Camera2D = %CarDriveCamera2D
@@ -115,6 +116,8 @@ func _on_cookie_loot_panel_cookie_collected(cookie_id: int) -> void:
 
 func _on_car_entered() -> void:
 	var thief_car := car_drive_scroller.thief_car
+	goal_tracker.call("update_mission_goals")
+	mission_details._update_ui()
 	mission_details.visible = true
 	player.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
 	player.visible = false

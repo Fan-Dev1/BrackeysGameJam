@@ -101,7 +101,7 @@ func _tracking_process(delta: float) -> void:
 		var target_camera_position := to_camera_position(tracking_target)
 		rotate_camera_toward(target_camera_position, delta)
 		if tracking_target is Player:
-			Global.player_spotted.emit(tracking_target.global_position)
+			Global.player_spotted.emit(tracking_target.global_position, self)
 	
 	# lost vision on tracking_target --> start tracking_reset_timer
 	elif tracking_reset_timer.is_stopped():

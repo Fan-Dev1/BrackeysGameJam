@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bec2v8kbofnve"]
+
+[node name="GoalCheckBox" type="CheckBox"]
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "Don't get seen by a camera"

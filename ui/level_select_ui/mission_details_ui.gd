@@ -4,6 +4,8 @@ extends Container
 signal mission_started(level_mission: LevelMission)
 signal mission_finished(level_mission: LevelMission)
 
+const GOAL_CHECK_BOX: PackedScene = preload("res://ui/level_select_ui/goal_check_box.tscn")
+
 @export var level_mission: LevelMission : set = set_level_mission
 @export var in_mission := false
 
@@ -29,13 +31,14 @@ func _update_ui() -> void:
 	
 	title_label.text = level_mission.level_name
 	for old_goal in main_goal_container.get_children():
+		main_goal_container.remove_child(old_goal)
 		old_goal.queue_free()
 	for old_goal in stretch_goal_container.get_children():
+		stretch_goal_container.remove_child(old_goal)
 		old_goal.queue_free()
 	
-	var goal_checkbox: CheckBox = main_goal_container.get_child(0)
 	for level_goal: LevelGoal in level_mission.level_goals:
-		goal_checkbox = goal_checkbox.duplicate()
+		var goal_checkbox: CheckBox = GOAL_CHECK_BOX.instantiate()
 		goal_checkbox.text = level_goal.goal_text
 		goal_checkbox.button_pressed = level_goal.goal_reached
 		var is_hidden_goal := level_goal.goal_type == 2
@@ -48,7 +51,8 @@ func _update_ui() -> void:
 
 func set_level_mission(_level_mission: LevelMission) -> void:
 	level_mission = _level_mission
-	_update_ui()
+	if is_node_ready():
+		_update_ui()
 
 
 func _on_mission_button_pressed():

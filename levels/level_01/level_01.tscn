@@ -1,21 +1,22 @@
 [gd_scene load_steps=21 format=4 uid="uid://baia6evchbu5t"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
-[ext_resource type="Texture2D" uid="uid://drvfejkgi0kmh" path="res://ui/wsad.png" id="2_81a5f"]
+[ext_resource type="Script" uid="uid://ckt5c02ykg6la" path="res://levels/level_01/goal_tracker_01.gd" id="2_7sc7i"]
+[ext_resource type="Texture2D" uid="uid://drvfejkgi0kmh" path="res://ui/wsad_keys.png" id="2_81a5f"]
 [ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="2_cg8v6"]
 [ext_resource type="PackedScene" uid="uid://cqscxj4caxy1i" path="res://core/detection_beam/detection_beam.tscn" id="2_gg43x"]
-[ext_resource type="Texture2D" uid="uid://chhym6c86s5ta" path="res://ui/SpaceKey.png" id="3_gg43x"]
+[ext_resource type="Texture2D" uid="uid://chhym6c86s5ta" path="res://ui/space_key.png" id="3_gg43x"]
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_j0sdw"]
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="3_q7ibo"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="4_cg8v6"]
 [ext_resource type="Script" uid="uid://tnboeigvkm0v" path="res://levels/level_01/pointer_sprite.gd" id="6_cfw67"]
 [ext_resource type="PackedScene" uid="uid://bdtjxtyyetv2y" path="res://core/security_guard/SecurityGuard.tscn" id="7_jy02f"]
-[ext_resource type="Script" uid="uid://tdiec21ofqup" path="res://core/security_guard/guard_position.gd" id="8_5dxk1"]
+[ext_resource type="Texture2D" uid="uid://dmj32b7kfrija" path="res://ui/escape_key.png" id="10_ehlne"]
 [ext_resource type="Script" uid="uid://b0bfudajh4tsg" path="res://levels/level_01/show_interact_hint.gd" id="10_kjd3d"]
 [ext_resource type="Script" uid="uid://dix4udd65fl5s" path="res://levels/level_01/point_at_cookie.gd" id="12_ng00s"]
 [ext_resource type="Texture2D" uid="uid://bxdthesv41ojc" path="res://ui/UI_sprite_sheet.png" id="12_qdeet"]
 
-[sub_resource type="Resource" id="Resource_cfw67"]
+[sub_resource type="Resource" id="Resource_ehlne"]
 resource_local_to_scene = true
 script = ExtResource("4_cg8v6")
 rotation = -1.79769
@@ -23,21 +24,13 @@ duration_min_sec = 3.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_ehlne"]
+[sub_resource type="Resource" id="Resource_7sc7i"]
 resource_local_to_scene = true
 script = ExtResource("4_cg8v6")
 rotation = 0.523599
 duration_min_sec = 3.0
 duration_max_sec = 1.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_y72ps"]
-script = ExtResource("8_5dxk1")
-rotation = 3.14159
-duration_min_sec = 3.0
-duration_max_sec = 3.0
-target_marker = Vector2(-453, -184)
-metadata/_custom_type_script = "uid://tdiec21ofqup"
 
 [sub_resource type="LabelSettings" id="LabelSettings_ty3hu"]
 font_size = 48
@@ -53,6 +46,9 @@ region = Rect2(560, 176, 32, 32)
 
 [node name="Level_01" instance=ExtResource("1_ty3hu")]
 
+[node name="GoalTracker" parent="." index="0"]
+script = ExtResource("2_7sc7i")
+
 [node name="WallTileMapLayer" parent="MapRoot" index="2"]
 tile_map_data = PackedByteArray("AAD+/xMAAAAAAAEAAAD+/xIAAAAAAAEAAAD+/xEAAAAAAAAAAAAfABQAAAACAAEAAAAfABMAAAACAAEAAAAfABIAAAACAAEAAAAfABEAAAACAAAAAAAHABYAAAABAAEAAAAHABUAAAABAAEAAAAHABQAAAABAAEAAAAHABMAAAABAAEAAAAIABYAAAACAAEAAAAIABMAAAACAAEAAAD+/xUAAAAAAAEAAAD+/xQAAAAAAAEAAAAfABgAAAACAAEAAAAfABcAAAACAAEAAAAfABYAAAACAAEAAAAfABUAAAACAAEAAAD//xUAAAABAAEAAAAAABUAAAABAAEAAAABABUAAAAEAAMAAAACABUAAAABAAAAAAADABUAAAABAAAAAAAEABUAAAABAAAAAAAFABUAAAABAAAAAAAGABUAAAAFAAMAAAAGABEAAAAAAAAAAAAGABIAAAAAAAEAAAAGABMAAAAAAAEAAAAGABQAAAAAAAEAAAD//xEAAAABAAAAAAD//xIAAAABAAEAAAD//xMAAAABAAEAAAD//xQAAAABAAEAAAAAABQAAAABAAEAAAAAABMAAAABAAEAAAAAABIAAAABAAEAAAAAABEAAAABAAAAAAABABEAAAACAAAAAAABABIAAAACAAEAAAABABMAAAACAAEAAAABABQAAAACAAEAAAAHABEAAAABAAAAAAAHABIAAAABAAEAAAAIABEAAAACAAAAAAAIABIAAAACAAEAAAAIABQAAAACAAEAAAAIABUAAAACAAEAAAAeABEAAAABAAAAAAAeABMAAAABAAEAAAAeABIAAAABAAEAAAAeABQAAAABAAEAAAAeABUAAAABAAEAAAAeABYAAAABAAEAAAAeABcAAAABAAEAAAAeABgAAAABAAEAAAAdABEAAAAAAAAAAAAdABIAAAAAAAEAAAAdABMAAAAAAAEAAAAdABQAAAAAAAEAAAAdABUAAAAAAAEAAAAdABYAAAAAAAEAAAAdABcAAAAAAAEAAAAdABgAAAAFAAMAAAAIABcAAAACAAEAAAAHABcAAAABAAEAAAAGABYAAAABAAEAAAAFABYAAAABAAEAAAAEABYAAAABAAEAAAADABYAAAABAAEAAAACABYAAAABAAEAAAABABYAAAABAAEAAAAAABYAAAABAAEAAAD//xYAAAABAAEAAAD+/xYAAAAAAAEAAAAGABcAAAAFAAIAAAAGABgAAAAAAAEAAAAHABgAAAABAAEAAAAIABgAAAACAAEAAAAIABkAAAACAAEAAAAHABkAAAABAAEAAAAGABkAAAAAAAEAAAAdABkAAAABAAEAAAAdABoAAAAFAAIAAAAfABoAAAACAAEAAAAfABkAAAACAAEAAAAeABkAAAABAAEAAAAeABoAAAABAAEAAAAFABcAAAABAAIAAAAEABcAAAABAAIAAAADABcAAAABAAIAAAACABcAAAABAAIAAAABABcAAAABAAIAAAAAABcAAAABAAIAAAD//xcAAAABAAIAAAD+/xcAAAAAAAIAAAAQABgAAAABAAAAAAARABgAAAAFAAMAAAASABgAAAAEAAIAAAATABgAAAACAAIAAAAYABkAAAAFAAIAAAAZABkAAAABAAEAAAAaABkAAAABAAEAAAAbABkAAAABAAEAAAAcABkAAAABAAEAAAAcABgAAAABAAAAAAAbABgAAAABAAAAAAAaABgAAAABAAAAAAAZABgAAAABAAAAAAAYABgAAAAEAAMAAAAcABoAAAABAAIAAAAbABoAAAABAAIAAAAaABoAAAABAAIAAAAZABoAAAAEAAIAAAAYABoAAAAAAAEAAAASABkAAAACAAIAAAARABoAAAACAAIAAAARABkAAAAEAAIAAAAQABkAAAABAAEAAAAIABoAAAACAAEAAAAHABoAAAABAAEAAAAGABoAAAAAAAEAAAAQABoAAAAEAAIAAAAVABYAAAABAAEAAAAVABUAAAABAAAAAAAUABcAAAABAAIAAAAUABYAAAABAAEAAAAWABYAAAAEAAMAAAAWABUAAAACAAAAAAATABcAAAAEAAIAAAAPABoAAAAAAAEAAAAPABkAAAAAAAEAAAAPABgAAAAAAAAAAAASABcAAAAFAAMAAAATABYAAAAFAAMAAAAUABUAAAABAAAAAAAVABcAAAABAAIAAAAWABcAAAAFAAIAAAAXABcAAAAEAAMAAAAXABYAAAACAAAAAAAYABcAAAACAAAAAAAIAB8AAAAEAAMAAAAIAB4AAAACAAEAAAAIAB0AAAACAAEAAAAIABwAAAACAAEAAAAIABsAAAACAAEAAAAHAB8AAAABAAEAAAAHAB4AAAABAAEAAAAHAB0AAAABAAEAAAAHABwAAAABAAEAAAAHABsAAAABAAEAAAAGAB8AAAAAAAEAAAAGAB4AAAAAAAEAAAAGAB0AAAAAAAEAAAAGABwAAAAAAAEAAAAGABsAAAAAAAEAAAAQACAAAAABAAEAAAAQAB8AAAABAAAAAAAPACAAAAABAAEAAAAPAB8AAAABAAAAAAAOACAAAAABAAEAAAAOAB8AAAABAAAAAAANACAAAAABAAEAAAANAB8AAAABAAAAAAAMACAAAAABAAEAAAAMAB8AAAABAAAAAAALACAAAAABAAEAAAALAB8AAAABAAAAAAAKACAAAAABAAEAAAAKAB8AAAABAAAAAAAJACAAAAABAAEAAAAJAB8AAAABAAAAAAAIACAAAAABAAEAAAAHACAAAAABAAEAAAAGACAAAAAAAAEAAAAQACEAAAABAAIAAAAPACEAAAABAAIAAAAOACEAAAABAAIAAAANACEAAAABAAIAAAAMACEAAAABAAIAAAALACEAAAABAAIAAAAKACEAAAABAAIAAAAJACEAAAABAAIAAAAIACEAAAABAAIAAAAHACEAAAABAAIAAAAGACEAAAAAAAIAAAAPABwAAAAAAAIAAAAPABsAAAAAAAEAAAAQABwAAAACAAIAAAAQABsAAAACAAEAAAATACAAAAABAAEAAAATAB8AAAABAAAAAAASACAAAAABAAEAAAASAB8AAAABAAAAAAARACAAAAABAAEAAAARAB8AAAABAAAAAAAbACEAAAABAAIAAAAbACAAAAABAAEAAAAaACEAAAABAAIAAAAaACAAAAABAAEAAAAZACEAAAABAAIAAAAZACAAAAABAAEAAAAYACEAAAABAAIAAAAYACAAAAABAAEAAAAXACEAAAABAAIAAAAXACAAAAABAAEAAAAWACEAAAABAAIAAAAWACAAAAABAAEAAAAVACEAAAABAAIAAAAVACAAAAABAAEAAAAUACEAAAABAAIAAAAUACAAAAABAAEAAAATACEAAAABAAIAAAASACEAAAABAAIAAAARACEAAAABAAIAAAAbAB8AAAABAAAAAAAaAB8AAAABAAAAAAAZAB8AAAAEAAMAAAAYAB8AAAAFAAMAAAAXAB8AAAABAAAAAAAWAB8AAAABAAAAAAAVAB8AAAABAAAAAAAUAB8AAAABAAAAAAAfACEAAAACAAIAAAAfACAAAAACAAEAAAAfAB8AAAACAAEAAAAeACEAAAABAAIAAAAeACAAAAABAAEAAAAeAB8AAAABAAEAAAAdACEAAAABAAIAAAAdACAAAAABAAEAAAAdAB8AAAAFAAMAAAAcACEAAAABAAIAAAAcACAAAAABAAEAAAAcAB8AAAABAAAAAAAfAB4AAAACAAEAAAAfAB0AAAACAAEAAAAfABwAAAACAAEAAAAfABsAAAACAAEAAAAeAB4AAAABAAEAAAAeAB0AAAABAAEAAAAeABwAAAABAAEAAAAeABsAAAABAAEAAAAdAB4AAAAAAAEAAAAdAB0AAAAAAAEAAAAdABwAAAAAAAEAAAAdABsAAAAAAAEAAAAZABsAAAACAAIAAAAYABsAAAAAAAIAAAAZAB4AAAACAAAAAAAYAB4AAAAAAAAAAAARABcAAAAAAAAAAAASABYAAAAAAAAAAAATABUAAAAAAAAAAAAXABkAAAAAAAIAAAAXABgAAAAFAAIAAAAWABgAAAAAAAIAAAA=")
 
@@ -63,12 +59,25 @@ rotation = 1.57079
 [node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_j0sdw")]
 position = Vector2(1344, 1584)
 
-[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" instance=ExtResource("2_gg43x")]
+[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
 position = Vector2(592, 1632)
 beam_length = 384.0
 blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
 
-[node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="1" instance=ExtResource("3_q7ibo")]
+[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="1" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
+position = Vector2(1520, 1664)
+rotation = 3.14159
+beam_length = 384.0
+blink_pattern = PackedFloat32Array(1, 1, 2, 3.5)
+
+[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="2" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
+position = Vector2(1168, 1688)
+rotation = 6.28318
+beam_length = 384.0
+blink_pattern = PackedFloat32Array(2, 1, 2, 2.5)
+
+[node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("3_q7ibo")]
+unique_name_in_owner = true
 position = Vector2(1848, 1512)
 rotation = -1.5708
 radius = 270.0
@@ -76,29 +85,16 @@ fov = 0.523599
 left_limit = -1.71042
 right_limit = 0.10472
 camera_position_index = 1
-camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_cfw67"), SubResource("Resource_ehlne")])
-
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="2" instance=ExtResource("2_gg43x")]
-position = Vector2(1520, 1664)
-rotation = 3.14159
-beam_length = 384.0
-blink_pattern = PackedFloat32Array(1, 1, 2, 3.5)
-
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("2_gg43x")]
-position = Vector2(1168, 1688)
-rotation = 6.28318
-beam_length = 384.0
-blink_pattern = PackedFloat32Array(2, 1, 2, 2.5)
+camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_ehlne"), SubResource("Resource_7sc7i")])
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_positions = Array[ExtResource("8_5dxk1")]([SubResource("Resource_y72ps")])
 state = 5
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
 position = Vector2(-500, 0)
 
-[node name="TutorialCanvas" type="CanvasLayer" parent="." index="3"]
+[node name="TutorialCanvas" type="CanvasLayer" parent="." index="4"]
 follow_viewport_enabled = true
 
 [node name="Movement" type="Label" parent="TutorialCanvas" index="0"]
@@ -125,7 +121,31 @@ grow_horizontal = 2
 scale = Vector2(2, 2)
 texture = ExtResource("2_81a5f")
 
-[node name="Interact" type="Label" parent="TutorialCanvas" index="1" node_paths=PackedStringArray("door")]
+[node name="PauseGame" type="Label" parent="TutorialCanvas" index="1"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1216.0
+offset_top = 208.0
+offset_right = 1472.0
+offset_bottom = 280.0
+grow_vertical = 0
+text = "Pause Game"
+label_settings = SubResource("LabelSettings_ty3hu")
+
+[node name="WasdKeyTexture" type="TextureRect" parent="TutorialCanvas/PauseGame" index="0"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -64.0
+offset_bottom = -32.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+texture = ExtResource("10_ehlne")
+
+[node name="Interact" type="Label" parent="TutorialCanvas" index="2" node_paths=PackedStringArray("door")]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -153,7 +173,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("3_gg43x")
 stretch_mode = 2
 
-[node name="PointAtCookie" type="Node2D" parent="TutorialCanvas" index="2" node_paths=PackedStringArray("cookie_stash")]
+[node name="PointAtCookie" type="Node2D" parent="TutorialCanvas" index="3" node_paths=PackedStringArray("cookie_stash")]
 position = Vector2(1376, 1584)
 script = ExtResource("12_ng00s")
 cookie_stash = NodePath("../../MapRoot/CookiesStashes/CookieStash")

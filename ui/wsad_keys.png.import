@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drvfejkgi0kmh"
-path="res://.godot/imported/wsad.png-99d2c049f9bcf73665f461e62e9856c4.ctex"
+path="res://.godot/imported/wsad_keys.png-80c290f56bbc214dfb529b78c88762c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/wsad.png"
-dest_files=["res://.godot/imported/wsad.png-99d2c049f9bcf73665f461e62e9856c4.ctex"]
+source_file="res://ui/wsad_keys.png"
+dest_files=["res://.godot/imported/wsad_keys.png-80c290f56bbc214dfb529b78c88762c9.ctex"]
 
 [params]
 
