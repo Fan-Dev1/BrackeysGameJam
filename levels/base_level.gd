@@ -6,6 +6,7 @@ const LEVEL_SELECT_UI := "res://ui/level_select_ui/level_select_ui.tscn"
 @export var level_mission: LevelMission
 @export var masked_by_player_vision_material: Material
 @export var skip_drive_animation := false
+@export var take_preview_screenshot := false
 
 var available_cookie_count := 0
 var collected_cookie_count := 0
@@ -16,6 +17,7 @@ var collected_cookie_count := 0
 @onready var car_drive_camera_2d: Camera2D = %CarDriveCamera2D
 @onready var level_timer: Timer = $LevelTimer
 @onready var car_drive_scroller: CarDriverScroller = %CarDriveScroller
+@onready var level_preview_camera_2d: Camera2D = %LevelPreviewCamera2D
 
 @onready var cookies_label: Label = %CookiesLabel
 @onready var time_label: Label = %TimeLabel
@@ -37,7 +39,7 @@ func _ready() -> void:
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
 	
-	if OS.is_debug_build() and skip_drive_animation:
+	if OS.is_debug_build() and (skip_drive_animation or take_preview_screenshot):
 		car_drive_scroller.stop_scrolling()
 		var thief_car := car_drive_scroller.thief_car
 		thief_car.set_process_unhandled_input(false)
@@ -49,6 +51,9 @@ func _ready() -> void:
 		camera_2d.enabled = true
 		camera_2d.make_current()
 		car_drive_camera_2d.enabled = false
+		
+		if take_preview_screenshot:
+			take_level_preview()
 	else:
 		_play_drive_in()
 	car_drive_scroller.thief_car.car_entered.connect(_on_car_entered)
@@ -193,3 +198,39 @@ static func format_as_time(total_seconds: float) -> String:
 	var seconds := int(total_seconds) % 60
 	var milliseconds := int((total_seconds - int(total_seconds)) * 1000)
 	return "%02d:%02d.%03d" % [minutes, seconds, milliseconds]
+
+
+func take_level_preview() -> void:
+	await get_tree().process_frame
+	level_preview_camera_2d.enabled = true
+	level_preview_camera_2d.make_current()
+	get_tree().call_group("preview_hidden", "hide")
+	await get_tree().process_frame
+	
+	var reference_rect := %PreviewReferenceRect
+	var rect := Rect2(reference_rect.global_position, reference_rect.size)
+	focus_on_rect(level_preview_camera_2d, rect)
+	await get_tree().create_timer(1.1).timeout
+	
+	var img_name := self.name
+	var img: Image = get_viewport().get_texture().get_image()
+	img.crop(1080.0, 1080.0)
+	img.resize(270.0, 270.0, Image.Interpolation.INTERPOLATE_LANCZOS)
+	
+	# Save screenshot as PNG
+	var path := "res://levels/missions//%s_preview.png" % img_name
+	var err := img.save_png(path)
+	if err == OK:
+		print("Screenshot saved to: %s" % path)
+	else:
+		push_error("Failed to save screenshot: %s" % path)
+	await get_tree().process_frame
+	get_tree().quit()
+
+
+func focus_on_rect(camera: Camera2D, rect: Rect2) -> void:
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var zoom_factor := minf(viewport_size.x, viewport_size.y)
+	zoom_factor /= minf(rect.size.x, rect.size.y)
+	camera.zoom = Vector2(zoom_factor, zoom_factor)
+	camera.position = rect.get_center()

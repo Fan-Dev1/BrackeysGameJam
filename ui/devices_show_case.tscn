@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://be3ewbyga6008" path="res://core/lever_button/lever_button.tscn" id="7_i3s5v"]
 [ext_resource type="PackedScene" uid="uid://bnl8ikta6u6ne" path="res://core/hiding_spot/hiding_spot.tscn" id="8_y3xnj"]
 
-[sub_resource type="Resource" id="Resource_6dg8q"]
+[sub_resource type="Resource" id="Resource_sjnjs"]
 resource_local_to_scene = true
 script = ExtResource("3_h5qyk")
 rotation = 0.0
@@ -17,7 +17,7 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_46p7r"]
+[sub_resource type="Resource" id="Resource_gf6fv"]
 resource_local_to_scene = true
 script = ExtResource("3_h5qyk")
 rotation = 0.855211
@@ -25,7 +25,7 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_1ipss"]
+[sub_resource type="Resource" id="Resource_h5qyk"]
 resource_local_to_scene = true
 script = ExtResource("3_h5qyk")
 rotation = 1.1781
@@ -81,7 +81,7 @@ border_color = Color(0, 1, 0.204102, 1)
 position = Vector2(164, 236)
 radius = 128.0
 fov = 0.698132
-camera_positions = Array[ExtResource("3_h5qyk")]([SubResource("Resource_6dg8q"), SubResource("Resource_46p7r"), SubResource("Resource_1ipss"), SubResource("Resource_46p7r")])
+camera_positions = Array[ExtResource("3_h5qyk")]([SubResource("Resource_sjnjs"), SubResource("Resource_gf6fv"), SubResource("Resource_h5qyk"), SubResource("Resource_gf6fv")])
 
 [node name="DetectionBeam" type="ReferenceRect" parent="DeviceSceneContainer"]
 custom_minimum_size = Vector2(512, 512)

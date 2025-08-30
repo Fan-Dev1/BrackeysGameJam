@@ -21,6 +21,8 @@ func update_ui() -> void:
 	level_label.text = level_mission.level_name
 	grey_color_rect.visible = not level_mission.unlocked
 	locked_texture_rect.visible = not level_mission.unlocked
+	if level_mission.level_preview_texture != null:
+		level_preview_texture_rect.texture = level_mission.level_preview_texture
 	self.disabled = not level_mission.unlocked
 
 

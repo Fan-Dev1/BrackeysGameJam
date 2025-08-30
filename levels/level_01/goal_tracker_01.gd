@@ -9,8 +9,9 @@ var spotted_by_security_camera := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if get_parent() is Level:
+	if not get_parent() is Level:
 		push_warning("Expect Level as parent")
+		return
 	level = get_parent()
 	Global.player_spotted.connect(_on_player_spotted)
 
