@@ -8,6 +8,7 @@ enum Mode { KEEP_ON, KEEP_OFF, BLINK_PATTERN }
 @export var mode := Mode.BLINK_PATTERN : set = set_beam_mode
 @export var beam_enabled := true : set = set_beam_enabled
 @export var beam_length := 200.0 : set = set_beam_length
+@export var appointed_guard : SecurityGuard
 ## even number = on duration in sec, odd number = off duration in sec[br]
 ## example: [0.4, 0.2, 1.0, 0.2] <=> on=0.4s -> off=0.2s -> on=1.0s -> off=0.2 -> repeat
 @export var blink_pattern := PackedFloat32Array()
@@ -19,6 +20,8 @@ var blink_pattern_index := 0
 
 
 func _ready() -> void:
+	if !appointed_guard:
+		appointed_guard = get_tree().get_first_node_in_group("Guard")
 	set_beam_length(beam_length)
 	_start_blink_timer()
 	if is_controlled_by_lever() and not Engine.is_editor_hint():
@@ -102,6 +105,7 @@ func _physics_process(_delta: float) -> void:
 		draw_beam_to(to_local(collision_point))
 		if laser_ray_cast_2d.get_collider() is Player:
 			if !laser_ray_cast_2d.get_collider().player_is_hidden:
+				appointed_guard.player_detected_elsewhere(laser_ray_cast_2d.get_collision_point())
 				Global.player_spotted.emit(collision_point, self)
 	else:
 		var full_length_position := Vector2.RIGHT * beam_length

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://baia6evchbu5t"]
+[gd_scene load_steps=22 format=4 uid="uid://baia6evchbu5t"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Script" uid="uid://ckt5c02ykg6la" path="res://levels/level_01/goal_tracker_01.gd" id="2_7sc7i"]
@@ -37,22 +37,6 @@ duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
 [sub_resource type="Resource" id="Resource_7sc7i"]
-resource_local_to_scene = true
-script = ExtResource("4_cg8v6")
-rotation = 0.523599
-duration_min_sec = 3.0
-duration_max_sec = 1.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_anxy3"]
-resource_local_to_scene = true
-script = ExtResource("4_cg8v6")
-rotation = -1.79769
-duration_min_sec = 3.0
-duration_max_sec = 2.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_t0q2h"]
 resource_local_to_scene = true
 script = ExtResource("4_cg8v6")
 rotation = 0.523599
@@ -205,11 +189,7 @@ tile_map_data = PackedByteArray("AAAfABgAAAACAAAAAAAeABgAAAABAAAAAAAdABgAAAABAAA
 [node name="InteriorTileMapLayer" parent="MapRoot" index="3"]
 tile_map_data = PackedByteArray("AAARACAABAAEAAAAAAATACAABAAEAAIAAAAUABgABAADAAMAAAAUABkABAADAAUAAAAUACAABAAEAAMAAAAVABgABAADAAMAAAAVABkABAAEAAUAAAAVACAABAAFAAIAAAAXACAABAAFAAAAAAAYAB0ABAAFAAUAAAAYAB4ABAAFAAUAAAAZAB0ABAAGAAUAAAAZAB4ABAAGAAUAAAAaABkABAAAAAEAAAAaABoABAAAAAIAAAAaAB8ABAAAAAMAAAAaACAABAAAAAQAAAAbABkABAACAAAAAAAcABkABAAAAAAAAAAdABkABAABAAEAAAAdABoABAABAAIAAAAdAB0ABAADAAAAAAAdAB8ABAACAAMAAAAdACAABAACAAQAAAA=")
 
-[node name="MainEntranceDoor2" parent="MapRoot/Interactables" index="0" instance=ExtResource("2_cg8v6")]
-position = Vector2(1023, 1920)
-rotation = 1.57079
-
-[node name="MainEntranceDoor" parent="MapRoot/Interactables" index="1" instance=ExtResource("2_cg8v6")]
+[node name="MainEntranceDoor" parent="MapRoot/Interactables" index="0" instance=ExtResource("2_cg8v6")]
 position = Vector2(1023, 1920)
 rotation = 1.57079
 
@@ -219,25 +199,28 @@ position = Vector2(1344, 1584)
 [node name="CookieStash" parent="MapRoot/CookiesStashes" index="1" instance=ExtResource("3_j0sdw")]
 position = Vector2(1344, 1584)
 
-[node name="DetectionBeam4" parent="MapRoot/SecurityDevices" index="0" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
-position = Vector2(944, 1632)
-rotation = 3.14159
-beam_length = 516.0
-blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
-
-[node name="DetectionBeam5" parent="MapRoot/SecurityDevices" index="1" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
+[node name="DetectionBeam5" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("appointed_guard") groups=["detection_beam"] instance=ExtResource("2_gg43x")]
 position = Vector2(1520, 1664)
 rotation = 3.14159
 beam_length = 384.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(1, 1, 2, 3.5)
 
-[node name="DetectionBeam6" parent="MapRoot/SecurityDevices" index="2" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
+[node name="DetectionBeam6" parent="MapRoot/SecurityDevices" index="1" node_paths=PackedStringArray("appointed_guard") groups=["detection_beam"] instance=ExtResource("2_gg43x")]
 position = Vector2(1168, 1688)
 rotation = 6.28318
 beam_length = 384.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(2, 1, 2, 2.5)
 
-[node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("3_q7ibo")]
+[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="2" node_paths=PackedStringArray("appointed_guard") groups=["detection_beam"] instance=ExtResource("2_gg43x")]
+position = Vector2(944, 1632)
+rotation = 3.14159
+beam_length = 516.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
+blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
+
+[node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("3_q7ibo")]
 unique_name_in_owner = true
 position = Vector2(1848, 1512)
 rotation = -1.5708
@@ -248,38 +231,9 @@ right_limit = 0.628319
 camera_position_index = 1
 camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_ehlne"), SubResource("Resource_7sc7i")])
 
-[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="4" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
-position = Vector2(944, 1632)
-rotation = 3.14159
-beam_length = 516.0
-blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
-
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="5" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
-position = Vector2(1520, 1664)
-rotation = 3.14159
-beam_length = 384.0
-blink_pattern = PackedFloat32Array(1, 1, 2, 3.5)
-
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="6" groups=["detection_beam"] instance=ExtResource("2_gg43x")]
-position = Vector2(1168, 1688)
-rotation = 6.28318
-beam_length = 384.0
-blink_pattern = PackedFloat32Array(2, 1, 2, 2.5)
-
-[node name="SecurityCamera" parent="MapRoot/SecurityDevices" index="7" instance=ExtResource("3_q7ibo")]
-unique_name_in_owner = true
-position = Vector2(1848, 1512)
-rotation = -1.5708
-radius = 270.0
-fov = 0.523599
-left_limit = -1.71042
-right_limit = 0.628319
-camera_position_index = 1
-camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_anxy3"), SubResource("Resource_t0q2h")])
-
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_position_index = 1
+rotaton_speed = 2.0
 
 [node name="Marker2D2" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
 position = Vector2(-500, 0)

@@ -2,7 +2,7 @@
 class_name SecurityGuard
 extends CharacterBody2D
 
-enum GuardState { NORMAL, TRACKING, DISTRACTED, LOST ,RETURN, OFF }
+enum GuardState { NORMAL, TRACKING, DISTRACTED, LOST ,RETURN, INVESTIGATE, OFF }
 
 @onready var caught_area: Area2D = $CaughtArea
 @onready var wall_ray_cast_2d: RayCast2D = $WallRayCast2D
@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 			GuardState.LOST: _lost_process(delta)
 			GuardState.RETURN: _return_process(delta)
 			GuardState.DISTRACTED : _distracted_process(delta)
-			#GuardState.MOVING: _moving_process(delta)
+			GuardState.INVESTIGATE: _investigate_process(delta)
 			GuardState.OFF: pass
 	
 
@@ -248,10 +248,30 @@ func change_light_colors(color : Color):
 
 
 func _on_update_nav_timeout() -> void:
-	navigation_agent_2d.target_position = target.global_position #if you get sent to this line,
+	if state != GuardState.INVESTIGATE and state != GuardState.RETURN:
+		navigation_agent_2d.target_position = target.global_position #if you get sent to this line,
 	#the player isnt in the scene, i had to preload it because im stupid and too lazy to fix, if you NEED 
 	#it fixed ill do it, but usually the player exists
 
+func player_detected_elsewhere(pos : Vector2):
+	if state == GuardState.TRACKING:
+		return
+	navigation_agent_2d.target_position = pos
+	state = GuardState.INVESTIGATE
+func _investigate_process(delta) -> void:
+	# I KNOW I COULD REUSE PART OF THIS CODE, I DONT WANNA THINK ITS LATE
+	_scan_for_player()
+	var next_path_pos = navigation_agent_2d.get_next_path_position()
+	var direction = (next_path_pos - self.global_position).normalized()
+	var angle_to_target = self.global_position.angle_to_point(next_path_pos)
+	rotate_camera_toward(angle_to_target, delta)
+	velocity = direction * move_speed
+	move_and_slide()
+	if navigation_agent_2d.is_navigation_finished():
+		velocity = Vector2.ZERO
+		change_light_colors(Color8(255,255,123)) #yellow
+		state = GuardState.LOST
+	
 
 func _on_caught_area_body_entered(body: Node2D) -> void:
 	
