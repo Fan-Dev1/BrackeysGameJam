@@ -36,7 +36,9 @@ mouse_cursor/custom_image_hotspot=Vector2(9, 6)
 
 [editor]
 
+movie_writer/mjpeg_quality=0.7
 movie_writer/movie_file="C:/Projekte/BrackeysGameJam/export/movie/movie_maker.png"
+movie_writer/fps=30
 
 [file_customization]
 
