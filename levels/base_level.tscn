@@ -7,14 +7,12 @@
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="2_p5284"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="3_63c5o"]
 [ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory/inventory_panel.tscn" id="4_satuh"]
+[ext_resource type="FontFile" uid="uid://c5qw4j6h2tlna" path="res://ui/fonts/fusion-pixel-10px-proportional-sc-latin-400-normal.woff2" id="6_n8wy4"]
 [ext_resource type="PackedScene" uid="uid://b64heix3puy0v" path="res://ui/level_select_ui/mission_details_ui.tscn" id="8_0rg8l"]
 [ext_resource type="PackedScene" uid="uid://cqctqm0k1qlsr" path="res://ui/game_paused_ui/game_paused_ui.tscn" id="10_n8wy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ew5uy"]
 light_mode = 2
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0rg8l"]
-normal = Vector2(0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ew5uy"]
 font_size = 32
@@ -22,7 +20,8 @@ outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_satuh"]
-font_size = 48
+font = ExtResource("6_n8wy4")
+font_size = 80
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -52,13 +51,6 @@ position = Vector2(960, 540)
 limit_top = 0
 metadata/_edit_lock_ = true
 
-[node name="WorldBoundaries" type="StaticBody2D" parent="MapRoot"]
-metadata/_edit_lock_ = true
-
-[node name="TopCollisionShape2D" type="CollisionShape2D" parent="MapRoot/WorldBoundaries"]
-position = Vector2(960, 686)
-shape = SubResource("WorldBoundaryShape2D_0rg8l")
-
 [node name="FloorTileMapLayer" type="TileMapLayer" parent="MapRoot"]
 texture_filter = 1
 tile_set = ExtResource("2_p5284")
@@ -66,7 +58,7 @@ metadata/_edit_lock_ = true
 
 [node name="WallTileMapLayer" type="TileMapLayer" parent="MapRoot"]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAdABMAAAACAAAAAAAcABMAAAABAAAAAAAbABMAAAABAAAAAAAaABMAAAABAAAAAAAZABMAAAABAAAAAAAYABMAAAABAAAAAAAXABMAAAABAAAAAAAWABMAAAABAAAAAAAVABMAAAABAAAAAAAUABMAAAABAAAAAAATABMAAAABAAAAAAASABMAAAABAAAAAAARABMAAAABAAAAAAAQABMAAAABAAAAAAAPABMAAAABAAAAAAAOABMAAAABAAAAAAANABMAAAABAAAAAAAMABMAAAABAAAAAAALABMAAAABAAAAAAAKABMAAAABAAAAAAAJABMAAAABAAAAAAAIABMAAAABAAAAAAAHABMAAAABAAAAAAAGABMAAAABAAAAAAAFABMAAAABAAAAAAAEABMAAAABAAAAAAADABMAAAABAAAAAAACABMAAAABAAAAAAABABMAAAABAAAAAAAAABMAAAAAAAAAAAAdABQAAAACAAIAAAAcABQAAAABAAIAAAAbABQAAAABAAIAAAAaABQAAAABAAIAAAAZABQAAAABAAIAAAAYABQAAAABAAIAAAAXABQAAAABAAIAAAAWABQAAAABAAIAAAAVABQAAAABAAIAAAAUABQAAAABAAIAAAATABQAAAABAAIAAAASABQAAAABAAIAAAARABQAAAABAAIAAAAQABQAAAABAAIAAAAPABQAAAABAAIAAAAOABQAAAABAAIAAAANABQAAAABAAIAAAAMABQAAAABAAIAAAALABQAAAABAAIAAAAKABQAAAABAAIAAAAJABQAAAABAAIAAAAIABQAAAABAAIAAAAHABQAAAABAAIAAAAGABQAAAABAAIAAAAFABQAAAABAAIAAAAEABQAAAABAAIAAAADABQAAAABAAIAAAACABQAAAABAAIAAAABABQAAAABAAIAAAAAABQAAAAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAD+/xMAAAADAAIAAAD+/xIAAAADAAEAAAD+/xEAAAADAAAAAAAfABQAAAADAAIAAAAfABMAAAADAAEAAAAfABIAAAADAAEAAAAfABEAAAADAAAAAAAHABYAAAAEAAEAAAAHABUAAAADAAEAAAAHABQAAAADAAEAAAAHABMAAAAEAAAAAAARABYAAAAFAAEAAAAQABYAAAABAAMAAAAPABYAAAABAAMAAAAOABYAAAABAAMAAAANABYAAAABAAMAAAAMABYAAAAHAAAAAAALABYAAAABAAMAAAAKABYAAAABAAMAAAAJABYAAAABAAMAAAAIABYAAAABAAMAAAARABUAAAADAAEAAAARABQAAAADAAEAAAARABMAAAAFAAAAAAAQABMAAAABAAMAAAAPABMAAAABAAMAAAAOABMAAAABAAMAAAANABMAAAABAAMAAAAMABMAAAAGAAAAAAAMABUAAAADAAEAAAAMABQAAAADAAEAAAALABMAAAABAAMAAAAKABMAAAABAAMAAAAJABMAAAABAAMAAAAIABMAAAABAAMAAAA=")
 tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
@@ -96,8 +88,10 @@ limit_top = 0
 [node name="UiCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TopLeftContainer" type="VBoxContainer" parent="UiCanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 240.0
+offset_bottom = 126.0
 
 [node name="CookiesLabel" type="Label" parent="UiCanvasLayer/TopLeftContainer"]
 unique_name_in_owner = true
@@ -114,7 +108,6 @@ label_settings = SubResource("LabelSettings_ew5uy")
 [node name="TimeoutPanel" type="PanelContainer" parent="UiCanvasLayer"]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -129,10 +122,10 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UiCanvasLayer/TimeoutPanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UiCanvasLayer/TimeoutPanel/MarginContainer"]
 layout_mode = 2
@@ -145,7 +138,7 @@ label_settings = SubResource("LabelSettings_satuh")
 [node name="RetryLevelButton" type="Button" parent="UiCanvasLayer/TimeoutPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "retry Level"
 
 [node name="CookieLootPanel" parent="UiCanvasLayer" instance=ExtResource("3_63c5o")]

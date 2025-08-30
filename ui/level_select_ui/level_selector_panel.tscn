@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk8hvcvnpno3k"]
+
+[ext_resource type="Theme" uid="uid://dphk2cvguw754" path="res://ui/sprout_land_theme.tres" id="1_if8pn"]
+[ext_resource type="Script" uid="uid://b8yh1jgpb2yx5" path="res://ui/level_select_ui/level_selector_panel.gd" id="1_mt5i0"]
+[ext_resource type="PackedScene" uid="uid://1gebq4go3yqh" path="res://ui/level_select_ui/level_slot.tscn" id="1_u7iiu"]
+[ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_if8pn"]
+[ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="3_einyf"]
+[ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="4_b27pu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgsmr"]
+font_size = 60
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LevelSelector" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -895.0
+offset_top = -476.0
+offset_right = 64.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_if8pn")
+script = ExtResource("1_mt5i0")
+
+[node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_if8pn"), ExtResource("3_einyf"), ExtResource("4_b27pu")]]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select next Mission"
+label_settings = SubResource("LabelSettings_vgsmr")
+
+[node name="Underline" type="ColorRect" parent="MarginContainer/VBoxContainer/TitleLabel"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.403922, 0.34902, 0.278431, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
+columns = 4
+
+[node name="LevelSlot" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot2" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot3" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot4" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot5" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot6" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot7" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot8" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot9" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2
+
+[node name="LevelSlot10" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+layout_mode = 2

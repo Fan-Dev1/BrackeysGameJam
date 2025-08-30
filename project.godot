@@ -52,6 +52,11 @@ player=""
 cookie_stash=""
 masked_by_player_vision=""
 
+[gui]
+
+theme/custom="uid://dphk2cvguw754"
+theme/custom_font="uid://cep3foox6k0yn"
+
 [input]
 
 move_left={

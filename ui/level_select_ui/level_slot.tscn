@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://k366ag4uvht" path="res://ui/level_select_ui/cliplock.png" id="1_b0egu"]
 [ext_resource type="Script" uid="uid://c0l77rhqtdjec" path="res://ui/level_select_ui/level_slot.gd" id="1_qmpul"]
 [ext_resource type="Texture2D" uid="uid://by43bsibwiydx" path="res://ui/level_select_ui/lock.png" id="2_b0egu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmpul"]
+[ext_resource type="FontFile" uid="uid://cep3foox6k0yn" path="res://ui/fonts/fusion-pixel-12px-proportional-sc-latin-400-normal.woff2" id="5_151i6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmpul"]
 atlas = ExtResource("1_680na")
 region = Rect2(128, 563, 1106, 1113)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8jadc"]
-font_size = 28
-outline_size = 6
+font = ExtResource("5_151i6")
+font_size = 24
+outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
 [node name="LevelSlot" type="Button"]
@@ -21,7 +21,6 @@ custom_minimum_size = Vector2(200, 250)
 offset_top = 253.0
 offset_right = 200.0
 offset_bottom = 503.0
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qmpul")
 toggle_mode = true
 script = ExtResource("1_qmpul")
 

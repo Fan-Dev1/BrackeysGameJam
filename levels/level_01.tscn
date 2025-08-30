@@ -1,222 +1,29 @@
-[gd_scene load_steps=21 format=4 uid="uid://d2j2q3cwvwesw"]
+[gd_scene load_steps=3 format=4 uid="uid://baia6evchbu5t"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
-[ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_mckh2"]
-[ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_81a5f"]
-[ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="4_gg43x"]
-[ext_resource type="PackedScene" uid="uid://bnl8ikta6u6ne" path="res://core/hiding_spot/hiding_spot.tscn" id="5_jy02f"]
-[ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="5_mllcm"]
-[ext_resource type="PackedScene" uid="uid://cqscxj4caxy1i" path="res://core/detection_beam/detection_beam.tscn" id="6_q7ibo"]
-[ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="7_cg8v6"]
-[ext_resource type="PackedScene" uid="uid://be3ewbyga6008" path="res://core/lever_button/lever_button.tscn" id="8_j0sdw"]
 
-[sub_resource type="Animation" id="Animation_cg8v6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(536, 1356)]
-}
-
-[sub_resource type="Animation" id="Animation_q7ibo"]
-resource_name = "loop_detection_beam"
-length = 13.0
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 5, 7, 9.9, 12.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(536, 1356), Vector2(536, 1356), Vector2(192, 1356), Vector2(192, 1356), Vector2(536, 1356), Vector2(536, 1356)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j0sdw"]
-_data = {
-&"RESET": SubResource("Animation_cg8v6"),
-&"loop_detection_beam": SubResource("Animation_q7ibo")
-}
-
-[sub_resource type="Resource" id="Resource_5dxk1"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = 1.1781
-duration_min_sec = 2.0
-duration_max_sec = 4.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_kjd3d"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = -1.1781
-duration_min_sec = 1.0
-duration_max_sec = 2.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_qdeet"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = -1.44862
-duration_min_sec = 2.0
-duration_max_sec = 5.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_y72ps"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = 1.44862
-duration_min_sec = 2.0
-duration_max_sec = 4.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_xw3ee"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = -1.18682
-duration_min_sec = 2.0
-duration_max_sec = 4.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_j0sdw"]
-script = ExtResource("5_mllcm")
-rotation = -2.1293
-duration_min_sec = 3.0
-duration_max_sec = 3.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_jy02f"]
-script = ExtResource("5_mllcm")
-rotation = -1.18682
-duration_min_sec = 3.0
-duration_max_sec = 3.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
-
-[sub_resource type="Resource" id="Resource_l0eo6"]
-resource_local_to_scene = true
-script = ExtResource("5_mllcm")
-rotation = 0.872665
-duration_min_sec = 3.0
-duration_max_sec = 3.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
+[sub_resource type="LabelSettings" id="LabelSettings_ty3hu"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Level_01" instance=ExtResource("1_ty3hu")]
 
-[node name="LevelMockup" type="Sprite2D" parent="." index="0"]
-self_modulate = Color(1, 1, 1, 0.321569)
-position = Vector2(624, 1588)
-texture = ExtResource("2_mckh2")
-metadata/_edit_lock_ = true
+[node name="WallTileMapLayer" parent="MapRoot" index="2"]
+tile_map_data = PackedByteArray("AAD+/xMAAAADAAEAAAD+/xIAAAADAAEAAAD+/xEAAAADAAAAAAAfABQAAAADAAEAAAAfABMAAAADAAEAAAAfABIAAAADAAEAAAAfABEAAAADAAAAAAD+/xcAAAADAAIAAAD+/xYAAAADAAEAAAD+/xUAAAADAAEAAAD+/xQAAAADAAEAAAAfABgAAAADAAIAAAAfABcAAAADAAEAAAAfABYAAAADAAEAAAAfABUAAAADAAEAAAA=")
 
-[node name="LevelTimer" parent="." index="2"]
-wait_time = 90.0
+[node name="TutorialCanvas" type="CanvasLayer" parent="." index="3"]
+follow_viewport_enabled = true
 
-[node name="CarDriveScroller" parent="MapRoot" index="0"]
-metadata/_edit_group_ = true
-
-[node name="WallTileMapLayer" parent="MapRoot" index="3"]
-tile_map_data = PackedByteArray("AAAQABQAAAAFAAAAAAAPABQAAAABAAMAAAAOABQAAAABAAMAAAANABQAAAABAAMAAAAMABQAAAABAAMAAAALABQAAAABAAMAAAAKABQAAAAGAAAAAAAJABQAAAABAAMAAAAIABQAAAABAAMAAAAHABQAAAAAAAMAAAAEABQAAAACAAMAAAADABQAAAABAAMAAAACABQAAAAEAAAAAAACABUAAAADAAEAAAACABYAAAADAAEAAAACABcAAAADAAEAAAACABgAAAADAAEAAAACABkAAAADAAEAAAACABoAAAADAAEAAAACABsAAAADAAEAAAACABwAAAAEAAEAAAAHAB0AAAADAAEAAAAHAB4AAAADAAEAAAAHAB8AAAADAAEAAAAHACAAAAADAAEAAAAHACEAAAADAAEAAAAHACIAAAADAAEAAAAHACMAAAADAAEAAAAHACQAAAAEAAEAAAAKABUAAAADAAEAAAAKABYAAAADAAEAAAAKABcAAAADAAEAAAAKABgAAAAFAAEAAAAKACEAAAADAAIAAAAQABUAAAADAAEAAAAQABYAAAADAAEAAAAQABcAAAADAAIAAAAQABsAAAADAAEAAAAQABwAAAAHAAEAAAAQAB0AAAAEAAEAAAASAB4AAAADAAEAAAASAB8AAAADAAEAAAASACAAAAAHAAEAAAASACEAAAADAAEAAAASACIAAAADAAEAAAASACMAAAADAAEAAAASACQAAAAFAAEAAAADABwAAAABAAMAAAAEABwAAAABAAMAAAAFABgAAAAAAAMAAAAFABwAAAABAAMAAAAGABgAAAABAAMAAAAGABwAAAABAAMAAAAHABgAAAABAAMAAAAHABwAAAAFAAAAAAAIABgAAAABAAMAAAAIACQAAAABAAMAAAAJABgAAAABAAMAAAAJACQAAAABAAMAAAAKACAAAAAEAAAAAAAKACQAAAABAAMAAAALACAAAAABAAMAAAALACQAAAABAAMAAAAMACAAAAABAAMAAAAMACQAAAABAAMAAAANABwAAAAAAAMAAAANACAAAAABAAMAAAANACQAAAABAAMAAAAOABwAAAABAAMAAAAOACAAAAABAAMAAAAOACQAAAABAAMAAAAPABwAAAABAAMAAAAPACAAAAABAAMAAAAPACQAAAABAAMAAAAQABoAAAADAAAAAAAQACAAAAABAAMAAAAQACQAAAABAAMAAAARAB0AAAABAAMAAAARACAAAAABAAMAAAARACQAAAABAAMAAAASAB0AAAAFAAAAAAAVABYAAAAAAAIAAAAWABYAAAACAAIAAAAWABUAAAACAAAAAAAVABUAAAAAAAAAAAA=")
-
-[node name="FrontDoor" parent="MapRoot/WallTileMapLayer" index="0" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("7_cg8v6")]
-position = Vector2(384, 1308)
-controlling_lever = NodePath("../../Interactables/DoorLeverButton")
-
-[node name="SideDoor" parent="MapRoot/WallTileMapLayer" index="1" instance=ExtResource("7_cg8v6")]
-position = Vector2(1056, 1596)
-rotation = -1.5708
-
-[node name="CameraLeverButton" parent="MapRoot/Interactables" index="0" instance=ExtResource("8_j0sdw")]
-position = Vector2(1040, 1292)
-
-[node name="DoorLeverButton" parent="MapRoot/Interactables" index="1" instance=ExtResource("8_j0sdw")]
-position = Vector2(616, 1292)
-flipped_over = false
-
-[node name="BeamLeverButton" parent="MapRoot/Interactables" index="2" instance=ExtResource("8_j0sdw")]
-position = Vector2(688, 1372)
-rotation = 1.5708
-
-[node name="HidingSpot2" parent="MapRoot/Interactables" index="3" instance=ExtResource("5_jy02f")]
-position = Vector2(400, 1540)
-
-[node name="HidingSpot3" parent="MapRoot/Interactables" index="4" instance=ExtResource("5_jy02f")]
-position = Vector2(928, 1804)
-
-[node name="CookieStash1" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_81a5f")]
-position = Vector2(976, 1388)
-
-[node name="CookieStash2" parent="MapRoot/CookiesStashes" index="1" instance=ExtResource("3_81a5f")]
-position = Vector2(616, 1388)
-
-[node name="CookieStash3" parent="MapRoot/CookiesStashes" index="2" instance=ExtResource("3_81a5f")]
-position = Vector2(696, 1780)
-
-[node name="CookieStash4" parent="MapRoot/CookiesStashes" index="3" instance=ExtResource("3_81a5f")]
-position = Vector2(1120, 1980)
-
-[node name="CookieStash5" parent="MapRoot/CookiesStashes" index="4" instance=ExtResource("3_81a5f")]
-position = Vector2(1128, 2188)
-
-[node name="DetectionBeam1" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_q7ibo")]
-position = Vector2(720, 1444)
-controlling_lever = NodePath("../../Interactables/BeamLeverButton")
-mode = 0
-beam_length = 320.0
-blink_pattern = PackedFloat32Array()
-
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" instance=ExtResource("6_q7ibo")]
-position = Vector2(552, 1604)
-rotation = 2.0944
-beam_length = 240.0
-
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="2" instance=ExtResource("6_q7ibo")]
-position = Vector2(536, 1356)
-rotation = 1.5708
-beam_length = 192.0
-blink_pattern = PackedFloat32Array(5, 2, 3, 3)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MapRoot/SecurityDevices/DetectionBeam2" index="5"]
-callback_mode_process = 0
-libraries = {
-&"": SubResource("AnimationLibrary_j0sdw")
-}
-autoplay = "loop_detection_beam"
-
-[node name="SecurityCamera1" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("4_gg43x")]
-position = Vector2(1008, 1868)
-rotation = -4.36332
-radius = 210.0
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_5dxk1"), SubResource("Resource_kjd3d")])
-
-[node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" instance=ExtResource("4_gg43x")]
-position = Vector2(864, 2300)
-rotation = -1.5708
-radius = 240.0
-rotaton_speed = 1.0
-fov = 0.523599
-left_limit = -1.71042
-right_limit = 1.71042
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_qdeet"), SubResource("Resource_y72ps")])
-
-[node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("4_gg43x")]
-position = Vector2(1344, 1472)
-rotation = 3.14159
-controlling_lever = NodePath("../../Interactables/CameraLeverButton")
-radius = 278.0
-rotaton_speed = 3.0
-fov = 1.0472
-left_limit = -3.14159
-camera_positions = Array[ExtResource("5_mllcm")]([SubResource("Resource_xw3ee"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_l0eo6")])
-
-[editable path="MapRoot/CarDriveScroller"]
+[node name="Movement" type="Label" parent="TutorialCanvas" index="0"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 528.0
+offset_top = 16.0
+offset_right = 778.0
+offset_bottom = 153.0
+grow_vertical = 0
+text = "WASD
+Movement"
+label_settings = SubResource("LabelSettings_ty3hu")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://7nm2meivy40g"]
+[gd_scene load_steps=13 format=3 uid="uid://7nm2meivy40g"]
 
 [ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/thief_car/car_driving_parallex_sprites.png" id="1_5vs06"]
 [ext_resource type="Script" uid="uid://c4eyim8o8cymi" path="res://core/thief_car/car_drive_scroller.gd" id="1_ffh42"]
 [ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/thief_car/thief_car.tscn" id="2_cton4"]
+[ext_resource type="Texture2D" uid="uid://dhfkss2i3828x" path="res://core/thief_car/street_barrier_stpritet.png" id="4_hmjxx"]
 
 [sub_resource type="Animation" id="Animation_0rg8l"]
 length = 0.001
@@ -168,6 +169,13 @@ _data = {
 &"exit_driving": SubResource("Animation_n0eqi")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj7nq"]
+size = Vector2(32, 576)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6i3xf"]
+normal = Vector2(0, 1)
+distance = -32.0
+
 [node name="CarDriveScroller" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_ffh42")
@@ -214,6 +222,7 @@ metadata/_edit_lock_ = true
 [node name="StreetParallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-360, 0)
+repeat_times = 2
 metadata/_edit_lock_ = true
 
 [node name="StreetSprite2D" type="Sprite2D" parent="StreetParallax2D"]
@@ -235,3 +244,28 @@ metadata/_edit_lock_ = true
 [node name="ThiefCar" parent="." instance=ExtResource("2_cton4")]
 unique_name_in_owner = true
 position = Vector2(960, 1008)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="RightBarrierSprite" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(1984, 824)
+scale = Vector2(4, 4)
+texture = ExtResource("4_hmjxx")
+
+[node name="LeftBarrierSprite" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-64, 824)
+scale = Vector2(4, 4)
+texture = ExtResource("4_hmjxx")
+flip_h = true
+
+[node name="LeftCollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-96, 864)
+shape = SubResource("RectangleShape2D_bj7nq")
+
+[node name="RightCollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2016, 884)
+shape = SubResource("RectangleShape2D_bj7nq")
+
+[node name="TopWorldCollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(896, 712)
+shape = SubResource("WorldBoundaryShape2D_6i3xf")

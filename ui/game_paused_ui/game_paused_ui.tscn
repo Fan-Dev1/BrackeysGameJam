@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqctqm0k1qlsr"]
+[gd_scene load_steps=4 format=3 uid="uid://cqctqm0k1qlsr"]
 
 [ext_resource type="Script" uid="uid://b5ssvuhii5rej" path="res://ui/game_paused_ui/game_paused_ui.gd" id="1_rf5t7"]
+[ext_resource type="FontFile" uid="uid://c5qw4j6h2tlna" path="res://ui/fonts/fusion-pixel-10px-proportional-sc-latin-400-normal.woff2" id="2_imb1i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_63c5o"]
-font_size = 48
+font = ExtResource("2_imb1i")
+font_size = 80
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -26,10 +28,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -178.5
-offset_top = -168.5
-offset_right = 178.5
-offset_bottom = 168.5
+offset_left = -252.0
+offset_top = -294.0
+offset_right = 252.0
+offset_bottom = 294.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -42,40 +44,53 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GamePausePanel/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="GamePausedLabel" type="Label" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Game Paused"
 label_settings = SubResource("LabelSettings_63c5o")
 
+[node name="Underline" type="ColorRect" parent="GamePausePanel/MarginContainer/VBoxContainer/GamePausedLabel"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -18.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
 [node name="ContinueButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "Continue"
 
 [node name="RestartMissionButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "Restart Mission"
 
 [node name="AbortMissionButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "Abort Mission"
 
 [node name="SettingsButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="GamePausePanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "Quit Game"
 
 [connection signal="pressed" from="GamePausePanel/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

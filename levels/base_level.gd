@@ -125,6 +125,7 @@ func _on_cookie_dropped() -> void:
 		player.drop_of_cookie()
 		inventory_panel.clear_inventory()
 		collected_cookie_count += 1
+		car_drive_scroller.thief_car.animated_cookie_drop(randi_range(6, 12))
 		cookies_label.text = "Cookies: %2d/%2d" % [collected_cookie_count, available_cookie_count]
 		check_for_mission_goals()
 	else:

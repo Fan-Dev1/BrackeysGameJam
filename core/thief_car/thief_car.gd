@@ -61,11 +61,10 @@ func _handle_interact_input() -> void:
 		car_entered.emit()
 	elif car_sprite_2d.frame == CarFrame.CARGO_BED_OUTLINE:
 		cookie_dropped.emit()
-		_animated_cookie_drop()
 
 
-func _animated_cookie_drop() -> void:
-	for i in range(randi_range(5, 12)):
+func animated_cookie_drop(amount: int) -> void:
+	for i in range(amount):
 		var delay := randf_range(0.05, 0.2)
 		await get_tree().create_timer(delay).timeout
 		_animated_dropped_cookie()
