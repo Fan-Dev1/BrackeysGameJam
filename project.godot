@@ -30,13 +30,16 @@ Global="*res://core/global.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/borderless=true
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://dmdm0q02po3e3"
 mouse_cursor/custom_image_hotspot=Vector2(9, 6)
 
 [editor]
 
+movie_writer/mjpeg_quality=0.7
 movie_writer/movie_file="C:/Projekte/BrackeysGameJam/export/movie/movie_maker.png"
+movie_writer/fps=30
 
 [file_customization]
 

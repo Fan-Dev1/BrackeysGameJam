@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://1gebq4go3yqh"]
+[gd_scene load_steps=9 format=3 uid="uid://1gebq4go3yqh"]
 
-[ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="1_680na"]
 [ext_resource type="Texture2D" uid="uid://k366ag4uvht" path="res://ui/level_select_ui/cliplock.png" id="1_b0egu"]
 [ext_resource type="Script" uid="uid://c0l77rhqtdjec" path="res://ui/level_select_ui/level_slot.gd" id="1_qmpul"]
 [ext_resource type="Texture2D" uid="uid://by43bsibwiydx" path="res://ui/level_select_ui/lock.png" id="2_b0egu"]
@@ -23,9 +22,8 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 region_rect = Rect2(155, 9, 26, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qmpul"]
-atlas = ExtResource("1_680na")
-region = Rect2(128, 563, 1106, 1113)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qmpul"]
+size = Vector2(1080, 1080)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8jadc"]
 font = ExtResource("5_151i6")
@@ -66,8 +64,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_qmpul")
+texture = SubResource("PlaceholderTexture2D_qmpul")
 expand_mode = 1
+stretch_mode = 6
 
 [node name="GreyColorRect" type="ColorRect" parent="ClipTextureRect/LevelPreviewTextureRect"]
 unique_name_in_owner = true

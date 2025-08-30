@@ -30,6 +30,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_ew5uy")
 level_mission = ExtResource("2_6w4ab")
 masked_by_player_vision_material = SubResource("CanvasItemMaterial_ew5uy")
+skip_drive_animation = true
 
 [node name="GoalTracker" type="Node" parent="."]
 
@@ -40,6 +41,12 @@ color = Color(0.7, 0.7, 0.7, 1)
 wait_time = 120.0
 one_shot = true
 autostart = true
+
+[node name="LevelPreviewCamera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1304, 1552)
+scale = Vector2(1.36453, 1.36453)
+enabled = false
 
 [node name="MapRoot" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -63,7 +70,7 @@ texture_filter = 1
 tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
-[node name="InteriorTileMapLayer" type="TileMapLayer" parent="MapRoot"]
+[node name="InteriorTileMapLayer" type="TileMapLayer" parent="MapRoot" groups=["preview_hidden"]]
 texture_filter = 1
 scale = Vector2(4, 4)
 tile_set = ExtResource("4_dx6c5")
@@ -79,26 +86,27 @@ position = Vector2(960, 540)
 limit_top = 0
 metadata/_edit_lock_ = true
 
-[node name="Interactables" type="Node2D" parent="MapRoot"]
+[node name="Interactables" type="Node2D" parent="MapRoot" groups=["preview_hidden"]]
 
-[node name="CookiesStashes" type="Node2D" parent="MapRoot"]
+[node name="CookiesStashes" type="Node2D" parent="MapRoot" groups=["preview_hidden"]]
 
-[node name="SecurityDevices" type="Node2D" parent="MapRoot"]
+[node name="SecurityDevices" type="Node2D" parent="MapRoot" groups=["preview_hidden"]]
 
-[node name="Guards" type="Node2D" parent="MapRoot"]
+[node name="Guards" type="Node2D" parent="MapRoot" groups=["preview_hidden"]]
 
 [node name="Player" parent="MapRoot" instance=ExtResource("2_63c5o")]
 unique_name_in_owner = true
 process_mode = 4
 position = Vector2(960, 1008)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="MapRoot/Player"]
 unique_name_in_owner = true
 enabled = false
 limit_top = 0
 
-[node name="UiCanvasLayer" type="CanvasLayer" parent="."]
+[node name="UiCanvasLayer" type="CanvasLayer" parent="." groups=["preview_hidden"]]
 
 [node name="TopLeftContainer" type="VBoxContainer" parent="UiCanvasLayer"]
 offset_left = 24.0
@@ -181,7 +189,25 @@ grow_horizontal = 0
 grow_vertical = 2
 in_mission = true
 
-[node name="GamePausedUI" parent="." instance=ExtResource("10_n8wy4")]
+[node name="PreviewReferenceRect" type="ReferenceRect" parent="UiCanvasLayer"]
+unique_name_in_owner = true
+z_index = 6
+custom_minimum_size = Vector2(1080, 1080)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.846
+offset_top = 275.154
+offset_right = 687.154
+offset_bottom = 1355.15
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.0818104, 0.165768, 0.95484, 1)
+border_width = 8.0
+
+[node name="GamePausedUI" parent="." groups=["preview_hidden"] instance=ExtResource("10_n8wy4")]
 unique_name_in_owner = true
 layer = 2
 visible = false
