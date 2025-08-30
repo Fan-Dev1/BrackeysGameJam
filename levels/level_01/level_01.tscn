@@ -273,12 +273,10 @@ camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_anxy3"),
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_position_index = 0
 state = 5
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="1" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_position_index = 0
 state = 5
 
 [node name="Marker2D2" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
