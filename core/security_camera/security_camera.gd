@@ -176,6 +176,8 @@ func _on_lever_flipped(flipped_over: bool) -> void:
 
 # debug draw
 func _draw() -> void:
+	if not OS.is_debug_build():
+		return
 	# draw_line for left and right limit
 	var left_limit_point := Vector2.from_angle(left_limit) * radius
 	var right_limit_point := Vector2.from_angle(right_limit) * radius

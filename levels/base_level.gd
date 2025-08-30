@@ -5,6 +5,7 @@ const LEVEL_SELECT_UI := "res://ui/level_select_ui/level_select_ui.tscn"
 
 @export var level_mission: LevelMission
 @export var masked_by_player_vision_material: Material
+@export var skip_drive_animation := false
 
 var available_cookie_count := 0
 var collected_cookie_count := 0
@@ -35,7 +36,7 @@ func _ready() -> void:
 	game_paused_ui.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
-	if OS.is_debug_build():
+	if OS.is_debug_build() and skip_drive_animation:
 		car_drive_scroller.stop_scrolling()
 		var thief_car := car_drive_scroller.thief_car
 		thief_car.set_process_unhandled_input(false)
