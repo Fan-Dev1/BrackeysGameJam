@@ -1,10 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://1gebq4go3yqh"]
+[gd_scene load_steps=10 format=3 uid="uid://1gebq4go3yqh"]
 
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="1_680na"]
 [ext_resource type="Texture2D" uid="uid://k366ag4uvht" path="res://ui/level_select_ui/cliplock.png" id="1_b0egu"]
 [ext_resource type="Script" uid="uid://c0l77rhqtdjec" path="res://ui/level_select_ui/level_slot.gd" id="1_qmpul"]
 [ext_resource type="Texture2D" uid="uid://by43bsibwiydx" path="res://ui/level_select_ui/lock.png" id="2_b0egu"]
 [ext_resource type="FontFile" uid="uid://cep3foox6k0yn" path="res://ui/fonts/fusion-pixel-12px-proportional-sc-latin-400-normal.woff2" id="5_151i6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_151i6"]
+load_path = "res://.godot/imported/UI_sprite_sheet.png-14207ab6cdb38c0993803add240da942.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gfvrm"]
+texture = SubResource("CompressedTexture2D_151i6")
+texture_margin_left = 5.0
+texture_margin_top = 7.0
+texture_margin_right = 5.0
+texture_margin_bottom = 7.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(155, 9, 26, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmpul"]
 atlas = ExtResource("1_680na")
@@ -21,11 +38,12 @@ custom_minimum_size = Vector2(200, 250)
 offset_top = 253.0
 offset_right = 200.0
 offset_bottom = 503.0
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gfvrm")
 toggle_mode = true
 script = ExtResource("1_qmpul")
 
 [node name="ClipTextureRect" type="TextureRect" parent="."]
-clip_children = 1
+clip_children = 2
 texture_filter = 1
 clip_contents = true
 custom_minimum_size = Vector2(200, 200)

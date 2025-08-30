@@ -47,7 +47,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 region_rect = Rect2(11, 59, 26, 28)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ek3yx"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u072a"]
 texture = ExtResource("3_hs3qb")
 texture_margin_left = 5.0
 texture_margin_top = 5.0
@@ -293,7 +293,7 @@ Button/styles/focus = SubResource("StyleBoxEmpty_tnqlp")
 Button/styles/hover = SubResource("StyleBoxTexture_03uf6")
 Button/styles/hover_pressed = SubResource("StyleBoxTexture_jc8ju")
 Button/styles/normal = SubResource("StyleBoxTexture_0c1h8")
-Button/styles/pressed = SubResource("StyleBoxTexture_ek3yx")
+Button/styles/pressed = SubResource("StyleBoxTexture_u072a")
 CheckBox/constants/h_separation = 12
 CheckBox/icons/checked = SubResource("AtlasTexture_ek3yx")
 CheckBox/icons/unchecked = SubResource("AtlasTexture_g2k58")

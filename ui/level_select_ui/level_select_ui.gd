@@ -5,7 +5,7 @@ extends Node
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var car_drive_scroller: CarDriverScroller = %CarDriveScroller
 @onready var mission_details: MissionDetailUi = %MissionDetails
-@onready var level_selector: PanelContainer = %LevelSelector
+@onready var level_selector: Control = %LevelSelector
 
 
 func _ready() -> void:

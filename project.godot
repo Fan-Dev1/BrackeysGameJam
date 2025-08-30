@@ -31,6 +31,8 @@ Global="*res://core/global.tscn"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://dmdm0q02po3e3"
+mouse_cursor/custom_image_hotspot=Vector2(9, 6)
 
 [editor]
 
@@ -100,5 +102,6 @@ interact={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

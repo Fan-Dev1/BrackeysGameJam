@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 signal level_selected(level_mission: LevelMission)
 

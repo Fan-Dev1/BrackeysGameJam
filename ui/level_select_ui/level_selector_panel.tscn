@@ -12,7 +12,8 @@ font_size = 60
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="LevelSelector" type="PanelContainer"]
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -24,30 +25,31 @@ offset_right = 64.0
 offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 0
 theme = ExtResource("1_if8pn")
 script = ExtResource("1_mt5i0")
 
 [node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_if8pn"), ExtResource("3_einyf"), ExtResource("4_b27pu")]]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-metadata/_edit_lock_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+offset_left = 31.0
+offset_top = 31.0
+offset_right = 928.0
+offset_bottom = 673.0
 theme_override_constants/separation = 24
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Select next Mission"
 label_settings = SubResource("LabelSettings_vgsmr")
+horizontal_alignment = 1
 
-[node name="Underline" type="ColorRect" parent="MarginContainer/VBoxContainer/TitleLabel"]
+[node name="Underline" type="ColorRect" parent="VBoxContainer/PanelContainer/TitleLabel"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 12
@@ -60,45 +62,45 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.403922, 0.34902, 0.278431, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LevelGridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="LevelGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_vertical = 2
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 24
 columns = 4
 
-[node name="LevelSlot" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot2" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot2" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot3" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot3" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot4" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot4" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot5" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot5" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot6" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot6" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot7" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot7" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot8" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot8" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot9" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot9" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
 
-[node name="LevelSlot10" parent="MarginContainer/VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
+[node name="LevelSlot10" parent="VBoxContainer/ScrollContainer/LevelGridContainer" instance=ExtResource("1_u7iiu")]
 layout_mode = 2
