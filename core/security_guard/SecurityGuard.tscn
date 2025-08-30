@@ -43,7 +43,6 @@ floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
 rotaton_speed = 1.0
 move_speed = 300.0
-guard_position_index = 1
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]
@@ -55,7 +54,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="GuardArea2D" type="Area2D" parent="."]
-rotation = 3.14159
+rotation = 1.5708
 collision_layer = 0
 collision_mask = 2
 
@@ -83,7 +82,7 @@ texture = SubResource("GradientTexture2D_e2b7p")
 z_index = 1
 scale = Vector2(0.55, 0.6)
 color = Color(1, 1, 0.482353, 1)
-energy = 0.75
+energy = 0.5
 shadow_enabled = true
 texture = ExtResource("3_e2b7p")
 offset = Vector2(105, 0)

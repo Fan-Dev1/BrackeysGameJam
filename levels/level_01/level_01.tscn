@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://baia6evchbu5t"]
+[gd_scene load_steps=24 format=4 uid="uid://baia6evchbu5t"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Script" uid="uid://ckt5c02ykg6la" path="res://levels/level_01/goal_tracker_01.gd" id="2_7sc7i"]
@@ -59,6 +59,12 @@ rotation = 0.523599
 duration_min_sec = 3.0
 duration_max_sec = 1.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_g7i00"]
+vertices = PackedVector2Array(1687.31, 1888.92, 1685.29, 1682.22, 1896, 1683.78, 1896, 2084.21, 1682, 2085.77, 1682, 1963.28, 1512.13, 1878.16, 1517.72, 1961.72, 535.141, 2008, 471, 2008, 471, 1911.68, 932, 1878.46, 943.102, 1959.39, -31.9922, 1329.68, -30.2578, 1131.91, 1939.77, 1126.08, 1213.31, 1316.83, 460.359, 1419.24, -29.0078, 1415.23, 1514.7, 2087.18, 1106.29, 2089.81, 1103.41, 1967.78, 941.117, 2011.73, 1947.01, 1403.96, 1950.95, 1508.14, 1905.3, 1513.01, 1664.12, 1514.89, 1293.6, 1618.81, 1346.01, 1569.31, 1407.24, 1621.58, 1465.39, 1674.54, 1229.88, 1679.5, 1517.45, 1703.37, 1142.54, 1751.03, 1111.44, 1869.92, 1048.46, 1957.96, 932, 1527.15, 1554.18, 1394.7, 1471.71, 1320.15, 1143.28, 1390.3, 1081.07, 1455.33)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 0, 5, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18), PackedInt32Array(7, 19, 20, 21, 6), PackedInt32Array(12, 22, 8), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 21, 31), PackedInt32Array(32, 6, 21, 30), PackedInt32Array(33, 31, 21, 34), PackedInt32Array(11, 34, 21, 35), PackedInt32Array(11, 35, 12), PackedInt32Array(11, 10, 17, 36), PackedInt32Array(15, 23, 26, 37), PackedInt32Array(15, 37, 38), PackedInt32Array(39, 40, 36, 17, 16), PackedInt32Array(15, 38, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1046, 1988, 1074, 1993, 1077, 2120, 1544, 2117, 1547, 1992, 1652, 1993, 1652, 2116, 1926, 2114, 1926, 1654, 1655, 1652, 1657, 1857, 1543, 1850, 1548, 1686, 1483, 1650, 1427, 1599, 1345, 1529, 1273, 1597, 1210, 1657, 1116, 1734, 1088, 1841, 962, 1847, 962, 1546, 1099, 1480, 1165, 1411, 1226, 1347, 1460, 1350, 1533, 1416, 1651, 1545, 1907, 1543, 1982, 1535, 1977, 1403, 1969, 1096, -60, 1102, -62, 1330, -58, 1445, 431, 1449, 441, 1912, 441, 2038, 535, 2038, 970, 2042, 972, 1989)])
+agent_radius = 30.0
 
 [node name="Level_01" instance=ExtResource("1_ty3hu")]
 
@@ -271,18 +277,15 @@ right_limit = 0.628319
 camera_position_index = 1
 camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_anxy3"), SubResource("Resource_t0q2h")])
 
-[node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
+[node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
-guard_position_index = 0
-state = 5
-
-[node name="SecurityGuard" parent="MapRoot/Guards" index="1" instance=ExtResource("7_jy02f")]
-position = Vector2(1760, 1856)
-guard_position_index = 0
-state = 5
+guard_position_index = 1
 
 [node name="Marker2D2" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
 position = Vector2(-500, 0)
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="11"]
 position = Vector2(-500, 0)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="8"]
+navigation_polygon = SubResource("NavigationPolygon_g7i00")

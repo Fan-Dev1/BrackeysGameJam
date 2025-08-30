@@ -95,6 +95,8 @@ func _on_lever_flipped(flipped_over: bool) -> void:
 func _on_interation_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		border_line_2d.visible = true
+	if body is SecurityGuard and door_state == State.CLOSED:
+		open_door()
 
 
 func _on_interation_area_2d_body_exited(body: Node2D) -> void:
@@ -102,6 +104,8 @@ func _on_interation_area_2d_body_exited(body: Node2D) -> void:
 		border_line_2d.visible = false
 		if door_state == State.PEAKING:
 			stop_peeking()
+	if body is SecurityGuard and door_state == State.OPEN:
+		close_door()
 
 
 func is_highlighted() -> bool:

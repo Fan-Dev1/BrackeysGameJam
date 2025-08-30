@@ -229,7 +229,6 @@ camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_ca4i1"),
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("10_cd850")]
 position = Vector2(910, 1522)
 rotaton_speed = 2.0
-guard_position_index = 0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="7"]
 position = Vector2(910, 1522)

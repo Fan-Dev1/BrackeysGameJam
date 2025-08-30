@@ -11,7 +11,7 @@ enum GuardState { NORMAL, TRACKING, DISTRACTED, LOST ,RETURN, OFF }
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0
 
-@export var rotaton_speed: float
+@export var rotaton_speed: float = 2.0
 @export var move_speed: float = 1.0
 @export var guard_position_index := 0
 @export var guard_positions: Array[GuardPosition]
