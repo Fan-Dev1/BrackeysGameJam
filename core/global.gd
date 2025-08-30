@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 signal player_spotted(position: Vector2, device: Node2D)
-
+signal player_caught
 @onready var theme_music_player: AudioStreamPlayer = $ThemeMusicPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

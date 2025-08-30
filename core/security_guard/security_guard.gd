@@ -85,7 +85,9 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
-	if detected == "player":
+	if target.player_is_hidden: 
+		state = GuardState.LOST
+	elif detected == "player":
 		
 		if is_instance_valid(target):
 			
@@ -101,21 +103,17 @@ func _tracking_process(delta: float) -> void:
 		elif tracking_timer.is_stopped():
 			tracking_timer.start()
 			
-		if detected == "player":
-			if target.player_is_hidden:
-				state = GuardState.LOST
-			
-					
-			if navigation_agent_2d.is_navigation_finished():
-				change_light_colors(Color8(255, 100, 0))
-				lost_rotation = 0.0
-				guard_area_2d.rotation = 0.0
-				state = GuardState.RETURN
-			next_path_pos = navigation_agent_2d.get_next_path_position()
-			var direction = (next_path_pos - self.global_position).normalized()
-			velocity = direction * move_speed
-			move_and_slide()
-			
+		
+		if navigation_agent_2d.is_navigation_finished():
+			change_light_colors(Color8(255, 100, 0))
+			lost_rotation = 0.0
+			guard_area_2d.rotation = 0.0
+			state = GuardState.RETURN
+		next_path_pos = navigation_agent_2d.get_next_path_position()
+		var direction = (next_path_pos - self.global_position).normalized()
+		velocity = direction * move_speed
+		move_and_slide()
+		
 		queue_redraw()
 
 func _distracted_process(delta):
@@ -129,9 +127,7 @@ func _distracted_process(delta):
 			tracking_timer.stop()
 		elif tracking_timer.is_stopped():
 			tracking_timer.start()
-			
-		elif tracking_timer.is_stopped():
-			tracking_timer.start()
+
 
 func _on_tracking_timer_timeout() -> void:
 	#switch back to normal operation
@@ -143,11 +139,13 @@ func _on_tracking_timer_timeout() -> void:
 
 
 func _return_process(delta) -> void:
-	_scan_for_player()
+	#_scan_for_player()
 	
 	navigation_agent_2d.target_position = original_position
 	var next_path_pos = navigation_agent_2d.get_next_path_position()
 	var direction = (next_path_pos - self.global_position).normalized()
+	var angle_to_target = self.global_position.angle_to_point(next_path_pos)
+	rotate_camera_toward(angle_to_target, delta)
 	velocity = direction * move_speed
 	move_and_slide()
 	if navigation_agent_2d.is_navigation_finished():
@@ -222,7 +220,7 @@ func _scan_walls(body : Node2D) -> bool:
 	wall_ray_cast_2d.target_position = body.global_position - wall_ray_cast_2d.global_position
 	wall_ray_cast_2d.force_raycast_update()
 	if wall_ray_cast_2d.is_colliding() and wall_ray_cast_2d.get_collider() == body:
-		print("its true")
+		
 		return true
 	else:
 		return false
@@ -256,8 +254,11 @@ func _on_update_nav_timeout() -> void:
 
 
 func _on_caught_area_body_entered(body: Node2D) -> void:
+	
 	if body.is_in_group("player"):
-		_scan_walls(body)
+		if _scan_walls(body):
+			print("Caught")
+			Global.player_caught.emit()
 
 
 func _on_lost_rotation_timer_timeout() -> void:

@@ -20,20 +20,21 @@ var player_is_hidden = false
 
 
 func _physics_process(delta: float) -> void:
-	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var target_velocity := input_direction * move_speed
-	if input_direction:	
-		last_direction = input_direction
-	manage_animations(input_direction, last_direction)
-	var velocity_weight := 1.0 - exp(-move_smothing * delta)
-	velocity = velocity.lerp(target_velocity, velocity_weight)
-	if fire_cooldown.is_stopped():
-		if Input.is_action_pressed("fire"):
-			aim()
-		elif Input.is_action_just_released("fire"):
-			fire_cooldown.start()
-			fire()
-	move_and_slide()
+	if !player_is_hidden:
+		var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var target_velocity := input_direction * move_speed
+		if input_direction:	
+			last_direction = input_direction
+		manage_animations(input_direction, last_direction)
+		var velocity_weight := 1.0 - exp(-move_smothing * delta)
+		velocity = velocity.lerp(target_velocity, velocity_weight)
+		if fire_cooldown.is_stopped():
+			if Input.is_action_pressed("fire"):
+				aim()
+			elif Input.is_action_just_released("fire"):
+				fire_cooldown.start()
+				fire()
+		move_and_slide()
 
 
 func manage_animations(input_direction, last_direction) -> void:

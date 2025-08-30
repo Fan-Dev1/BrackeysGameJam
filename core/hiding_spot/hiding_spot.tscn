@@ -74,5 +74,10 @@ texture = ExtResource("5_856r5")
 position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_856r5")
 
+[node name="Hiding" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Hiding" to="." method="_on_hiding_timeout"]

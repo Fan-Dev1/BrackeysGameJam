@@ -75,8 +75,11 @@ func _normal_process(delta: float) -> void:
 func _scan_for_player() -> void:
 	for body: Node2D in camera_area_2d.get_overlapping_bodies():
 		# alert about spotted player and track him
-		var should_track_body := body is Player or body is CookieProjectile
-		if should_track_body:
+		if body is Player:
+			if !body.player_is_hidden:
+				tracking_target = body
+				state = CameraState.TRACKING
+		elif body is CookieProjectile:
 			tracking_target = body
 			state = CameraState.TRACKING
 

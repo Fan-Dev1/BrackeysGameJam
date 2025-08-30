@@ -98,7 +98,9 @@ func _physics_process(_delta: float) -> void:
 		var collision_point := laser_ray_cast_2d.get_collision_point()
 		draw_beam_to(to_local(collision_point))
 		if laser_ray_cast_2d.get_collider() is Player:
-			Global.player_spotted.emit(collision_point, self)
+			if !laser_ray_cast_2d.get_collider().player_is_hidden:
+				
+				Global.player_spotted.emit(collision_point, self)
 	else:
 		var full_length_position := Vector2.RIGHT * beam_length
 		draw_beam_to(full_length_position)
