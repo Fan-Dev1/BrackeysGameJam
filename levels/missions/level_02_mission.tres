@@ -6,23 +6,23 @@
 
 [sub_resource type="Resource" id="Resource_d3o6j"]
 script = ExtResource("1_e0787")
-goal_text = "Collect 12 cookies within 150 seconds"
+goal_text = "Collect 2 cookies within 150 seconds"
 goal_reached = false
 goal_type = 0
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
-[sub_resource type="Resource" id="Resource_pdl2l"]
+[sub_resource type="Resource" id="Resource_2t17w"]
 script = ExtResource("1_e0787")
-goal_text = "Escape in under 120 seconds"
+goal_text = "Don't get hit by a laser"
 goal_reached = false
 goal_type = 1
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
-[sub_resource type="Resource" id="Resource_2t17w"]
+[sub_resource type="Resource" id="Resource_e0787"]
 script = ExtResource("1_e0787")
-goal_text = "Don't get spotted by a security camera"
+goal_text = "Take the bridge"
 goal_reached = false
-goal_type = 1
+goal_type = 2
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lb8fc"]
@@ -30,12 +30,12 @@ metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 [resource]
 script = ExtResource("3_0ca0m")
 level_index = 2
-level_name = "Fast and silently"
+level_name = "Dance of the Lasers"
 level_path = "uid://bkumol8f5qnnh"
 level_preview_texture = SubResource("PlaceholderTexture2D_lb8fc")
 level_music = ExtResource("2_7oekt")
-level_goals = Array[ExtResource("1_e0787")]([SubResource("Resource_d3o6j"), SubResource("Resource_pdl2l"), SubResource("Resource_2t17w")])
+level_goals = Array[ExtResource("1_e0787")]([SubResource("Resource_d3o6j"), SubResource("Resource_2t17w"), SubResource("Resource_e0787")])
 used_device_count = PackedInt32Array(2, 4)
 unlocked = true
-level_completion_time = 120.0
+level_completion_time = 150.0
 metadata/_custom_type_script = "uid://btji1vxv6jj7s"

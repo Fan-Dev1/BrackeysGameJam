@@ -36,6 +36,7 @@ func _ready() -> void:
 	game_paused_ui.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
+	
 	if OS.is_debug_build() and skip_drive_animation:
 		car_drive_scroller.stop_scrolling()
 		var thief_car := car_drive_scroller.thief_car
