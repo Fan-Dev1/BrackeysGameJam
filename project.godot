@@ -53,6 +53,7 @@ folder_colors={
 player=""
 cookie_stash=""
 masked_by_player_vision=""
+thief_car=""
 
 [gui]
 

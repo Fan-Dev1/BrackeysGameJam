@@ -3,27 +3,20 @@ class_name SecurityGuard
 extends CharacterBody2D
 
 enum GuardState { NORMAL, TRACKING, DISTRACTED, LOST ,RETURN, OFF }
+
 @onready var caught_area: Area2D = $CaughtArea
-
-
-
 @onready var wall_ray_cast_2d: RayCast2D = $WallRayCast2D
 
 @export var radius := 256.0
-
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0
-#@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
-#var left_limit := PI / -2.0
-#@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
-#var right_limit := PI / 2.0
 
 @export var rotaton_speed: float
 @export var move_speed: float = 1.0
 @export var guard_position_index := 0
 @export var guard_positions: Array[GuardPosition]
-@onready var update_nav: Timer = $updateNav
 
+@onready var update_nav: Timer = $updateNav
 @onready var position_timer: Timer = $positionTimer
 @onready var tracking_timer: Timer = $trackingTimer
 @onready var guard_area_2d: Area2D = $GuardArea2D
@@ -34,12 +27,15 @@ var fov := PI / 4.0
 
 @onready var vision_light: PointLight2D = $GuardArea2D/PointLight2D
 @onready var flashlight: PointLight2D = $GuardArea2D/PointLight2D/PointLight2D
+@onready var target: CharacterBody2D = get_tree().get_first_node_in_group("player")
+
 var lost_rotation : float = 0.0
 var next_path_pos : Vector2 = Vector2.ZERO
 var original_position : Vector2 = Vector2.ZERO
-var state := GuardState.NORMAL : set = set_state
+@export var state := GuardState.NORMAL : set = set_state
 var detected := "Player"
-@onready var target : CharacterBody2D= get_tree().get_first_node_in_group("player")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	original_position = self.global_position
@@ -51,7 +47,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	if Engine.is_editor_hint():
 		_update_fov_polygon()
 		#_clamp_camera_rotations()
@@ -90,7 +85,6 @@ func _on_position_timer_timeout() -> void:
 
 
 func _tracking_process(delta: float) -> void:
-	
 	if detected == "player":
 		
 		if is_instance_valid(target):
@@ -146,6 +140,8 @@ func _on_tracking_timer_timeout() -> void:
 	guard_area_2d.rotation = 0.0
 	state = GuardState.LOST
 	velocity = Vector2.ZERO
+
+
 func _return_process(delta) -> void:
 	_scan_for_player()
 	
@@ -179,15 +175,18 @@ func _lost_process(delta: float) -> void:
 		lost_rotation_timer.start()
 	rotate_camera_toward(deg_to_rad(lost_rotation), delta)
 	_scan_for_player()
+
+
 func set_state(new_state: GuardState) -> void:
 	if state == new_state:
 		return
 	state = new_state
-	guard_area_2d.monitoring = GuardState.OFF != new_state
-	#guard_fov.visible = GuardState.OFF != new_state
-	queue_redraw()
-	position_timer.stop()
-	tracking_timer.stop()
+	if is_node_ready():
+		guard_area_2d.monitoring = GuardState.OFF != new_state
+		#guard_fov.visible = GuardState.OFF != new_state
+		queue_redraw()
+		position_timer.stop()
+		tracking_timer.stop()
 
 
 func _update_fov_polygon(circle_points := 12) -> void:
@@ -262,7 +261,6 @@ func _on_caught_area_body_entered(body: Node2D) -> void:
 
 
 func _on_lost_rotation_timer_timeout() -> void:
-	
 	if lost_rotation >= 360.0:
 		lost_rotation = 0.0
 		guard_area_2d.rotation = 0.0

@@ -34,7 +34,20 @@ func _ready() -> void:
 	game_paused_ui.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
-	_play_drive_in()
+	if OS.is_debug_build():
+		car_drive_scroller.stop_scrolling()
+		var thief_car := car_drive_scroller.thief_car
+		thief_car.set_process_unhandled_input(false)
+		mission_details.visible = false
+		player.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
+		player.visible = true
+		thief_car.set_process_unhandled_input(true)
+		
+		camera_2d.enabled = true
+		camera_2d.make_current()
+		car_drive_camera_2d.enabled = false
+	else:
+		_play_drive_in()
 	car_drive_scroller.thief_car.car_entered.connect(_on_car_entered)
 	car_drive_scroller.thief_car.car_exited.connect(_on_car_exited)
 	car_drive_scroller.thief_car.cookie_dropped.connect(_on_cookie_dropped)

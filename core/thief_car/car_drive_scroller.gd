@@ -13,6 +13,11 @@ func play_drive_in() -> void:
 	animation_player.play("drive_in")
 
 
+func stop_scrolling() -> void:
+	$StreetParallax2D.autoscroll = Vector2.ZERO
+
+
+
 func play_drive_out() -> void:
 	animation_player.play("drive_out")
 

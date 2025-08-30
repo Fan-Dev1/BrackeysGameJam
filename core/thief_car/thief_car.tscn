@@ -15,7 +15,7 @@ polygon = PackedVector2Array(8, -80, -168, -56, -184, -16, -184, 40, -168, 56, -
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_seo5q"]
 size = Vector2(352, 48)
 
-[node name="ThiefCar" type="CharacterBody2D"]
+[node name="ThiefCar" type="CharacterBody2D" groups=["thief_car"]]
 disable_mode = 1
 motion_mode = 1
 script = ExtResource("1_1ss3k")

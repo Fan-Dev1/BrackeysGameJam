@@ -63,22 +63,18 @@ tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
 [node name="Interactables" type="Node2D" parent="MapRoot"]
-metadata/_edit_lock_ = true
 
 [node name="CookiesStashes" type="Node2D" parent="MapRoot"]
-metadata/_edit_lock_ = true
 
 [node name="SecurityDevices" type="Node2D" parent="MapRoot"]
-metadata/_edit_lock_ = true
 
 [node name="Guards" type="Node2D" parent="MapRoot"]
-metadata/_edit_lock_ = true
 
 [node name="Player" parent="MapRoot" instance=ExtResource("2_63c5o")]
 unique_name_in_owner = true
 process_mode = 4
 position = Vector2(960, 1008)
-metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="MapRoot/Player"]
 unique_name_in_owner = true

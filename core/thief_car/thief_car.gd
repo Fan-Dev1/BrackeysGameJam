@@ -8,6 +8,7 @@ signal cookie_dropped
 enum CarFrame { 
 	NORMAL=0, CABIN_OUTLINE=1, CARGO_BED_OUTLINE=2,
 }
+
 const COOKIE_TEXTURE: Texture2D = preload("res://PlaceholderCharacter/PlaceholderCookie.png")
 
 var player_inside := false
