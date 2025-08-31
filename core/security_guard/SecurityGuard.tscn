@@ -43,6 +43,7 @@ floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
 rotaton_speed = 1.0
 move_speed = 300.0
+guard_position_index = 1
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]
@@ -55,7 +56,7 @@ one_shot = true
 
 [node name="GuardArea2D" type="Area2D" parent="."]
 visible = false
-rotation = 1.5708
+rotation = 3.14159
 collision_layer = 0
 collision_mask = 2
 

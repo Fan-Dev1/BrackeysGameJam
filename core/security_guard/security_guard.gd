@@ -260,7 +260,6 @@ func _investigate_process(delta) -> void:
 	
 
 func _on_caught_area_body_entered(body: Node2D) -> void:
-	
 	if body.is_in_group("player"):
 		if _scan_walls(body):
 			print("Caught")

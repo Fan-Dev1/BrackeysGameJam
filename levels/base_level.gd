@@ -27,17 +27,20 @@ var collected_cookie_count := 0
 @onready var inventory_panel: InventoryPanel = %InventoryPanel
 @onready var mission_details: MissionDetailUi = %MissionDetails
 @onready var game_paused_ui: GamePausedUI = %GamePausedUI
+@onready var catched_by_guard_panel = %CatchedByGuardPanel
 
 
 func _ready() -> void:
 	mission_details.set_level_mission(level_mission)
 	mission_details.visible = true
 	timeout_panel.visible = false
+	catched_by_guard_panel.visible = false
 	cookie_loot_panel.visible = false
 	inventory_panel.visible = false
 	game_paused_ui.visible = false
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
+	Global.player_caught.connect(_on_player_caught)
 	
 	if OS.is_debug_build() and (skip_drive_animation or take_preview_screenshot):
 		car_drive_scroller.stop_scrolling()
@@ -92,6 +95,11 @@ func _process(_delta: float) -> void:
 func _on_level_timer_timeout() -> void:
 	get_tree().set_pause.call_deferred(true)
 	timeout_panel.visible = true
+
+
+func _on_player_caught() -> void:
+	get_tree().set_pause.call_deferred(true)
+	catched_by_guard_panel.visible = true
 
 
 func _on_next_level_button_pressed() -> void:
