@@ -178,7 +178,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p37y6"]
-radius = 25.02
+radius = 25.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
 radius = 68.0074
@@ -190,6 +190,7 @@ floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
 rotaton_speed = 1.0
 move_speed = 300.0
+guard_position_index = 1
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]
@@ -200,8 +201,19 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="lostRotationTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="updateNav" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
 [node name="GuardArea2D" type="Area2D" parent="."]
-rotation = 1.5708
+rotation = 3.14159
 collision_layer = 0
 collision_mask = 2
 
@@ -210,20 +222,22 @@ unique_name_in_owner = true
 rotation = -0.0707134
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
-[node name="GuardFov" type="Polygon2D" parent="GuardArea2D"]
+[node name="GuardFov" type="Polygon2D" parent="GuardArea2D" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 rotation = -0.0730822
 color = Color(1, 1, 0, 0.235294)
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
-[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D"]
+[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D" groups=["masked_by_player_vision"]]
+visible = false
 position = Vector2(-1.99999, 2.00001)
 scale = Vector2(2.5, 2.5)
 color = Color(1, 1, 0, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_e2b7p")
 
-[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D"]
+[node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D" groups=["masked_by_player_vision"]]
+visible = false
 z_index = 1
 scale = Vector2(0.55, 0.6)
 color = Color(1, 1, 0.482353, 1)
@@ -247,13 +261,6 @@ animation = &"alarmd"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p37y6")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
-
-[node name="updateNav" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
-
 [node name="WallRayCast2D" type="RayCast2D" parent="."]
 enabled = false
 target_position = Vector2(236.513, 97.967)
@@ -266,12 +273,8 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_e2b7p")
 debug_color = Color(0.7, 0.123896, 0, 0.42)
 
-[node name="lostRotationTimer" type="Timer" parent="."]
-wait_time = 1.5
-one_shot = true
-
 [connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
 [connection signal="timeout" from="trackingTimer" to="." method="_on_tracking_timer_timeout"]
+[connection signal="timeout" from="lostRotationTimer" to="." method="_on_lost_rotation_timer_timeout"]
 [connection signal="timeout" from="updateNav" to="." method="_on_update_nav_timeout"]
 [connection signal="body_entered" from="CaughtArea" to="." method="_on_caught_area_body_entered"]
-[connection signal="timeout" from="lostRotationTimer" to="." method="_on_lost_rotation_timer_timeout"]

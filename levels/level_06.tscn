@@ -237,28 +237,31 @@ libraries = {
 }
 autoplay = "loop_detection_beam"
 
-[node name="SecurityCamera1" parent="MapRoot/SecurityDevices" index="3" instance=ExtResource("7_jepln")]
+[node name="SecurityCamera1" parent="MapRoot/SecurityDevices" index="3" node_paths=PackedStringArray("assigned_guard") instance=ExtResource("7_jepln")]
 position = Vector2(1008, 1868)
 rotation = -4.36332
 radius = 210.0
+assigned_guard = NodePath("../../Guards/SecurityGuard2")
 camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_lljxk"), SubResource("Resource_ecahe")])
 
-[node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" instance=ExtResource("7_jepln")]
+[node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" node_paths=PackedStringArray("assigned_guard") instance=ExtResource("7_jepln")]
 position = Vector2(864, 2300)
 rotation = -1.5708
 radius = 240.0
 rotaton_speed = 1.0
+assigned_guard = NodePath("../../Guards/SecurityGuard2")
 fov = 0.523599
 left_limit = -1.71042
 right_limit = 1.71042
 camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_4ncwt"), SubResource("Resource_jepln")])
 
-[node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("7_jepln")]
+[node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever", "assigned_guard") instance=ExtResource("7_jepln")]
 position = Vector2(1344, 1472)
 rotation = 3.14159
 controlling_lever = NodePath("../../Interactables/CameraLeverButton")
 radius = 278.0
 rotaton_speed = 3.0
+assigned_guard = NodePath("../../Guards/SecurityGuard")
 fov = 1.0472
 left_limit = -3.14159
 camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_fk51f"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_d0fql")])
@@ -266,9 +269,11 @@ camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_fk51f"),
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("9_d0fql")]
 position = Vector2(910, 1522)
 rotaton_speed = 2.0
+guard_position_index = 0
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="1" instance=ExtResource("9_d0fql")]
 position = Vector2(631.6, 1970.4)
+guard_position_index = 0
 
 [node name="FocusGameConceptArea2D" type="Area2D" parent="MapRoot" index="11"]
 position = Vector2(1809, 2280)

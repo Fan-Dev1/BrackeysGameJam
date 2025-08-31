@@ -1,17 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnl8ikta6u6ne"]
+[gd_scene load_steps=10 format=3 uid="uid://bnl8ikta6u6ne"]
 
 [ext_resource type="Script" uid="uid://bem2o48yolu4w" path="res://core/hiding_spot/hiding_spot.gd" id="1_asnba"]
-[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://core/shaders/chroma_key_shader.gdshader" id="2_mndq3"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_856r5"]
 [ext_resource type="Texture2D" uid="uid://d0ok7ef2k5w3d" path="res://biom_grass/Objects/HidePlant_InUse.png" id="4_c38xd"]
 [ext_resource type="Texture2D" uid="uid://bpiplaf4x666r" path="res://biom_grass/Objects/HidePlant.png" id="5_eo0hy"]
 [ext_resource type="Texture2D" uid="uid://b4qj7oc4pntvd" path="res://biom_grass/Objects/HidePlant_Outline.png" id="6_c38xd"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c38xd"]
-shader = ExtResource("2_mndq3")
-shader_parameter/chroma_key_color = Color(0, 1, 0, 1)
-shader_parameter/pickup_range = 0.25
-shader_parameter/fade_amount = 0.284
 
 [sub_resource type="Gradient" id="Gradient_satuh"]
 offsets = PackedFloat32Array(0.864943, 1)
@@ -58,11 +51,11 @@ metadata/_edit_group_ = true
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerMarker2D"]
 unique_name_in_owner = true
-self_modulate = Color(0.798517, 0.296629, 0.812278, 1)
-material = SubResource("ShaderMaterial_c38xd")
+position = Vector2(5, 0)
 scale = Vector2(0.667, 0.667)
 sprite_frames = ExtResource("3_856r5")
 animation = &"IdleSouth"
+frame_progress = 0.838122
 
 [node name="Camera2D" type="Camera2D" parent="PlayerMarker2D/PlayerAnimatedSprite2D"]
 unique_name_in_owner = true
@@ -80,14 +73,16 @@ shadow_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_856r5")
 metadata/_edit_lock_ = true
 
-[node name="FlowerPotSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="FlowerPotSprite2D" type="AnimatedSprite2D" parent="." groups=["masked_by_player_vision"]]
 texture_filter = 1
 position = Vector2(0, -33)
 scale = Vector2(0.667, 0.667)
 sprite_frames = SubResource("SpriteFrames_hmdob")
+animation = &"Hiding"
 
 [node name="OutlineSprite2D" type="Sprite2D" parent="FlowerPotSprite2D"]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 texture = ExtResource("6_c38xd")
 
