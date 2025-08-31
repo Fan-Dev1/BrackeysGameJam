@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnl8ikta6u6ne"]
+[gd_scene load_steps=12 format=3 uid="uid://bnl8ikta6u6ne"]
 
 [ext_resource type="Script" uid="uid://bem2o48yolu4w" path="res://core/hiding_spot/hiding_spot.gd" id="1_asnba"]
 [ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://core/shaders/chroma_key_shader.gdshader" id="2_mndq3"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_856r5"]
-[ext_resource type="Texture2D" uid="uid://85ppxd85sf86" path="res://core/hiding_spot/hiding_spot_plant_sprite.png" id="4_c38xd"]
-[ext_resource type="Texture2D" uid="uid://d2hrjq42tjtik" path="res://core/hiding_spot/hiding_spot_plant_sprite_outline.png" id="5_856r5"]
+[ext_resource type="Texture2D" uid="uid://d0ok7ef2k5w3d" path="res://biom_grass/Objects/HidePlant_InUse.png" id="4_c38xd"]
+[ext_resource type="Texture2D" uid="uid://bpiplaf4x666r" path="res://biom_grass/Objects/HidePlant.png" id="5_eo0hy"]
+[ext_resource type="Texture2D" uid="uid://b4qj7oc4pntvd" path="res://biom_grass/Objects/HidePlant_Outline.png" id="6_c38xd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c38xd"]
 shader = ExtResource("2_mndq3")
@@ -23,6 +24,25 @@ height = 1080
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.850427, 0.211538)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmdob"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c38xd")
+}],
+"loop": true,
+"name": &"Hiding",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_eo0hy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_856r5"]
 radius = 40.0
@@ -60,15 +80,16 @@ shadow_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_856r5")
 metadata/_edit_lock_ = true
 
-[node name="FlowerPotSprite2D" type="Sprite2D" parent="."]
+[node name="FlowerPotSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -48)
-texture = ExtResource("4_c38xd")
+position = Vector2(0, -33)
+scale = Vector2(0.667, 0.667)
+sprite_frames = SubResource("SpriteFrames_hmdob")
 
 [node name="OutlineSprite2D" type="Sprite2D" parent="FlowerPotSprite2D"]
 unique_name_in_owner = true
 texture_filter = 1
-texture = ExtResource("5_856r5")
+texture = ExtResource("6_c38xd")
 
 [node name="InteractionCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)

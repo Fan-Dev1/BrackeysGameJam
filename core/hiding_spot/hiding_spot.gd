@@ -11,6 +11,7 @@ var occupied := false
 @onready var vision_point_light: PointLight2D = %VisionPointLight2D
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var hiding: Timer = $Hiding
+@onready var flower_pot_sprite_2d: AnimatedSprite2D = $FlowerPotSprite2D
 
 var player: Player
 func _ready() -> void:
@@ -33,7 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func start_hiding() -> void:
-	
+	flower_pot_sprite_2d.play("Hiding")
 		
 	var from_position := player.global_position
 	var final_position := player_marker.global_position
@@ -57,7 +58,7 @@ func start_hiding() -> void:
 
 
 func stop_hiding() -> void:
-	
+	flower_pot_sprite_2d.play("default")
 	player.global_position = player_placeholder_sprite.global_position
 	#player.process_mode = Node.PROCESS_MODE_INHERIT
 	player.visible = true
