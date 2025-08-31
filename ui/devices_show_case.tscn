@@ -103,10 +103,11 @@ grow_horizontal = 2
 grow_vertical = 2
 border_color = Color(0, 1, 0.204102, 1)
 
-[node name="DetectionBeam" parent="DeviceSceneContainer/DetectionBeam" instance=ExtResource("4_5yme1")]
+[node name="DetectionBeam" parent="DeviceSceneContainer/DetectionBeam" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("4_5yme1")]
 position = Vector2(200, 256)
 mode = 0
 beam_length = 160.0
+appointed_guard = NodePath("../../SecurityGuard/SecurityGuard")
 
 [node name="SecurityGuard" type="ReferenceRect" parent="DeviceSceneContainer"]
 custom_minimum_size = Vector2(512, 512)
@@ -131,7 +132,6 @@ border_color = Color(0, 1, 0.204102, 1)
 [node name="SecurityGuard" parent="DeviceSceneContainer/SecurityGuard" instance=ExtResource("5_moqre")]
 process_mode = 4
 position = Vector2(259, 261)
-guard_position_index = 1
 
 [node name="Door" type="ReferenceRect" parent="DeviceSceneContainer"]
 custom_minimum_size = Vector2(512, 512)
