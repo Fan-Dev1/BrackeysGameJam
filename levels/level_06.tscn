@@ -132,7 +132,6 @@ outline_color = Color(0, 0, 0, 1)
 size = Vector2(192, 200)
 
 [node name="Level_06" instance=ExtResource("1_k8ise")]
-take_preview_screenshot = true
 
 [node name="GoalTracker" parent="." index="0"]
 script = ExtResource("2_7c8pi")

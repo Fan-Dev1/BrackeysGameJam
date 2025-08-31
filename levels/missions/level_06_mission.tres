@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_d3o6j"]
 script = ExtResource("1_v02e5")
-goal_text = "Collect 5 cookies within 210 seconds"
+goal_text = "Collect 1 cookies within 150 seconds"
 goal_reached = false
 goal_type = 0
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
@@ -28,6 +28,6 @@ level_preview_texture = ExtResource("3_v02e5")
 level_music = ExtResource("2_rl087")
 level_goals = Array[ExtResource("1_v02e5")]([SubResource("Resource_d3o6j"), SubResource("Resource_oiihw")])
 used_device_count = PackedInt32Array(4, 1)
-unlocked = true
-level_completion_time = 210.0
+unlocked = false
+level_completion_time = 150.0
 metadata/_custom_type_script = "uid://btji1vxv6jj7s"
