@@ -18,6 +18,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 outlines = Array[PackedVector2Array]([PackedVector2Array(-96, 672, -95.9999, 1218.27, -32, 1304, -32, 1584, -96, 1704, -96, 2048, -200, 2264, -168, 3208, 1976, 3184, 2000, 2488, 2016, 2200, 2016, 664)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
+cell_size = 8.0
 agent_radius = 30.0
 
 [sub_resource type="Animation" id="Animation_3ew82"]
@@ -286,19 +287,21 @@ flipped_over = false
 [node name="CookieStash2" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("7_dmyuw")]
 position = Vector2(168, 2280)
 
-[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever") groups=["masked_by_player_vision"] instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever", "appointed_guard") groups=["masked_by_player_vision"] instance=ExtResource("6_vlrfo")]
 position = Vector2(16, 1264)
 rotation = -6.28318
 controlling_lever = NodePath("../../Interactables/LeverButton")
 mode = 0
 beam_length = 896.0
+appointed_guard = NodePath("../../Guards/SecurityGuard2")
 
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(990, 2352)
 rotation = -1.57079
 controlling_lever = NodePath("../../Interactables/LeverButton2")
 mode = 0
 beam_length = 256.0
+appointed_guard = NodePath("../../Guards/SecurityGuard2")
 
 [node name="LeftRoomLaser" type="Node2D" parent="MapRoot/SecurityDevices" index="2"]
 position = Vector2(-64, 0)
@@ -309,47 +312,57 @@ libraries = {
 }
 autoplay = "sweep_laser"
 
-[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="1" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="1" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2496)
 controlling_lever = NodePath("../../../Interactables/LeverButton4")
 mode = 0
 beam_length = 960.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
-[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="2" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="2" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2816)
 controlling_lever = NodePath("../../../Interactables/LeverButton6")
 mode = 0
 beam_length = 960.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
-[node name="DetectionBeam6" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="3" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam6" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="3" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2952)
 controlling_lever = NodePath("../../../Interactables/LeverButton2")
 mode = 0
 beam_length = 960.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="4" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("6_vlrfo")]
+[node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="4" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2368)
 controlling_lever = NodePath("../../../Interactables/LeverButton3")
 mode = 0
 beam_length = 960.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("8_b3fh1")]
 position = Vector2(1156, 1392)
+guard_position_index = 0
 
 [node name="SecurityGuard3" parent="MapRoot/Guards" index="1" instance=ExtResource("8_b3fh1")]
 position = Vector2(1728, 1656)
+guard_position_index = 0
 
 [node name="SecurityGuard4" parent="MapRoot/Guards" index="2" instance=ExtResource("8_b3fh1")]
 position = Vector2(1528, 2376)
+guard_position_index = 0
 
 [node name="SecurityGuard5" parent="MapRoot/Guards" index="3" instance=ExtResource("8_b3fh1")]
 position = Vector2(990, 2928)
+guard_position_index = 0
 
 [node name="SecurityGuard6" parent="MapRoot/Guards" index="4" instance=ExtResource("8_b3fh1")]
 position = Vector2(385.391, 2651.73)
+guard_position_index = 0
 
 [node name="SecurityGuard7" parent="MapRoot/Guards" index="5" instance=ExtResource("8_b3fh1")]
 position = Vector2(456, 2176)
+guard_position_index = 0
 
 [node name="Player" parent="MapRoot" index="10"]
 position = Vector2(1539.76, 1091.58)

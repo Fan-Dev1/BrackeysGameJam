@@ -10,6 +10,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 outlines = Array[PackedVector2Array]([PackedVector2Array(-96, 672, -96, 1496, 416, 1496, 408, 2072, 1032, 2064, 1032, 2208, 2016, 2200, 2016, 664)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
+cell_size = 8.0
 agent_radius = 30.0
 
 [node name="Level_05" instance=ExtResource("1_eyhsw")]
