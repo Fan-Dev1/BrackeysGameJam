@@ -18,7 +18,9 @@ func _ready() -> void:
 func update_ui() -> void:
 	if level_mission == null or not is_node_ready():
 		return
-	level_label.text = level_mission.level_name
+	level_label.text = str(level_mission.level_index)
+	level_label.text += " "
+	level_label.text += level_mission.level_name
 	grey_color_rect.visible = not level_mission.unlocked
 	locked_texture_rect.visible = not level_mission.unlocked
 	if level_mission.level_preview_texture != null:

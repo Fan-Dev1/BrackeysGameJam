@@ -4,6 +4,7 @@ extends Area2D
 @export var enter_duration: float
 
 var occupied := false
+var player: Player
 
 @onready var player_marker: Marker2D = $PlayerMarker2D
 @onready var player_placeholder_sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
@@ -13,7 +14,7 @@ var occupied := false
 @onready var hiding: Timer = $Hiding
 @onready var flower_pot_sprite_2d: AnimatedSprite2D = $FlowerPotSprite2D
 
-var player: Player
+
 func _ready() -> void:
 	player = Global.get_player()
 	outline_sprite.visible = false

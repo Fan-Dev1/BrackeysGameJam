@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 [resource]
 script = ExtResource("3_0ca0m")
 level_index = 2
-level_name = "Dance of the Lasers"
+level_name = "Lasers Dance"
 level_path = "uid://bkumol8f5qnnh"
 level_preview_texture = ExtResource("3_7oekt")
 level_music = ExtResource("2_7oekt")

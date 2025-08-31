@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
 [sub_resource type="Resource" id="Resource_oiihw"]
 script = ExtResource("1_v02e5")
-goal_text = "Open every door"
+goal_text = "Throw a cookie"
 goal_reached = false
 goal_type = 1
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"

@@ -17,14 +17,20 @@ font_size = 40
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="MissionDetails" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 488)
-offset_right = 530.0
-offset_bottom = 488.0
-theme = ExtResource("1_l600d")
+[node name="MissionDetails" type="VBoxContainer"]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 523.0
+offset_bottom = 481.0
+theme_override_constants/separation = 40
 script = ExtResource("1_nj7oi")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MissioGoalPanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 404)
+layout_mode = 2
+theme = ExtResource("1_l600d")
+
+[node name="MarginContainer" type="MarginContainer" parent="MissioGoalPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
@@ -32,18 +38,18 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MissioGoalPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="MissioGoalPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_nj7oi")
 text = "Mission Name"
 label_settings = SubResource("LabelSettings_l600d")
 
-[node name="Underline" type="ColorRect" parent="MarginContainer/VBoxContainer/TitleLabel"]
+[node name="Underline" type="ColorRect" parent="MissioGoalPanel/MarginContainer/VBoxContainer/TitleLabel"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 12
@@ -53,45 +59,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MainGoalContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MainGoalContainer" type="VBoxContainer" parent="MissioGoalPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="GoalCheckBox1" parent="MarginContainer/VBoxContainer/MainGoalContainer" instance=ExtResource("3_t0ror")]
+[node name="GoalCheckBox1" parent="MissioGoalPanel/MarginContainer/VBoxContainer/MainGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
 text = "Collect 2 cookies within 120 seconds"
 
-[node name="Spacer1" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Spacer1" type="Control" parent="MissioGoalPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StretchGoal" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="StretchGoal" type="Label" parent="MissioGoalPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stretch Goals"
 label_settings = SubResource("LabelSettings_t0ror")
 
-[node name="StretchGoalContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="StretchGoalContainer" type="VBoxContainer" parent="MissioGoalPanel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="GoalCheckBox2" parent="MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
+[node name="GoalCheckBox2" parent="MissioGoalPanel/MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
 
-[node name="GoalCheckBox3" parent="MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
+[node name="GoalCheckBox3" parent="MissioGoalPanel/MarginContainer/VBoxContainer/StretchGoalContainer" instance=ExtResource("3_t0ror")]
 layout_mode = 2
 text = "Block a Laser"
 
-[node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MissionButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MissionButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Start / Finish Mission"
+theme_override_font_sizes/font_size = 60
+text = "Finish Mission"
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MissionButton" to="." method="_on_mission_button_pressed"]
+[connection signal="visibility_changed" from="MissioGoalPanel" to="MissioGoalPanel" method="_on_visibility_changed"]
+[connection signal="pressed" from="MissionButton" to="." method="_on_mission_button_pressed"]

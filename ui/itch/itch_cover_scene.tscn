@@ -1,12 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://bji21ff8kxjhs"]
+[gd_scene load_steps=25 format=3 uid="uid://bji21ff8kxjhs"]
 
 [ext_resource type="Script" uid="uid://cekml1idu14q1" path="res://ui/itch/itch_cover_scene.gd" id="1_r5x7g"]
 [ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/thief_car/car_driving_parallex_sprites.png" id="1_tdweg"]
-[ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/thief_car/thief_car.tscn" id="2_r5x7g"]
+[ext_resource type="Texture2D" uid="uid://dxik0npp1s6j2" path="res://core/thief_car/thief_car_sprites.png" id="3_qm8ye"]
 [ext_resource type="Texture2D" uid="uid://bbhfeba5dbtx5" path="res://core/security_guard/Guard.png" id="4_6hwa6"]
+[ext_resource type="Texture2D" uid="uid://d1sge6ua7f628" path="res://core/thief_car/thief_car_head_lights.png" id="4_l1qb2"]
+[ext_resource type="Texture2D" uid="uid://b52iigx68pmyb" path="res://core/thief_car/thief_car_tail_lights.png" id="5_h2ba2"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="5_l1qb2"]
 [ext_resource type="FontFile" uid="uid://c5qw4j6h2tlna" path="res://ui/fonts/fusion-pixel-10px-proportional-sc-latin-400-normal.woff2" id="6_h2ba2"]
 [ext_resource type="Texture2D" uid="uid://nhcsglbv34ad" path="res://ui/itch/Brackeys Game Jam 2025.2 Logo.png" id="7_80l0k"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_80l0k"]
+cull_mode = 1
+polygon = PackedVector2Array(8, -80, -168, -56, -184, -16, -184, 40, -168, 56, -112, 64, 144, 64, 184, 56, 192, 48, 192, -16, 184, -48, 176, -56, 88, -80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cx8x8"]
 atlas = ExtResource("4_6hwa6")
@@ -139,14 +145,8 @@ texture_filter = 1
 script = ExtResource("1_r5x7g")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.7, 0.7, 0.7, 1)
-
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
-z_index = 1
-offset_right = 1920.0
-offset_bottom = 1080.0
-border_color = Color(0.908041, 0, 1, 1)
-border_width = 8.0
 
 [node name="SkySprite2D" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -180,10 +180,46 @@ region_enabled = true
 region_rect = Rect2(0, 1080, 480, 270)
 metadata/_edit_lock_ = true
 
-[node name="ThiefCar" parent="." instance=ExtResource("2_r5x7g")]
+[node name="CarSprite2D2" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(960, 1008)
-script = null
+texture_filter = 1
+position = Vector2(960, 952)
+scale = Vector2(8, 8)
+texture = ExtResource("3_qm8ye")
+vframes = 3
+region_rect = Rect2(0, 0, 448, 160)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="CarSprite2D2"]
+visible = false
+position = Vector2(0, 1)
+scale = Vector2(0.125, 0.125)
+occluder = SubResource("OccluderPolygon2D_80l0k")
+
+[node name="HeadLights" type="PointLight2D" parent="CarSprite2D2"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(25, 1)
+scale = Vector2(0.125, 0.125)
+color = Color(0.985389, 0.939989, 0.696828, 1)
+energy = 0.6
+shadow_enabled = true
+shadow_filter_smooth = 5.0
+texture = ExtResource("4_l1qb2")
+offset = Vector2(-200, 0)
+metadata/_edit_lock_ = true
+
+[node name="TailLights" type="PointLight2D" parent="CarSprite2D2"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(-24, 0)
+scale = Vector2(0.125, 0.125)
+color = Color(0.981995, 0.514889, 0.452249, 1)
+energy = 0.3
+shadow_enabled = true
+shadow_filter_smooth = 5.0
+texture = ExtResource("5_h2ba2")
+offset = Vector2(192, 0)
+metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["masked_by_player_vision"]]
 position = Vector2(1304, 680)
@@ -198,27 +234,39 @@ sprite_frames = ExtResource("5_l1qb2")
 animation = &"IdleSouth"
 speed_scale = 1.5
 
+[node name="CoverReferenceRect" type="ReferenceRect" parent="."]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(630, 500)
+offset_left = 312.0
+offset_top = 80.0
+offset_right = 942.0
+offset_bottom = 580.0
+scale = Vector2(2, 2)
+border_color = Color(0.908041, 0, 1, 1)
+border_width = 8.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(930, 580)
-zoom = Vector2(0.5, 0.5)
+unique_name_in_owner = true
+anchor_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -15.0
-offset_top = 264.0
-offset_right = 1244.0
-offset_bottom = 552.0
-grow_horizontal = 2
-text = "Cookie Heist"
-label_settings = SubResource("LabelSettings_6i3xf")
-horizontal_alignment = 1
 
 [node name="BrackeysGameJam2025_2Logo" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(510, 904)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_80l0k")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -629.5
+offset_top = 248.0
+offset_right = 629.5
+offset_bottom = 536.0
+grow_horizontal = 2
+text = "Cookie Heist"
+label_settings = SubResource("LabelSettings_6i3xf")
+horizontal_alignment = 1

@@ -345,21 +345,27 @@ appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("8_b3fh1")]
 position = Vector2(1156, 1392)
+guard_position_index = 0
 
 [node name="SecurityGuard3" parent="MapRoot/Guards" index="1" instance=ExtResource("8_b3fh1")]
 position = Vector2(1728, 1656)
+guard_position_index = 0
 
 [node name="SecurityGuard4" parent="MapRoot/Guards" index="2" instance=ExtResource("8_b3fh1")]
 position = Vector2(1528, 2376)
+guard_position_index = 0
 
 [node name="SecurityGuard5" parent="MapRoot/Guards" index="3" instance=ExtResource("8_b3fh1")]
 position = Vector2(990, 2928)
+guard_position_index = 0
 
 [node name="SecurityGuard6" parent="MapRoot/Guards" index="4" instance=ExtResource("8_b3fh1")]
 position = Vector2(385.391, 2651.73)
+guard_position_index = 0
 
 [node name="SecurityGuard7" parent="MapRoot/Guards" index="5" instance=ExtResource("8_b3fh1")]
 position = Vector2(456, 2176)
+guard_position_index = 0
 
 [node name="Player" parent="MapRoot" index="10"]
 position = Vector2(1539.76, 1091.58)

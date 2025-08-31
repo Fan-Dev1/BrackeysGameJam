@@ -78,7 +78,7 @@ texture_filter = 1
 position = Vector2(0, -33)
 scale = Vector2(0.667, 0.667)
 sprite_frames = SubResource("SpriteFrames_hmdob")
-animation = &"Hiding"
+autoplay = "default"
 
 [node name="OutlineSprite2D" type="Sprite2D" parent="FlowerPotSprite2D"]
 unique_name_in_owner = true

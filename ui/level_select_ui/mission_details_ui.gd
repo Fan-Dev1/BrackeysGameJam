@@ -37,6 +37,7 @@ func _update_ui() -> void:
 		stretch_goal_container.remove_child(old_goal)
 		old_goal.queue_free()
 	
+	var has_none_stretch_goal := true
 	for level_goal: LevelGoal in level_mission.level_goals:
 		var goal_checkbox: CheckBox = GOAL_CHECK_BOX.instantiate()
 		goal_checkbox.text = level_goal.goal_text
@@ -46,7 +47,14 @@ func _update_ui() -> void:
 		if level_goal.goal_type == 0:
 			main_goal_container.add_child(goal_checkbox)
 		else:
+			has_none_stretch_goal = false
 			stretch_goal_container.add_child(goal_checkbox)
+	
+	if has_none_stretch_goal:
+		var goal_checkbox: CheckBox = GOAL_CHECK_BOX.instantiate()
+		goal_checkbox.text = "none available"
+		goal_checkbox.button_pressed = true
+		stretch_goal_container.add_child(goal_checkbox)
 
 
 func set_level_mission(_level_mission: LevelMission) -> void:
