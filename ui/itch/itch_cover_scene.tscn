@@ -1,0 +1,224 @@
+[gd_scene load_steps=22 format=3 uid="uid://bji21ff8kxjhs"]
+
+[ext_resource type="Script" uid="uid://cekml1idu14q1" path="res://ui/itch/itch_cover_scene.gd" id="1_r5x7g"]
+[ext_resource type="Texture2D" uid="uid://dcbn3xbm6u5jf" path="res://core/thief_car/car_driving_parallex_sprites.png" id="1_tdweg"]
+[ext_resource type="PackedScene" uid="uid://d3rxxvccy5nlr" path="res://core/thief_car/thief_car.tscn" id="2_r5x7g"]
+[ext_resource type="Texture2D" uid="uid://bbhfeba5dbtx5" path="res://core/security_guard/Guard.png" id="4_6hwa6"]
+[ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="5_l1qb2"]
+[ext_resource type="FontFile" uid="uid://c5qw4j6h2tlna" path="res://ui/fonts/fusion-pixel-10px-proportional-sc-latin-400-normal.woff2" id="6_h2ba2"]
+[ext_resource type="Texture2D" uid="uid://nhcsglbv34ad" path="res://ui/itch/Brackeys Game Jam 2025.2 Logo.png" id="7_80l0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx8x8"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylcyo"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snib7"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8xhu"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qgeb"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ahe6"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuco0"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yhi0"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmkuu"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o01ts"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c774s"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn1ve"]
+atlas = ExtResource("4_6hwa6")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdknj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx8x8")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylcyo")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snib7")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8xhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qgeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ahe6")
+}],
+"loop": true,
+"name": &"run_down",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuco0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yhi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmkuu")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o01ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c774s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn1ve")
+}],
+"loop": true,
+"name": &"run_up",
+"speed": 6.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6i3xf"]
+font = ExtResource("6_h2ba2")
+font_size = 180
+outline_size = 50
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 40
+shadow_color = Color(0, 0, 0, 0.635294)
+shadow_offset = Vector2(12, 12)
+
+[node name="ItchCoverScene" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_r5x7g")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+border_color = Color(0.908041, 0, 1, 1)
+border_width = 8.0
+
+[node name="SkySprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_tdweg")
+region_enabled = true
+region_rect = Rect2(0, 0, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="CloudSprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_tdweg")
+region_enabled = true
+region_rect = Rect2(0, 270, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="StreetSprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_tdweg")
+region_enabled = true
+region_rect = Rect2(0, 540, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="TreesSprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_tdweg")
+region_enabled = true
+region_rect = Rect2(0, 1080, 480, 270)
+metadata/_edit_lock_ = true
+
+[node name="ThiefCar" parent="." instance=ExtResource("2_r5x7g")]
+unique_name_in_owner = true
+position = Vector2(960, 1008)
+script = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["masked_by_player_vision"]]
+position = Vector2(1304, 680)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rdknj")
+animation = &"run_right"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(1424, 976)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("5_l1qb2")
+animation = &"IdleSouth"
+speed_scale = 1.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(930, 580)
+zoom = Vector2(0.5, 0.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = 264.0
+offset_right = 1244.0
+offset_bottom = 552.0
+grow_horizontal = 2
+text = "Cookie Heist"
+label_settings = SubResource("LabelSettings_6i3xf")
+horizontal_alignment = 1
+
+[node name="BrackeysGameJam2025_2Logo" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(510, 904)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_80l0k")
