@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_d3o6j"]
 script = ExtResource("1_jv3tm")
-goal_text = "Collect 2 cookies within 150 seconds"
+goal_text = "Collect 1 cookies within 150 seconds"
 goal_reached = false
 goal_type = 0
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"

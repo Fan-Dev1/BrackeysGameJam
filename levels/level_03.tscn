@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://o4veqm2euuq0"]
+[gd_scene load_steps=16 format=4 uid="uid://o4veqm2euuq0"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_0mo0b"]
 [ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="2_2wlag"]
@@ -60,20 +60,6 @@ _data = {
 &"laser_loop_3": SubResource("Animation_wq170")
 }
 
-[sub_resource type="Animation" id="Animation_3ew82"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_2wlag"]
-resource_name = "sweep_laser"
-length = 2.5
-loop_mode = 2
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bj1y"]
-_data = {
-&"RESET": SubResource("Animation_3ew82"),
-&"sweep_laser": SubResource("Animation_2wlag")
-}
-
 [sub_resource type="LabelSettings" id="LabelSettings_5pqto"]
 font = ExtResource("11_j4ks3")
 font_size = 80
@@ -100,55 +86,23 @@ tile_map_data = PackedByteArray("AADs/x0ABAAAAAMAAADs/x4ABAAAAAQAAADv/x0ABAACAAM
 position = Vector2(-56, 1408)
 rotation = 1.57079
 
-[node name="CLosedDoor1" parent="MapRoot/Interactables" index="1" instance=ExtResource("2_lear0")]
+[node name="CLosedDoor1" parent="MapRoot/Interactables" index="1" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("2_lear0")]
 position = Vector2(1536, 1200)
+controlling_lever = NodePath("../ImpossibleLeverButton7")
 
-[node name="ClosedDoor2" parent="MapRoot/Interactables" index="2" instance=ExtResource("2_lear0")]
+[node name="ClosedDoor2" parent="MapRoot/Interactables" index="2" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("2_lear0")]
 position = Vector2(1536, 1344)
 rotation = 3.14159
+controlling_lever = NodePath("../ImpossibleLeverButton7")
 door_state = 0
 
-[node name="LeverButton2" parent="MapRoot/Interactables" index="3" instance=ExtResource("3_85vqe")]
-position = Vector2(1008, 1912)
-rotation = 1.57079
-
-[node name="HidingSpot2" parent="MapRoot/Interactables" index="4" instance=ExtResource("4_ngl01")]
-position = Vector2(1888, 2184)
-
-[node name="HidingSpot6" parent="MapRoot/Interactables" index="5" instance=ExtResource("4_ngl01")]
-position = Vector2(1872, 2904)
-
-[node name="HidingSpot3" parent="MapRoot/Interactables" index="6" instance=ExtResource("4_ngl01")]
-position = Vector2(1888, 1568)
-
-[node name="HidingSpot4" parent="MapRoot/Interactables" index="7" instance=ExtResource("4_ngl01")]
-position = Vector2(1248, 1360)
-
-[node name="HidingSpot5" parent="MapRoot/Interactables" index="8" instance=ExtResource("4_ngl01")]
-position = Vector2(1184, 2048)
-
-[node name="LeverButton3" parent="MapRoot/Interactables" index="9" instance=ExtResource("3_85vqe")]
-position = Vector2(992, 2480)
-rotation = 3.14159
-
-[node name="LeverButton4" parent="MapRoot/Interactables" index="10" instance=ExtResource("3_85vqe")]
-position = Vector2(288, 2992)
-rotation = -3.14159
-
-[node name="LeverButton5" parent="MapRoot/Interactables" index="11" instance=ExtResource("3_85vqe")]
-position = Vector2(160, 2992)
-rotation = -3.14159
-
-[node name="LeverButton6" parent="MapRoot/Interactables" index="12" instance=ExtResource("3_85vqe")]
-position = Vector2(1856, 3152)
-
-[node name="LeverButton" parent="MapRoot/Interactables" index="13" instance=ExtResource("3_85vqe")]
+[node name="LeverButton" parent="MapRoot/Interactables" index="3" instance=ExtResource("3_85vqe")]
 position = Vector2(32, 1224)
 
-[node name="HidingSpot" parent="MapRoot/Interactables" index="14" instance=ExtResource("4_ngl01")]
+[node name="HidingSpot" parent="MapRoot/Interactables" index="4" instance=ExtResource("4_ngl01")]
 position = Vector2(-480, 1544)
 
-[node name="LeverLockPuzzle" type="Node2D" parent="MapRoot/Interactables" index="15"]
+[node name="LeverLockPuzzle" type="Node2D" parent="MapRoot/Interactables" index="5"]
 position = Vector2(248, 232)
 
 [node name="On1LeverButton" parent="MapRoot/Interactables/LeverLockPuzzle" index="0" instance=ExtResource("3_85vqe")]
@@ -156,7 +110,6 @@ position = Vector2(-1208, 1320)
 
 [node name="Off2LeverButton" parent="MapRoot/Interactables/LeverLockPuzzle" index="1" instance=ExtResource("3_85vqe")]
 position = Vector2(-1400, 1320)
-flipped_over = false
 
 [node name="On3LeverButton" parent="MapRoot/Interactables/LeverLockPuzzle" index="2" instance=ExtResource("3_85vqe")]
 position = Vector2(-1208, 1032)
@@ -165,7 +118,6 @@ rotation = -3.14159
 [node name="Off4LeverButton" parent="MapRoot/Interactables/LeverLockPuzzle" index="3" instance=ExtResource("3_85vqe")]
 position = Vector2(-1400, 1032)
 rotation = -3.14159
-flipped_over = false
 
 [node name="OnDoor5" parent="MapRoot/Interactables/LeverLockPuzzle" index="4" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("2_lear0")]
 position = Vector2(-1552, 1272)
@@ -250,11 +202,12 @@ mode = 0
 beam_length = 464.0
 appointed_guard = NodePath("../../../Guards/SecurityGuard")
 
+[node name="ImpossibleLeverButton7" parent="MapRoot/Interactables" index="6" instance=ExtResource("3_85vqe")]
+position = Vector2(1542.53, 1575.72)
+flipped_over = false
+
 [node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("6_wq170")]
 position = Vector2(-1888, 1472)
-
-[node name="CookieStash2" parent="MapRoot/CookiesStashes" index="1" instance=ExtResource("6_wq170")]
-position = Vector2(168, 2280)
 
 [node name="DetectionBeam" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever", "appointed_guard") groups=["masked_by_player_vision"] instance=ExtResource("4_p0vsl")]
 position = Vector2(16, 1264)
@@ -281,71 +234,8 @@ libraries = {
 }
 autoplay = "laser_loop_3"
 
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="2" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("4_p0vsl")]
-position = Vector2(990, 2352)
-rotation = -1.57079
-controlling_lever = NodePath("../../Interactables/LeverButton2")
-mode = 0
-beam_length = 256.0
-appointed_guard = NodePath("../../Guards/SecurityGuard")
-
-[node name="LeftRoomLaser" type="Node2D" parent="MapRoot/SecurityDevices" index="3"]
-position = Vector2(-64, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_0bj1y")
-}
-autoplay = "sweep_laser"
-
-[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="1" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("4_p0vsl")]
-position = Vector2(-48, 2496)
-controlling_lever = NodePath("../../../Interactables/LeverButton4")
-mode = 0
-beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard")
-
-[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="2" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("4_p0vsl")]
-position = Vector2(-48, 2816)
-controlling_lever = NodePath("../../../Interactables/LeverButton6")
-mode = 0
-beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard")
-
-[node name="DetectionBeam6" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="3" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("4_p0vsl")]
-position = Vector2(-48, 2952)
-controlling_lever = NodePath("../../../Interactables/LeverButton2")
-mode = 0
-beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard")
-
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="4" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("4_p0vsl")]
-position = Vector2(-48, 2368)
-controlling_lever = NodePath("../../../Interactables/LeverButton3")
-mode = 0
-beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard")
-
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_6hrdw")]
 position = Vector2(-1168, 1895)
-
-[node name="SecurityGuard2" parent="MapRoot/Guards" index="1" instance=ExtResource("7_6hrdw")]
-position = Vector2(1156, 1392)
-
-[node name="SecurityGuard3" parent="MapRoot/Guards" index="2" instance=ExtResource("7_6hrdw")]
-position = Vector2(1728, 1656)
-
-[node name="SecurityGuard4" parent="MapRoot/Guards" index="3" instance=ExtResource("7_6hrdw")]
-position = Vector2(1528, 2376)
-
-[node name="SecurityGuard5" parent="MapRoot/Guards" index="4" instance=ExtResource("7_6hrdw")]
-position = Vector2(990, 2928)
-
-[node name="SecurityGuard6" parent="MapRoot/Guards" index="5" instance=ExtResource("7_6hrdw")]
-position = Vector2(385.391, 2651.73)
-
-[node name="SecurityGuard7" parent="MapRoot/Guards" index="6" instance=ExtResource("7_6hrdw")]
-position = Vector2(456, 2176)
 
 [node name="Player" parent="MapRoot" index="10"]
 position = Vector2(1539.76, 1091.58)

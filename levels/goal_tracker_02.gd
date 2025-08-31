@@ -24,10 +24,12 @@ func _on_player_spotted(position: Vector2, device: Node2D) -> void:
 
 func update_mission_goals() -> void:
 	var level_goals := level.level_mission.level_goals
-	var detection_beam_goal := level_goals[1]
-	detection_beam_goal.goal_reached = not spotted_by_detection_beam
-	var take_bridge_goal := level_goals[2]
-	take_bridge_goal.goal_reached = taken_bridge
+	if level_goals.size() > 1:
+		var detection_beam_goal := level_goals[1]
+		detection_beam_goal.goal_reached = not spotted_by_detection_beam
+	if level_goals.size() > 2:
+		var take_bridge_goal := level_goals[2]
+		take_bridge_goal.goal_reached = taken_bridge
 
 
 func _on_bridge_area_2d_body_entered(body: Node2D) -> void:

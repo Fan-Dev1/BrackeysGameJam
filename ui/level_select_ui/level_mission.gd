@@ -21,3 +21,14 @@ func can_finish_mission() -> bool:
 func main_goals() -> Array[LevelGoal]:
 	return level_goals.filter(func (level_goal: LevelGoal): 
 		return level_goal.goal_type == LevelGoal.Type.MAIN_GOAL)
+
+
+func update_goal(index: int, goal_reached: bool) -> void:
+	if index >= level_goals.size():
+		push_warning("out of bounds: " + str(index))
+		return
+	var level_goal := level_goals[index]
+	if level_goal != null:
+		level_goal.goal_reached = goal_reached
+	else:
+		push_warning("level_goal was null at: " + str(index))

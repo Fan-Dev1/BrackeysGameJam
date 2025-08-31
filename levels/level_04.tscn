@@ -241,9 +241,10 @@ door_state = 2
 [node name="Door20" parent="MapRoot/Interactables/Doors" index="20" instance=ExtResource("3_g141h")]
 position = Vector2(0, 2976)
 
-[node name="ImpossibleDoor4" parent="MapRoot/Interactables" index="1" instance=ExtResource("3_g141h")]
+[node name="ImpossibleDoor4" parent="MapRoot/Interactables" index="1" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("3_g141h")]
 position = Vector2(-56, 1408)
 rotation = 1.57079
+controlling_lever = NodePath("../ImpossibleLeverButton7")
 
 [node name="LeverButton" parent="MapRoot/Interactables" index="2" instance=ExtResource("4_hapfj")]
 position = Vector2(32, 1224)
@@ -303,7 +304,7 @@ rotation = -1.57079
 controlling_lever = NodePath("../../Interactables/LeverButton2")
 mode = 0
 beam_length = 256.0
-appointed_guard = NodePath("../../Guards/SecurityGuard2")
+appointed_guard = NodePath("../../Guards/SecurityGuard3")
 
 [node name="LeftRoomLaser" type="Node2D" parent="MapRoot/SecurityDevices" index="2"]
 position = Vector2(-64, 0)
@@ -319,7 +320,7 @@ position = Vector2(-48, 2496)
 controlling_lever = NodePath("../../../Interactables/LeverButton4")
 mode = 0
 beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard2")
+appointed_guard = NodePath("../../../Guards/SecurityGuard6")
 
 [node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="2" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2816)
@@ -333,7 +334,7 @@ position = Vector2(-48, 2952)
 controlling_lever = NodePath("../../../Interactables/LeverButton2")
 mode = 0
 beam_length = 960.0
-appointed_guard = NodePath("../../../Guards/SecurityGuard2")
+appointed_guard = NodePath("../../../Guards/SecurityGuard6")
 
 [node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LeftRoomLaser" index="4" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("6_vlrfo")]
 position = Vector2(-48, 2368)

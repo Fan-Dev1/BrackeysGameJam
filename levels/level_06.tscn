@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=4 uid="uid://vjnujqcn3oi6"]
+[gd_scene load_steps=28 format=4 uid="uid://vjnujqcn3oi6"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_k8ise"]
 [ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="2_0ffyv"]
 [ext_resource type="Script" uid="uid://8wt75g3nm4vn" path="res://levels/goal_tracker_06.gd" id="2_7c8pi"]
+[ext_resource type="Resource" uid="uid://bdpmuhw2ih25" path="res://levels/missions/level_06_mission.tres" id="2_lljxk"]
 [ext_resource type="PackedScene" uid="uid://be3ewbyga6008" path="res://core/lever_button/lever_button.tscn" id="3_7c8pi"]
 [ext_resource type="PackedScene" uid="uid://bnl8ikta6u6ne" path="res://core/hiding_spot/hiding_spot.tscn" id="4_lljxk"]
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="5_ecahe"]
@@ -61,7 +62,7 @@ _data = {
 &"loop_detection_beam": SubResource("Animation_q7ibo")
 }
 
-[sub_resource type="Resource" id="Resource_7c8pi"]
+[sub_resource type="Resource" id="Resource_ecahe"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = 1.1781
@@ -69,7 +70,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_lljxk"]
+[sub_resource type="Resource" id="Resource_4ncwt"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = -1.1781
@@ -77,7 +78,7 @@ duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_ecahe"]
+[sub_resource type="Resource" id="Resource_jepln"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = -1.44862
@@ -85,7 +86,7 @@ duration_min_sec = 2.0
 duration_max_sec = 5.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_4ncwt"]
+[sub_resource type="Resource" id="Resource_fk51f"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = 1.44862
@@ -93,7 +94,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_jepln"]
+[sub_resource type="Resource" id="Resource_d0fql"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = -1.18682
@@ -115,7 +116,7 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_fk51f"]
+[sub_resource type="Resource" id="Resource_dbgp1"]
 resource_local_to_scene = true
 script = ExtResource("8_fk51f")
 rotation = 0.872665
@@ -132,6 +133,7 @@ outline_color = Color(0, 0, 0, 1)
 size = Vector2(192, 200)
 
 [node name="Level_06" instance=ExtResource("1_k8ise")]
+level_mission = ExtResource("2_lljxk")
 
 [node name="GoalTracker" parent="." index="0"]
 script = ExtResource("2_7c8pi")
@@ -239,7 +241,7 @@ autoplay = "loop_detection_beam"
 position = Vector2(1008, 1868)
 rotation = -4.36332
 radius = 210.0
-camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_7c8pi"), SubResource("Resource_lljxk")])
+camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_ecahe"), SubResource("Resource_4ncwt")])
 
 [node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" instance=ExtResource("7_jepln")]
 position = Vector2(864, 2300)
@@ -249,7 +251,7 @@ rotaton_speed = 1.0
 fov = 0.523599
 left_limit = -1.71042
 right_limit = 1.71042
-camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_ecahe"), SubResource("Resource_4ncwt")])
+camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_jepln"), SubResource("Resource_fk51f")])
 
 [node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("7_jepln")]
 position = Vector2(1344, 1472)
@@ -259,7 +261,7 @@ radius = 278.0
 rotaton_speed = 3.0
 fov = 1.0472
 left_limit = -3.14159
-camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_jepln"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_fk51f")])
+camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_d0fql"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_dbgp1")])
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("9_d0fql")]
 position = Vector2(910, 1522)
