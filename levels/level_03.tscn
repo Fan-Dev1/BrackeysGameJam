@@ -48,6 +48,57 @@ _data = {
 &"laser_loop_3": SubResource("Animation_wq170")
 }
 
+[sub_resource type="Animation" id="Animation_3ew82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DetectionBeam4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-48, 2496)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DetectionBeam2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-48, 2368)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DetectionBeam6:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-48, 2952)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DetectionBeam5:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-48, 2816)]
+}
+
 [sub_resource type="Animation" id="Animation_2wlag"]
 resource_name = "sweep_laser"
 length = 2.5
@@ -99,57 +150,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-48, 2816), Vector2(-48, 2944)]
-}
-
-[sub_resource type="Animation" id="Animation_3ew82"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DetectionBeam4:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-48, 2496)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DetectionBeam2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-48, 2368)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DetectionBeam6:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-48, 2952)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("DetectionBeam5:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-48, 2816)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0bj1y"]
@@ -464,27 +464,28 @@ beam_length = 960.0
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_6hrdw")]
 position = Vector2(-1168, 1895)
-guard_position_index = 0
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="1" instance=ExtResource("7_6hrdw")]
 position = Vector2(1156, 1392)
+guard_position_index = 0
 
 [node name="SecurityGuard3" parent="MapRoot/Guards" index="2" instance=ExtResource("7_6hrdw")]
 position = Vector2(1728, 1656)
-guard_position_index = 0
 
 [node name="SecurityGuard4" parent="MapRoot/Guards" index="3" instance=ExtResource("7_6hrdw")]
 position = Vector2(1528, 2376)
+guard_position_index = 0
 
 [node name="SecurityGuard5" parent="MapRoot/Guards" index="4" instance=ExtResource("7_6hrdw")]
 position = Vector2(990, 2928)
+guard_position_index = 0
 
 [node name="SecurityGuard6" parent="MapRoot/Guards" index="5" instance=ExtResource("7_6hrdw")]
 position = Vector2(385.391, 2651.73)
+guard_position_index = 0
 
 [node name="SecurityGuard7" parent="MapRoot/Guards" index="6" instance=ExtResource("7_6hrdw")]
 position = Vector2(456, 2176)
-guard_position_index = 0
 
 [node name="Player" parent="MapRoot" index="9"]
 position = Vector2(1539.76, 1091.58)
