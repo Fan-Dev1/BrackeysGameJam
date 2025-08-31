@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bkumol8f5qnnh"]
+[gd_scene load_steps=21 format=4 uid="uid://bkumol8f5qnnh"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_8yqd8"]
 [ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="2_didps"]
@@ -132,6 +132,12 @@ duration_max_sec = 3.0
 target_marker = Vector2(240, 8)
 metadata/_custom_type_script = "uid://tdiec21ofqup"
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_05651"]
+vertices = PackedVector2Array(1371.34, 1494.28, 1303.13, 1665.46, 1309.91, 1437.82, 1378.34, 1363.04, -491.703, 1365.95, 414.32, 1443.15, 1993.05, 1843.16, 2036.11, 1833.51, 2121.9, 2140.95, 1923.48, 2130.99, 1868.63, 2085.34, 1378.22, 1584.91, 1381.03, 1694.89, 1378.86, 1694.44, 1991, 1529.29, 1993.65, 1252.24, 2214.62, 1294.71, 2027.16, 1506.66, 406.344, 1494, -223.391, 1494, -213.039, 1434, -426.477, 1445.61, -487.281, 1822.15, -422.523, 1680.68, 419.68, 1826.83, -230.633, 1689.47, 416.688, 1757, -232.703, 1640.86, 424, 1638.12, 424, 1678.9, 599.594, 1757, 609.344, 1699.17, 1378.05, 2143.54, 1055, 2149.45, 1055, 2014.07, 1305.26, 2006.15, 1328.81, 1768.09, 1561.96, 1585.46, 1555.6, 1492.64, 1560.59, 1116.62, 1691.31, 1119.39, 1707.03, 1462.37, 1709.99, 1615.77, 1697.92, 1977.85, 2211.44, 1508.67, 1713.07, 2074.22, 1758.11, 2133.95, 1558.18, 2101.5, 1137.95, 1749.29, 1152, 1693.92, 615.578, 1624.3, 1124.2, 1629.78, 1127.64, 1829.62, 612.656, 1822.34)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 1, 0), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20), PackedInt32Array(4, 5, 18, 20), PackedInt32Array(4, 20, 21), PackedInt32Array(22, 4, 21, 23), PackedInt32Array(24, 22, 23, 25, 26), PackedInt32Array(26, 25, 27, 28, 29), PackedInt32Array(30, 26, 29, 31), PackedInt32Array(32, 33, 34, 35), PackedInt32Array(13, 32, 35, 36), PackedInt32Array(37, 38, 39, 40, 41, 42, 43), PackedInt32Array(16, 44, 17), PackedInt32Array(14, 17, 7, 6), PackedInt32Array(45, 10, 9, 46, 47), PackedInt32Array(45, 47, 37, 43), PackedInt32Array(38, 37, 11, 0), PackedInt32Array(1, 13, 36, 48, 49), PackedInt32Array(48, 31, 50, 51, 49), PackedInt32Array(48, 52, 53, 30, 31)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1025, 1985, 1025, 2180, 1408, 2173, 1409, 1615, 1170, 1660, 1144, 1600, 588, 1594, 582, 1666, 454, 1652, 454, 1608, -264, 1611, -262, 1658, -393, 1652, -396, 1474, -249, 1466, -259, 1524, 432, 1524, 440, 1473, 1279, 1468, 1272, 1703, 1412, 1732, 1409, 1615, 1531.74, 1615.37, 1528, 2127, 1756, 2164, 1923, 2161, 2162, 2173, 2066, 1829, 2058, 1537, 2241, 1539, 2245, 1270, 1964, 1216, 1961, 1529, 1963, 1836, 1851, 2054, 1739, 2046, 1728, 1976, 1740, 1616, 1737, 1461, 1720, 1090, 1531, 1086, 1525.99, 1462.9, 1403, 1464, 1410, 1333, -522, 1336, -517, 1852, 451, 1857, 448, 1787, 575, 1787, 588, 1852, 1154, 1860, 1164, 1782, 1296, 1795, 1278, 1977)])
+agent_radius = 30.0
+
 [node name="Level_02" instance=ExtResource("1_8yqd8")]
 level_mission = ExtResource("2_didps")
 
@@ -188,11 +194,12 @@ metadata/_edit_lock_ = true
 [node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_didps")]
 position = Vector2(936, 1408)
 
-[node name="EntranceDetectionBeam" parent="MapRoot/SecurityDevices" index="0" instance=ExtResource("5_mihb8")]
+[node name="EntranceDetectionBeam" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(1712, 1256)
 rotation = 3.14159
 mode = 0
 beam_length = 192.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MapRoot/SecurityDevices/EntranceDetectionBeam" index="5"]
 root_node = NodePath("../..")
@@ -211,54 +218,62 @@ libraries = {
 }
 autoplay = "laser_loop_3"
 
-[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/MovingPair1" index="1" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/MovingPair1" index="1" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(1152, 1488)
 rotation = 1.57078
 beam_length = 256.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(2.3, 1.4, 2.3)
 
-[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/MovingPair1" index="2" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/MovingPair1" index="2" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(576, 1712)
 rotation = -1.5708
 beam_length = 256.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(2.3, 1.4, 2.3)
 
 [node name="LaserWave" type="Node2D" parent="MapRoot/SecurityDevices" index="2"]
 
-[node name="DetectionBeam1" parent="MapRoot/SecurityDevices/LaserWave" index="0" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam1" parent="MapRoot/SecurityDevices/LaserWave" index="0" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(416, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(0, 2, 10, 2)
 
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LaserWave" index="1" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam2" parent="MapRoot/SecurityDevices/LaserWave" index="1" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(288, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(1, 2, 8, 2, 1)
 
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices/LaserWave" index="2" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam3" parent="MapRoot/SecurityDevices/LaserWave" index="2" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(160, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(2, 2, 6, 2, 2)
 
-[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/LaserWave" index="3" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam4" parent="MapRoot/SecurityDevices/LaserWave" index="3" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(32, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(3, 2, 4, 2, 3)
 
-[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LaserWave" index="4" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam5" parent="MapRoot/SecurityDevices/LaserWave" index="4" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(-96, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(4, 2, 2, 2, 4)
 
-[node name="DetectionBeam6" parent="MapRoot/SecurityDevices/LaserWave" index="5" instance=ExtResource("5_mihb8")]
+[node name="DetectionBeam6" parent="MapRoot/SecurityDevices/LaserWave" index="5" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("5_mihb8")]
 position = Vector2(-224, 1840)
 rotation = -1.5708
 beam_length = 512.0
+appointed_guard = NodePath("../../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(5, 4, 5)
 
 [node name="Guards" parent="MapRoot" index="9"]
@@ -267,7 +282,7 @@ rotation = 3.14159
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_mihb8")]
 position = Vector2(-1111.99, -2080)
 rotation = -3.14159
-guard_position_index = 1
+rotaton_speed = 2.0
 guard_positions = Array[ExtResource("8_2owmk")]([SubResource("Resource_ptygn"), SubResource("Resource_cwmx8")])
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
@@ -280,5 +295,8 @@ offset_top = 276.0
 offset_right = 808.0
 offset_bottom = 1788.0
 editor_only = false
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="7"]
+navigation_polygon = SubResource("NavigationPolygon_05651")
 
 [connection signal="body_entered" from="GoalTracker/BridgeArea2D" to="GoalTracker" method="_on_bridge_area_2d_body_entered"]

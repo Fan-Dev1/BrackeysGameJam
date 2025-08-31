@@ -38,23 +38,22 @@ var detected := "Player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	original_position = self.global_position
-	_update_fov_polygon()
+	
 	var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 	rotate_camera_toward(guard_pos.rotation)
 	var duration := randf_range(guard_pos.duration_min_sec, guard_pos.duration_max_sec)
 	position_timer.start(duration)
-
+	original_position = self.global_position
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
-		_update_fov_polygon()
+		
 		#_clamp_camera_rotations()
 		queue_redraw()
 		var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 		rotate_camera_toward(guard_pos.rotation)
 	else:
-		_update_fov_polygon()
+		
 		match state:
 			GuardState.NORMAL: _normal_process(delta)
 			GuardState.TRACKING: _tracking_process(delta)
@@ -150,7 +149,7 @@ func _return_process(delta) -> void:
 	move_and_slide()
 	if navigation_agent_2d.is_navigation_finished():
 		velocity = Vector2.ZERO
-		position = original_position
+		global_position = original_position
 		change_light_colors(Color8(255,255,123)) #yellow
 		state = GuardState.NORMAL
 
@@ -187,20 +186,7 @@ func set_state(new_state: GuardState) -> void:
 		tracking_timer.stop()
 
 
-func _update_fov_polygon(circle_points := 12) -> void:
-	pass 
-	#var new_polygon := PackedVector2Array()
-	#var fov_step := fov / circle_points
-	#var current_angle := -fov_step * (circle_points / 2.0)
-	
-	#new_polygon.append(Vector2(0.0, -8.0))
-	#for i in range(circle_points + 1):
-		
-	#	current_angle += fov_step
-	#	new_polygon.append(Vector2.from_angle(current_angle) * radius)
-	#new_polygon.append(Vector2(0.0, 8.0))
-	#guard_fov.polygon = new_polygon
-	#guard_collision.polygon = new_polygon
+
 
 func rotate_camera_toward(to: float, delta := 1.0) -> void:
 	var from := guard_area_2d.rotation
