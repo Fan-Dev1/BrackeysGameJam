@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="LevelMission" load_steps=7 format=3 uid="uid://c2vwisavjdjuy"]
+
+[ext_resource type="Script" uid="uid://dnrw5msmlqhea" path="res://ui/level_select_ui/level_goal.gd" id="1_v02e5"]
+[ext_resource type="AudioStream" uid="uid://cf3f4s4yahc7q" path="res://levels/missions/cookie jam.mp3" id="2_rl087"]
+[ext_resource type="Texture2D" uid="uid://br5gm5fm5jmyj" path="res://levels/missions/Level_06_preview.png" id="3_v02e5"]
+[ext_resource type="Script" uid="uid://btji1vxv6jj7s" path="res://ui/level_select_ui/level_mission.gd" id="4_2tltq"]
+
+[sub_resource type="Resource" id="Resource_d3o6j"]
+script = ExtResource("1_v02e5")
+goal_text = "Collect 1 cookies within 150 seconds"
+goal_reached = false
+goal_type = 0
+metadata/_custom_type_script = "uid://dnrw5msmlqhea"
+
+[sub_resource type="Resource" id="Resource_oiihw"]
+script = ExtResource("1_v02e5")
+goal_text = "Open every door"
+goal_reached = false
+goal_type = 1
+metadata/_custom_type_script = "uid://dnrw5msmlqhea"
+
+[resource]
+script = ExtResource("4_2tltq")
+level_index = 6
+level_name = "A Concept"
+level_path = "uid://vjnujqcn3oi6"
+level_preview_texture = ExtResource("3_v02e5")
+level_music = ExtResource("2_rl087")
+level_goals = Array[ExtResource("1_v02e5")]([SubResource("Resource_d3o6j"), SubResource("Resource_oiihw")])
+used_device_count = PackedInt32Array(4, 1)
+unlocked = false
+level_completion_time = 150.0
+metadata/_custom_type_script = "uid://btji1vxv6jj7s"

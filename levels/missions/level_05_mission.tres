@@ -21,9 +21,9 @@ metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
 [resource]
 script = ExtResource("4_ehxhk")
-level_index = 4
+level_index = 5
 level_name = "Door Maze"
-level_path = "uid://bow6dx6gppwwl"
+level_path = "uid://c3u6j7clnmqo7"
 level_preview_texture = ExtResource("3_v2hvu")
 level_music = ExtResource("2_st03p")
 level_goals = Array[ExtResource("1_bghnh")]([SubResource("Resource_d3o6j"), SubResource("Resource_oiihw")])

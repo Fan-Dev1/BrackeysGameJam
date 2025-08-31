@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://0yvwdew6p8sp"]
+[gd_scene load_steps=17 format=4 uid="uid://0yvwdew6p8sp"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_alx8i"]
+[ext_resource type="Resource" uid="uid://d3d2vbronr6pn" path="res://levels/missions/level_04_mission.tres" id="2_6w184"]
 [ext_resource type="Script" uid="uid://c1gi5c72rh4vv" path="res://levels/goal_tracker_04.gd" id="2_hapfj"]
 [ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="3_g141h"]
 [ext_resource type="PackedScene" uid="uid://be3ewbyga6008" path="res://core/lever_button/lever_button.tscn" id="4_hapfj"]
@@ -136,6 +137,7 @@ font = ExtResource("10_6w184")
 font_size = 80
 
 [node name="Level_04" instance=ExtResource("1_alx8i")]
+level_mission = ExtResource("2_6w184")
 
 [node name="GoalTracker" parent="." index="0"]
 script = ExtResource("2_hapfj")
@@ -342,27 +344,21 @@ appointed_guard = NodePath("../../../Guards/SecurityGuard2")
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("8_b3fh1")]
 position = Vector2(1156, 1392)
-guard_position_index = 0
 
 [node name="SecurityGuard3" parent="MapRoot/Guards" index="1" instance=ExtResource("8_b3fh1")]
 position = Vector2(1728, 1656)
-guard_position_index = 0
 
 [node name="SecurityGuard4" parent="MapRoot/Guards" index="2" instance=ExtResource("8_b3fh1")]
 position = Vector2(1528, 2376)
-guard_position_index = 0
 
 [node name="SecurityGuard5" parent="MapRoot/Guards" index="3" instance=ExtResource("8_b3fh1")]
 position = Vector2(990, 2928)
-guard_position_index = 0
 
 [node name="SecurityGuard6" parent="MapRoot/Guards" index="4" instance=ExtResource("8_b3fh1")]
 position = Vector2(385.391, 2651.73)
-guard_position_index = 0
 
 [node name="SecurityGuard7" parent="MapRoot/Guards" index="5" instance=ExtResource("8_b3fh1")]
 position = Vector2(456, 2176)
-guard_position_index = 0
 
 [node name="Player" parent="MapRoot" index="10"]
 position = Vector2(1539.76, 1091.58)
