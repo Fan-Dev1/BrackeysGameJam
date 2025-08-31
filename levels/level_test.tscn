@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://fl583y621j5m"]
+[gd_scene load_steps=24 format=4 uid="uid://fl583y621j5m"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_vac4a"]
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="2_cd850"]
@@ -10,6 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://cdppfmbhnfc3d" path="res://core/security_camera/security_camera.tscn" id="8_qyf36"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="9_f33k1"]
 [ext_resource type="PackedScene" uid="uid://bdtjxtyyetv2y" path="res://core/security_guard/SecurityGuard.tscn" id="10_cd850"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cd850"]
+resource_local_to_scene = true
+vertices = PackedVector2Array(374, 1334, 138, 1334, 138, 1162, 374, 1162, 1846, 1270, 1610, 1270, 1610, 1162, 1846, 1162, 1452.14, 1350, 1235.86, 1350, 406, 1346.36, 406, 1149.64, 1990, 1182, 1964.14, 1286, 1939.86, 1286, 1878, 1282.36, 1878, 1149.64, 1990, 674.078, 1978, 1326.18, 1978, 1299.86, 1994, 1182, 1994, 1542, 1962.36, 1542, 1978, 1534.18, 1926, 1534.18, 1941.64, 1542, 1596.14, 1542, 1091.86, 1542, 1002.36, 1542, 1018, 1534.18, 966, 1534.18, 981.641, 1542, 979.859, 1542, 758, 2054, 490.359, 2054, 506, 2046.18, 758, 2038, 454, 2046.18, 469.641, 2054, 438, 2054, 438, 1478, 362.359, 1478, 378, 1470.18, 326, 1470.18, 341.641, 1478, -21.6406, 1478, -6, 1470.18, -58, 1470.18, -42.3594, 1478, -74, 1478, 1158, 1427.86, 1158, 1475.86, 1146, 1454.18, 1146, 1427.86, 1939.86, 1486, 1526, 1398.18, 1526, 1361.82, 1926, 1326.18, 1952, 1339.18, 1964.14, 1486, 1222, 1363.86, 1926, 1299.86, 1871.45, 1295.45, 454, 2011.86, 467.859, 1998, -74, 1162, -58, 1435.86, -44.1406, 1422, -70, 1162, 1978, 1499.86, 966, 1555.86, 399.453, 1359.45, 506, 2011.86, 966, 2003.86, 966, 2038, 326, 1435.86, -6, 1435.86, -70, 681.898, 125.641, 1130, 1222, 1411.86, 1219.86, 1414, 1171.86, 1414, 1926, 1499.86, 1594, 1539.86, 1594, 1491.86, 1120, 1467.18, 1155.86, 1478, 1107.86, 1478, 1094, 1454.18, 1871.45, 1136.55, 1858.36, 1130, 492.141, 1998, 1510.36, 1354, 1858.36, 1302, 112.547, 1359.45, -19.8594, 1422, 106, 1346.36, 1094, 1539.86, 1018, 1499.86, 1094, 1491.86, 378, 1435.86, 386.359, 1366, 1004.14, 1486, 1597.64, 1130, 1094, 1427.86, 979.859, 1486, 1580.14, 1478, 1510.36, 1406, 1578, 1149.64, 399.453, 1136.55, 1584.55, 1136.55, 1532.14, 1478, 1530, 1475.86, 1530, 1427.86, 1516.14, 1414, 1468.14, 1414, 1497.64, 1406, 1482, 1398.18, 1466, 1411.86, 1466, 1363.86, 1482, 1361.82, 1497.64, 1354, 1578, 1282.36, 1132.14, 1414, 1107.86, 1414, 966, 1499.86, 966, 1836.14, 1082, 1836.14, 1082, 1724.14, 1084.14, 1722, 1132.14, 1722, 1542, 1836.14, 1146, 1708.14, 1146, 1660.14, 1148.14, 1658, 1196.14, 1658, 1210, 1644.14, 1210, 1596.14, 1212.14, 1594, 1260.14, 1594, 1274, 1580.14, 1274, 1532.14, 1276.14, 1530, 1411.86, 1530, 1414, 1532.14, 1414, 1580.14, 1427.86, 1594, 1478, 1644.14, 1478, 1596.14, 1475.86, 1594, 1491.86, 1658, 1542, 1660.14, 1539.86, 1658, 1555.86, 1990, 1068.14, 1850, 1555.86, 1850, 1644.14, 1990, 1658, 1836.14, 1658, 1660.14, 1660.14, 1658, 1923.86, 1658, 1926, 1660.14, 1926, 2115.86, 1644.14, 1850, 1923.86, 2118, 1658, 2003.86, 1660.14, 2118, 1658, 2115.86, 1542, 2003.86, 1542, 2115.86, 1539.86, 2118, 1082, 2003.86, 1068.14, 1990, 979.859, 1850, 1084.14, 2118, 1082, 2115.86, 979.859, 1990, 339.859, 1422, 125.641, 1366, 364.141, 1422, 106, 1149.64, 112.547, 1136.55, 1597.64, 1302, 1584.55, 1295.45, 386.359, 1130)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(21, 22, 23), PackedInt32Array(24, 25, 26), PackedInt32Array(27, 28, 29), PackedInt32Array(30, 31, 32), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(37, 38, 39), PackedInt32Array(40, 41, 42), PackedInt32Array(43, 44, 45, 46), PackedInt32Array(47, 48, 49), PackedInt32Array(50, 51, 52, 53), PackedInt32Array(54, 55, 56, 57, 58, 59), PackedInt32Array(10, 9, 60), PackedInt32Array(15, 14, 61, 62), PackedInt32Array(20, 19, 13, 12), PackedInt32Array(37, 39, 40, 63), PackedInt32Array(64, 63, 40), PackedInt32Array(47, 49, 65, 66), PackedInt32Array(67, 66, 65, 68), PackedInt32Array(58, 18, 21, 69), PackedInt32Array(30, 32, 70, 71), PackedInt32Array(36, 35, 72), PackedInt32Array(73, 74, 36), PackedInt32Array(75, 43, 46, 76), PackedInt32Array(68, 77, 17, 78), PackedInt32Array(10, 60, 79, 80, 81, 71), PackedInt32Array(82, 24, 26, 83, 84), PackedInt32Array(85, 52, 51, 86, 87), PackedInt32Array(88, 85, 87), PackedInt32Array(17, 16, 89), PackedInt32Array(17, 89, 90), PackedInt32Array(91, 64, 40), PackedInt32Array(61, 57, 56, 92, 93), PackedInt32Array(94, 95, 67, 68, 96), PackedInt32Array(97, 27, 29, 98, 99), PackedInt32Array(40, 42, 100, 101), PackedInt32Array(88, 87, 99, 98, 102), PackedInt32Array(17, 90, 103), PackedInt32Array(71, 104, 88, 102, 105), PackedInt32Array(21, 23, 69), PackedInt32Array(58, 69, 59), PackedInt32Array(55, 54, 82, 84, 106, 107), PackedInt32Array(108, 8, 11, 109, 110), PackedInt32Array(106, 111, 112, 113), PackedInt32Array(107, 106, 113), PackedInt32Array(107, 113, 114), PackedInt32Array(107, 114, 115, 116), PackedInt32Array(117, 116, 115, 118), PackedInt32Array(117, 118, 119, 120), PackedInt32Array(121, 120, 119, 8, 108, 122), PackedInt32Array(81, 50, 53, 123), PackedInt32Array(71, 81, 123), PackedInt32Array(71, 123, 124), PackedInt32Array(71, 124, 104), PackedInt32Array(71, 105, 125), PackedInt32Array(71, 125, 30), PackedInt32Array(101, 71, 70, 126, 36, 40), PackedInt32Array(127, 128, 129, 130, 131), PackedInt32Array(132, 133, 134, 135), PackedInt32Array(136, 137, 138, 139), PackedInt32Array(140, 141, 142, 143, 144, 145), PackedInt32Array(139, 140, 145, 146), PackedInt32Array(147, 136, 139, 146, 148), PackedInt32Array(146, 149, 148), PackedInt32Array(135, 136, 147, 150), PackedInt32Array(131, 132, 135, 150, 151), PackedInt32Array(150, 152, 151), PackedInt32Array(130, 132, 131), PackedInt32Array(153, 154, 127, 131, 155, 156), PackedInt32Array(157, 158, 159, 160, 161, 162), PackedInt32Array(163, 157, 162, 164, 165, 156), PackedInt32Array(164, 166, 167, 165), PackedInt32Array(155, 163, 156), PackedInt32Array(154, 153, 168), PackedInt32Array(154, 168, 169, 170, 171, 172, 173), PackedInt32Array(170, 174, 175, 171), PackedInt32Array(173, 172, 176, 126), PackedInt32Array(126, 176, 73, 36), PackedInt32Array(177, 75, 76, 95, 178), PackedInt32Array(36, 72, 91, 40), PackedInt32Array(101, 100, 179), PackedInt32Array(178, 101, 179, 177), PackedInt32Array(94, 178, 95), PackedInt32Array(180, 96, 68), PackedInt32Array(181, 180, 68), PackedInt32Array(93, 62, 61), PackedInt32Array(182, 93, 92), PackedInt32Array(183, 182, 92), PackedInt32Array(122, 183, 92, 121), PackedInt32Array(17, 103, 110, 109, 184), PackedInt32Array(78, 181, 68), PackedInt32Array(17, 184, 78)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-96, 672, -96, 1496, 416, 1496, 408, 2072, 1032, 2064, 1032, 2208, 2016, 2200, 2016, 664)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+cell_size = 8.0
+agent_radius = 30.0
 
 [sub_resource type="Animation" id="Animation_cg8v6"]
 length = 0.001
@@ -50,7 +60,7 @@ _data = {
 &"loop_detection_beam": SubResource("Animation_q7ibo")
 }
 
-[sub_resource type="Resource" id="Resource_cd850"]
+[sub_resource type="Resource" id="Resource_gcim3"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = 1.1781
@@ -58,7 +68,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_gcim3"]
+[sub_resource type="Resource" id="Resource_d4l3b"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = -1.1781
@@ -66,7 +76,7 @@ duration_min_sec = 1.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_d4l3b"]
+[sub_resource type="Resource" id="Resource_41qk1"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = -1.44862
@@ -74,7 +84,7 @@ duration_min_sec = 2.0
 duration_max_sec = 5.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_41qk1"]
+[sub_resource type="Resource" id="Resource_ca4i1"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = 1.44862
@@ -82,7 +92,7 @@ duration_min_sec = 2.0
 duration_max_sec = 4.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_ca4i1"]
+[sub_resource type="Resource" id="Resource_8sp67"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = -1.18682
@@ -104,7 +114,7 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_8sp67"]
+[sub_resource type="Resource" id="Resource_qyf36"]
 resource_local_to_scene = true
 script = ExtResource("9_f33k1")
 rotation = 0.872665
@@ -129,7 +139,10 @@ metadata/_edit_lock_ = true
 [node name="LevelTimer" parent="." index="3"]
 wait_time = 90.0
 
-[node name="WallTileMapLayer" parent="MapRoot" index="2"]
+[node name="GuardNavigationRegion2D" parent="MapRoot" index="0"]
+navigation_polygon = SubResource("NavigationPolygon_cd850")
+
+[node name="WallTileMapLayer" parent="MapRoot" index="3"]
 tile_map_data = PackedByteArray("AAAHABQAAAAAAAMAAAAQABYAAAADAAEAAAAKABYAAAADAAEAAAAMABQAAAABAAMAAAAQABQAAAAFAAAAAAAPABQAAAABAAMAAAAOABQAAAABAAMAAAANABQAAAABAAMAAAALABQAAAABAAMAAAAKABQAAAAGAAAAAAAJABQAAAABAAMAAAAIABQAAAABAAMAAAAEABQAAAACAAMAAAADABQAAAABAAMAAAACABQAAAAEAAAAAAACABUAAAADAAEAAAACABYAAAADAAEAAAACABcAAAADAAEAAAACABgAAAADAAEAAAACABkAAAADAAEAAAACABoAAAADAAEAAAACABsAAAADAAEAAAACABwAAAAEAAEAAAAHAB0AAAADAAEAAAAHAB4AAAADAAEAAAAHAB8AAAADAAEAAAAHACAAAAADAAEAAAAHACEAAAADAAEAAAAHACIAAAADAAEAAAAHACMAAAADAAEAAAAHACQAAAAEAAEAAAAKABUAAAADAAEAAAAKABcAAAADAAEAAAAKABgAAAAFAAEAAAAKACEAAAADAAIAAAAQABUAAAADAAEAAAAQABcAAAADAAIAAAAQABsAAAADAAEAAAAQABwAAAAHAAEAAAAQAB0AAAAEAAEAAAASAB4AAAADAAEAAAASAB8AAAADAAEAAAASACAAAAAHAAEAAAASACEAAAADAAEAAAASACIAAAADAAEAAAASACMAAAADAAEAAAASACQAAAAFAAEAAAADABwAAAABAAMAAAAEABwAAAABAAMAAAAFABgAAAAAAAMAAAAFABwAAAABAAMAAAAGABgAAAABAAMAAAAGABwAAAABAAMAAAAHABgAAAABAAMAAAAHABwAAAAFAAAAAAAIABgAAAABAAMAAAAIACQAAAABAAMAAAAJABgAAAABAAMAAAAJACQAAAABAAMAAAAKACAAAAAEAAAAAAAKACQAAAABAAMAAAALACAAAAABAAMAAAALACQAAAABAAMAAAAMACAAAAABAAMAAAAMACQAAAABAAMAAAANABwAAAAAAAMAAAANACAAAAABAAMAAAANACQAAAABAAMAAAAOABwAAAABAAMAAAAOACAAAAABAAMAAAAOACQAAAABAAMAAAAPABwAAAABAAMAAAAPACAAAAABAAMAAAAPACQAAAABAAMAAAAQABoAAAADAAAAAAAQACAAAAABAAMAAAAQACQAAAABAAMAAAARAB0AAAABAAMAAAARACAAAAABAAMAAAARACQAAAABAAMAAAASAB0AAAAFAAAAAAAVABYAAAAAAAIAAAAWABYAAAACAAIAAAAWABUAAAACAAAAAAAVABUAAAAAAAAAAAA=")
 
 [node name="FrontDoor" parent="MapRoot/WallTileMapLayer" index="0" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("3_gcim3")]
@@ -140,7 +153,7 @@ controlling_lever = NodePath("../../Interactables/DoorLeverButton")
 position = Vector2(1056, 1596)
 rotation = -1.5708
 
-[node name="CarDriveScroller" parent="MapRoot" index="4"]
+[node name="CarDriveScroller" parent="MapRoot" index="5"]
 metadata/_edit_group_ = true
 
 [node name="CameraLeverButton" parent="MapRoot/Interactables" index="0" instance=ExtResource("4_d4l3b")]
@@ -175,22 +188,25 @@ position = Vector2(1120, 1980)
 [node name="CookieStash5" parent="MapRoot/CookiesStashes" index="4" instance=ExtResource("6_ca4i1")]
 position = Vector2(1128, 2188)
 
-[node name="DetectionBeam1" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("7_8sp67")]
+[node name="DetectionBeam1" parent="MapRoot/SecurityDevices" index="0" node_paths=PackedStringArray("controlling_lever", "appointed_guard") instance=ExtResource("7_8sp67")]
 position = Vector2(720, 1444)
 controlling_lever = NodePath("../../Interactables/BeamLeverButton")
 mode = 0
 beam_length = 320.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array()
 
-[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" instance=ExtResource("7_8sp67")]
+[node name="DetectionBeam3" parent="MapRoot/SecurityDevices" index="1" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("7_8sp67")]
 position = Vector2(552, 1604)
 rotation = 2.0944
 beam_length = 240.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 
-[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="2" instance=ExtResource("7_8sp67")]
+[node name="DetectionBeam2" parent="MapRoot/SecurityDevices" index="2" node_paths=PackedStringArray("appointed_guard") instance=ExtResource("7_8sp67")]
 position = Vector2(536, 1356)
 rotation = 1.5708
 beam_length = 192.0
+appointed_guard = NodePath("../../Guards/SecurityGuard")
 blink_pattern = PackedFloat32Array(5, 2, 3, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MapRoot/SecurityDevices/DetectionBeam2" index="5"]
@@ -204,7 +220,7 @@ autoplay = "loop_detection_beam"
 position = Vector2(1008, 1868)
 rotation = -4.36332
 radius = 210.0
-camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_cd850"), SubResource("Resource_gcim3")])
+camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_gcim3"), SubResource("Resource_d4l3b")])
 
 [node name="SecurityCamera2" parent="MapRoot/SecurityDevices" index="4" instance=ExtResource("8_qyf36")]
 position = Vector2(864, 2300)
@@ -214,7 +230,7 @@ rotaton_speed = 1.0
 fov = 0.523599
 left_limit = -1.71042
 right_limit = 1.71042
-camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_d4l3b"), SubResource("Resource_41qk1")])
+camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_41qk1"), SubResource("Resource_ca4i1")])
 
 [node name="OutdoorSecurityCamera" parent="MapRoot/SecurityDevices" index="5" node_paths=PackedStringArray("controlling_lever") instance=ExtResource("8_qyf36")]
 position = Vector2(1344, 1472)
@@ -224,11 +240,12 @@ radius = 278.0
 rotaton_speed = 3.0
 fov = 1.0472
 left_limit = -3.14159
-camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_ca4i1"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_8sp67")])
+camera_positions = Array[ExtResource("9_f33k1")]([SubResource("Resource_8sp67"), SubResource("Resource_j0sdw"), SubResource("Resource_jy02f"), SubResource("Resource_qyf36")])
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("10_cd850")]
 position = Vector2(910, 1522)
 rotaton_speed = 2.0
+guard_position_index = 0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="7"]
 position = Vector2(910, 1522)

@@ -304,7 +304,6 @@ rotation = 3.14159
 
 [node name="RightSecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_mihb8")]
 position = Vector2(1131.67, 2094.34)
-guard_position_index = 0
 guard_positions = Array[ExtResource("8_2owmk")]([SubResource("Resource_ptygn"), SubResource("Resource_cwmx8")])
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/RightSecurityGuard" index="10"]
@@ -315,7 +314,6 @@ position = Vector2(214.066, -6.89063)
 
 [node name="LeftSecurityGuard" parent="MapRoot/Guards" index="1" instance=ExtResource("7_mihb8")]
 position = Vector2(-256, 2080.03)
-guard_position_index = 0
 guard_positions = Array[ExtResource("8_2owmk")]([SubResource("Resource_05651"), SubResource("Resource_xxuo2")])
 
 [node name="Marker2D1" type="Marker2D" parent="MapRoot/Guards/LeftSecurityGuard" index="10"]
@@ -328,7 +326,6 @@ position = Vector2(-178.397, 5.71216)
 position = Vector2(-1111.99, -2080)
 rotation = -3.14159
 rotaton_speed = 5.0
-guard_position_index = 0
 
 [node name="PreviewReferenceRect" parent="UiCanvasLayer" index="5"]
 visible = false

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://d3d2vbronr6pn" path="res://levels/missions/level_04_mission.tres" id="2_dx6c5"]
 [ext_resource type="PackedScene" uid="uid://7nm2meivy40g" path="res://core/thief_car/car_drive_scroller.tscn" id="2_maq6b"]
 [ext_resource type="TileSet" uid="uid://ca4fue5xq1fm2" path="res://levels/tilemaps/wall_tile_set.tres" id="2_p5284"]
-[ext_resource type="Script" uid="uid://hwe6cic7iuaq" path="res://levels/goal_tracker_base.gd" id="3_5mwf5"]
+[ext_resource type="Script" path="res://levels/goal_tracker_base.gd" id="3_5mwf5"]
 [ext_resource type="PackedScene" uid="uid://b50ql2p2uq8a4" path="res://ui/cookie_loot_panel.tscn" id="3_63c5o"]
 [ext_resource type="TileSet" uid="uid://c63a86ctllhcp" path="res://biom_grass/tile_set.tres" id="4_dx6c5"]
 [ext_resource type="PackedScene" uid="uid://crpqeph3siqhn" path="res://ui/inventory/inventory_panel.tscn" id="4_satuh"]

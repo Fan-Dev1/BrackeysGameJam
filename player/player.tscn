@@ -1,14 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhd35o5m5lhrq"]
+[gd_scene load_steps=6 format=3 uid="uid://dhd35o5m5lhrq"]
 
 [ext_resource type="Script" uid="uid://bpqyegseblpju" path="res://player/player.gd" id="1_rkbax"]
-[ext_resource type="Shader" uid="uid://pbba4pjyac7t" path="res://core/shaders/chroma_key_shader.gdshader" id="3_ebec5"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_g1dw6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yllr7"]
-shader = ExtResource("3_ebec5")
-shader_parameter/chroma_key_color = Color(0, 1, 0, 1)
-shader_parameter/pickup_range = 0.25
-shader_parameter/fade_amount = 0.284
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 24.0
@@ -37,10 +30,11 @@ wait_time = 3.0
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_yllr7")
-scale = Vector2(0.667, 0.667)
+position = Vector2(-4, 0)
 sprite_frames = ExtResource("3_g1dw6")
-animation = &"IdleSouth"
+animation = &"WalkNorth"
+frame_progress = 0.70409
+speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 24)
