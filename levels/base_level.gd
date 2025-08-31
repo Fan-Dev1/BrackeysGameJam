@@ -113,9 +113,11 @@ func _on_retry_level_button_pressed() -> void:
 
 
 func _on_cookie_looted(_from: CookieStash) -> void:
-	cookie_loot_panel.visible = true
-	inventory_panel.visible = true
-	get_tree().paused = true
+	player.has_cookie = true
+	# BUG cookie_loot_panel mechanic cutted from the game
+	#cookie_loot_panel.visible = true
+	#inventory_panel.visible = true
+	#get_tree().paused = true
 
 
 func _on_cookie_loot_panel_finish_looting() -> void:
