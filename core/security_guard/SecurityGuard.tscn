@@ -117,6 +117,8 @@ debug_color = Color(0.7, 0.123896, 0, 0.42)
 wait_time = 1.5
 one_shot = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
 [connection signal="timeout" from="positionTimer" to="." method="_on_position_timer_timeout"]
 [connection signal="timeout" from="trackingTimer" to="." method="_on_tracking_timer_timeout"]
 [connection signal="timeout" from="updateNav" to="." method="_on_update_nav_timeout"]
