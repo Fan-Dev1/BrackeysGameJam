@@ -25,9 +25,11 @@ var fov := PI / 4.0
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var lost_rotation_timer: Timer = $lostRotationTimer
 
+@onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var vision_light: PointLight2D = $GuardArea2D/PointLight2D
 @onready var flashlight: PointLight2D = $GuardArea2D/PointLight2D/PointLight2D
 @onready var target: CharacterBody2D = get_tree().get_first_node_in_group("player")
+@onready var sign_animated_sprite_2d = $SignAnimatedSprite2D
 
 var lost_rotation : float = 0.0
 var next_path_pos : Vector2 = Vector2.ZERO
@@ -46,23 +48,31 @@ func _ready() -> void:
 	original_position = self.global_position
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		
+	if Engine.is_editor_hint():	
 		#_clamp_camera_rotations()
 		queue_redraw()
 		var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 		rotate_camera_toward(guard_pos.rotation)
-	else:
-		
-		match state:
-			GuardState.NORMAL: _normal_process(delta)
-			GuardState.TRACKING: _tracking_process(delta)
-			GuardState.LOST: _lost_process(delta)
-			GuardState.RETURN: _return_process(delta)
-			GuardState.DISTRACTED : _distracted_process(delta)
-			GuardState.INVESTIGATE: _investigate_process(delta)
-			GuardState.OFF: pass
+		return
 	
+	match state:
+		GuardState.NORMAL: _normal_process(delta)
+		GuardState.TRACKING: _tracking_process(delta)
+		GuardState.LOST: _lost_process(delta)
+		GuardState.RETURN: _return_process(delta)
+		GuardState.DISTRACTED : _distracted_process(delta)
+		GuardState.INVESTIGATE: _investigate_process(delta)
+		GuardState.OFF: pass
+	_update_guard_animation()
+
+
+func _update_guard_animation() -> void:
+	if velocity.length_squared() > 20.0:
+		animated_sprite_2d.play("run_down")
+	else:
+		animated_sprite_2d.play("idle_down")
+	print("%6d %s", velocity.length_squared(), animated_sprite_2d.animation)
+
 
 
 func _normal_process(delta: float) -> void:
@@ -111,6 +121,7 @@ func _tracking_process(delta: float) -> void:
 		next_path_pos = navigation_agent_2d.get_next_path_position()
 		var direction = (next_path_pos - self.global_position).normalized()
 		velocity = direction * move_speed
+		
 		move_and_slide()
 		
 		queue_redraw()
@@ -139,7 +150,6 @@ func _on_tracking_timer_timeout() -> void:
 
 func _return_process(delta) -> void:
 	#_scan_for_player()
-	
 	navigation_agent_2d.target_position = original_position
 	var next_path_pos = navigation_agent_2d.get_next_path_position()
 	var direction = (next_path_pos - self.global_position).normalized()
@@ -167,6 +177,7 @@ func _scan_for_player() -> void:
 			change_light_colors(Color8(255, 100, 0)) #orange
 			state = GuardState.DISTRACTED
 
+
 func _lost_process(delta: float) -> void:
 	if lost_rotation_timer.is_stopped():
 		lost_rotation_timer.start()
@@ -187,30 +198,25 @@ func set_state(new_state: GuardState) -> void:
 
 
 
-
 func rotate_camera_toward(to: float, delta := 1.0) -> void:
 	var from := guard_area_2d.rotation
 	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
 #	new_rotation = clamp_camera_rotation(new_rotation)
 	guard_area_2d.rotation = new_rotation
 
-#func _moving_process(delta: float)
 
 func move_guard_toward(to: Vector2, delta : float):
-		
 	velocity = velocity.move_toward(to, move_speed * delta)
-	
-	
+
+
 func _scan_walls(body : Node2D) -> bool:
-	
 	wall_ray_cast_2d.target_position = body.global_position - wall_ray_cast_2d.global_position
 	wall_ray_cast_2d.force_raycast_update()
 	if wall_ray_cast_2d.is_colliding() and wall_ray_cast_2d.get_collider() == body:
-		
 		return true
 	else:
 		return false
-		
+
 
 func _draw() -> void:
 	if Engine.is_editor_hint():
@@ -244,6 +250,7 @@ func player_detected_elsewhere(pos : Vector2):
 		return
 	navigation_agent_2d.target_position = pos
 	state = GuardState.INVESTIGATE
+
 func _investigate_process(delta) -> void:
 	# I KNOW I COULD REUSE PART OF THIS CODE, I DONT WANNA THINK ITS LATE
 	_scan_for_player()

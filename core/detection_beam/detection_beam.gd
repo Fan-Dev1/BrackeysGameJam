@@ -17,6 +17,7 @@ var blink_pattern_index := 0
 @onready var blink_timer: Timer = $BlinkTimer
 @onready var beam_line_2d: Line2D = $BeamLine2D
 @onready var laser_ray_cast_2d: RayCast2D = $LaserRayCast2D
+@onready var alarm_sprite_2d = $AlarmSprite2D
 
 
 func _ready() -> void:

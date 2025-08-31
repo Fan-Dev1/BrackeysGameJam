@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqscxj4caxy1i"]
+[gd_scene load_steps=6 format=3 uid="uid://cqscxj4caxy1i"]
 
 [ext_resource type="Script" uid="uid://b0n8mtigge4g2" path="res://core/detection_beam/detection_beam.gd" id="1_p7rxj"]
 [ext_resource type="Script" uid="uid://cqufeafed1a5a" path="res://core/blinking_led.gd" id="2_lgpul"]
 [ext_resource type="Texture2D" uid="uid://ettr15dib47b" path="res://core/detection_beam/LaserThin.png" id="3_2he8q"]
 [ext_resource type="Texture2D" uid="uid://dcwyrvct4co40" path="res://core/detection_beam/LaserPointer_Blank.png" id="3_jqvm2"]
+[ext_resource type="Texture2D" uid="uid://ci171n26uc0iy" path="res://core/security_guard/Alert.png" id="4_p5mjb"]
 
 [node name="DetectionBeam" type="Node2D"]
 script = ExtResource("1_p7rxj")
@@ -29,6 +30,11 @@ color = Color(0, 0, 0, 1)
 [node name="LaserPointerBlank" type="Sprite2D" parent="." groups=["masked_by_player_vision"]]
 position = Vector2(-14, 2)
 texture = ExtResource("3_jqvm2")
+
+[node name="AlarmSprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-56, 0)
+texture = ExtResource("4_p5mjb")
 
 [node name="LazerStateRect" type="ColorRect" parent="." node_paths=PackedStringArray("timer") groups=["masked_by_player_vision"]]
 offset_left = -24.0
