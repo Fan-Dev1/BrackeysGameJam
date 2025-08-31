@@ -282,7 +282,8 @@ rotation = 3.14159
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_mihb8")]
 position = Vector2(-1111.99, -2080)
 rotation = -3.14159
-rotaton_speed = 2.0
+rotaton_speed = 5.0
+guard_position_index = 1
 guard_positions = Array[ExtResource("8_2owmk")]([SubResource("Resource_ptygn"), SubResource("Resource_cwmx8")])
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]

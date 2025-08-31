@@ -41,8 +41,8 @@ collision_layer = 8
 floor_stop_on_slope = false
 floor_max_angle = 3.14159
 script = ExtResource("1_p6iyn")
-rotaton_speed = 1.0
-move_speed = 300.0
+rotaton_speed = 3.0
+move_speed = 350.0
 guard_positions = Array[ExtResource("2_ptygn")]([SubResource("Resource_ptygn"), SubResource("Resource_p37y6")])
 
 [node name="positionTimer" type="Timer" parent="."]

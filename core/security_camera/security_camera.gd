@@ -7,7 +7,7 @@ enum CameraState { NORMAL, TRACKING, OFF }
 @export var controlling_lever : LeverButton
 @export var radius := 256.0
 @export var rotaton_speed: float
-
+@export var assigned_guard : SecurityGuard
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0
 @export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
@@ -36,7 +36,8 @@ func _ready() -> void:
 	_ready_camera_rotation()
 	if is_controlled_by_lever():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
-
+	if !assigned_guard:
+		assigned_guard = get_tree().get_first_node_in_group("Guard")
 
 func _ready_camera_rotation() -> void:
 	if not camera_positions.is_empty():
@@ -78,6 +79,7 @@ func _scan_for_player() -> void:
 		if body is Player:
 			if !body.player_is_hidden:
 				tracking_target = body
+				assigned_guard.player_detected_elsewhere(body.global_position)
 				state = CameraState.TRACKING
 		elif body is CookieProjectile:
 			tracking_target = body

@@ -9,7 +9,7 @@ const cookie_proyectile := preload("res://core/cookie_proyectile/cookie_projecti
 @export var max_line_length: float = 300.0
 @export var dot_size: float = 10.0
 @export var gap_size: float = 15.0
-
+var original_speed : float = 4000
 var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
@@ -17,13 +17,15 @@ var player_is_hidden = false
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_point_light_2d: PointLight2D = $VisionPointLight2D
+@onready var laser_crippled: Timer = $LaserCrippled
 
-
+func _ready() -> void:
+	original_speed = move_speed
 func _physics_process(delta: float) -> void:
 	if !player_is_hidden:
 		var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		var target_velocity := input_direction * move_speed
-		if input_direction:	
+		if input_direction:
 			last_direction = input_direction
 		manage_animations(input_direction, last_direction)
 		var velocity_weight := 1.0 - exp(-move_smothing * delta)
@@ -95,3 +97,7 @@ func take_cookie_from(from: CookieStash):
 
 func drop_of_cookie():
 	has_cookie = false
+
+
+func _on_laser_crippled_timeout() -> void:
+	move_speed = original_speed

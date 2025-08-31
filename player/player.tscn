@@ -54,3 +54,9 @@ shadow_filter_smooth = 20.0
 shadow_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_2ieo8")
 metadata/_edit_lock_ = true
+
+[node name="LaserCrippled" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="LaserCrippled" to="." method="_on_laser_crippled_timeout"]
