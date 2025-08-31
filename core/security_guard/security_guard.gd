@@ -71,7 +71,6 @@ func _update_guard_animation() -> void:
 		animated_sprite_2d.play("run_down")
 	else:
 		animated_sprite_2d.play("idle_down")
-	print("%6d %s", velocity.length_squared(), animated_sprite_2d.animation)
 
 
 
