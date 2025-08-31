@@ -113,7 +113,7 @@ size = Vector2(96, 48)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nufx1"]
 load_path = "res://.godot/imported/level_button_sprites_outline.png-709011cd7feea237fe4cf8549e4bb501.ctex"
 
-[node name="LeverButton" type="Area2D"]
+[node name="LeverButton" type="Area2D" groups=["masked_by_player_vision"]]
 collision_mask = 2
 script = ExtResource("1_76s5e")
 
@@ -146,6 +146,7 @@ metadata/_edit_group_ = true
 [node name="OutlineSprite2D" type="Sprite2D" parent="Sprite2D"]
 show_behind_parent = true
 texture_filter = 1
+use_parent_material = true
 texture = SubResource("CompressedTexture2D_nufx1")
 hframes = 5
 

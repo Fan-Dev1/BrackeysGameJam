@@ -207,10 +207,7 @@ rotation = 1.57079
 position = Vector2(1023, 1920)
 rotation = 1.57079
 
-[node name="CookieStash2" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_j0sdw")]
-position = Vector2(1344, 1584)
-
-[node name="CookieStash" parent="MapRoot/CookiesStashes" index="1" instance=ExtResource("3_j0sdw")]
+[node name="CookieStash" parent="MapRoot/CookiesStashes" index="0" instance=ExtResource("3_j0sdw")]
 position = Vector2(1344, 1584)
 
 [node name="DetectionBeam4" parent="MapRoot/SecurityDevices" index="0" groups=["detection_beam"] instance=ExtResource("2_gg43x")]

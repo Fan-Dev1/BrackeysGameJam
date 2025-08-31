@@ -21,6 +21,6 @@ level_preview_texture = ExtResource("3_rswpg")
 level_music = ExtResource("2_rswpg")
 level_goals = Array[ExtResource("1_jv3tm")]([SubResource("Resource_d3o6j")])
 used_device_count = PackedInt32Array(2, 4)
-unlocked = false
+unlocked = true
 level_completion_time = 150.0
 metadata/_custom_type_script = "uid://btji1vxv6jj7s"

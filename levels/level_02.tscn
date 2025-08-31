@@ -170,7 +170,7 @@ position = Vector2(1216, 1408)
 rotation = 10.9956
 controlling_lever = NodePath("LeverButton")
 
-[node name="LeverButton" parent="MapRoot/WallTileMapLayer/Door2" index="5" groups=["masked_by_player_vision"] instance=ExtResource("4_gia0r")]
+[node name="LeverButton" parent="MapRoot/WallTileMapLayer/Door2" index="5" instance=ExtResource("4_gia0r")]
 position = Vector2(-79.998, -128.001)
 rotation = 1.57079
 flipped_over = false
@@ -267,6 +267,7 @@ rotation = 3.14159
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_mihb8")]
 position = Vector2(-1111.99, -2080)
 rotation = -3.14159
+guard_position_index = 0
 guard_positions = Array[ExtResource("8_2owmk")]([SubResource("Resource_ptygn"), SubResource("Resource_cwmx8")])
 
 [node name="Marker2D" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
