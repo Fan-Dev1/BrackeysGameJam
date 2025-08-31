@@ -39,7 +39,7 @@ func _ready() -> void:
 	_setup_cookie_stashes()
 	_setup_masked_by_player_nodes()
 	
-	if OS.is_debug_build() and (skip_drive_animation or take_preview_screenshot):
+	if false and OS.is_debug_build() and (skip_drive_animation or take_preview_screenshot):
 		car_drive_scroller.stop_scrolling()
 		var thief_car := car_drive_scroller.thief_car
 		thief_car.set_process_unhandled_input(false)

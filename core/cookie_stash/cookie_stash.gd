@@ -7,7 +7,7 @@ signal cookie_looted(from: CookieStash)
 
 @onready var loot_timer: Timer = $LootTimer
 @onready var loot_progress_bar: ProgressBar = %LootProgressBar
-@onready var cookie_particles: GPUParticles2D = $CookieParticles
+@onready var cookie_particles: CPUParticles2D = $CookieParticles
 
 
 func _ready() -> void:

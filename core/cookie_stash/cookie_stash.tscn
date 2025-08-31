@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3lmri50c7jn1"]
+[gd_scene load_steps=7 format=3 uid="uid://b3lmri50c7jn1"]
 
 [ext_resource type="Script" uid="uid://dwaxnvwn5gcdi" path="res://core/cookie_stash/cookie_stash.gd" id="1_lrudw"]
 [ext_resource type="Texture2D" uid="uid://y0f6l3finpfs" path="res://PlaceholderCharacter/PlaceholderCookie.png" id="2_gfnro"]
@@ -6,24 +6,6 @@
 [sub_resource type="Curve" id="Curve_gfnro"]
 _data = [Vector2(0.776, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.499661), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_n8t3n"]
-curve = SubResource("Curve_gfnro")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7tqer"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 28.0
-direction = Vector3(0, -1, 0)
-spread = 15.0
-initial_velocity_min = 220.0
-initial_velocity_max = 280.0
-angular_velocity_min = -180.0
-angular_velocity_max = -90.0
-gravity = Vector3(0, 490, 0)
-scale_min = 0.05
-scale_max = 0.1
-scale_curve = SubResource("CurveTexture_n8t3n")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tinl6"]
 radius = 40.0
@@ -58,12 +40,23 @@ one_shot = true
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_gfnro")
 
-[node name="CookieParticles" type="GPUParticles2D" parent="."]
+[node name="CookieParticles" type="CPUParticles2D" parent="."]
 emitting = false
 texture = ExtResource("2_gfnro")
 randomness = 0.21
-fixed_fps = 0
-process_material = SubResource("ParticleProcessMaterial_7tqer")
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 28.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, 490)
+initial_velocity_min = 220.0
+initial_velocity_max = 280.0
+angular_velocity_min = -180.0
+angular_velocity_max = -90.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_gfnro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tinl6")

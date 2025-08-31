@@ -36,7 +36,7 @@ func _start_blink_timer():
 		blink_timer.start(2.0)
 	else:
 		var blink_duration_sec := blink_pattern[blink_pattern_index]
-		while is_zero_approx(blink_duration_sec): 
+		if is_zero_approx(blink_duration_sec): 
 			_on_blink_timer_timeout()
 			blink_duration_sec = blink_pattern[blink_pattern_index]
 		blink_timer.start(blink_duration_sec)

@@ -23,7 +23,8 @@ func _ready() -> void:
 	if door_state == State.CLOSED:
 		slide_door.set_position.call_deferred(get_slide_position())
 	border_line_2d.visible = false
-	stop_peeking()
+	up_peek_light.enabled = false
+	down_peek_light.enabled = false
 	if is_controlled_by_lever() and not Engine.is_editor_hint():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 
