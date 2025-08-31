@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://bdsbune6m5ul1" path="res://levels/level_01_mockup.png" id="10_dbgp1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7c8pi"]
-vertices = PackedVector2Array(-102.563, 363.477, 88.5234, 360.477, 87.5469, 424.281, -294.523, 499.938, -295.703, -153.063, -294.297, -10, -610, -10, -693, -153.93, -693, 243.094, -610, 102.406, -372.172, 244.094, -185, 96.5938, 214, 427.289, 214, 500.938, -185, -158, 91, -158, 91, 246.313, -100.469, 248.313, -369.172, 756, -297.477, 682.461, -142, 756, -181.43, 684.531, -142, 614.141, -180.422, 614.063, 214.539, 614.93, 212.438, 756, -50, 756, -50, 614.344)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 13, 3, 2), PackedInt32Array(11, 14, 15, 16, 17), PackedInt32Array(10, 11, 17, 0, 3), PackedInt32Array(18, 10, 3, 19), PackedInt32Array(20, 18, 19, 21), PackedInt32Array(22, 20, 21, 23), PackedInt32Array(24, 25, 26, 27)])
+vertices = PackedVector2Array(-102.563, 363.477, 88.5234, 360.477, 87.5469, 424.281, -294.523, 499.938, -180.422, 614.063, 214.539, 614.93, 212.438, 756, -181.43, 684.531, -369.172, 756, -297.477, 682.461, -372.172, 244.094, -295.703, -153.063, -294.297, -10, -610, -10, -693, -153.93, -693, 243.094, -610, 102.406, -185, 96.5938, 214, 427.289, 214, 500.938, -100.469, 248.313, -185, -158, 91, -158, 91, 246.313)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 6, 8, 9), PackedInt32Array(9, 8, 10, 3), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 14, 13, 16), PackedInt32Array(10, 15, 16, 17), PackedInt32Array(18, 19, 3, 2), PackedInt32Array(0, 3, 10, 17, 20), PackedInt32Array(17, 21, 22, 23, 20)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-215, 67, -215, -188, 121, -188, 121, 276, -71, 278, -72, 333, 119, 330, 118, 395, 244, 398, 244, 531, -265, 530, -267, 653, -211, 654, -210, 584, 245, 585, 242, 786, -399, 786, -402, 274, -723, 273, -723, -184, -266, -183, -264, 20, -580, 20, -580, 72)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
@@ -265,11 +265,9 @@ camera_positions = Array[ExtResource("8_fk51f")]([SubResource("Resource_jepln"),
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("9_d0fql")]
 position = Vector2(910, 1522)
 rotaton_speed = 2.0
-guard_position_index = 0
 
 [node name="SecurityGuard2" parent="MapRoot/Guards" index="1" instance=ExtResource("9_d0fql")]
 position = Vector2(631.6, 1970.4)
-guard_position_index = 0
 
 [node name="FocusGameConceptArea2D" type="Area2D" parent="MapRoot" index="11"]
 position = Vector2(1809, 2280)
@@ -312,5 +310,3 @@ offset_bottom = 1812.0
 [connection signal="body_entered" from="MapRoot/FocusGameConceptArea2D" to="GoalTracker" method="_on_focus_game_concept_area_2d_body_entered"]
 [connection signal="body_entered" from="MapRoot/FocusGameConceptArea2D" to="MapRoot/FocusGameConceptArea2D" method="_on_body_entered"]
 [connection signal="body_exited" from="MapRoot/FocusGameConceptArea2D" to="MapRoot/FocusGameConceptArea2D" method="_on_body_exited"]
-
-[editable path="MapRoot/CarDriveScroller"]

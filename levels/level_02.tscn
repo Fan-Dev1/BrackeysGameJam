@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_8yqd8"]
 [ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="2_didps"]
-[ext_resource type="Script" path="res://levels/goal_tracker_02.gd" id="3_cwmx8"]
+[ext_resource type="Script" uid="uid://bwqunu8bm1gao" path="res://levels/goal_tracker_02.gd" id="3_cwmx8"]
 [ext_resource type="PackedScene" uid="uid://b3lmri50c7jn1" path="res://core/cookie_stash/cookie_stash.tscn" id="3_didps"]
 [ext_resource type="PackedScene" uid="uid://d3ex6enbtttl5" path="res://core/door/door.tscn" id="3_gia0r"]
 [ext_resource type="PackedScene" uid="uid://be3ewbyga6008" path="res://core/lever_button/lever_button.tscn" id="4_gia0r"]
