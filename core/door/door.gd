@@ -1,11 +1,13 @@
 class_name Door
 extends Node2D
 
+signal door_state_changed(state: State)
+
 enum State { OPEN, CLOSED, PEAKING }
 
 @export var controlling_lever : LeverButton
 @export var door_speed: float
-@export var door_state := State.CLOSED
+@export var door_state := State.CLOSED : set = set_door_state
 
 @onready var slide_door: AnimatableBody2D = $SlideDoor
 @onready var border_line_2d: Line2D = %BorderLine2D
@@ -122,3 +124,9 @@ func handle_interation() -> void:
 			open_door() # peaking --> open
 		elif slide_door.position.x < 20.0: # --> peaking
 			start_peeking(player.global_position)
+
+
+func set_door_state(_door_state: State) -> void:
+	if door_state != _door_state:
+		door_state = _door_state
+		door_state_changed.emit(door_state)
