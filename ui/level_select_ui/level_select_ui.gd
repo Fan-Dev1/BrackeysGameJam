@@ -19,12 +19,16 @@ func _on_level_selector_level_selected(level_mission: LevelMission) -> void:
 
 func _on_mission_details_mission_started(level_mission: LevelMission) -> void:
 	animation_player.play("exit_scene")
-	car_drive_scroller.play_exit_driving()
+	#car_drive_scroller.play_exit_driving() # crashes web export
+	print("_on_mission_details_mission_started load_threaded_request")
 	ResourceLoader.load_threaded_request(level_mission.level_path)
-	await animation_player.animation_finished
+	#await animation_player.animation_finished
 	await Global.play_fade_out()
+	print("_on_mission_details_mission_started load_threaded_get")
 	var loaded_level := ResourceLoader.load_threaded_get(level_mission.level_path)
+	print("_on_mission_details_mission_started change_scene_to_packed")
 	get_tree().change_scene_to_packed(loaded_level)
+	#get_tree().change_scene_to_file(level_mission.level_path)
 	Global.play_fade_in()
 
 

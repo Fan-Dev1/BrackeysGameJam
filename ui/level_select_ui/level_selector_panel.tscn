@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk8hvcvnpno3k"]
+[gd_scene load_steps=9 format=3 uid="uid://bk8hvcvnpno3k"]
 
 [ext_resource type="Theme" uid="uid://dphk2cvguw754" path="res://ui/sprout_land_theme.tres" id="1_if8pn"]
 [ext_resource type="Script" uid="uid://b8yh1jgpb2yx5" path="res://ui/level_select_ui/level_selector_panel.gd" id="1_mt5i0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dn4kc3fwiw8kb" path="res://levels/missions/level_01_mission.tres" id="2_if8pn"]
 [ext_resource type="Resource" uid="uid://by1n18bx63d3g" path="res://levels/missions/level_02_mission.tres" id="3_einyf"]
 [ext_resource type="Resource" uid="uid://cv2jpjfkankn5" path="res://levels/missions/level_03_mission.tres" id="4_b27pu"]
+[ext_resource type="Resource" uid="uid://d3d2vbronr6pn" path="res://levels/missions/level_04_mission.tres" id="6_einyf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vgsmr"]
 font_size = 60
@@ -30,7 +31,7 @@ theme = ExtResource("1_if8pn")
 script = ExtResource("1_mt5i0")
 
 [node name="LevelMissionPreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission"), [ExtResource("2_if8pn"), ExtResource("3_einyf"), ExtResource("4_b27pu")]]
+resources = [PackedStringArray("level_01_mission", "level_02_mission", "level_03_mission", "level_04_mission"), [ExtResource("2_if8pn"), ExtResource("3_einyf"), ExtResource("4_b27pu"), ExtResource("6_einyf")]]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

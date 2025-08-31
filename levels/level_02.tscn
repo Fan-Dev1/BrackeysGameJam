@@ -215,13 +215,13 @@ autoplay = "laser_loop_3"
 position = Vector2(1152, 1488)
 rotation = 1.57078
 beam_length = 256.0
-blink_pattern = PackedFloat32Array(2.4, 1.2, 2.4)
+blink_pattern = PackedFloat32Array(2.3, 1.4, 2.3)
 
 [node name="DetectionBeam5" parent="MapRoot/SecurityDevices/MovingPair1" index="2" instance=ExtResource("5_mihb8")]
 position = Vector2(576, 1712)
 rotation = -1.5708
 beam_length = 256.0
-blink_pattern = PackedFloat32Array(2.4, 1.2, 2.4)
+blink_pattern = PackedFloat32Array(2.3, 1.4, 2.3)
 
 [node name="LaserWave" type="Node2D" parent="MapRoot/SecurityDevices" index="2"]
 

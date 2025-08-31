@@ -268,11 +268,7 @@ right_limit = 0.628319
 camera_position_index = 1
 camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_anxy3"), SubResource("Resource_t0q2h")])
 
-[node name="SecurityGuard2" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
-position = Vector2(1760, 1856)
-state = 5
-
-[node name="SecurityGuard" parent="MapRoot/Guards" index="1" instance=ExtResource("7_jy02f")]
+[node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1760, 1856)
 state = 5
 
