@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3ex6enbtttl5"]
+[gd_scene load_steps=10 format=3 uid="uid://d3ex6enbtttl5"]
 
 [ext_resource type="Script" uid="uid://dmy6ut8fhdaxr" path="res://core/door/door.gd" id="1_sc1hs"]
 [ext_resource type="Texture2D" uid="uid://b15xciarxjoqi" path="res://core/door/door_sprite.png" id="2_ib8i1"]
 [ext_resource type="Texture2D" uid="uid://crar5ecjk0mgx" path="res://core/door/door_vision_light.png" id="2_p5nwt"]
+[ext_resource type="Texture2D" uid="uid://biyll2faw2pim" path="res://core/door/Door_North.png" id="3_0eq6o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc1hs"]
 radius = 48.0
@@ -52,10 +53,17 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_ib8i1")
 
+[node name="Sprite2D2" type="Sprite2D" parent="SlideDoor/VisuallyNode" groups=["masked_by_player_vision"]]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture = ExtResource("2_ib8i1")
+
 [node name="Sprite2D" type="Sprite2D" parent="SlideDoor/VisuallyNode" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 texture_filter = 1
-texture = ExtResource("2_ib8i1")
+scale = Vector2(-1.14588, -1.14588)
+texture = ExtResource("3_0eq6o")
 
 [node name="BorderLine2D" type="Line2D" parent="SlideDoor/VisuallyNode"]
 unique_name_in_owner = true
