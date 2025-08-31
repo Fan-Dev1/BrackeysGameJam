@@ -57,6 +57,7 @@ player=""
 cookie_stash=""
 masked_by_player_vision=""
 thief_car=""
+navigation=""
 
 [gui]
 
@@ -101,8 +102,13 @@ interact={
 
 2d_render/layer_2="player_vision"
 2d_physics/layer_1="envoirment"
+2d_navigation/layer_1="guard_navigation"
 2d_physics/layer_2="player"
 2d_physics/layer_3="cookies"
+
+[navigation]
+
+2d/default_cell_size=8.0
 
 [rendering]
 
