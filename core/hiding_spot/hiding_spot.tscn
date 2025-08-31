@@ -27,7 +27,7 @@ fill_to = Vector2(0.850427, 0.211538)
 [sub_resource type="CircleShape2D" id="CircleShape2D_856r5"]
 radius = 40.0
 
-[node name="HidingSpot" type="Area2D"]
+[node name="HidingSpot" type="Area2D" groups=["masked_by_player_vision"]]
 collision_mask = 2
 script = ExtResource("1_asnba")
 enter_duration = 0.3

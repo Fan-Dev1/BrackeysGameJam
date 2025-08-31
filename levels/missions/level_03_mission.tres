@@ -1,41 +1,26 @@
-[gd_resource type="Resource" script_class="LevelMission" load_steps=8 format=3 uid="uid://cv2jpjfkankn5"]
+[gd_resource type="Resource" script_class="LevelMission" load_steps=6 format=3 uid="uid://cv2jpjfkankn5"]
 
 [ext_resource type="Script" uid="uid://dnrw5msmlqhea" path="res://ui/level_select_ui/level_goal.gd" id="1_jv3tm"]
 [ext_resource type="AudioStream" uid="uid://cf3f4s4yahc7q" path="res://levels/missions/cookie jam.mp3" id="2_rswpg"]
+[ext_resource type="Texture2D" uid="uid://c3toiylapgphq" path="res://levels/missions/Level_03_preview.png" id="3_rswpg"]
 [ext_resource type="Script" uid="uid://btji1vxv6jj7s" path="res://ui/level_select_ui/level_mission.gd" id="3_whqp8"]
 
 [sub_resource type="Resource" id="Resource_d3o6j"]
 script = ExtResource("1_jv3tm")
-goal_text = "Collect 15 cookies within 150 seconds"
+goal_text = "Collect 2 cookies within 150 seconds"
 goal_reached = false
 goal_type = 0
 metadata/_custom_type_script = "uid://dnrw5msmlqhea"
 
-[sub_resource type="Resource" id="Resource_pdl2l"]
-script = ExtResource("1_jv3tm")
-goal_text = "Escape in under 120 seconds"
-goal_reached = false
-goal_type = 1
-metadata/_custom_type_script = "uid://dnrw5msmlqhea"
-
-[sub_resource type="Resource" id="Resource_2t17w"]
-script = ExtResource("1_jv3tm")
-goal_text = "Don't get spotted by a security camera"
-goal_reached = false
-goal_type = 1
-metadata/_custom_type_script = "uid://dnrw5msmlqhea"
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0xemx"]
-
 [resource]
 script = ExtResource("3_whqp8")
 level_index = 3
-level_name = "Mission 03"
-level_path = "res://levels/level_03.tscn"
-level_preview_texture = SubResource("PlaceholderTexture2D_0xemx")
+level_name = "Locked by Lever"
+level_path = "uid://o4veqm2euuq0"
+level_preview_texture = ExtResource("3_rswpg")
 level_music = ExtResource("2_rswpg")
-level_goals = Array[ExtResource("1_jv3tm")]([SubResource("Resource_d3o6j"), SubResource("Resource_pdl2l"), SubResource("Resource_2t17w")])
+level_goals = Array[ExtResource("1_jv3tm")]([SubResource("Resource_d3o6j")])
 used_device_count = PackedInt32Array(2, 4)
 unlocked = false
-level_completion_time = 120.0
+level_completion_time = 150.0
 metadata/_custom_type_script = "uid://btji1vxv6jj7s"
