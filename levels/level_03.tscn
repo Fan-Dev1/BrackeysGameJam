@@ -236,7 +236,7 @@ autoplay = "laser_loop_3"
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_6hrdw")]
 position = Vector2(-1168, 1895)
-guard_position_index = 0
+guard_position_index = 1
 
 [node name="Player" parent="MapRoot" index="10"]
 position = Vector2(1539.76, 1091.58)

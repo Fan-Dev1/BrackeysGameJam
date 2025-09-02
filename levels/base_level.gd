@@ -39,7 +39,6 @@ func _ready() -> void:
 	inventory_panel.visible = false
 	game_paused_ui.visible = false
 	_setup_cookie_stashes()
-	_setup_masked_by_player_nodes()
 	Global.player_caught.connect(_on_player_caught)
 	
 	if OS.is_debug_build() and (skip_drive_animation or take_preview_screenshot):
@@ -57,8 +56,11 @@ func _ready() -> void:
 		
 		if take_preview_screenshot:
 			take_level_preview()
+		else:
+			_setup_masked_by_player_nodes()
 	else:
 		_play_drive_in()
+		_setup_masked_by_player_nodes()
 	car_drive_scroller.thief_car.car_entered.connect(_on_car_entered)
 	car_drive_scroller.thief_car.car_exited.connect(_on_car_exited)
 	car_drive_scroller.thief_car.cookie_dropped.connect(_on_cookie_dropped)

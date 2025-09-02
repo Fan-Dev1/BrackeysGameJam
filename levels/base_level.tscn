@@ -83,7 +83,7 @@ texture_filter = 1
 tile_set = ExtResource("2_p5284")
 metadata/_edit_lock_ = true
 
-[node name="InteriorTileMapLayer" type="TileMapLayer" parent="MapRoot" groups=["masked_by_player_vision", "preview_hidden"]]
+[node name="InteriorTileMapLayer" type="TileMapLayer" parent="MapRoot" groups=["masked_by_player_vision"]]
 texture_filter = 1
 scale = Vector2(4, 4)
 tile_set = ExtResource("4_dx6c5")
