@@ -8,9 +8,9 @@ signal body_spotted(event: BodySpottedEvent)
 @export var vision_cone_config: VisionConeConfig : set = set_vision_cone_config
 var vison_cone_changed := true
 
-@onready var point_light_2d: PointLight2D = %PointLight2D
+@onready var vision_polygon: Polygon2D = %VisionPolygon
+@onready var vision_collision_polygon: CollisionPolygon2D = %VisionCollisionPolygon
 @onready var ray_cast_2d: RayCast2D = %RayCast2D
-@onready var camera_collision: CollisionPolygon2D = %CameraCollision
 
 
 func _ready() -> void:
@@ -18,16 +18,15 @@ func _ready() -> void:
 
 
 func _update_vision_cone() -> void:
-	camera_collision.polygon = vision_cone_config.new_cone_area_polygon()
 	ray_cast_2d.target_position = Vector2(vision_cone_config.radius, 0.0)
-	var light_image_texture: ImageTexture = point_light_2d.texture
-	light_image_texture.image = vision_cone_config.new_cone_light_texture()
-	point_light_2d.color = vision_cone_config.color
-	#point_light_2d.energy = vision_cone_config.energy
+	var cone_polygon := vision_cone_config.new_cone_area_polygon()
+	vision_collision_polygon.polygon = cone_polygon
+	vision_polygon.polygon = cone_polygon
+	vision_polygon.color = vision_cone_config.color
 
 
 func _physics_process(delta: float) -> void:
-	point_light_2d.enabled = self.monitoring
+	vision_polygon.visible = self.monitoring
 	_scan_vision_cone()
 	
 	if vison_cone_changed:

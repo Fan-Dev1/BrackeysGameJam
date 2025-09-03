@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://baia6evchbu5t"]
+[gd_scene load_steps=25 format=4 uid="uid://baia6evchbu5t"]
 
 [ext_resource type="PackedScene" uid="uid://dptqv0l043tyw" path="res://levels/base_level.tscn" id="1_ty3hu"]
 [ext_resource type="Script" uid="uid://ckt5c02ykg6la" path="res://levels/level_01/goal_tracker_01.gd" id="2_7sc7i"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://b0bfudajh4tsg" path="res://levels/level_01/show_interact_hint.gd" id="10_kjd3d"]
 [ext_resource type="Script" uid="uid://dix4udd65fl5s" path="res://levels/level_01/point_at_cookie.gd" id="12_ng00s"]
 [ext_resource type="Texture2D" uid="uid://bxdthesv41ojc" path="res://ui/UI_sprite_sheet.png" id="12_qdeet"]
+[ext_resource type="Script" uid="uid://dyi5r0theihmc" path="res://core/security_camera/camera_vision_config.gd" id="15_anxy3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ty3hu"]
 font_size = 48
@@ -36,7 +37,18 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1046, 1988, 1074, 1993,
 cell_size = 8.0
 agent_radius = 30.0
 
-[sub_resource type="Resource" id="Resource_7sc7i"]
+[sub_resource type="Resource" id="Resource_t0q2h"]
+resource_local_to_scene = true
+script = ExtResource("15_anxy3")
+rotaton_speed = 1.0
+left_limit = -1.5708
+right_limit = 1.5708
+color = Color(1, 0.894118, 0.521569, 0.560784)
+radius = 256.0
+fov = 0.610865
+metadata/_custom_type_script = "uid://dyi5r0theihmc"
+
+[sub_resource type="Resource" id="Resource_g7i00"]
 resource_local_to_scene = true
 script = ExtResource("4_cg8v6")
 rotation = -1.79769
@@ -44,7 +56,7 @@ duration_min_sec = 3.0
 duration_max_sec = 2.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_anxy3"]
+[sub_resource type="Resource" id="Resource_rge7b"]
 resource_local_to_scene = true
 script = ExtResource("4_cg8v6")
 rotation = 0.523599
@@ -231,9 +243,8 @@ blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
 unique_name_in_owner = true
 position = Vector2(1848, 1512)
 rotation = -1.5708
-left_limit = -1.71042
-right_limit = 0.628319
-camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_7sc7i"), SubResource("Resource_anxy3")])
+vision_config = SubResource("Resource_t0q2h")
+camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_g7i00"), SubResource("Resource_rge7b")])
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1741, 1882)

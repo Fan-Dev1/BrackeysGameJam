@@ -101,6 +101,7 @@ interact={
 [layer_names]
 
 2d_render/layer_2="player_vision"
+2d_render/layer_3="enemy_vision"
 2d_physics/layer_1="envoirment"
 2d_navigation/layer_1="guard_navigation"
 2d_physics/layer_2="player"

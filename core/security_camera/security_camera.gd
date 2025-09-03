@@ -4,14 +4,10 @@ extends Node2D
 
 enum CameraState { NORMAL, TRACKING, OFF }
 
+
 @export var controlling_lever: LeverButton
 @export var assigned_guard: SecurityGuard
-
-@export var rotaton_speed: float
-@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
-var left_limit := PI / -2.0
-@export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
-var right_limit := PI / 2.0
+@export var vision_config: CameraVisionConfig : set = set_vision_config
 
 @export var camera_position_index := 0
 @export var camera_positions: Array[CameraPosition] = []
@@ -32,6 +28,7 @@ var tracking_target: Node2D
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	_on_vision_config_changed()
 	vision_cone.body_spotted.connect(_on_body_spotted)
 	_ready_camera_rotation()
 	if is_controlled_by_lever():
@@ -148,8 +145,10 @@ func set_state(new_state: CameraState) -> void:
 
 
 func clamp_camera_rotation(rotation_value: float) -> float:
-	var half_fov := vision_cone.vision_cone_config.fov / 2.0
-	return clampf(rotation_value, left_limit + half_fov, right_limit - half_fov)
+	var half_fov := vision_config.fov / 2.0
+	var left_limit := vision_config.left_limit + half_fov
+	var right_limit := vision_config.right_limit - half_fov
+	return clampf(rotation_value, left_limit, right_limit)
 
 
 func rotate_camera_toward(camera_position: CameraPosition, delta := 1.0) -> bool:
@@ -157,7 +156,7 @@ func rotate_camera_toward(camera_position: CameraPosition, delta := 1.0) -> bool
 		return true
 	var from := pivot_point.rotation
 	var to :=  camera_position.rotation
-	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
+	var new_rotation := rotate_toward(from, to, vision_config.rotaton_speed * delta)
 	new_rotation = clamp_camera_rotation(new_rotation)
 	pivot_point.rotation = new_rotation
 	var angle_diff := angle_difference(pivot_point.rotation, clamp_camera_rotation(camera_position.rotation))
@@ -180,7 +179,9 @@ func _draw() -> void:
 	if not OS.is_debug_build():
 		return
 	# draw_line for left and right limit
-	var radius := vision_cone.vision_cone_config.radius
+	var radius := vision_config.radius
+	var left_limit := vision_config.left_limit
+	var right_limit := vision_config.right_limit
 	var left_limit_point := Vector2.from_angle(left_limit) * radius
 	var right_limit_point := Vector2.from_angle(right_limit) * radius
 	draw_line(Vector2.ZERO, left_limit_point, Color.GREEN, 2.0)
@@ -190,3 +191,16 @@ func _draw() -> void:
 		# draw_line to tracked target for debug purposes
 		var target_position := to_local(tracking_target.global_position)
 		draw_line(Vector2.ZERO, target_position, Color.WHEAT, 4.0)
+
+
+func set_vision_config(_vision_config: CameraVisionConfig) -> void:
+	if vision_config != null:
+		vision_config.changed.disconnect(_on_vision_config_changed)
+	vision_config = _vision_config
+	vision_config.changed.connect(_on_vision_config_changed)
+
+
+func _on_vision_config_changed() -> void:
+	queue_redraw()
+	if is_node_ready():
+		vision_cone.vision_cone_config = vision_config

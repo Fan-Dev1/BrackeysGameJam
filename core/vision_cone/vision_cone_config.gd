@@ -3,11 +3,9 @@ class_name VisionConeConfig
 extends Resource
 
 @export var color := Color.WHITE : set = set_color
-@export var energy := 1.0   : set = set_energy
 @export var radius := 256.0 : set = set_radius
 @export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
 var fov := PI / 4.0 : set = set_fov
-
 
 
 func new_cone_area_polygon(circle_points := 16) -> PackedVector2Array:
@@ -61,10 +59,4 @@ func set_fov(_fov: float) -> void:
 func set_color(_color: Color) -> void:
 	if not color == _color:
 		color = _color
-		emit_changed()
-
-
-func set_energy(_energy: float) -> void:
-	if not is_equal_approx(energy, _energy):
-		energy = _energy
 		emit_changed()
