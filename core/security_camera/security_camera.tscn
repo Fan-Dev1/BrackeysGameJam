@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdppfmbhnfc3d"]
+[gd_scene load_steps=9 format=3 uid="uid://cdppfmbhnfc3d"]
 
 [ext_resource type="Script" uid="uid://bxyyl3oktcgqk" path="res://core/security_camera/security_camera.gd" id="1_05d2b"]
 [ext_resource type="Script" uid="uid://cw0363ko8eoy5" path="res://core/security_camera/camera_position.gd" id="2_t0tbx"]
 [ext_resource type="Texture2D" uid="uid://cck2p827qqu3f" path="res://core/security_camera/Camera_Top_Off.png" id="3_v1u64"]
+[ext_resource type="PackedScene" uid="uid://etadkwfowmko" path="res://core/vision_cone/vision_cone.tscn" id="4_1qdvj"]
+[ext_resource type="Script" uid="uid://db2ape2olhhjm" path="res://core/vision_cone/vision_cone_config.gd" id="5_djrot"]
 
-[sub_resource type="Resource" id="Resource_t0tbx"]
+[sub_resource type="Resource" id="Resource_djrot"]
 resource_local_to_scene = true
 script = ExtResource("2_t0tbx")
 rotation = 0.0
@@ -12,26 +14,26 @@ duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_v1u64"]
+[sub_resource type="Resource" id="Resource_sy6pc"]
 resource_local_to_scene = true
 script = ExtResource("2_t0tbx")
-rotation = 0.855211
+rotation = 0.666716
 duration_min_sec = 3.0
 duration_max_sec = 3.0
 metadata/_custom_type_script = "uid://cw0363ko8eoy5"
 
-[sub_resource type="Resource" id="Resource_1qdvj"]
-resource_local_to_scene = true
-script = ExtResource("2_t0tbx")
-rotation = 1.1781
-duration_min_sec = 3.0
-duration_max_sec = 3.0
-metadata/_custom_type_script = "uid://cw0363ko8eoy5"
+[sub_resource type="Resource" id="Resource_sda1o"]
+script = ExtResource("5_djrot")
+color = Color(1, 0.865, 0.55, 1)
+energy = 1.0
+radius = 256.0
+fov = 0.610865
+metadata/_custom_type_script = "uid://db2ape2olhhjm"
 
-[node name="SecurityCamera" type="Node2D"]
+[node name="SecurityCamera" type="Node2D" groups=["masked_by_player_vision"]]
 script = ExtResource("1_05d2b")
 rotaton_speed = 2.0
-camera_positions = Array[ExtResource("2_t0tbx")]([SubResource("Resource_t0tbx"), SubResource("Resource_v1u64"), SubResource("Resource_1qdvj"), SubResource("Resource_v1u64")])
+camera_positions = Array[ExtResource("2_t0tbx")]([SubResource("Resource_djrot"), SubResource("Resource_sy6pc")])
 
 [node name="PositionTimer" type="Timer" parent="."]
 one_shot = true
@@ -40,41 +42,26 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="CameraArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="PivotPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
 
-[node name="CameraSprite2D" type="ColorRect" parent="CameraArea2D" groups=["masked_by_player_vision"]]
-visible = false
-offset_left = -40.0
-offset_top = -8.0
-offset_right = -38.0
-offset_bottom = -7.0
-scale = Vector2(20, 16.5)
-color = Color(0, 0, 0, 1)
+[node name="VisionCone" parent="PivotPoint" instance=ExtResource("4_1qdvj")]
+unique_name_in_owner = true
+vision_cone_config = SubResource("Resource_sda1o")
 
-[node name="Sprite2D" type="Sprite2D" parent="CameraArea2D" groups=["masked_by_player_vision"]]
+[node name="Sprite2D" type="Sprite2D" parent="PivotPoint" groups=["masked_by_player_vision"]]
+unique_name_in_owner = true
 position = Vector2(-17, 0)
 rotation = -1.5708
 texture = ExtResource("3_v1u64")
 
-[node name="StatusColorRect" type="ColorRect" parent="CameraArea2D" groups=["masked_by_player_vision"]]
+[node name="StatusColorRect" type="ColorRect" parent="PivotPoint" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
 offset_left = -27.0
 offset_top = -13.0
 offset_right = -19.0
 offset_bottom = -5.0
 color = Color(0, 1, 0, 1)
-
-[node name="CameraCollision" type="CollisionPolygon2D" parent="CameraArea2D"]
-unique_name_in_owner = true
-visible = false
-polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
-
-[node name="CameraFov" type="Polygon2D" parent="CameraArea2D" groups=["masked_by_player_vision"]]
-unique_name_in_owner = true
-color = Color(1, 1, 0, 0.235294)
-polygon = PackedVector2Array(0, -8, 236.513, -97.967, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 0, 8)
 
 [connection signal="timeout" from="PositionTimer" to="." method="_on_position_timer_timeout"]
 [connection signal="timeout" from="TrackingResetTimer" to="." method="_on_tracking_reset_timer_timeout"]

@@ -14,13 +14,17 @@ var target_pos: Vector2
 var has_cookie := false
 var last_direction := Vector2.DOWN
 var player_is_hidden = false
+
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var vision_point_light_2d: PointLight2D = $VisionPointLight2D
 @onready var laser_crippled: Timer = $LaserCrippled
+
+
 
 func _ready() -> void:
 	original_speed = move_speed
+
+
 func _physics_process(delta: float) -> void:
 	if !player_is_hidden:
 		var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")

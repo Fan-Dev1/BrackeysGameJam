@@ -4,12 +4,10 @@ extends Node2D
 
 enum CameraState { NORMAL, TRACKING, OFF }
 
-@export var controlling_lever : LeverButton
-@export var radius := 256.0
+@export var controlling_lever: LeverButton
+@export var assigned_guard: SecurityGuard
+
 @export var rotaton_speed: float
-@export var assigned_guard : SecurityGuard
-@export_range(0.0, 360.0, 0.1, "radians_as_degrees") 
-var fov := PI / 4.0
 @export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
 var left_limit := PI / -2.0
 @export_range(-180.0, 180.0, 0.1, "radians_as_degrees") 
@@ -18,26 +16,40 @@ var right_limit := PI / 2.0
 @export var camera_position_index := 0
 @export var camera_positions: Array[CameraPosition] = []
 
-@onready var position_timer: Timer = $PositionTimer
-@onready var tracking_reset_timer: Timer = $TrackingResetTimer
-@onready var camera_area_2d: Area2D = $CameraArea2D
-@onready var camera_fov: Polygon2D = %CameraFov
-@onready var camera_collision: CollisionPolygon2D = %CameraCollision
-@onready var status_color_rect: ColorRect = %StatusColorRect
-
 var state := CameraState.NORMAL : set = set_state
 var tracking_target: Node2D
+
+
+@onready var position_timer: Timer = $PositionTimer
+@onready var tracking_reset_timer: Timer = $TrackingResetTimer
+
+@onready var pivot_point: Node2D = %PivotPoint
+@onready var sprite_2d: Sprite2D = %Sprite2D
+@onready var status_color_rect: ColorRect = %StatusColorRect
+@onready var vision_cone: VisionCone = %VisionCone
 
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	_update_fov_polygon()
+	vision_cone.body_spotted.connect(_on_body_spotted)
 	_ready_camera_rotation()
 	if is_controlled_by_lever():
 		controlling_lever.lever_flipped.connect(_on_lever_flipped)
 	if !assigned_guard:
+		push_warning("no guard assigned - fallback to first guard in tree")
 		assigned_guard = get_tree().get_first_node_in_group("Guard")
+
+
+func _notification(what: int) -> void:
+	if what == Node.NOTIFICATION_EDITOR_PRE_SAVE:
+		camera_position_index = 0
+		_ready_camera_rotation()
+
+
+func _on_body_spotted(body_spotted_event: VisionCone.BodySpottedEvent) -> void:
+	pass
+
 
 func _ready_camera_rotation() -> void:
 	if not camera_positions.is_empty():
@@ -50,8 +62,6 @@ func _physics_process(delta: float) -> void:
 	if OS.is_debug_build():
 		queue_redraw()
 	if Engine.is_editor_hint():
-		_update_fov_polygon()
-		
 		camera_position_index = wrapi(camera_position_index, 0, camera_positions.size())
 		var camera_position := camera_positions[camera_position_index]
 		rotate_camera_toward(camera_position)
@@ -64,17 +74,16 @@ func _physics_process(delta: float) -> void:
 
 func _normal_process(delta: float) -> void:
 	var camera_position := camera_positions[camera_position_index]
-	rotate_camera_toward(camera_position, delta)
+	var at_rotation := rotate_camera_toward(camera_position, delta)
 	_scan_for_player()
 	# if camera reached camera_position --> start position_timer
-	var angle_diff := angle_difference(camera_area_2d.rotation, camera_position.rotation)
-	if is_zero_approx(angle_diff) and position_timer.is_stopped():
+	if at_rotation and position_timer.is_stopped():
 		var duration := randf_range(camera_position.duration_min_sec, camera_position.duration_max_sec)
 		position_timer.start(duration)
 
 
 func _scan_for_player() -> void:
-	for body: Node2D in camera_area_2d.get_overlapping_bodies():
+	for body: Node2D in vision_cone.get_overlapping_bodies():
 		# alert about spotted player and track him
 		if body is Player:
 			if !body.player_is_hidden:
@@ -101,7 +110,7 @@ func _tracking_process(delta: float) -> void:
 		tracking_target = null
 		return
 	
-	if camera_area_2d.overlaps_body(tracking_target):
+	if vision_cone.overlaps_body(tracking_target):
 		# Maintain focus on the target, angle the camera toward it, and report the position
 		var target_camera_position := to_camera_position(tracking_target)
 		rotate_camera_toward(target_camera_position, delta)
@@ -133,39 +142,26 @@ func set_state(new_state: CameraState) -> void:
 	if state == new_state:
 		return
 	state = new_state
-	camera_area_2d.monitoring = CameraState.OFF != new_state
-	camera_fov.visible = CameraState.OFF != new_state
+	vision_cone.monitoring = CameraState.OFF != new_state
 	position_timer.stop()
 	tracking_reset_timer.stop()
 
 
-func _update_fov_polygon(circle_points := 12) -> void:
-	var new_polygon := PackedVector2Array()
-	var fov_step := fov / circle_points
-	var current_angle := -fov_step * (circle_points / 2.0)
-	
-	new_polygon.append(Vector2(0.0, -8.0))
-	for i in range(circle_points + 1):
-		new_polygon.append(Vector2.from_angle(current_angle) * radius)
-		current_angle += fov_step
-	new_polygon.append(Vector2(0.0, 8.0))
-	camera_fov.polygon = new_polygon
-	camera_collision.polygon = new_polygon
-
-
 func clamp_camera_rotation(rotation_value: float) -> float:
-	var half_fov := fov / 2.0
+	var half_fov := vision_cone.vision_cone_config.fov / 2.0
 	return clampf(rotation_value, left_limit + half_fov, right_limit - half_fov)
 
 
-func rotate_camera_toward(camera_position: CameraPosition, delta := 1.0) -> void:
+func rotate_camera_toward(camera_position: CameraPosition, delta := 1.0) -> bool:
 	if camera_position == null:
-		return
-	var to_rotation := camera_position.rotation
-	var from := camera_area_2d.rotation
-	var new_rotation := rotate_toward(from, to_rotation, rotaton_speed * delta)
+		return true
+	var from := pivot_point.rotation
+	var to :=  camera_position.rotation
+	var new_rotation := rotate_toward(from, to, rotaton_speed * delta)
 	new_rotation = clamp_camera_rotation(new_rotation)
-	camera_area_2d.rotation = new_rotation
+	pivot_point.rotation = new_rotation
+	var angle_diff := angle_difference(pivot_point.rotation, clamp_camera_rotation(camera_position.rotation))
+	return is_zero_approx(angle_diff)
 
 
 func is_controlled_by_lever() -> bool:
@@ -184,6 +180,7 @@ func _draw() -> void:
 	if not OS.is_debug_build():
 		return
 	# draw_line for left and right limit
+	var radius := vision_cone.vision_cone_config.radius
 	var left_limit_point := Vector2.from_angle(left_limit) * radius
 	var right_limit_point := Vector2.from_angle(right_limit) * radius
 	draw_line(Vector2.ZERO, left_limit_point, Color.GREEN, 2.0)

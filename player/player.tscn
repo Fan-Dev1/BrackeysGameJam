@@ -2,21 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bpqyegseblpju" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="SpriteFrames" uid="uid://6ml17fgqm8tw" path="res://player/player_sprite_frames.tres" id="3_g1dw6"]
+[ext_resource type="Texture2D" uid="uid://dv833l2ep8jjt" path="res://player/player_vision_texture.png" id="3_g6k8r"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g1dw6"]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 24.0
-
-[sub_resource type="Gradient" id="Gradient_2ieo8"]
-offsets = PackedFloat32Array(0.864943, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2ieo8"]
-gradient = SubResource("Gradient_2ieo8")
-width = 1080
-height = 1080
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.850427, 0.211538)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -29,11 +21,31 @@ move_smothing = 20.0
 wait_time = 3.0
 one_shot = true
 
+[node name="LaserCrippled" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="VisionTexture" type="TextureRect" parent="."]
+light_mask = 4
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_g1dw6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("3_g6k8r")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4, 0)
 sprite_frames = ExtResource("3_g1dw6")
-animation = &"WalkNorth"
-frame_progress = 0.70409
+animation = &"IdleSouth"
+autoplay = "IdleSouth"
 speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,16 +53,13 @@ position = Vector2(0, 24)
 shape = SubResource("CircleShape2D_rkbax")
 
 [node name="VisionPointLight2D" type="PointLight2D" parent="."]
-energy = 0.2
+blend_mode = 2
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter_smooth = 20.0
 shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_2ieo8")
+texture = ExtResource("3_g6k8r")
+texture_scale = 2.0
 metadata/_edit_lock_ = true
-
-[node name="LaserCrippled" type="Timer" parent="."]
-wait_time = 1.5
-one_shot = true
 
 [connection signal="timeout" from="LaserCrippled" to="." method="_on_laser_crippled_timeout"]

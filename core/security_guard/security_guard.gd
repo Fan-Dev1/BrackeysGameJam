@@ -40,17 +40,15 @@ var detected := "Player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 	rotate_camera_toward(guard_pos.rotation)
 	var duration := randf_range(guard_pos.duration_min_sec, guard_pos.duration_max_sec)
 	position_timer.start(duration)
 	original_position = self.global_position
 
+
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():	
-		#_clamp_camera_rotations()
-		queue_redraw()
 		var guard_pos: GuardPosition = guard_positions.get(guard_position_index)
 		rotate_camera_toward(guard_pos.rotation)
 		return
@@ -118,12 +116,11 @@ func _tracking_process(delta: float) -> void:
 			guard_area_2d.rotation = 0.0
 			state = GuardState.RETURN
 		next_path_pos = navigation_agent_2d.get_next_path_position()
-		var direction = (next_path_pos - self.global_position).normalized()
+		var direction = self.global_position.direction_to(next_path_pos)
 		velocity = direction * move_speed
 		
 		move_and_slide()
-		
-		queue_redraw()
+
 
 func _distracted_process(delta):
 	var cookie = get_tree().get_first_node_in_group("cookie_projectile")
@@ -191,10 +188,8 @@ func set_state(new_state: GuardState) -> void:
 	if is_node_ready():
 		guard_area_2d.monitoring = GuardState.OFF != new_state
 		#guard_fov.visible = GuardState.OFF != new_state
-		queue_redraw()
 		position_timer.stop()
 		tracking_timer.stop()
-
 
 
 func rotate_camera_toward(to: float, delta := 1.0) -> void:
@@ -216,22 +211,6 @@ func _scan_walls(body : Node2D) -> bool:
 	else:
 		return false
 
-
-func _draw() -> void:
-	if Engine.is_editor_hint():
-		# draw_line for left and right limit
-		var half_fov := fov / 2.0
-		#var left_limit_point := Vector2.from_angl	e(left_limit) * radius
-		#var right_limit_point := Vector2.from_angle(right_limit) * radius
-		#draw_line(Vector2.ZERO, left_limit_point, Color.RED, 2.0)
-		#draw_line(Vector2.ZERO, right_limit_point, Color.BLUE, 2.0)
-	
-	if OS.is_debug_build() and state == GuardState.TRACKING:
-		pass
-		# draw_line to tracked player
-		#var player: Player = get_tree().get_first_node_in_group("player")
-		#var player_position := to_local(player.global_position)
-		#draw_line(Vector2.ZERO, player_position, Color.WHEAT, 4.0)
 
 func change_light_colors(color : Color):
 	flashlight.color = color

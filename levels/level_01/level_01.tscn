@@ -58,6 +58,9 @@ level_mission = ExtResource("2_anxy3")
 [node name="GoalTracker" parent="." index="0"]
 script = ExtResource("2_7sc7i")
 
+[node name="CanvasModulate" parent="." index="1"]
+visible = true
+
 [node name="LevelPreviewCamera2D" parent="." index="3"]
 position = Vector2(1320, 1528)
 
@@ -181,6 +184,7 @@ script = ExtResource("6_cfw67")
 enabled = false
 
 [node name="GuardNavigationRegion2D" parent="MapRoot" index="0"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_g7i00")
 
 [node name="GroundTileMapLayer" parent="MapRoot" index="1"]
@@ -227,16 +231,14 @@ blink_pattern = PackedFloat32Array(3, 2, 1, 0.5)
 unique_name_in_owner = true
 position = Vector2(1848, 1512)
 rotation = -1.5708
-radius = 270.0
-fov = 0.523599
 left_limit = -1.71042
 right_limit = 0.628319
-camera_position_index = 1
 camera_positions = Array[ExtResource("4_cg8v6")]([SubResource("Resource_7sc7i"), SubResource("Resource_anxy3")])
 
 [node name="SecurityGuard" parent="MapRoot/Guards" index="0" instance=ExtResource("7_jy02f")]
 position = Vector2(1741, 1882)
 rotaton_speed = 2.0
+guard_position_index = 1
 
 [node name="Marker2D2" type="Marker2D" parent="MapRoot/Guards/SecurityGuard" index="10"]
 position = Vector2(-500, 0)
@@ -245,6 +247,7 @@ position = Vector2(-500, 0)
 position = Vector2(-500, 0)
 
 [node name="PreviewReferenceRect" parent="UiCanvasLayer" index="6"]
+visible = false
 offset_left = -379.0
 offset_top = 294.0
 offset_right = 1072.0

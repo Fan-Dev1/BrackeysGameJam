@@ -42,3 +42,14 @@ func get_player() -> Player:
 
 func _on_theme_music_player_finished() -> void:
 	theme_music_player.play()
+
+
+## Returns a callable that throttles another callable
+static func throttle(callback: Callable, interval_sec: float) -> Callable:
+	var interval_ms := interval_sec * 1000
+	var last_emit_time := -interval_ms
+	return func(args):
+		var now := Time.get_ticks_msec()
+		if now - last_emit_time >= interval_ms:
+			callback.callv(args)
+			last_emit_time = now

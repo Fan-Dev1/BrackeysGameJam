@@ -218,17 +218,18 @@ collision_mask = 2
 
 [node name="GuardCollision" type="CollisionPolygon2D" parent="GuardArea2D"]
 unique_name_in_owner = true
+visible = false
 rotation = -0.0707134
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
 [node name="GuardFov" type="Polygon2D" parent="GuardArea2D" groups=["masked_by_player_vision"]]
 unique_name_in_owner = true
+visible = false
 rotation = -0.0730822
 color = Color(1, 1, 0, 0.235294)
 polygon = PackedVector2Array(0, -8, 242.414, -82.2885, 247.277, -66.2577, 251.081, -49.9431, 253.81, -33.4147, 255.452, -16.7432, 256, -2.13163e-14, 255.452, 16.7432, 253.81, 33.4147, 251.081, 49.9431, 247.277, 66.2577, 242.414, 82.2885, 236.513, 97.967, 229.599, 113.226, 0, 8)
 
 [node name="PointLight2D" type="PointLight2D" parent="GuardArea2D" groups=["masked_by_player_vision"]]
-visible = false
 position = Vector2(-1.99999, 2.00001)
 scale = Vector2(2.5, 2.5)
 color = Color(1, 1, 0, 1)
@@ -236,7 +237,6 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_e2b7p")
 
 [node name="PointLight2D" type="PointLight2D" parent="GuardArea2D/PointLight2D" groups=["masked_by_player_vision"]]
-visible = false
 z_index = 1
 scale = Vector2(0.55, 0.6)
 color = Color(1, 1, 0.482353, 1)
@@ -258,6 +258,7 @@ sprite_frames = SubResource("SpriteFrames_ylcyo")
 animation = &"alarmd"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_p37y6")
 
 [node name="WallRayCast2D" type="RayCast2D" parent="."]
@@ -266,6 +267,7 @@ target_position = Vector2(236.513, 97.967)
 collision_mask = 3
 
 [node name="CaughtArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CaughtArea"]
